@@ -7,21 +7,26 @@
     <meta name="description" content="プロフェッショナルな映像制作ポートフォリオ。アニメーション、プロモーション、教育コンテンツなど幅広いジャンルの動画制作を手がけています。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a24;
+            --bg-dark: #050508;
+            --bg-card: rgba(15, 15, 25, 0.6);
+            --bg-glass: rgba(255, 255, 255, 0.03);
             --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --accent: #6366f1;
-            --accent-hover: #818cf8;
-            --accent-glow: rgba(99, 102, 241, 0.3);
-            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-            --gradient-2: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --accent-primary: #a855f7;
+            --accent-secondary: #6366f1;
+            --accent-tertiary: #ec4899;
+            --accent-cyan: #06b6d4;
+            --gradient-main: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
+            --gradient-accent: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.4) 100%);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --shadow-glow: 0 0 60px rgba(168, 85, 247, 0.3);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         * {
@@ -35,25 +40,77 @@
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-            background: var(--bg-primary);
+            font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+            background: var(--bg-dark);
             color: var(--text-primary);
             line-height: 1.7;
             overflow-x: hidden;
+            cursor: none;
         }
 
-        /* Custom Scrollbar */
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease-out, border-color 0.3s, background 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(2);
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--accent-tertiary);
+        }
+
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+            background: transparent;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
+            background: var(--gradient-main);
+            border-radius: 3px;
+        }
+
+        /* Background Effects */
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% -10%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 30% at 50% 90%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* Navigation */
@@ -63,20 +120,19 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1rem 2rem;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
+            padding: 1.5rem 3rem;
+            transition: var(--transition-smooth);
         }
 
         nav.scrolled {
-            padding: 0.75rem 2rem;
-            background: rgba(10, 10, 15, 0.95);
+            padding: 1rem 3rem;
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-glass);
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -84,18 +140,38 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            background: var(--gradient-1);
+            letter-spacing: -0.03em;
+            position: relative;
+        }
+
+        .logo span {
+            background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.02em;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-main);
+            transform: scaleX(0);
+            transition: var(--transition-smooth);
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
             list-style: none;
         }
 
@@ -104,42 +180,80 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: var(--transition);
+            letter-spacing: 0.02em;
+            transition: var(--transition-smooth);
             position: relative;
+            padding: 0.5rem 0;
         }
 
-        .nav-links a::after {
+        .nav-links a::before {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: 0;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-1);
-            transition: var(--transition);
+            width: 100%;
+            height: 1px;
+            background: var(--gradient-main);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
         }
 
         .nav-links a:hover {
             color: var(--text-primary);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-cta:hover {
+            background: var(--gradient-main);
+            border-color: transparent;
+            box-shadow: var(--shadow-glow);
         }
 
         .menu-toggle {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
             padding: 5px;
+            z-index: 1001;
         }
 
         .menu-toggle span {
-            width: 25px;
+            width: 28px;
             height: 2px;
             background: var(--text-primary);
-            transition: var(--transition);
+            transition: var(--transition-smooth);
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
         }
 
         /* Hero Section */
@@ -147,138 +261,288 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
             position: relative;
-            padding: 6rem 2rem;
+            padding: 8rem 3rem;
             overflow: hidden;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(217, 70, 239, 0.05) 0%, transparent 70%);
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        .hero-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-content {
-            text-align: center;
-            max-width: 900px;
             position: relative;
-            z-index: 1;
         }
 
-        .hero-badge {
+        .hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            color: var(--accent-hover);
+            gap: 0.75rem;
+            padding: 0.6rem 1.25rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out;
+            backdrop-filter: blur(10px);
+            animation: fadeSlideUp 0.8s ease-out;
         }
 
-        .hero-badge::before {
-            content: '';
+        .hero-eyebrow .dot {
             width: 8px;
             height: 8px;
-            background: var(--accent);
+            background: #10b981;
             border-radius: 50%;
             animation: pulse 2s infinite;
+            box-shadow: 0 0 10px #10b981;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            50% { opacity: 0.6; transform: scale(1.3); }
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(3rem, 7vw, 5.5rem);
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
             margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
-            animation: fadeInUp 0.8s ease-out 0.1s both;
+            animation: fadeSlideUp 0.8s ease-out 0.1s both;
         }
 
-        .hero h1 .highlight {
-            background: var(--gradient-1);
+        .hero h1 .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            background-size: 200% auto;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeSlideUp 0.8s ease-out 0.2s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
+            animation: fadeSlideUp 0.8s ease-out 0.3s both;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 0.6rem;
             padding: 1rem 2rem;
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 100px;
+            font-size: 0.95rem;
             font-weight: 600;
             text-decoration: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             cursor: pointer;
             border: none;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: var(--gradient-1);
+            background: var(--gradient-main);
             color: white;
-            box-shadow: 0 4px 20px var(--accent-glow);
+            box-shadow: 0 4px 30px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            opacity: 0;
+            transition: var(--transition-smooth);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--accent-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 40px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
         }
 
         .btn-secondary {
-            background: transparent;
+            background: var(--bg-glass);
             color: var(--text-primary);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-primary);
         }
 
-        @keyframes fadeInUp {
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            transition: var(--transition-smooth);
+        }
+
+        .btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeSlideUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-visual-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            aspect-ratio: 16/10;
+            backdrop-filter: blur(20px);
+        }
+
+        .hero-visual-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-glow);
+            opacity: 0.1;
+        }
+
+        .hero-visual-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-button-hero {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.4);
+        }
+
+        .play-button-hero:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(168, 85, 247, 0.6);
+        }
+
+        .play-button-hero svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+            margin-left: 4px;
+        }
+
+        .hero-visual-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--accent-primary);
+            border-radius: 24px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 16px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element.fe-1 {
+            top: 10%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element.fe-2 {
+            bottom: 15%;
+            left: -5%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-main);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .floating-text {
+            font-size: 0.85rem;
+        }
+
+        .floating-text span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        @keyframes fadeSlideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -289,185 +553,101 @@
         /* Scroll Indicator */
         .scroll-indicator {
             position: absolute;
-            bottom: 2rem;
+            bottom: 3rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
-            animation: fadeInUp 0.8s ease-out 0.5s both;
+            gap: 0.75rem;
+            animation: fadeSlideUp 0.8s ease-out 0.6s both;
         }
 
         .scroll-indicator span {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            font-size: 0.7rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.2em;
         }
 
-        .scroll-indicator .mouse {
-            width: 24px;
-            height: 40px;
-            border: 2px solid var(--text-secondary);
-            border-radius: 12px;
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--accent-primary), transparent);
             position: relative;
+            overflow: hidden;
         }
 
-        .scroll-indicator .mouse::after {
+        .scroll-line::after {
             content: '';
             position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 2px;
-            animation: scroll 1.5s infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: var(--text-primary);
+            animation: scrollDown 1.5s ease-in-out infinite;
         }
 
-        @keyframes scroll {
-            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+        @keyframes scrollDown {
+            0% { transform: translateY(-20px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(60px); opacity: 0; }
         }
 
         /* Section Styles */
         section {
-            padding: 6rem 2rem;
+            padding: 8rem 3rem;
             position: relative;
+            z-index: 2;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .section-label {
-            display: inline-block;
-            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            color: var(--accent);
+            color: var(--accent-primary);
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--gradient-main);
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.25rem;
         }
 
         .section-subtitle {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 550px;
             margin: 0 auto;
-        }
-
-        /* About Section */
-        .about {
-            background: var(--bg-secondary);
-        }
-
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-image {
-            position: relative;
-        }
-
-        .about-image-wrapper {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            aspect-ratio: 1;
-            background: var(--bg-card);
-        }
-
-        .about-image-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--gradient-1);
-            opacity: 0.1;
-        }
-
-        .about-image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--accent);
-        }
-
-        .about-image-decoration {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid var(--accent);
-            border-radius: 24px;
-            top: 20px;
-            left: 20px;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .about-text h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 2.5rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
         }
 
         /* Works Section */
         .works {
-            background: var(--bg-primary);
+            background: transparent;
         }
 
         .works-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -475,51 +655,76 @@
         .category-filter {
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .filter-btn {
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
+            padding: 0.75rem 1.75rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
             color: var(--text-secondary);
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
         }
 
-        .filter-btn:hover,
+        .filter-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+        }
+
         .filter-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--gradient-main);
+            border-color: transparent;
             color: white;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
         }
 
-        /* Video Grid */
+        /* Video Grid - Bento Style */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
         }
 
         .video-card {
             background: var(--bg-card);
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            opacity: 1;
-            transform: translateY(0);
+            border: 1px solid var(--border-glass);
+            transition: var(--transition-smooth);
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-glow);
+            opacity: 0;
+            transition: var(--transition-smooth);
+            z-index: 0;
         }
 
         .video-card:hover {
             transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 60px rgba(168, 85, 247, 0.15);
+        }
+
+        .video-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .video-card.featured {
+            grid-column: span 2;
+            grid-row: span 2;
         }
 
         .video-card.hidden {
@@ -529,19 +734,24 @@
         .video-thumbnail {
             position: relative;
             aspect-ratio: 16/9;
-            background: var(--bg-secondary);
             overflow: hidden;
+            display: block;
+            text-decoration: none;
+        }
+
+        .video-card.featured .video-thumbnail {
+            aspect-ratio: 16/10;
         }
 
         .video-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
         .video-card:hover .video-thumbnail img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .video-thumbnail-placeholder {
@@ -550,20 +760,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+            position: relative;
+        }
+
+        .video-thumbnail-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
         }
 
         .play-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-1);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transform: scale(0.8);
-            transition: var(--transition);
+            transition: var(--transition-bounce);
+            position: relative;
+            z-index: 2;
         }
 
         .video-card:hover .play-icon {
@@ -571,25 +795,67 @@
             transform: scale(1);
         }
 
+        .play-icon::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .video-card:hover .play-icon::before {
+            opacity: 1;
+        }
+
         .play-icon svg {
             width: 24px;
             height: 24px;
             fill: white;
-            margin-left: 4px;
+            margin-left: 3px;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5, 5, 8, 0.9) 0%, transparent 50%);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .video-card:hover .video-overlay {
+            opacity: 1;
         }
 
         .video-info {
             padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .video-category {
-            display: inline-block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            color: var(--accent);
+            color: var(--accent-primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 100px;
+        }
+
+        .video-duration {
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
         .video-title {
@@ -597,58 +863,272 @@
             font-weight: 600;
             margin-bottom: 0.5rem;
             line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-card.featured .video-title {
+            font-size: 1.5rem;
         }
 
         .video-description {
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .video-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 1rem;
-            color: var(--accent);
+            margin-top: 1.25rem;
+            color: var(--text-primary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
         .video-link:hover {
-            color: var(--accent-hover);
-            gap: 0.75rem;
+            color: var(--accent-primary);
         }
 
         .video-link svg {
             width: 16px;
             height: 16px;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
+        }
+
+        .video-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* About Section */
+        .about {
+            background: transparent;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            aspect-ratio: 4/5;
+            backdrop-filter: blur(20px);
+        }
+
+        .about-image-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-glow);
+            opacity: 0.1;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image-placeholder svg {
+            width: 120px;
+            height: 120px;
+            color: var(--accent-primary);
+            opacity: 0.5;
+        }
+
+        .about-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--accent-primary);
+            border-radius: 24px;
+            top: 25px;
+            left: 25px;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .about-badge-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-badge-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .about-text h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-text h3 span {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .highlight-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+        }
+
+        .highlight-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background: var(--border-glass);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
         }
 
         /* Services Section */
         .services {
-            background: var(--bg-secondary);
+            background: transparent;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .services-grid {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
         }
 
         .service-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
             padding: 2.5rem;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(20px);
         }
 
         .service-card::before {
@@ -658,14 +1138,16 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--gradient-1);
+            background: var(--gradient-main);
             transform: scaleX(0);
-            transition: var(--transition);
+            transform-origin: left;
+            transition: var(--transition-smooth);
         }
 
         .service-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
+            transform: translateY(-6px);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .service-card:hover::before {
@@ -673,96 +1155,116 @@
         }
 
         .service-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(99, 102, 241, 0.1);
+            width: 64px;
+            height: 64px;
+            background: rgba(168, 85, 247, 0.1);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
+            transition: var(--transition-smooth);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--gradient-main);
+            transform: scale(1.1);
         }
 
         .service-card h3 {
             font-size: 1.25rem;
-            margin-bottom: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
         }
 
         .service-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
+            line-height: 1.7;
         }
 
         /* Contact Section */
         .contact {
-            background: var(--bg-primary);
+            background: transparent;
             position: relative;
-        }
-
-        .contact::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at 30% 70%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
         }
 
         .contact-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .contact-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 3rem;
+            border: 1px solid var(--border-glass);
+            border-radius: 32px;
+            padding: 4rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
         }
 
-        .contact-card h3 {
-            font-size: 1.75rem;
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+            animation: contactGlow 10s linear infinite;
+        }
+
+        @keyframes contactGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-content h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
-        .contact-card p {
+        .contact-content p {
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
         }
 
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
+        .contact-email {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .contact-item svg {
-            width: 20px;
-            height: 20px;
-            color: var(--accent);
-        }
-
-        .contact-item a {
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
             color: var(--text-primary);
             text-decoration: none;
-            transition: var(--transition);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: var(--transition-smooth);
         }
 
-        .contact-item a:hover {
-            color: var(--accent);
+        .contact-email:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-primary);
+        }
+
+        .contact-email svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-primary);
         }
 
         .social-links {
@@ -773,155 +1275,246 @@
         }
 
         .social-link {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
             text-decoration: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
         .social-link:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--gradient-main);
+            border-color: transparent;
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
         }
 
         .social-link svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
         }
 
         /* Footer */
         footer {
-            background: var(--bg-secondary);
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--border-color);
+            padding: 3rem;
+            border-top: 1px solid var(--border-glass);
+            position: relative;
+            z-index: 2;
         }
 
         .footer-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .footer-logo {
             font-size: 1.25rem;
             font-weight: 700;
-            background: var(--gradient-1);
+        }
+
+        .footer-logo span {
+            background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .footer-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .about-content {
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
 
-            .about-image {
-                max-width: 400px;
+            .hero-visual {
+                max-width: 600px;
                 margin: 0 auto;
+            }
+
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .video-card.featured {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 968px) {
+            nav {
+                padding: 1rem 1.5rem;
             }
 
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 0;
                 left: 0;
                 right: 0;
-                background: var(--bg-primary);
+                bottom: 0;
+                background: rgba(5, 5, 8, 0.98);
                 flex-direction: column;
-                padding: 1.5rem 2rem;
-                gap: 1rem;
-                border-bottom: 1px solid var(--border-color);
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                z-index: 1000;
             }
 
             .nav-links.active {
                 display: flex;
             }
 
+            .nav-links a {
+                font-size: 1.5rem;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
             .menu-toggle {
                 display: flex;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-visual {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
             }
         }
 
         @media (max-width: 640px) {
-            section {
-                padding: 4rem 1.5rem;
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-dot {
+                display: none;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
             }
 
             .video-grid {
                 grid-template-columns: 1fr;
             }
 
-            .about-stats {
+            .video-card.featured {
+                grid-column: span 1;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
+                padding: 2rem;
             }
 
             .contact-card {
-                padding: 2rem 1.5rem;
+                padding: 2.5rem 1.5rem;
+            }
+
+            .floating-element {
+                display: none;
             }
 
             .footer-content {
                 flex-direction: column;
+                gap: 1rem;
                 text-align: center;
             }
         }
 
-        /* Animations on scroll */
-        .fade-in {
+        /* Animation Classes */
+        .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .fade-in.visible {
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Background Effects -->
+    <div class="bg-gradient"></div>
+    <div class="noise-overlay"></div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">PORTFOLIO</div>
+            <div class="logo"><span>STUDIO</span></div>
             <ul class="nav-links">
                 <li><a href="#works">Works</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <a href="#contact" class="nav-cta">Let's Talk</a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -932,49 +1525,80 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-grid"></div>
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span>Available for Projects</span>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="dot"></span>
+                    Available for Projects
+                </div>
+                <h1>
+                    <span class="line">Creating</span>
+                    <span class="line"><span class="gradient-text">Visual Stories</span></span>
+                    <span class="line">That Inspire</span>
+                </h1>
+                <p>
+                    映像の力で、アイデアを形に。<br>
+                    アニメーション、プロモーション、教育コンテンツまで<br>
+                    幅広いジャンルの映像制作でビジョンを実現します。
+                </p>
+                <div class="hero-buttons">
+                    <a href="#works" class="btn btn-primary">
+                        View Portfolio
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        Get in Touch
+                    </a>
+                </div>
             </div>
-            <h1>
-                Crafting <span class="highlight">Visual Stories</span><br>
-                That Captivate
-            </h1>
-            <p>
-                アニメーション、プロモーション、教育コンテンツなど、
-                あらゆるジャンルの映像制作でビジョンを形にします。
-            </p>
-            <div class="hero-buttons">
-                <a href="#works" class="btn btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    View Works
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    Contact Me
-                </a>
+
+            <div class="hero-visual">
+                <div class="hero-visual-wrapper">
+                    <div class="hero-visual-content">
+                        <div class="play-button-hero">
+                            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual-decoration"></div>
+
+                <!-- Floating Elements -->
+                <div class="floating-element fe-1">
+                    <div class="floating-icon">🎬</div>
+                    <div class="floating-text">
+                        <strong>50+</strong>
+                        <span>Projects Done</span>
+                    </div>
+                </div>
+                <div class="floating-element fe-2">
+                    <div class="floating-icon">⭐</div>
+                    <div class="floating-text">
+                        <strong>100%</strong>
+                        <span>Client Satisfaction</span>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="scroll-indicator">
             <span>Scroll</span>
-            <div class="mouse"></div>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
     <!-- Works Section -->
     <section id="works" class="works">
         <div class="works-container">
-            <div class="section-header fade-in">
+            <div class="section-header reveal">
                 <span class="section-label">Portfolio</span>
                 <h2 class="section-title">Selected Works</h2>
                 <p class="section-subtitle">ジャンル別に制作した映像作品をご覧ください</p>
             </div>
 
-            <div class="category-filter fade-in">
-                <button class="filter-btn active" data-category="all">All</button>
+            <div class="category-filter reveal">
+                <button class="filter-btn active" data-category="all">All Works</button>
                 <button class="filter-btn" data-category="animation">Animation</button>
                 <button class="filter-btn" data-category="promotion">Promotion</button>
                 <button class="filter-btn" data-category="education">Education</button>
@@ -982,21 +1606,25 @@
             </div>
 
             <div class="video-grid">
-                <!-- Video Card Template - Animation Category -->
-                <article class="video-card fade-in" data-category="animation">
+                <!-- Featured Video Card -->
+                <article class="video-card featured reveal" data-category="animation">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Animation</span>
-                        <h3 class="video-title">アニメーション作品タイトル 1</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Animation</span>
+                            <span class="video-duration">2:30</span>
+                        </div>
+                        <h3 class="video-title">フィーチャード作品タイトル</h3>
+                        <p class="video-description">最も注目される作品の概要をここに記載します。制作背景やコンセプト、使用した技術などの説明文。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch Full Video
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1004,20 +1632,25 @@
                     </div>
                 </article>
 
-                <article class="video-card fade-in" data-category="animation">
+                <!-- Animation Cards -->
+                <article class="video-card reveal reveal-delay-1" data-category="animation">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Animation</span>
-                        <h3 class="video-title">アニメーション作品タイトル 2</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Animation</span>
+                            <span class="video-duration">1:45</span>
+                        </div>
+                        <h3 class="video-title">アニメーション作品 1</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1025,21 +1658,24 @@
                     </div>
                 </article>
 
-                <!-- Video Card Template - Promotion Category -->
-                <article class="video-card fade-in" data-category="promotion">
+                <article class="video-card reveal reveal-delay-2" data-category="animation">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Promotion</span>
-                        <h3 class="video-title">プロモーション動画タイトル 1</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Animation</span>
+                            <span class="video-duration">2:10</span>
+                        </div>
+                        <h3 class="video-title">アニメーション作品 2</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1047,20 +1683,25 @@
                     </div>
                 </article>
 
-                <article class="video-card fade-in" data-category="promotion">
+                <!-- Promotion Cards -->
+                <article class="video-card reveal reveal-delay-1" data-category="promotion">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Promotion</span>
-                        <h3 class="video-title">プロモーション動画タイトル 2</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Promotion</span>
+                            <span class="video-duration">0:60</span>
+                        </div>
+                        <h3 class="video-title">プロモーション動画 1</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1068,21 +1709,24 @@
                     </div>
                 </article>
 
-                <!-- Video Card Template - Education Category -->
-                <article class="video-card fade-in" data-category="education">
+                <article class="video-card reveal reveal-delay-2" data-category="promotion">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Education</span>
-                        <h3 class="video-title">教育コンテンツタイトル 1</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Promotion</span>
+                            <span class="video-duration">1:30</span>
+                        </div>
+                        <h3 class="video-title">プロモーション動画 2</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1090,20 +1734,25 @@
                     </div>
                 </article>
 
-                <article class="video-card fade-in" data-category="education">
+                <!-- Education Cards -->
+                <article class="video-card reveal reveal-delay-3" data-category="education">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Education</span>
-                        <h3 class="video-title">教育コンテンツタイトル 2</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Education</span>
+                            <span class="video-duration">5:00</span>
+                        </div>
+                        <h3 class="video-title">教育コンテンツ 1</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1111,21 +1760,24 @@
                     </div>
                 </article>
 
-                <!-- Video Card Template - Short Film Category -->
-                <article class="video-card fade-in" data-category="shortfilm">
+                <article class="video-card reveal reveal-delay-4" data-category="education">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Short Film</span>
-                        <h3 class="video-title">ショートフィルムタイトル 1</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Education</span>
+                            <span class="video-duration">3:45</span>
+                        </div>
+                        <h3 class="video-title">教育コンテンツ 2</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1133,20 +1785,50 @@
                     </div>
                 </article>
 
-                <article class="video-card fade-in" data-category="shortfilm">
+                <!-- Short Film Cards -->
+                <article class="video-card reveal reveal-delay-1" data-category="shortfilm">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
                             <div class="play-icon">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
-                        <span class="video-category">Short Film</span>
-                        <h3 class="video-title">ショートフィルムタイトル 2</h3>
-                        <p class="video-description">作品の概要がここに入ります。制作背景やコンセプトなどの説明文。</p>
+                        <div class="video-meta">
+                            <span class="video-category">Short Film</span>
+                            <span class="video-duration">8:00</span>
+                        </div>
+                        <h3 class="video-title">ショートフィルム 1</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
                         <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch on YouTube
+                            Watch
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="video-card reveal reveal-delay-2" data-category="shortfilm">
+                    <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
+                        <div class="video-thumbnail-placeholder">
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="video-overlay"></div>
+                    </a>
+                    <div class="video-info">
+                        <div class="video-meta">
+                            <span class="video-category">Short Film</span>
+                            <span class="video-duration">6:30</span>
+                        </div>
+                        <h3 class="video-title">ショートフィルム 2</h3>
+                        <p class="video-description">作品の概要がここに入ります。</p>
+                        <a href="#" class="video-link" target="_blank" rel="noopener">
+                            Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -1159,43 +1841,86 @@
 
     <!-- About Section -->
     <section id="about" class="about">
-        <div class="about-content">
-            <div class="about-image fade-in">
-                <div class="about-image-wrapper">
-                    <div class="about-image-placeholder">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
+        <div class="about-container">
+            <div class="about-content">
+                <div class="about-visual reveal">
+                    <div class="about-image-wrapper">
+                        <div class="about-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="about-decoration"></div>
+                    <div class="about-badge">
+                        <div class="about-badge-number">3+</div>
+                        <div class="about-badge-text">Years Experience</div>
                     </div>
                 </div>
-                <div class="about-image-decoration"></div>
+
+                <div class="about-text reveal">
+                    <span class="section-label">About Me</span>
+                    <h3>映像で<span>想いを形に</span><br>するクリエイター</h3>
+                    <p>
+                        アニメーション、プロモーション映像、教育コンテンツなど、
+                        幅広いジャンルの映像制作を手がけています。
+                    </p>
+                    <p>
+                        最新のAI技術と従来の映像制作技術を組み合わせ、
+                        クライアントのビジョンを深く理解し、
+                        視聴者の心に響く映像作品を制作します。
+                    </p>
+
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">🎨</div>
+                            <div class="highlight-text">
+                                <h4>クリエイティブ</h4>
+                                <p>独創的なビジュアル表現</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">⚡</div>
+                            <div class="highlight-text">
+                                <h4>高速納品</h4>
+                                <p>AI活用による効率化</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">🎯</div>
+                            <div class="highlight-text">
+                                <h4>目的達成</h4>
+                                <p>ビジネス目標に貢献</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">💬</div>
+                            <div class="highlight-text">
+                                <h4>コミュニケーション</h4>
+                                <p>丁寧なヒアリング</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="about-text fade-in">
-                <span class="section-label">About Me</span>
-                <h3>映像で想いを形にする<br>クリエイター</h3>
-                <p>
-                    アニメーション、プロモーション映像、教育コンテンツなど、
-                    幅広いジャンルの映像制作を手がけています。
-                    クライアントのビジョンを深く理解し、視聴者の心に響く映像作品を制作します。
-                </p>
-                <p>
-                    最新のAI技術と従来の映像制作技術を組み合わせ、
-                    効率的かつクオリティの高い制作を実現しています。
-                </p>
-                <div class="about-stats">
-                    <div class="stat">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">制作作品数</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">30+</div>
-                        <div class="stat-label">クライアント</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">3+</div>
-                        <div class="stat-label">年の経験</div>
-                    </div>
+
+            <div class="stats-bar reveal">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">制作作品数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">クライアント</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">満足度</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24h</div>
+                    <div class="stat-label">レスポンス</div>
                 </div>
             </div>
         </div>
@@ -1203,47 +1928,49 @@
 
     <!-- Services Section -->
     <section id="services" class="services">
-        <div class="section-header fade-in">
-            <span class="section-label">Services</span>
-            <h2 class="section-title">What I Offer</h2>
-            <p class="section-subtitle">プロジェクトに最適なソリューションを提供します</p>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">🎬</div>
-                <h3>プロモーション映像</h3>
-                <p>企業・サービス・商品のプロモーション映像を制作。ブランドの魅力を最大限に引き出します。</p>
+        <div class="services-container">
+            <div class="section-header reveal">
+                <span class="section-label">Services</span>
+                <h2 class="section-title">What I Offer</h2>
+                <p class="section-subtitle">プロジェクトに最適なソリューションを提供します</p>
             </div>
 
-            <div class="service-card fade-in">
-                <div class="service-icon">✨</div>
-                <h3>アニメーション制作</h3>
-                <p>2D/3Dアニメーション、モーショングラフィックスなど、幅広いスタイルに対応します。</p>
-            </div>
+            <div class="services-grid">
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon">🎬</div>
+                    <h3>プロモーション映像</h3>
+                    <p>企業・サービス・商品のプロモーション映像を制作。ブランドの魅力を最大限に引き出し、ターゲットに響くコンテンツを提供します。</p>
+                </div>
 
-            <div class="service-card fade-in">
-                <div class="service-icon">📚</div>
-                <h3>教育コンテンツ</h3>
-                <p>分かりやすく魅力的な教育・解説動画を制作。複雑な内容も視覚的に伝えます。</p>
-            </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon">✨</div>
+                    <h3>アニメーション制作</h3>
+                    <p>2D/3Dアニメーション、モーショングラフィックスなど、幅広いスタイルに対応。動きで魅せる表現を追求します。</p>
+                </div>
 
-            <div class="service-card fade-in">
-                <div class="service-icon">🎥</div>
-                <h3>ショートフィルム</h3>
-                <p>ストーリー性のある短編映像作品を制作。感情に訴えかける映像表現を追求します。</p>
-            </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon">📚</div>
+                    <h3>教育コンテンツ</h3>
+                    <p>分かりやすく魅力的な教育・解説動画を制作。複雑な内容も視覚的に伝え、学習効果を最大化します。</p>
+                </div>
 
-            <div class="service-card fade-in">
-                <div class="service-icon">🤖</div>
-                <h3>AI映像制作</h3>
-                <p>最新のAI技術を活用した革新的な映像制作。効率的かつ高品質なコンテンツを提供します。</p>
-            </div>
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon">🎥</div>
+                    <h3>ショートフィルム</h3>
+                    <p>ストーリー性のある短編映像作品を制作。感情に訴えかける映像表現で、視聴者の心を動かします。</p>
+                </div>
 
-            <div class="service-card fade-in">
-                <div class="service-icon">🎨</div>
-                <h3>映像編集・カラーグレーディング</h3>
-                <p>既存素材の編集・加工、色調整など、ポストプロダクション作業全般に対応します。</p>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon">🤖</div>
+                    <h3>AI映像制作</h3>
+                    <p>最新のAI技術を活用した革新的な映像制作。効率的かつ高品質なコンテンツを実現します。</p>
+                </div>
+
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon">🎨</div>
+                    <h3>映像編集</h3>
+                    <p>既存素材の編集・加工、カラーグレーディングなど、ポストプロダクション作業全般に対応します。</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1251,50 +1978,49 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="contact-container">
-            <div class="section-header fade-in">
-                <span class="section-label">Contact</span>
-                <h2 class="section-title">Let's Work Together</h2>
-                <p class="section-subtitle">プロジェクトのご相談はお気軽にどうぞ</p>
-            </div>
+            <div class="contact-card reveal">
+                <div class="contact-content">
+                    <span class="section-label">Contact</span>
+                    <h3>Let's Create Together</h3>
+                    <p>プロジェクトのご相談はお気軽にどうぞ。<br>内容を確認の上、24時間以内にご連絡いたします。</p>
 
-            <div class="contact-card fade-in">
-                <h3>お問い合わせ</h3>
-                <p>映像制作のご依頼・ご相談は下記よりご連絡ください。<br>内容を確認の上、折り返しご連絡いたします。</p>
-
-                <div class="contact-info">
-                    <div class="contact-item">
+                    <a href="mailto:your-email@example.com" class="contact-email">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
-                        <a href="mailto:your-email@example.com">your-email@example.com</a>
+                        your-email@example.com
+                    </a>
+
+                    <a href="mailto:your-email@example.com" class="btn btn-primary">
+                        Start a Project
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="Twitter/X">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
                     </div>
-                </div>
-
-                <a href="mailto:your-email@example.com" class="btn btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    Send Message
-                </a>
-
-                <div class="social-links">
-                    <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="YouTube">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
                 </div>
             </div>
         </div>
@@ -1303,15 +2029,45 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">PORTFOLIO</div>
-            <p class="footer-text">&copy; 2025 All Rights Reserved.</p>
+            <div class="footer-logo"><span>STUDIO</span></div>
+            <p class="footer-text">&copy; 2025 All Rights Reserved. Crafted with passion.</p>
         </div>
     </footer>
 
     <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effect
+        const hoverElements = document.querySelectorAll('a, button, .video-card, .service-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
         // Mobile Menu Toggle
         function toggleMenu() {
             document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active');
         }
 
         // Navbar scroll effect
@@ -1324,18 +2080,15 @@
             }
         });
 
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.menu-toggle').classList.remove('active');
                 }
             });
         });
@@ -1346,10 +2099,8 @@
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active button
                 filterButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const category = btn.dataset.category;
 
                 videoCards.forEach(card => {
@@ -1362,10 +2113,10 @@
             });
         });
 
-        // Intersection Observer for fade-in animations
+        // Reveal on scroll
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -80px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1376,16 +2127,15 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Close mobile menu when clicking outside
+        // Close mobile menu on outside click
         document.addEventListener('click', (e) => {
             const navLinks = document.querySelector('.nav-links');
             const menuToggle = document.querySelector('.menu-toggle');
-            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+            if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
                 navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
             }
         });
     </script>
