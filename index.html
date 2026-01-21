@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Portfolio | Creative Video Production</title>
-    <meta name="description" content="プロフェッショナルな映像制作ポートフォリオ。アニメーション、プロモーション、教育コンテンツなど幅広いジャンルの動画制作を手がけています。">
+    <title>Video Portfolio | Award-Winning Creative Video Production</title>
+    <meta name="description" content="多数のコンテスト受賞歴を持つ映像クリエイター。アニメーション、プロモーション、教育コンテンツなど幅広いジャンルの動画制作を手がけています。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -20,8 +20,11 @@
             --accent-secondary: #6366f1;
             --accent-tertiary: #ec4899;
             --accent-cyan: #06b6d4;
+            --accent-gold: #f59e0b;
+            --accent-emerald: #10b981;
             --gradient-main: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
             --gradient-accent: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%);
             --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.4) 100%);
             --border-glass: rgba(255, 255, 255, 0.08);
             --shadow-glow: 0 0 60px rgba(168, 85, 247, 0.3);
@@ -46,6 +49,61 @@
             line-height: 1.7;
             overflow-x: hidden;
             cursor: none;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse-glow 1.5s ease-in-out infinite;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 3px;
+            animation: loading 1.5s ease-in-out forwards;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.8; filter: brightness(1.3); }
         }
 
         /* Custom Cursor */
@@ -111,6 +169,46 @@
             opacity: 0.03;
             pointer-events: none;
             z-index: 1;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.6);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2.5;
         }
 
         /* Navigation */
@@ -282,6 +380,34 @@
             position: relative;
         }
 
+        .hero-badge-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            animation: fadeSlideUp 0.8s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
         .hero-eyebrow {
             display: inline-flex;
             align-items: center;
@@ -295,7 +421,7 @@
             color: var(--text-secondary);
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
-            animation: fadeSlideUp 0.8s ease-out;
+            animation: fadeSlideUp 0.8s ease-out 0.1s both;
         }
 
         .hero-eyebrow .dot {
@@ -318,7 +444,7 @@
             line-height: 1.05;
             letter-spacing: -0.04em;
             margin-bottom: 1.5rem;
-            animation: fadeSlideUp 0.8s ease-out 0.1s both;
+            animation: fadeSlideUp 0.8s ease-out 0.2s both;
         }
 
         .hero h1 .line {
@@ -346,13 +472,13 @@
             max-width: 480px;
             margin-bottom: 2.5rem;
             line-height: 1.8;
-            animation: fadeSlideUp 0.8s ease-out 0.2s both;
+            animation: fadeSlideUp 0.8s ease-out 0.3s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 1rem;
-            animation: fadeSlideUp 0.8s ease-out 0.3s both;
+            animation: fadeSlideUp 0.8s ease-out 0.4s both;
         }
 
         .btn {
@@ -421,7 +547,7 @@
         /* Hero Visual */
         .hero-visual {
             position: relative;
-            animation: fadeSlideUp 0.8s ease-out 0.4s both;
+            animation: fadeSlideUp 0.8s ease-out 0.5s both;
         }
 
         .hero-visual-wrapper {
@@ -513,6 +639,14 @@
             animation-delay: 2s;
         }
 
+        .floating-element.fe-award {
+            top: -5%;
+            left: 10%;
+            animation-delay: 1s;
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -527,6 +661,10 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+        }
+
+        .floating-icon.gold {
+            background: var(--gradient-gold);
         }
 
         .floating-text {
@@ -560,7 +698,7 @@
             flex-direction: column;
             align-items: center;
             gap: 0.75rem;
-            animation: fadeSlideUp 0.8s ease-out 0.6s both;
+            animation: fadeSlideUp 0.8s ease-out 0.7s both;
         }
 
         .scroll-indicator span {
@@ -639,6 +777,202 @@
             color: var(--text-secondary);
             max-width: 550px;
             margin: 0 auto;
+        }
+
+        /* Awards Section */
+        .awards {
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .awards::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .awards-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .awards-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .awards-year {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+        }
+
+        .awards-year svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .award-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .award-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-gold);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .award-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(245, 158, 11, 0.1);
+        }
+
+        .award-card:hover::before {
+            opacity: 1;
+        }
+
+        .award-card.grand-prix {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 15, 25, 0.6) 100%);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .award-card.grand-prix .award-rank {
+            background: var(--gradient-gold);
+            color: #1a1a1a;
+        }
+
+        .award-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .award-rank {
+            padding: 0.4rem 0.8rem;
+            background: rgba(168, 85, 247, 0.15);
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .award-rank.gold {
+            background: var(--gradient-gold);
+            color: #1a1a1a;
+        }
+
+        .award-rank.silver {
+            background: linear-gradient(135deg, #9ca3af 0%, #d1d5db 50%, #9ca3af 100%);
+            color: #1a1a1a;
+        }
+
+        .award-rank.bronze {
+            background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #b45309 100%);
+            color: white;
+        }
+
+        .award-info {
+            flex: 1;
+        }
+
+        .award-contest {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .award-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .award-card.grand-prix .award-title {
+            font-size: 1.3rem;
+        }
+
+        .award-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .awards-summary {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .summary-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
         /* Works Section */
@@ -829,6 +1163,28 @@
             opacity: 1;
         }
 
+        .video-award-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 0.75rem;
+            background: var(--gradient-gold);
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            z-index: 3;
+        }
+
+        .video-award-badge svg {
+            width: 12px;
+            height: 12px;
+            fill: currentColor;
+        }
+
         .video-info {
             padding: 1.5rem;
             position: relative;
@@ -990,7 +1346,7 @@
         .about-badge-number {
             font-size: 2.5rem;
             font-weight: 700;
-            background: var(--gradient-main);
+            background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1096,6 +1452,13 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1;
+        }
+
+        .stat-number.gold {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
@@ -1354,6 +1717,14 @@
                 grid-column: span 2;
                 grid-row: span 1;
             }
+
+            .awards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .award-card.grand-prix {
+                grid-column: span 1;
+            }
         }
 
         @media (max-width: 968px) {
@@ -1417,6 +1788,11 @@
             .stat-item:not(:last-child)::after {
                 display: none;
             }
+
+            .awards-summary {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
         }
 
         @media (max-width: 640px) {
@@ -1434,6 +1810,10 @@
 
             .hero h1 {
                 font-size: 2.5rem;
+            }
+
+            .hero-badge-row {
+                justify-content: center;
             }
 
             .hero-buttons {
@@ -1475,6 +1855,13 @@
                 gap: 1rem;
                 text-align: center;
             }
+
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 44px;
+                height: 44px;
+            }
         }
 
         /* Animation Classes */
@@ -1493,9 +1880,23 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* Number Counter Animation */
+        .counter {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-logo">STUDIO</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
@@ -1504,11 +1905,19 @@
     <div class="bg-gradient"></div>
     <div class="noise-overlay"></div>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="logo"><span>STUDIO</span></div>
             <ul class="nav-links">
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#works">Works</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
@@ -1527,6 +1936,16 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-badge-row">
+                    <div class="hero-badge">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        2025 Award Winner
+                    </div>
+                    <div class="hero-badge">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        10+ Awards
+                    </div>
+                </div>
                 <div class="hero-eyebrow">
                     <span class="dot"></span>
                     Available for Projects
@@ -1538,8 +1957,8 @@
                 </h1>
                 <p>
                     映像の力で、アイデアを形に。<br>
-                    アニメーション、プロモーション、教育コンテンツまで<br>
-                    幅広いジャンルの映像制作でビジョンを実現します。
+                    多数のコンテスト受賞経験を活かし、<br>
+                    心に響く映像作品を制作します。
                 </p>
                 <div class="hero-buttons">
                     <a href="#works" class="btn btn-primary">
@@ -1548,8 +1967,8 @@
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        Get in Touch
+                    <a href="#awards" class="btn btn-secondary">
+                        View Awards
                     </a>
                 </div>
             </div>
@@ -1565,6 +1984,13 @@
                 <div class="hero-visual-decoration"></div>
 
                 <!-- Floating Elements -->
+                <div class="floating-element fe-award">
+                    <div class="floating-icon gold">🏆</div>
+                    <div class="floating-text">
+                        <strong>10+</strong>
+                        <span>Awards in 2025</span>
+                    </div>
+                </div>
                 <div class="floating-element fe-1">
                     <div class="floating-icon">🎬</div>
                     <div class="floating-text">
@@ -1588,13 +2014,163 @@
         </div>
     </section>
 
+    <!-- Awards Section -->
+    <section id="awards" class="awards">
+        <div class="awards-container">
+            <div class="section-header reveal">
+                <span class="section-label">Achievements</span>
+                <h2 class="section-title">Awards & Recognition</h2>
+                <p class="section-subtitle">これまでに受賞したコンテスト・アワードの実績</p>
+            </div>
+
+            <div class="awards-header reveal">
+                <div class="awards-year">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    2025 Contest Results
+                </div>
+            </div>
+
+            <div class="awards-grid">
+                <!-- Grand Prix Awards -->
+                <article class="award-card grand-prix reveal reveal-delay-1">
+                    <div class="award-header">
+                        <div class="award-icon">🏆</div>
+                        <div class="award-info">
+                            <p class="award-contest">SOZO美術館 第29回コンペ</p>
+                            <h3 class="award-title">縦型ショートアニメ総合賞 グランプリ</h3>
+                        </div>
+                        <span class="award-rank gold">Grand Prix</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-2">
+                    <div class="award-header">
+                        <div class="award-icon">🥇</div>
+                        <div class="award-info">
+                            <p class="award-contest">「あったらいいな」CMコンテスト</p>
+                            <h3 class="award-title">最優秀賞</h3>
+                        </div>
+                        <span class="award-rank gold">Best Award</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-3">
+                    <div class="award-header">
+                        <div class="award-icon">🥈</div>
+                        <div class="award-info">
+                            <p class="award-contest">SOZO美術館 第30回行ってみたい白浜</p>
+                            <h3 class="award-title">表コンペ 準グランプリ</h3>
+                        </div>
+                        <span class="award-rank silver">Runner-up</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-4">
+                    <div class="award-header">
+                        <div class="award-icon">🎖️</div>
+                        <div class="award-info">
+                            <p class="award-contest">泣けるAIショートアニメ</p>
+                            <h3 class="award-title">優秀賞</h3>
+                        </div>
+                        <span class="award-rank">Excellence</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-1">
+                    <div class="award-header">
+                        <div class="award-icon">🎖️</div>
+                        <div class="award-info">
+                            <p class="award-contest">幸手市 映像コンテスト</p>
+                            <h3 class="award-title">優秀賞</h3>
+                        </div>
+                        <span class="award-rank">Excellence</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-2">
+                    <div class="award-header">
+                        <div class="award-icon">🎖️</div>
+                        <div class="award-info">
+                            <p class="award-contest">WIZ AI #絶対迷惑かけないハロウィーン選手権</p>
+                            <h3 class="award-title">優秀賞</h3>
+                        </div>
+                        <span class="award-rank">Excellence</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-3">
+                    <div class="award-header">
+                        <div class="award-icon">🥉</div>
+                        <div class="award-info">
+                            <p class="award-contest">ミスターAIコンテスト</p>
+                            <h3 class="award-title">3位</h3>
+                        </div>
+                        <span class="award-rank bronze">3rd Place</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-4">
+                    <div class="award-header">
+                        <div class="award-icon">🥈</div>
+                        <div class="award-info">
+                            <p class="award-contest">Vidu Qreation Challenge</p>
+                            <h3 class="award-title">Silver賞</h3>
+                        </div>
+                        <span class="award-rank silver">Silver</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-1">
+                    <div class="award-header">
+                        <div class="award-icon">🎗️</div>
+                        <div class="award-info">
+                            <p class="award-contest">Viduバレンタインチャレンジ</p>
+                            <h3 class="award-title">入賞</h3>
+                        </div>
+                        <span class="award-rank">Winner</span>
+                    </div>
+                </article>
+
+                <article class="award-card reveal reveal-delay-2">
+                    <div class="award-header">
+                        <div class="award-icon">📱</div>
+                        <div class="award-info">
+                            <p class="award-contest">NICIドリームステージ大賞</p>
+                            <h3 class="award-title">SNS特別賞</h3>
+                        </div>
+                        <span class="award-rank">Special</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="awards-summary reveal">
+                <div class="summary-item">
+                    <div class="summary-number counter" data-target="10">0</div>
+                    <div class="summary-label">Total Awards</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number counter" data-target="2">0</div>
+                    <div class="summary-label">Grand Prix / Best</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number counter" data-target="3">0</div>
+                    <div class="summary-label">Silver / Runner-up</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number counter" data-target="5">0</div>
+                    <div class="summary-label">Excellence / Other</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Works Section -->
     <section id="works" class="works">
         <div class="works-container">
             <div class="section-header reveal">
                 <span class="section-label">Portfolio</span>
                 <h2 class="section-title">Selected Works</h2>
-                <p class="section-subtitle">ジャンル別に制作した映像作品をご覧ください</p>
+                <p class="section-subtitle">受賞作品を含む、ジャンル別の映像作品をご覧ください</p>
             </div>
 
             <div class="category-filter reveal">
@@ -1614,11 +2190,15 @@
                         <div class="play-icon">
                             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
+                        <div class="video-award-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            3位入賞
+                        </div>
                     </a>
                     <div class="video-info">
                         <div class="video-meta">
                             <span class="video-category">Promotion</span>
-                            <span class="video-duration">🏆 3位入賞</span>
+                            <span class="video-duration">ミスターAIコンテスト</span>
                         </div>
                         <h3 class="video-title">AIスタイリスト降臨！SADAの勝負服で大変身</h3>
                         <p class="video-description">プレゼン直前にスーツがない!? 絶望のピンチにAIスタイリスト参上！奇抜なコーデから運命の一着へ――。笑撃と感動のビフォーアフター。ミスターAIコンテスト3位入賞作品。</p>
@@ -1781,7 +2361,7 @@
                     </div>
                 </article>
 
-                <!-- KAERUN AI -->
+                <!-- KAERUN AI - Award Winner -->
                 <article class="video-card reveal reveal-delay-2" data-category="promotion">
                     <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" class="video-thumbnail" target="_blank" rel="noopener">
                         <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/maxresdefault.jpg" alt="KAERUN AI" style="width:100%;height:100%;object-fit:cover;">
@@ -1789,11 +2369,15 @@
                         <div class="play-icon">
                             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
+                        <div class="video-award-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            最優秀賞
+                        </div>
                     </a>
                     <div class="video-info">
                         <div class="video-meta">
                             <span class="video-category">Promotion</span>
-                            <span class="video-duration">Best Award</span>
+                            <span class="video-duration">「あったらいいな」CM</span>
                         </div>
                         <h3 class="video-title">KAERUN AI</h3>
                         <p class="video-description">仕事も家族も、自分らしく。そんな願いを叶えるAIアシスタント「KAERUN AI」を描いたCM風ショートアニメ。あったらいいなCMコンテスト最優秀賞受賞作品。</p>
@@ -1806,7 +2390,7 @@
                     </div>
                 </article>
 
-                <!-- 幸手市PR映像 -->
+                <!-- 幸手市PR映像 - Award Winner -->
                 <article class="video-card reveal reveal-delay-3" data-category="promotion">
                     <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" class="video-thumbnail" target="_blank" rel="noopener">
                         <img src="https://img.youtube.com/vi/xp4sub-rhXM/maxresdefault.jpg" alt="幸手市PR映像" style="width:100%;height:100%;object-fit:cover;">
@@ -1814,11 +2398,15 @@
                         <div class="play-icon">
                             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
+                        <div class="video-award-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            優秀賞
+                        </div>
                     </a>
                     <div class="video-info">
                         <div class="video-meta">
                             <span class="video-category">Promotion</span>
-                            <span class="video-duration">Award</span>
+                            <span class="video-duration">幸手市映像コンテスト</span>
                         </div>
                         <h3 class="video-title">幸手市PR映像 - 目に見えない幸せ</h3>
                         <p class="video-description">日本で唯一「幸」の字を持つまち、埼玉県幸手市。その日常に潜む、目には見えない幸せをAIで映像化。幸手市映像コンテスト優秀賞受賞作品。</p>
@@ -1951,8 +2539,8 @@
                     </div>
                     <div class="about-decoration"></div>
                     <div class="about-badge">
-                        <div class="about-badge-number">3+</div>
-                        <div class="about-badge-text">Years Experience</div>
+                        <div class="about-badge-number">10+</div>
+                        <div class="about-badge-text">Awards in 2025</div>
                     </div>
                 </div>
 
@@ -1964,17 +2552,16 @@
                         幅広いジャンルの映像制作を手がけています。
                     </p>
                     <p>
-                        最新のAI技術と従来の映像制作技術を組み合わせ、
-                        クライアントのビジョンを深く理解し、
-                        視聴者の心に響く映像作品を制作します。
+                        2025年は10以上のコンテストで受賞。最新のAI技術と従来の映像制作技術を組み合わせ、
+                        クライアントのビジョンを深く理解し、視聴者の心に響く映像作品を制作します。
                     </p>
 
                     <div class="about-highlights">
                         <div class="highlight-item">
-                            <div class="highlight-icon">🎨</div>
+                            <div class="highlight-icon">🏆</div>
                             <div class="highlight-text">
-                                <h4>クリエイティブ</h4>
-                                <p>独創的なビジュアル表現</p>
+                                <h4>受賞歴多数</h4>
+                                <p>2025年10件以上の受賞</p>
                             </div>
                         </div>
                         <div class="highlight-item">
@@ -2004,20 +2591,20 @@
 
             <div class="stats-bar reveal">
                 <div class="stat-item">
-                    <div class="stat-number">50+</div>
+                    <div class="stat-number counter" data-target="50">0</div>
                     <div class="stat-label">制作作品数</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">クライアント</div>
+                    <div class="stat-number gold counter" data-target="10">0</div>
+                    <div class="stat-label">受賞数 (2025)</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">満足度</div>
+                    <div class="stat-number counter" data-target="100">0</div>
+                    <div class="stat-label">満足度 %</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">24h</div>
-                    <div class="stat-label">レスポンス</div>
+                    <div class="stat-number counter" data-target="24">0</div>
+                    <div class="stat-label">レスポンス h</div>
                 </div>
             </div>
         </div>
@@ -2029,7 +2616,7 @@
             <div class="section-header reveal">
                 <span class="section-label">Services</span>
                 <h2 class="section-title">What I Offer</h2>
-                <p class="section-subtitle">プロジェクトに最適なソリューションを提供します</p>
+                <p class="section-subtitle">受賞実績に裏打ちされた高品質な映像制作サービス</p>
             </div>
 
             <div class="services-grid">
@@ -2132,6 +2719,13 @@
     </footer>
 
     <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').classList.add('hidden');
+            }, 1800);
+        });
+
         // Custom Cursor
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
@@ -2155,7 +2749,7 @@
         animateCursor();
 
         // Cursor hover effect
-        const hoverElements = document.querySelectorAll('a, button, .video-card, .service-card');
+        const hoverElements = document.querySelectorAll('a, button, .video-card, .service-card, .award-card');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -2170,12 +2764,26 @@
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
+            const backToTop = document.querySelector('.back-to-top');
+
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
+
+            // Back to top button visibility
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
         });
+
+        // Back to top function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2210,7 +2818,32 @@
             });
         });
 
-        // Reveal on scroll
+        // Counter animation
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000;
+            const start = 0;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(start + (target - start) * easeOut);
+
+                element.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.textContent = target;
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Reveal on scroll with counter animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -80px 0px'
@@ -2220,11 +2853,32 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+
+                    // Trigger counter animation for elements within this container
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if (!counter.dataset.animated) {
+                            counter.dataset.animated = 'true';
+                            animateCounter(counter);
+                        }
+                    });
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Also observe individual counters not in reveal containers
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    animateCounter(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
         // Close mobile menu on outside click
         document.addEventListener('click', (e) => {
