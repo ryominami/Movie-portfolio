@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Portfolio | Creative Video Production</title>
-    <meta name="description" content="プロフェッショナルな映像制作ポートフォリオ。アニメーション、プロモーション、教育コンテンツなど幅広いジャンルの動画制作を手がけています。">
+    <title>Video Portfolio | Award-Winning Creative Video Production</title>
+    <meta name="description" content="受賞歴多数のプロフェッショナルな映像制作ポートフォリオ。アニメーション、プロモーション、教育コンテンツなど幅広いジャンルの動画制作を手がけています。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -20,8 +20,11 @@
             --accent-secondary: #6366f1;
             --accent-tertiary: #ec4899;
             --accent-cyan: #06b6d4;
+            --accent-gold: #fbbf24;
+            --accent-emerald: #10b981;
             --gradient-main: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
             --gradient-accent: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.4) 100%);
             --border-glass: rgba(255, 255, 255, 0.08);
             --shadow-glow: 0 0 60px rgba(168, 85, 247, 0.3);
@@ -46,6 +49,116 @@
             line-height: 1.7;
             overflow-x: hidden;
             cursor: none;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .loading-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 3px;
+            animation: loading 1.2s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5)); }
+            50% { opacity: 0.8; filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.8)); }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-main);
+            z-index: 10001;
+            transition: width 0.1s linear;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.6);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
         }
 
         /* Custom Cursor */
@@ -113,6 +226,32 @@
             z-index: 1;
         }
 
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float-particle 15s infinite ease-in-out;
+        }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -171,7 +310,7 @@
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
@@ -305,6 +444,27 @@
             border-radius: 50%;
             animation: pulse 2s infinite;
             box-shadow: 0 0 10px #10b981;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-left: 0.75rem;
+            animation: fadeSlideUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent-gold);
         }
 
         @keyframes pulse {
@@ -513,6 +673,12 @@
             animation-delay: 2s;
         }
 
+        .floating-element.fe-3 {
+            bottom: 40%;
+            right: -15%;
+            animation-delay: 4s;
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -527,6 +693,10 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+        }
+
+        .floating-icon.gold {
+            background: var(--gradient-gold);
         }
 
         .floating-text {
@@ -639,6 +809,192 @@
             color: var(--text-secondary);
             max-width: 550px;
             margin: 0 auto;
+        }
+
+        /* Awards Section */
+        .awards {
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .awards::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .awards-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .award-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .award-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-smooth);
+        }
+
+        .award-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(251, 191, 36, 0.1);
+        }
+
+        .award-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .award-card.grand-prix {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, var(--bg-card) 100%);
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+        .award-card.grand-prix::before {
+            transform: scaleX(1);
+        }
+
+        .award-rank {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .award-rank.gold {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .award-rank.silver {
+            background: rgba(192, 192, 192, 0.15);
+            color: #c0c0c0;
+            border: 1px solid rgba(192, 192, 192, 0.3);
+        }
+
+        .award-rank.bronze {
+            background: rgba(205, 127, 50, 0.15);
+            color: #cd7f32;
+            border: 1px solid rgba(205, 127, 50, 0.3);
+        }
+
+        .award-rank.special {
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .award-rank svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .award-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .award-card.grand-prix .award-title {
+            font-size: 1.3rem;
+        }
+
+        .award-contest {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .award-year {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .award-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            opacity: 0.3;
+            transition: var(--transition-smooth);
+        }
+
+        .award-card:hover .award-icon {
+            opacity: 0.6;
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Awards Stats */
+        .awards-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+        }
+
+        .award-stat {
+            text-align: center;
+        }
+
+        .award-stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .award-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
         }
 
         /* Works Section */
@@ -829,6 +1185,29 @@
             opacity: 1;
         }
 
+        .video-award-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(251, 191, 36, 0.9);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #000;
+            z-index: 3;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-award-badge svg {
+            width: 12px;
+            height: 12px;
+            fill: currentColor;
+        }
+
         .video-info {
             padding: 1.5rem;
             position: relative;
@@ -907,6 +1286,81 @@
 
         .video-link:hover svg {
             transform: translateX(4px);
+        }
+
+        /* Skills Section */
+        .skills {
+            background: transparent;
+        }
+
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: var(--transition-smooth);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-4px);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .skill-category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .skill-category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            padding: 0.5rem 1rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+        }
+
+        .skill-item:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
         }
 
         /* About Section */
@@ -990,7 +1444,7 @@
         .about-badge-number {
             font-size: 2.5rem;
             font-weight: 700;
-            background: var(--gradient-main);
+            background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1354,6 +1808,15 @@
                 grid-column: span 2;
                 grid-row: span 1;
             }
+
+            .award-card.grand-prix {
+                grid-column: span 1;
+            }
+
+            .awards-stats {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
         }
 
         @media (max-width: 968px) {
@@ -1417,6 +1880,10 @@
             .stat-item:not(:last-child)::after {
                 display: none;
             }
+
+            .awards-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 640px) {
@@ -1434,6 +1901,10 @@
 
             .hero h1 {
                 font-size: 2.5rem;
+            }
+
+            .hero-badge {
+                display: none;
             }
 
             .hero-buttons {
@@ -1475,6 +1946,18 @@
                 gap: 1rem;
                 text-align: center;
             }
+
+            .awards-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 44px;
+                height: 44px;
+            }
         }
 
         /* Animation Classes */
@@ -1493,9 +1976,40 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Shimmer effect for awards */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .award-card.grand-prix .award-title {
+            background: linear-gradient(90deg, var(--accent-gold) 0%, #fff 50%, var(--accent-gold) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-logo">STUDIO</div>
+        <div class="loading-bar"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
+        <svg viewBox="0 0 24 24">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
@@ -1503,13 +2017,16 @@
     <!-- Background Effects -->
     <div class="bg-gradient"></div>
     <div class="noise-overlay"></div>
+    <div class="particles" id="particles"></div>
 
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="logo"><span>STUDIO</span></div>
             <ul class="nav-links">
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#works">Works</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -1530,6 +2047,10 @@
                 <div class="hero-eyebrow">
                     <span class="dot"></span>
                     Available for Projects
+                    <span class="hero-badge">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        10 Awards
+                    </span>
                 </div>
                 <h1>
                     <span class="line">Creating</span>
@@ -1538,6 +2059,7 @@
                 </h1>
                 <p>
                     映像の力で、アイデアを形に。<br>
+                    受賞歴多数のクリエイターが、<br>
                     アニメーション、プロモーション、教育コンテンツまで<br>
                     幅広いジャンルの映像制作でビジョンを実現します。
                 </p>
@@ -1548,8 +2070,8 @@
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        Get in Touch
+                    <a href="#awards" class="btn btn-secondary">
+                        View Awards
                     </a>
                 </div>
             </div>
@@ -1566,17 +2088,24 @@
 
                 <!-- Floating Elements -->
                 <div class="floating-element fe-1">
+                    <div class="floating-icon gold">🏆</div>
+                    <div class="floating-text">
+                        <strong>10+</strong>
+                        <span>Awards Won</span>
+                    </div>
+                </div>
+                <div class="floating-element fe-2">
                     <div class="floating-icon">🎬</div>
                     <div class="floating-text">
                         <strong>50+</strong>
                         <span>Projects Done</span>
                     </div>
                 </div>
-                <div class="floating-element fe-2">
+                <div class="floating-element fe-3">
                     <div class="floating-icon">⭐</div>
                     <div class="floating-text">
                         <strong>100%</strong>
-                        <span>Client Satisfaction</span>
+                        <span>Satisfaction</span>
                     </div>
                 </div>
             </div>
@@ -1585,6 +2114,154 @@
         <div class="scroll-indicator">
             <span>Scroll</span>
             <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="awards">
+        <div class="awards-container">
+            <div class="section-header reveal">
+                <span class="section-label">Achievements</span>
+                <h2 class="section-title">Awards & Recognition</h2>
+                <p class="section-subtitle">2025年のコンテストで獲得した受賞歴</p>
+            </div>
+
+            <div class="awards-grid">
+                <!-- Grand Prix -->
+                <article class="award-card grand-prix reveal">
+                    <span class="award-rank gold">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        グランプリ
+                    </span>
+                    <h3 class="award-title">縦型ショートアニメ総合賞</h3>
+                    <p class="award-contest">SOZO美術館 第29回コンペ</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🏆</span>
+                </article>
+
+                <!-- Best Award -->
+                <article class="award-card reveal reveal-delay-1">
+                    <span class="award-rank gold">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        最優秀賞
+                    </span>
+                    <h3 class="award-title">KAERUN AI</h3>
+                    <p class="award-contest">「あったらいいな」CMコンテスト</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🥇</span>
+                </article>
+
+                <!-- Semi Grand Prix -->
+                <article class="award-card reveal reveal-delay-2">
+                    <span class="award-rank silver">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        準グランプリ
+                    </span>
+                    <h3 class="award-title">行ってみたい白浜</h3>
+                    <p class="award-contest">SOZO美術館 第30回表コンペ</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🥈</span>
+                </article>
+
+                <!-- Excellence Awards -->
+                <article class="award-card reveal reveal-delay-3">
+                    <span class="award-rank gold">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        優秀賞
+                    </span>
+                    <h3 class="award-title">泣けるAIショートアニメ</h3>
+                    <p class="award-contest">泣けるAIショートアニメコンテスト</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🎬</span>
+                </article>
+
+                <article class="award-card reveal reveal-delay-1">
+                    <span class="award-rank gold">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        優秀賞
+                    </span>
+                    <h3 class="award-title">目に見えない幸せ</h3>
+                    <p class="award-contest">幸手市 映像コンテスト</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🌸</span>
+                </article>
+
+                <article class="award-card reveal reveal-delay-2">
+                    <span class="award-rank gold">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        優秀賞
+                    </span>
+                    <h3 class="award-title">#絶対迷惑かけないハロウィーン</h3>
+                    <p class="award-contest">WIZ AI ハロウィーン選手権</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🎃</span>
+                </article>
+
+                <!-- 3rd Place -->
+                <article class="award-card reveal reveal-delay-3">
+                    <span class="award-rank bronze">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        3位
+                    </span>
+                    <h3 class="award-title">AIスタイリスト降臨！</h3>
+                    <p class="award-contest">ミスターAIコンテスト</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🥉</span>
+                </article>
+
+                <!-- Special Awards -->
+                <article class="award-card reveal reveal-delay-1">
+                    <span class="award-rank silver">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        Silver賞
+                    </span>
+                    <h3 class="award-title">Vidu Creation Challenge</h3>
+                    <p class="award-contest">ViduQreation Challenge</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">✨</span>
+                </article>
+
+                <article class="award-card reveal reveal-delay-2">
+                    <span class="award-rank special">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        入賞
+                    </span>
+                    <h3 class="award-title">バレンタインチャレンジ</h3>
+                    <p class="award-contest">Viduバレンタインチャレンジ</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">💝</span>
+                </article>
+
+                <article class="award-card reveal reveal-delay-3">
+                    <span class="award-rank special">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        SNS特別賞
+                    </span>
+                    <h3 class="award-title">NICIドリームステージ</h3>
+                    <p class="award-contest">NICIドリームステージ大賞</p>
+                    <p class="award-year">2025</p>
+                    <span class="award-icon">🌟</span>
+                </article>
+            </div>
+
+            <div class="awards-stats reveal">
+                <div class="award-stat">
+                    <div class="award-stat-number">10</div>
+                    <div class="award-stat-label">受賞総数</div>
+                </div>
+                <div class="award-stat">
+                    <div class="award-stat-number">2</div>
+                    <div class="award-stat-label">グランプリ・準グランプリ</div>
+                </div>
+                <div class="award-stat">
+                    <div class="award-stat-number">4</div>
+                    <div class="award-stat-label">最優秀賞・優秀賞</div>
+                </div>
+                <div class="award-stat">
+                    <div class="award-stat-number">2025</div>
+                    <div class="award-stat-label">受賞年度</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1606,23 +2283,27 @@
             </div>
 
             <div class="video-grid">
-                <!-- Featured Video Card - AIスタイリスト降臨 -->
-                <article class="video-card featured reveal" data-category="promotion">
-                    <a href="https://www.youtube.com/watch?v=LaB5PMDItJI" class="video-thumbnail" target="_blank" rel="noopener">
-                        <img src="https://img.youtube.com/vi/LaB5PMDItJI/maxresdefault.jpg" alt="AIスタイリスト降臨！SADAの勝負服で大変身" style="width:100%;height:100%;object-fit:cover;">
+                <!-- Featured Video Card - SOZO美術館 グランプリ作品 -->
+                <article class="video-card featured reveal" data-category="animation">
+                    <a href="https://www.youtube.com/watch?v=KZkzLVDarFY" class="video-thumbnail" target="_blank" rel="noopener">
+                        <img src="https://img.youtube.com/vi/KZkzLVDarFY/maxresdefault.jpg" alt="GAMBLE KINGDOM" style="width:100%;height:100%;object-fit:cover;">
                         <div class="video-overlay"></div>
                         <div class="play-icon">
                             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
+                        <span class="video-award-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            グランプリ
+                        </span>
                     </a>
                     <div class="video-info">
                         <div class="video-meta">
-                            <span class="video-category">Promotion</span>
-                            <span class="video-duration">🏆 3位入賞</span>
+                            <span class="video-category">Animation</span>
+                            <span class="video-duration">SOZO美術館 第29回</span>
                         </div>
-                        <h3 class="video-title">AIスタイリスト降臨！SADAの勝負服で大変身</h3>
-                        <p class="video-description">プレゼン直前にスーツがない!? 絶望のピンチにAIスタイリスト参上！奇抜なコーデから運命の一着へ――。笑撃と感動のビフォーアフター。ミスターAIコンテスト3位入賞作品。</p>
-                        <a href="https://www.youtube.com/watch?v=LaB5PMDItJI" class="video-link" target="_blank" rel="noopener">
+                        <h3 class="video-title">GAMBLE KINGDOM</h3>
+                        <p class="video-description">眠らない摩天楼のカジノを舞台に、運命のカードが舞う！己の全てを賭け、"ギャンブル・キングダム"の嘘と真実に挑む者たちのハイステークス・心理戦アニメ。SOZO美術館第29回コンペ縦型ショートアニメ総合賞グランプリ受賞作品。</p>
+                        <a href="https://www.youtube.com/watch?v=KZkzLVDarFY" class="video-link" target="_blank" rel="noopener">
                             Watch Full Video
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1631,23 +2312,27 @@
                     </div>
                 </article>
 
-                <!-- Animation Cards - GAMBLE KINGDOM -->
-                <article class="video-card reveal reveal-delay-1" data-category="animation">
-                    <a href="https://www.youtube.com/watch?v=KZkzLVDarFY" class="video-thumbnail" target="_blank" rel="noopener">
-                        <img src="https://img.youtube.com/vi/KZkzLVDarFY/maxresdefault.jpg" alt="GAMBLE KINGDOM" style="width:100%;height:100%;object-fit:cover;">
+                <!-- KAERUN AI - 最優秀賞 -->
+                <article class="video-card reveal reveal-delay-1" data-category="promotion">
+                    <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" class="video-thumbnail" target="_blank" rel="noopener">
+                        <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/maxresdefault.jpg" alt="KAERUN AI" style="width:100%;height:100%;object-fit:cover;">
                         <div class="video-overlay"></div>
                         <div class="play-icon">
                             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
+                        <span class="video-award-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            最優秀賞
+                        </span>
                     </a>
                     <div class="video-info">
                         <div class="video-meta">
-                            <span class="video-category">Animation</span>
-                            <span class="video-duration">Anime OP</span>
+                            <span class="video-category">Promotion</span>
+                            <span class="video-duration">Best Award</span>
                         </div>
-                        <h3 class="video-title">GAMBLE KINGDOM</h3>
-                        <p class="video-description">眠らない摩天楼のカジノを舞台に、運命のカードが舞う！己の全てを賭け、"ギャンブル・キングダム"の嘘と真実に挑む者たちのハイステークス・心理戦アニメ。</p>
-                        <a href="https://www.youtube.com/watch?v=KZkzLVDarFY" class="video-link" target="_blank" rel="noopener">
+                        <h3 class="video-title">KAERUN AI</h3>
+                        <p class="video-description">仕事も家族も、自分らしく。そんな願いを叶えるAIアシスタント「KAERUN AI」を描いたCM風ショートアニメ。「あったらいいな」CMコンテスト最優秀賞受賞作品。</p>
+                        <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" class="video-link" target="_blank" rel="noopener">
                             Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1656,23 +2341,27 @@
                     </div>
                 </article>
 
-                <article class="video-card reveal reveal-delay-2" data-category="animation">
-                    <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
-                        <div class="video-thumbnail-placeholder">
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
+                <!-- AIスタイリスト - 3位 -->
+                <article class="video-card reveal reveal-delay-2" data-category="promotion">
+                    <a href="https://www.youtube.com/watch?v=LaB5PMDItJI" class="video-thumbnail" target="_blank" rel="noopener">
+                        <img src="https://img.youtube.com/vi/LaB5PMDItJI/maxresdefault.jpg" alt="AIスタイリスト降臨！SADAの勝負服で大変身" style="width:100%;height:100%;object-fit:cover;">
                         <div class="video-overlay"></div>
+                        <div class="play-icon">
+                            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                        <span class="video-award-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            3位入賞
+                        </span>
                     </a>
                     <div class="video-info">
                         <div class="video-meta">
-                            <span class="video-category">Animation</span>
-                            <span class="video-duration">Coming Soon</span>
+                            <span class="video-category">Promotion</span>
+                            <span class="video-duration">3rd Place</span>
                         </div>
-                        <h3 class="video-title">アニメーション作品</h3>
-                        <p class="video-description">新作準備中</p>
-                        <a href="#" class="video-link" target="_blank" rel="noopener">
+                        <h3 class="video-title">AIスタイリスト降臨！</h3>
+                        <p class="video-description">プレゼン直前にスーツがない!? 絶望のピンチにAIスタイリスト参上！ミスターAIコンテスト3位入賞作品。</p>
+                        <a href="https://www.youtube.com/watch?v=LaB5PMDItJI" class="video-link" target="_blank" rel="noopener">
                             Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1681,7 +2370,36 @@
                     </div>
                 </article>
 
-                <!-- Promotion Cards - BEYOND BOUNDARIES -->
+                <!-- 幸手市PR映像 - 優秀賞 -->
+                <article class="video-card reveal reveal-delay-3" data-category="promotion">
+                    <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" class="video-thumbnail" target="_blank" rel="noopener">
+                        <img src="https://img.youtube.com/vi/xp4sub-rhXM/maxresdefault.jpg" alt="幸手市PR映像" style="width:100%;height:100%;object-fit:cover;">
+                        <div class="video-overlay"></div>
+                        <div class="play-icon">
+                            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                        <span class="video-award-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            優秀賞
+                        </span>
+                    </a>
+                    <div class="video-info">
+                        <div class="video-meta">
+                            <span class="video-category">Promotion</span>
+                            <span class="video-duration">Award</span>
+                        </div>
+                        <h3 class="video-title">幸手市PR - 目に見えない幸せ</h3>
+                        <p class="video-description">日本で唯一「幸」の字を持つまち、埼玉県幸手市。その日常に潜む幸せをAIで映像化。幸手市映像コンテスト優秀賞受賞。</p>
+                        <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" class="video-link" target="_blank" rel="noopener">
+                            Watch
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- BEYOND BOUNDARIES -->
                 <article class="video-card reveal reveal-delay-1" data-category="promotion">
                     <a href="https://www.youtube.com/watch?v=seTHDd55QjY" class="video-thumbnail" target="_blank" rel="noopener">
                         <img src="https://img.youtube.com/vi/seTHDd55QjY/maxresdefault.jpg" alt="BEYOND BOUNDARIES" style="width:100%;height:100%;object-fit:cover;">
@@ -1696,7 +2414,7 @@
                             <span class="video-duration">Contest Entry</span>
                         </div>
                         <h3 class="video-title">BEYOND BOUNDARIES</h3>
-                        <p class="video-description">砂漠も険しい山も都会の夜景さえもすべてがあなたのステージになる。場所を選ばず、自由を纏う究極のフィット感。SADAのスーツが映える、美しき冒険の旅路。</p>
+                        <p class="video-description">砂漠も険しい山も都会の夜景さえもすべてがあなたのステージになる。SADAのスーツが映える、美しき冒険の旅路。</p>
                         <a href="https://www.youtube.com/watch?v=seTHDd55QjY" class="video-link" target="_blank" rel="noopener">
                             Watch
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1706,53 +2424,23 @@
                     </div>
                 </article>
 
-                <!-- KAERUN AI -->
-                <article class="video-card reveal reveal-delay-2" data-category="promotion">
-                    <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" class="video-thumbnail" target="_blank" rel="noopener">
-                        <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/maxresdefault.jpg" alt="KAERUN AI" style="width:100%;height:100%;object-fit:cover;">
-                        <div class="video-overlay"></div>
-                        <div class="play-icon">
-                            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <!-- Animation Coming Soon -->
+                <article class="video-card reveal reveal-delay-2" data-category="animation">
+                    <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
+                        <div class="video-thumbnail-placeholder">
+                            <div class="play-icon" style="opacity: 0.5; transform: scale(1);">
+                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
                         </div>
+                        <div class="video-overlay"></div>
                     </a>
                     <div class="video-info">
                         <div class="video-meta">
-                            <span class="video-category">Promotion</span>
-                            <span class="video-duration">Best Award</span>
+                            <span class="video-category">Animation</span>
+                            <span class="video-duration">Coming Soon</span>
                         </div>
-                        <h3 class="video-title">KAERUN AI</h3>
-                        <p class="video-description">仕事も家族も、自分らしく。そんな願いを叶えるAIアシスタント「KAERUN AI」を描いたCM風ショートアニメ。あったらいいなCMコンテスト最優秀賞受賞作品。</p>
-                        <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" class="video-link" target="_blank" rel="noopener">
-                            Watch
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- 幸手市PR映像 -->
-                <article class="video-card reveal reveal-delay-3" data-category="promotion">
-                    <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" class="video-thumbnail" target="_blank" rel="noopener">
-                        <img src="https://img.youtube.com/vi/xp4sub-rhXM/maxresdefault.jpg" alt="幸手市PR映像" style="width:100%;height:100%;object-fit:cover;">
-                        <div class="video-overlay"></div>
-                        <div class="play-icon">
-                            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        </div>
-                    </a>
-                    <div class="video-info">
-                        <div class="video-meta">
-                            <span class="video-category">Promotion</span>
-                            <span class="video-duration">Award</span>
-                        </div>
-                        <h3 class="video-title">幸手市PR映像 - 目に見えない幸せ</h3>
-                        <p class="video-description">日本で唯一「幸」の字を持つまち、埼玉県幸手市。その日常に潜む、目には見えない幸せをAIで映像化。幸手市映像コンテスト優秀賞受賞作品。</p>
-                        <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" class="video-link" target="_blank" rel="noopener">
-                            Watch
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
+                        <h3 class="video-title">新作アニメーション</h3>
+                        <p class="video-description">次回作準備中。新たなストーリーをお届けします。</p>
                     </div>
                 </article>
 
@@ -1760,7 +2448,7 @@
                 <article class="video-card reveal reveal-delay-3" data-category="education">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
-                            <div class="play-icon">
+                            <div class="play-icon" style="opacity: 0.5; transform: scale(1);">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
@@ -1769,41 +2457,10 @@
                     <div class="video-info">
                         <div class="video-meta">
                             <span class="video-category">Education</span>
-                            <span class="video-duration">5:00</span>
+                            <span class="video-duration">Coming Soon</span>
                         </div>
-                        <h3 class="video-title">教育コンテンツ 1</h3>
-                        <p class="video-description">作品の概要がここに入ります。</p>
-                        <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="video-card reveal reveal-delay-4" data-category="education">
-                    <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
-                        <div class="video-thumbnail-placeholder">
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="video-overlay"></div>
-                    </a>
-                    <div class="video-info">
-                        <div class="video-meta">
-                            <span class="video-category">Education</span>
-                            <span class="video-duration">3:45</span>
-                        </div>
-                        <h3 class="video-title">教育コンテンツ 2</h3>
-                        <p class="video-description">作品の概要がここに入ります。</p>
-                        <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
+                        <h3 class="video-title">教育コンテンツ</h3>
+                        <p class="video-description">教育・解説動画を制作中。</p>
                     </div>
                 </article>
 
@@ -1811,7 +2468,7 @@
                 <article class="video-card reveal reveal-delay-1" data-category="shortfilm">
                     <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
                         <div class="video-thumbnail-placeholder">
-                            <div class="play-icon">
+                            <div class="play-icon" style="opacity: 0.5; transform: scale(1);">
                                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
                         </div>
@@ -1820,43 +2477,104 @@
                     <div class="video-info">
                         <div class="video-meta">
                             <span class="video-category">Short Film</span>
-                            <span class="video-duration">8:00</span>
+                            <span class="video-duration">Coming Soon</span>
                         </div>
-                        <h3 class="video-title">ショートフィルム 1</h3>
-                        <p class="video-description">作品の概要がここに入ります。</p>
-                        <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
+                        <h3 class="video-title">ショートフィルム</h3>
+                        <p class="video-description">新作ショートフィルムを制作中。</p>
                     </div>
                 </article>
+            </div>
+        </div>
+    </section>
 
-                <article class="video-card reveal reveal-delay-2" data-category="shortfilm">
-                    <a href="#" class="video-thumbnail" target="_blank" rel="noopener">
-                        <div class="video-thumbnail-placeholder">
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="video-overlay"></div>
-                    </a>
-                    <div class="video-info">
-                        <div class="video-meta">
-                            <span class="video-category">Short Film</span>
-                            <span class="video-duration">6:30</span>
-                        </div>
-                        <h3 class="video-title">ショートフィルム 2</h3>
-                        <p class="video-description">作品の概要がここに入ります。</p>
-                        <a href="#" class="video-link" target="_blank" rel="noopener">
-                            Watch
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="skills-container">
+            <div class="section-header reveal">
+                <span class="section-label">Expertise</span>
+                <h2 class="section-title">Skills & Tools</h2>
+                <p class="section-subtitle">制作に使用するスキルとツール</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category reveal reveal-delay-1">
+                    <div class="skill-category-header">
+                        <div class="skill-category-icon">🎬</div>
+                        <h3 class="skill-category-title">映像編集</h3>
                     </div>
-                </article>
+                    <div class="skill-items">
+                        <span class="skill-item">Premiere Pro</span>
+                        <span class="skill-item">After Effects</span>
+                        <span class="skill-item">DaVinci Resolve</span>
+                        <span class="skill-item">Final Cut Pro</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal reveal-delay-2">
+                    <div class="skill-category-header">
+                        <div class="skill-category-icon">🤖</div>
+                        <h3 class="skill-category-title">AI Tools</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">Runway</span>
+                        <span class="skill-item">Vidu</span>
+                        <span class="skill-item">Midjourney</span>
+                        <span class="skill-item">Stable Diffusion</span>
+                        <span class="skill-item">DALL-E</span>
+                        <span class="skill-item">Suno AI</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal reveal-delay-3">
+                    <div class="skill-category-header">
+                        <div class="skill-category-icon">✨</div>
+                        <h3 class="skill-category-title">モーション & 3D</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">Motion Graphics</span>
+                        <span class="skill-item">2D Animation</span>
+                        <span class="skill-item">Blender</span>
+                        <span class="skill-item">Cinema 4D</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal reveal-delay-1">
+                    <div class="skill-category-header">
+                        <div class="skill-category-icon">🎨</div>
+                        <h3 class="skill-category-title">デザイン</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">Photoshop</span>
+                        <span class="skill-item">Illustrator</span>
+                        <span class="skill-item">Figma</span>
+                        <span class="skill-item">Canva</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal reveal-delay-2">
+                    <div class="skill-category-header">
+                        <div class="skill-category-icon">🎵</div>
+                        <h3 class="skill-category-title">サウンド</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">Sound Design</span>
+                        <span class="skill-item">AI Music Generation</span>
+                        <span class="skill-item">Audio Mixing</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal reveal-delay-3">
+                    <div class="skill-category-header">
+                        <div class="skill-category-icon">📱</div>
+                        <h3 class="skill-category-title">プラットフォーム</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">YouTube</span>
+                        <span class="skill-item">TikTok</span>
+                        <span class="skill-item">Instagram</span>
+                        <span class="skill-item">X (Twitter)</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1876,8 +2594,8 @@
                     </div>
                     <div class="about-decoration"></div>
                     <div class="about-badge">
-                        <div class="about-badge-number">3+</div>
-                        <div class="about-badge-text">Years Experience</div>
+                        <div class="about-badge-number">10+</div>
+                        <div class="about-badge-text">Awards in 2025</div>
                     </div>
                 </div>
 
@@ -1892,14 +2610,16 @@
                         最新のAI技術と従来の映像制作技術を組み合わせ、
                         クライアントのビジョンを深く理解し、
                         視聴者の心に響く映像作品を制作します。
+                        2025年には10以上のコンテストで入賞を果たし、
+                        グランプリ・最優秀賞など多数の受賞歴があります。
                     </p>
 
                     <div class="about-highlights">
                         <div class="highlight-item">
-                            <div class="highlight-icon">🎨</div>
+                            <div class="highlight-icon">🏆</div>
                             <div class="highlight-text">
-                                <h4>クリエイティブ</h4>
-                                <p>独創的なビジュアル表現</p>
+                                <h4>受賞実績</h4>
+                                <p>10以上のコンテスト入賞</p>
                             </div>
                         </div>
                         <div class="highlight-item">
@@ -1933,8 +2653,8 @@
                     <div class="stat-label">制作作品数</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">クライアント</div>
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">受賞歴</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">100%</div>
@@ -2052,11 +2772,63 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo"><span>STUDIO</span></div>
-            <p class="footer-text">&copy; 2025 All Rights Reserved. Crafted with passion.</p>
+            <p class="footer-text">&copy; 2025 All Rights Reserved. Award-Winning Video Creator.</p>
         </div>
     </footer>
 
     <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+        });
+
+        // Back to Top Button
+        window.addEventListener('scroll', () => {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Particle Background
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+
+                const colors = ['#a855f7', '#6366f1', '#06b6d4', '#ec4899', '#fbbf24'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.width = (2 + Math.random() * 4) + 'px';
+                particle.style.height = particle.style.width;
+
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
         // Custom Cursor
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
@@ -2080,7 +2852,7 @@
         animateCursor();
 
         // Cursor hover effect
-        const hoverElements = document.querySelectorAll('a, button, .video-card, .service-card');
+        const hoverElements = document.querySelectorAll('a, button, .video-card, .service-card, .award-card, .skill-category');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -2160,6 +2932,18 @@
                 menuToggle.classList.remove('active');
             }
         });
+
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number, .award-stat-number');
+            counters.forEach(counter => {
+                const target = counter.innerText;
+                if (target.includes('+') || target.includes('%') || target.includes('h')) {
+                    // Already animated or special format
+                    return;
+                }
+            });
+        }
     </script>
 </body>
 </html>
