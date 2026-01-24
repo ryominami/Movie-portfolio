@@ -416,6 +416,7 @@
             padding: 8rem 4rem;
             background: var(--bg-darker);
             position: relative;
+            overflow: hidden;
         }
 
         .featured-works::before {
@@ -428,9 +429,39 @@
             background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
         }
 
+        .featured-video-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .featured-video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 3s ease;
+            filter: saturate(0.5) brightness(0.4) blur(2px);
+        }
+
+        .featured-video-bg video.active {
+            opacity: 0.15;
+        }
+
+        .featured-video-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, var(--bg-darker) 0%, transparent 15%, transparent 85%, var(--bg-darker) 100%),
+                radial-gradient(ellipse 100% 100% at 50% 50%, transparent 0%, var(--bg-darker) 70%);
+            z-index: 1;
+        }
+
         .featured-works-container {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .works-grid {
@@ -1024,13 +1055,13 @@
     <section class="hero">
         <div class="hero-video-bg">
             <video autoplay muted loop playsinline id="heroVideo1" class="active">
-                <source src="https://cdn.leonardo.ai/users/f9b5e3ef-a2c9-4ce9-b3ad-da5a93c09e45/generations/b0b0de5a-d72f-4be7-817a-76b59a9ef80d/b0b0de5a-d72f-4be7-817a-76b59a9ef80d.mp4" type="video/mp4">
+                <source src="videos/bg-video-1.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline id="heroVideo2">
-                <source src="https://cdn.leonardo.ai/users/f9b5e3ef-a2c9-4ce9-b3ad-da5a93c09e45/generations/31f40e86-f3d6-4920-b959-54e3c75be3ac/31f40e86-f3d6-4920-b959-54e3c75be3ac.mp4" type="video/mp4">
+                <source src="videos/bg-video-2.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline id="heroVideo3">
-                <source src="https://cdn.leonardo.ai/users/f9b5e3ef-a2c9-4ce9-b3ad-da5a93c09e45/generations/05edcc37-04b7-48f5-a29f-b9e4dfd40fa2/05edcc37-04b7-48f5-a29f-b9e4dfd40fa2.mp4" type="video/mp4">
+                <source src="videos/bg-video-3.mp4" type="video/mp4">
             </video>
         </div>
         <div class="hero-overlay"></div>
@@ -1056,6 +1087,18 @@
 
     <!-- Featured Works Section -->
     <section id="works" class="featured-works">
+        <div class="featured-video-bg">
+            <video autoplay muted loop playsinline id="featuredVideo1" class="active">
+                <source src="videos/bg-video-2.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline id="featuredVideo2">
+                <source src="videos/bg-video-3.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop playsinline id="featuredVideo3">
+                <source src="videos/bg-video-1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="featured-video-overlay"></div>
         <div class="featured-works-container">
             <div class="section-header reveal">
                 <span class="section-label">Selected Works</span>
@@ -1069,7 +1112,7 @@
                         <img src="https://img.youtube.com/vi/w98sWMe82BQ/maxresdefault.jpg" alt="これも、日常の宝物。" loading="lazy">
                         <div class="work-card-overlay"></div>
                         <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>Grand Prix</span></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>グランプリ</span></div>
                     </div>
                     <div class="work-card-info">
                         <div class="work-card-category">Short Film / Family</div>
@@ -1083,7 +1126,7 @@
                         <img src="https://img.youtube.com/vi/eioMivdnM5M/maxresdefault.jpg" alt="それぞれの午後、一つの想い" loading="lazy">
                         <div class="work-card-overlay"></div>
                         <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>Grand Prix</span></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>グランプリ</span></div>
                     </div>
                     <div class="work-card-info">
                         <div class="work-card-category">Short Film / Family</div>
@@ -1097,7 +1140,7 @@
                         <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/maxresdefault.jpg" alt="KAERUN AI" loading="lazy">
                         <div class="work-card-overlay"></div>
                         <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>Best Award</span></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>最優秀賞</span></div>
                     </div>
                     <div class="work-card-info">
                         <div class="work-card-category">Commercial / Tech</div>
@@ -1111,7 +1154,7 @@
                         <img src="https://img.youtube.com/vi/xp4sub-rhXM/maxresdefault.jpg" alt="幸手市PR映像" loading="lazy">
                         <div class="work-card-overlay"></div>
                         <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>Excellence</span></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>優秀賞</span></div>
                     </div>
                     <div class="work-card-info">
                         <div class="work-card-category">Promotion / City PR</div>
@@ -1125,7 +1168,7 @@
                         <img src="https://img.youtube.com/vi/UOXAXAf5mB4/maxresdefault.jpg" alt="最後の宿題" loading="lazy">
                         <div class="work-card-overlay"></div>
                         <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>Excellence</span></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>優秀賞</span></div>
                     </div>
                     <div class="work-card-info">
                         <div class="work-card-category">Short Film / Drama</div>
@@ -1390,21 +1433,37 @@
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
 
-        // Video Background Rotation
-        const videos = [
+        // Video Background Rotation - Hero
+        const heroVideos = [
             document.getElementById('heroVideo1'),
             document.getElementById('heroVideo2'),
             document.getElementById('heroVideo3')
         ];
-        let currentVideo = 0;
+        let currentHeroVideo = 0;
 
-        function rotateVideo() {
-            videos[currentVideo].classList.remove('active');
-            currentVideo = (currentVideo + 1) % videos.length;
-            videos[currentVideo].classList.add('active');
+        function rotateHeroVideo() {
+            heroVideos[currentHeroVideo].classList.remove('active');
+            currentHeroVideo = (currentHeroVideo + 1) % heroVideos.length;
+            heroVideos[currentHeroVideo].classList.add('active');
         }
 
-        setInterval(rotateVideo, 10000);
+        setInterval(rotateHeroVideo, 10000);
+
+        // Video Background Rotation - Featured Works
+        const featuredVideos = [
+            document.getElementById('featuredVideo1'),
+            document.getElementById('featuredVideo2'),
+            document.getElementById('featuredVideo3')
+        ];
+        let currentFeaturedVideo = 0;
+
+        function rotateFeaturedVideo() {
+            featuredVideos[currentFeaturedVideo].classList.remove('active');
+            currentFeaturedVideo = (currentFeaturedVideo + 1) % featuredVideos.length;
+            featuredVideos[currentFeaturedVideo].classList.add('active');
+        }
+
+        setInterval(rotateFeaturedVideo, 12000);
 
         // Loading
         window.addEventListener('load', () => {
