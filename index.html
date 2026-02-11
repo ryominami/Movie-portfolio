@@ -13,20 +13,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0a0a0c;
-            --bg-darker: #050506;
-            --bg-card: rgba(16, 16, 20, 0.7);
+            --bg-dark: #0a0a12;
+            --bg-darker: #060610;
+            --bg-card: rgba(12, 12, 24, 0.7);
             --bg-glass: rgba(255, 255, 255, 0.02);
             --text-primary: #f5f5f7;
             --text-secondary: rgba(245, 245, 247, 0.6);
             --text-muted: rgba(245, 245, 247, 0.35);
-            --accent: #8b9dc3;
-            --accent-light: #a8b5cf;
-            --accent-soft: rgba(139, 157, 195, 0.15);
-            --accent-warm: #c9a87c;
-            --gradient-main: linear-gradient(135deg, #8b9dc3 0%, #6b7c9e 100%);
-            --gradient-soft: linear-gradient(135deg, rgba(139, 157, 195, 0.2) 0%, rgba(107, 124, 158, 0.1) 100%);
-            --border-subtle: rgba(139, 157, 195, 0.15);
+            --accent: #7b8cc4;
+            --accent-light: #a0aed8;
+            --accent-soft: rgba(123, 140, 196, 0.15);
+            --accent-warm: #d4a853;
+            --gradient-main: linear-gradient(135deg, #7b8cc4 0%, #5a6b9e 100%);
+            --gradient-gold: linear-gradient(135deg, #d4a853, #e8c878);
+            --gradient-soft: linear-gradient(135deg, rgba(123, 140, 196, 0.2) 0%, rgba(90, 107, 158, 0.1) 100%);
+            --border-subtle: rgba(123, 140, 196, 0.15);
             --border-glass: rgba(255, 255, 255, 0.05);
             --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -119,7 +120,7 @@
 
         .loading-progress {
             height: 100%;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent-warm), var(--accent));
             animation: loading 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
@@ -142,9 +143,10 @@
 
         nav.scrolled {
             padding: 1.25rem 4rem;
-            background: rgba(10, 10, 12, 0.9);
+            background: rgba(10, 10, 18, 0.92);
             backdrop-filter: blur(30px) saturate(150%);
             border-bottom: 1px solid var(--border-glass);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         }
 
         .nav-container {
@@ -161,6 +163,7 @@
             font-weight: 400;
             letter-spacing: 0.2em;
             color: var(--text-primary);
+            text-shadow: 0 0 20px rgba(123, 140, 196, 0.3);
         }
 
         .nav-links {
@@ -226,10 +229,24 @@
             overflow: hidden;
         }
 
-        .hero-video-bg {
+        .hero-image-bg {
             position: absolute;
             inset: 0;
             z-index: 0;
+            will-change: transform;
+        }
+
+        .hero-image-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 25% center;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
         }
 
         .hero-video-bg video {
@@ -237,30 +254,77 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 2s ease;
-            filter: saturate(0.7) brightness(0.9);
+            transition: opacity 3s ease;
+            filter: saturate(0.5) brightness(0.7);
         }
 
         .hero-video-bg video.active {
-            opacity: 0.3;
+            opacity: 0.15;
         }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, var(--bg-dark) 70%),
-                linear-gradient(180deg, rgba(10, 10, 12, 0.3) 0%, rgba(10, 10, 12, 0.7) 100%);
-            z-index: 1;
+                linear-gradient(to right, rgba(10, 10, 18, 0.1) 0%, rgba(10, 10, 18, 0.4) 35%, rgba(10, 10, 18, 0.85) 60%, rgba(10, 10, 18, 0.95) 80%),
+                linear-gradient(to top, rgba(10, 10, 18, 0.9) 0%, transparent 30%);
+            z-index: 2;
+        }
+
+        /* Bokeh Particles */
+        .bokeh-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bokeh-particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: bokehFloat var(--dur, 18s) var(--del, 0s) infinite ease-in-out;
+        }
+
+        .bokeh-particle.gold { background: radial-gradient(circle, rgba(212, 168, 83, 0.6), rgba(212, 168, 83, 0)); }
+        .bokeh-particle.blue { background: radial-gradient(circle, rgba(123, 140, 196, 0.5), rgba(123, 140, 196, 0)); }
+        .bokeh-particle.white { background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+
+        @keyframes bokehFloat {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+            20% { opacity: 0.7; }
+            50% { opacity: 0.3; transform: translateY(-40px) scale(1.2); }
+            80% { opacity: 0.6; }
         }
 
         .hero-container {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
             width: 100%;
             position: relative;
-            z-index: 2;
-            text-align: center;
+            z-index: 4;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            text-align: right;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(212, 168, 83, 0.1);
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--accent-warm);
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease 0.2s both;
         }
 
         .hero-eyebrow {
@@ -270,7 +334,7 @@
             color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 2rem;
-            animation: fadeIn 1s ease 0.3s both;
+            animation: fadeIn 1s ease 0.4s both;
         }
 
         .hero h1 {
@@ -280,7 +344,8 @@
             line-height: 1.15;
             letter-spacing: 0.02em;
             margin-bottom: 2rem;
-            animation: fadeIn 1s ease 0.5s both;
+            animation: fadeIn 1s ease 0.6s both;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .hero h1 em {
@@ -295,15 +360,15 @@
             color: var(--text-secondary);
             letter-spacing: 0.05em;
             margin-bottom: 3.5rem;
-            animation: fadeIn 1s ease 0.7s both;
+            animation: fadeIn 1s ease 0.8s both;
         }
 
         .hero-cta-group {
             display: flex;
             gap: 1.5rem;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
-            animation: fadeIn 1s ease 0.9s both;
+            animation: fadeIn 1s ease 1.0s both;
         }
 
         .hero-cta {
@@ -361,7 +426,8 @@
             font-size: 0.65rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            animation: fadeIn 1s ease 1.2s both;
+            animation: fadeIn 1s ease 1.4s both;
+            z-index: 5;
         }
 
         .hero-scroll-line {
@@ -397,6 +463,13 @@
             margin-bottom: 1.25rem;
         }
 
+        .section-label::before,
+        .section-label::after {
+            content: '——';
+            margin: 0 0.75rem;
+            opacity: 0.3;
+        }
+
         .section-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -411,9 +484,46 @@
             font-weight: 300;
         }
 
+        /* Awards Ticker */
+        .awards-ticker {
+            overflow: hidden;
+            background: rgba(10, 10, 18, 0.9);
+            border-top: 1px solid rgba(212, 168, 83, 0.25);
+            border-bottom: 1px solid rgba(212, 168, 83, 0.25);
+            padding: 0.75rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .ticker-track {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0 2.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        .ticker-star {
+            color: var(--accent-warm);
+            font-size: 0.85rem;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* Featured Works Section */
         .featured-works {
-            padding: 8rem 4rem;
+            padding: 10rem 4rem;
             background: var(--bg-darker);
             position: relative;
             overflow: hidden;
@@ -425,8 +535,9 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent-warm) 50%, var(--accent) 70%, transparent);
+            box-shadow: 0 0 20px rgba(123, 140, 196, 0.3), 0 0 40px rgba(212, 168, 83, 0.15);
         }
 
         .featured-video-bg {
@@ -483,7 +594,7 @@
 
         .work-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(123, 140, 196, 0.08), 0 0 80px rgba(212, 168, 83, 0.04);
             border-color: var(--border-subtle);
         }
 
@@ -540,6 +651,25 @@
             margin-left: 3px;
         }
 
+        .work-card-play::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            animation: pulseRing 2s ease infinite;
+        }
+
+        .work-card:hover .work-card-play::before {
+            opacity: 1;
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
         .work-card-badge {
             position: absolute;
             top: 1rem;
@@ -548,9 +678,9 @@
             align-items: center;
             gap: 0.4rem;
             padding: 0.4rem 0.8rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(212, 168, 83, 0.15);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(212, 168, 83, 0.3);
             border-radius: 100px;
             z-index: 2;
         }
@@ -622,11 +752,31 @@
             transition: var(--transition-smooth);
             text-decoration: none;
             color: inherit;
+            position: relative;
+        }
+
+        .more-work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+            z-index: 2;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .more-work-card:hover::before {
+            transform: scaleX(1);
         }
 
         .more-work-card:hover {
             border-color: var(--border-subtle);
             transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(123, 140, 196, 0.06);
         }
 
         .more-work-card .work-card-thumbnail {
@@ -653,7 +803,7 @@
 
         /* About Section */
         .about {
-            padding: 8rem 4rem;
+            padding: 10rem 4rem;
             background: var(--bg-darker);
             position: relative;
         }
@@ -664,8 +814,9 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-glass), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent-warm) 50%, var(--accent) 70%, transparent);
+            box-shadow: 0 0 15px rgba(123, 140, 196, 0.2);
         }
 
         .about-container {
@@ -684,7 +835,17 @@
 
         .about-title em {
             font-style: italic;
-            color: var(--accent-light);
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-warm), var(--accent-light));
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 200% center; }
+            50% { background-position: 0% center; }
         }
 
         .about-text {
@@ -745,17 +906,31 @@
             border-radius: 12px;
             padding: 2rem;
             transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+            border-radius: 12px 12px 0 0;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
         }
 
         .service-card:hover {
             border-color: var(--border-subtle);
             transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .service-icon {
-            font-size: 1.8rem;
-            margin-bottom: 1.25rem;
-            opacity: 0.9;
+        .service-card:hover::before {
+            opacity: 1;
         }
 
         .service-card h3 {
@@ -773,7 +948,7 @@
 
         /* Contact Section */
         .contact {
-            padding: 8rem 4rem;
+            padding: 10rem 4rem;
             background: var(--bg-darker);
             position: relative;
         }
@@ -784,8 +959,9 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent-warm), var(--accent), transparent);
+            box-shadow: 0 0 15px rgba(123, 140, 196, 0.2);
         }
 
         .contact-container {
@@ -823,9 +999,10 @@
         .contact-availability .dot {
             width: 6px;
             height: 6px;
-            background: var(--accent);
+            background: var(--accent-warm);
             border-radius: 50%;
             animation: pulse 2.5s infinite;
+            box-shadow: 0 0 8px rgba(212, 168, 83, 0.4);
         }
 
         @keyframes pulse {
@@ -845,7 +1022,7 @@
             align-items: center;
             gap: 0.75rem;
             padding: 1rem 2.5rem;
-            background: var(--text-primary);
+            background: linear-gradient(135deg, var(--accent-warm), #e8c878);
             color: var(--bg-dark);
             text-decoration: none;
             font-weight: 600;
@@ -857,9 +1034,9 @@
         }
 
         .contact-cta:hover {
-            background: var(--accent-light);
+            background: linear-gradient(135deg, #e8c878, var(--accent-warm));
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(139, 157, 195, 0.2);
+            box-shadow: 0 15px 40px rgba(212, 168, 83, 0.3);
         }
 
         .contact-cta svg {
@@ -924,6 +1101,14 @@
             color: var(--text-secondary);
         }
 
+        .footer-tagline {
+            font-size: 0.7rem;
+            color: var(--accent-warm);
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+        }
+
         .footer-text {
             font-size: 0.7rem;
             color: var(--text-muted);
@@ -981,6 +1166,11 @@
         }
 
         /* Responsive */
+        @media (min-width: 1440px) {
+            .works-grid { grid-template-columns: repeat(3, 1fr); }
+            .more-works-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
         @media (max-width: 1024px) {
             .hero, .featured-works, .more-works, .about, .services, .contact, nav, footer {
                 padding-left: 2rem;
@@ -1009,6 +1199,23 @@
             body { cursor: auto; }
         }
 
+        @media (max-width: 768px) {
+            .hero-container { justify-content: center; }
+            .hero-content { text-align: center; max-width: 100%; }
+            .hero-cta-group { justify-content: center; }
+            .hero-image-bg img { object-position: center top; }
+            .hero-overlay {
+                background:
+                    radial-gradient(ellipse 80% 60% at 50% 40%, transparent 0%, var(--bg-dark) 70%),
+                    linear-gradient(to top, rgba(10, 10, 18, 0.9) 0%, rgba(10, 10, 18, 0.5) 100%);
+            }
+            .bokeh-particle:nth-child(n+9) { display: none; }
+            .featured-bokeh .bokeh-particle:nth-child(n+5) { display: none; }
+            .featured-works, .about, .contact { padding-top: 6rem; padding-bottom: 6rem; }
+            .awards-ticker { padding: 0.5rem 0; }
+            .ticker-item { padding: 0 1.5rem; font-size: 0.65rem; }
+        }
+
         @media (max-width: 640px) {
             .hero h1 { font-size: 2.5rem; }
             .hero-cta-group { flex-direction: column; gap: 1rem; }
@@ -1016,6 +1223,17 @@
             .more-works-grid { grid-template-columns: 1fr; }
             .about-stats { flex-direction: column; gap: 2rem; }
             .services-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .bokeh-particle { display: none; }
+            .ticker-track { animation: none; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .hero-badge, .hero-eyebrow, .hero h1, .hero-tagline, .hero-cta-group, .hero-scroll {
+                animation: none; opacity: 1; transform: translateY(0);
+            }
+            .about-title em { animation: none; }
         }
     </style>
 </head>
@@ -1053,6 +1271,9 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-image-bg">
+            <img src="images/hero-anime.png" alt="" loading="eager">
+        </div>
         <div class="hero-video-bg">
             <video autoplay muted loop playsinline id="heroVideo1" class="active">
                 <source src="videos/bg-video-1.mp4" type="video/mp4">
@@ -1065,18 +1286,43 @@
             </video>
         </div>
         <div class="hero-overlay"></div>
+        <div class="bokeh-particles" aria-hidden="true">
+            <div class="bokeh-particle gold" style="left:5%;top:15%;width:14px;height:14px;--dur:18s;--del:0s"></div>
+            <div class="bokeh-particle blue" style="left:15%;top:60%;width:8px;height:8px;--dur:22s;--del:3s"></div>
+            <div class="bokeh-particle white" style="left:25%;top:30%;width:6px;height:6px;--dur:16s;--del:1s"></div>
+            <div class="bokeh-particle gold" style="left:35%;top:80%;width:10px;height:10px;--dur:20s;--del:5s"></div>
+            <div class="bokeh-particle blue" style="left:45%;top:20%;width:12px;height:12px;--dur:24s;--del:2s"></div>
+            <div class="bokeh-particle gold" style="left:55%;top:55%;width:7px;height:7px;--dur:19s;--del:4s"></div>
+            <div class="bokeh-particle white" style="left:65%;top:40%;width:9px;height:9px;--dur:17s;--del:6s"></div>
+            <div class="bokeh-particle blue" style="left:75%;top:70%;width:11px;height:11px;--dur:21s;--del:1s"></div>
+            <div class="bokeh-particle gold" style="left:85%;top:25%;width:5px;height:5px;--dur:23s;--del:3s"></div>
+            <div class="bokeh-particle white" style="left:90%;top:85%;width:8px;height:8px;--dur:18s;--del:7s"></div>
+            <div class="bokeh-particle gold" style="left:8%;top:45%;width:6px;height:6px;--dur:25s;--del:2s"></div>
+            <div class="bokeh-particle blue" style="left:20%;top:75%;width:10px;height:10px;--dur:19s;--del:5s"></div>
+            <div class="bokeh-particle white" style="left:30%;top:10%;width:7px;height:7px;--dur:22s;--del:0s"></div>
+            <div class="bokeh-particle gold" style="left:42%;top:50%;width:13px;height:13px;--dur:16s;--del:4s"></div>
+            <div class="bokeh-particle blue" style="left:52%;top:90%;width:5px;height:5px;--dur:20s;--del:6s"></div>
+            <div class="bokeh-particle gold" style="left:62%;top:15%;width:9px;height:9px;--dur:24s;--del:1s"></div>
+            <div class="bokeh-particle white" style="left:72%;top:65%;width:11px;height:11px;--dur:17s;--del:3s"></div>
+            <div class="bokeh-particle blue" style="left:82%;top:35%;width:6px;height:6px;--dur:21s;--del:8s"></div>
+            <div class="bokeh-particle gold" style="left:92%;top:50%;width:8px;height:8px;--dur:19s;--del:2s"></div>
+            <div class="bokeh-particle white" style="left:48%;top:42%;width:15px;height:15px;--dur:26s;--del:0s"></div>
+        </div>
         <div class="hero-container">
-            <p class="hero-eyebrow">Visual Storyteller</p>
-            <h1>Where <em>Stories</em><br>Come Alive</h1>
-            <p class="hero-tagline">映像という言葉で、あなたの物語を紡ぎます</p>
-            <div class="hero-cta-group">
-                <a href="#works" class="hero-cta primary">
-                    View Works
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a href="#contact" class="hero-cta">
-                    Contact
-                </a>
+            <div class="hero-content">
+                <div class="hero-badge">AI Agent x Video Production</div>
+                <p class="hero-eyebrow">Visual Storyteller</p>
+                <h1>Where <em>Stories</em><br>Come Alive</h1>
+                <p class="hero-tagline">映像という言葉で、あなたの物語を紡ぎます</p>
+                <div class="hero-cta-group">
+                    <a href="#works" class="hero-cta primary">
+                        View Works
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#contact" class="hero-cta">
+                        Contact
+                    </a>
+                </div>
             </div>
         </div>
         <div class="hero-scroll">
@@ -1084,6 +1330,26 @@
             <div class="hero-scroll-line"></div>
         </div>
     </section>
+
+    <!-- Awards Ticker -->
+    <div class="awards-ticker">
+        <div class="ticker-track">
+            <div class="ticker-item"><span class="ticker-star">★</span> 最優秀賞 — KAERUN AI CMコンテスト</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> グランプリ×3 — SOZO美術館 第29回</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> 準グランプリ — SOZO美術館 第30回</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> 優秀賞 — 幸手市映像コンテスト</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> 優秀賞 — 泣けるAIショートアニメ</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> SNS特別賞 — NICIドリームステージ大賞</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> Silver賞 — ViduQreation Challenge</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> 最優秀賞 — KAERUN AI CMコンテスト</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> グランプリ×3 — SOZO美術館 第29回</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> 準グランプリ — SOZO美術館 第30回</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> 優秀賞 — 幸手市映像コンテスト</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> 優秀賞 — 泣けるAIショートアニメ</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> SNS特別賞 — NICIドリームステージ大賞</div>
+            <div class="ticker-item"><span class="ticker-star">★</span> Silver賞 — ViduQreation Challenge</div>
+        </div>
+    </div>
 
     <!-- Featured Works Section -->
     <section id="works" class="featured-works">
@@ -1099,6 +1365,16 @@
             </video>
         </div>
         <div class="featured-video-overlay"></div>
+        <div class="bokeh-particles featured-bokeh" aria-hidden="true">
+            <div class="bokeh-particle gold" style="left:10%;top:20%;width:8px;height:8px;--dur:20s;--del:0s"></div>
+            <div class="bokeh-particle blue" style="left:30%;top:70%;width:6px;height:6px;--dur:24s;--del:3s"></div>
+            <div class="bokeh-particle white" style="left:50%;top:30%;width:7px;height:7px;--dur:18s;--del:1s"></div>
+            <div class="bokeh-particle gold" style="left:70%;top:80%;width:10px;height:10px;--dur:22s;--del:5s"></div>
+            <div class="bokeh-particle blue" style="left:85%;top:40%;width:5px;height:5px;--dur:19s;--del:2s"></div>
+            <div class="bokeh-particle gold" style="left:20%;top:50%;width:9px;height:9px;--dur:25s;--del:4s"></div>
+            <div class="bokeh-particle white" style="left:60%;top:15%;width:6px;height:6px;--dur:21s;--del:6s"></div>
+            <div class="bokeh-particle blue" style="left:40%;top:60%;width:8px;height:8px;--dur:17s;--del:1s"></div>
+        </div>
         <div class="featured-works-container">
             <div class="section-header reveal">
                 <span class="section-label">Selected Works</span>
@@ -1389,15 +1665,15 @@
             </p>
             <div class="about-stats">
                 <div class="about-stat">
-                    <div class="about-stat-number">10+</div>
+                    <div class="about-stat-number" data-target="10+">0+</div>
                     <div class="about-stat-label">Awards</div>
                 </div>
                 <div class="about-stat">
-                    <div class="about-stat-number">50+</div>
+                    <div class="about-stat-number" data-target="50+">0+</div>
                     <div class="about-stat-label">Projects</div>
                 </div>
                 <div class="about-stat">
-                    <div class="about-stat-number">24h</div>
+                    <div class="about-stat-number" data-target="24h">0h</div>
                     <div class="about-stat-label">Response</div>
                 </div>
             </div>
@@ -1414,17 +1690,14 @@
 
             <div class="services-grid">
                 <div class="service-card reveal">
-                    <div class="service-icon">🎬</div>
                     <h3>Promotion</h3>
                     <p>企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。</p>
                 </div>
                 <div class="service-card reveal">
-                    <div class="service-icon">✨</div>
                     <h3>Animation</h3>
                     <p>物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。</p>
                 </div>
                 <div class="service-card reveal">
-                    <div class="service-icon">🎭</div>
                     <h3>Short Film</h3>
                     <p>心に残るストーリーを、映像という形で紡ぎます。</p>
                 </div>
@@ -1465,6 +1738,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-logo">RYO STUDIO</div>
+        <p class="footer-tagline">AI Agent x Video Production</p>
         <p class="footer-text">&copy; 2025 RYO STUDIO. All Rights Reserved.</p>
     </footer>
 
@@ -1539,11 +1813,20 @@
             document.querySelector('.menu-toggle').classList.toggle('active');
         }
 
-        // Scroll Effects
+        // Scroll Effects + Parallax
+        const heroImageBg = document.querySelector('.hero-image-bg');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         window.addEventListener('scroll', () => {
-            document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
-            document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 500);
-        });
+            const scrollY = window.scrollY;
+            document.querySelector('nav').classList.toggle('scrolled', scrollY > 50);
+            document.querySelector('.back-to-top').classList.toggle('visible', scrollY > 500);
+
+            // Parallax for hero image
+            if (!prefersReducedMotion && heroImageBg && scrollY < window.innerHeight) {
+                heroImageBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+            }
+        }, { passive: true });
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1562,7 +1845,7 @@
             });
         });
 
-        // Reveal Animation
+        // Reveal Animation with stagger
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1573,12 +1856,50 @@
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('visible');
-                    }, index * 100);
+                    }, index * 120);
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Count-up Animation for Stats
+        function animateCountUp(el) {
+            const targetText = el.getAttribute('data-target');
+            if (!targetText) return;
+            const match = targetText.match(/^(\d+)(.*)$/);
+            if (!match) return;
+            const target = parseInt(match[1]);
+            const suffix = match[2];
+            let current = 0;
+            const steps = 40;
+            const increment = target / steps;
+            const stepTime = 50;
+            el.textContent = '0' + suffix;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = targetText;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current) + suffix;
+                }
+            }, stepTime);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.about-stat-number[data-target]').forEach(el => {
+                        animateCountUp(el);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const aboutStats = document.querySelector('.about-stats');
+        if (aboutStats) statsObserver.observe(aboutStats);
     </script>
 </body>
 </html>
