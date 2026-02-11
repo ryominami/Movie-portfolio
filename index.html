@@ -8,9 +8,30 @@
     <meta property="og:title" content="RYO STUDIO | Visual Storyteller">
     <meta property="og:description" content="映像で物語を紡ぐクリエイター">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://ryominami.github.io/Movie-portfolio/images/hero-anime-og.jpg">
+    <meta property="og:url" content="https://ryominami.github.io/Movie-portfolio/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RYO STUDIO | Visual Storyteller">
+    <meta name="twitter:description" content="映像で物語を紡ぐクリエイター">
+    <meta name="twitter:image" content="https://ryominami.github.io/Movie-portfolio/images/hero-anime-og.jpg">
+    <link rel="canonical" href="https://ryominami.github.io/Movie-portfolio/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a12' width='100' height='100' rx='16'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='58' font-weight='300' fill='%23a0aed8' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+    <link rel="preload" as="image" type="image/webp" href="images/hero-anime.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "RYO STUDIO",
+        "url": "https://ryominami.github.io/Movie-portfolio/",
+        "description": "映像で物語を紡ぐクリエイター。アニメーション、プロモーション映像など、心に響く映像作品を制作します。",
+        "sameAs": ["https://x.com/ryo05m"],
+        "jobTitle": "Visual Storyteller / Video Creator",
+        "knowsAbout": ["Video Production", "Animation", "AI Video", "Short Film", "Promotion Video"]
+    }
+    </script>
     <style>
         :root {
             --bg-dark: #0a0a12;
@@ -236,6 +257,7 @@
             will-change: transform;
         }
 
+        .hero-image-bg picture,
         .hero-image-bg img {
             width: 100%;
             height: 100%;
@@ -250,6 +272,8 @@
         }
 
         .hero-video-bg video {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -547,6 +571,8 @@
         }
 
         .featured-video-bg video {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -658,11 +684,11 @@
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.3);
             opacity: 0;
-            animation: pulseRing 2s ease infinite;
         }
 
         .work-card:hover .work-card-play::before {
             opacity: 1;
+            animation: pulseRing 2s ease infinite;
         }
 
         @keyframes pulseRing {
@@ -931,6 +957,16 @@
 
         .service-card:hover::before {
             opacity: 1;
+        }
+
+        .service-icon {
+            margin-bottom: 1.25rem;
+            color: var(--accent);
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
         }
 
         .service-card h3 {
@@ -1260,9 +1296,10 @@
             <ul class="nav-links">
                 <li><a href="#works">Works</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="https://x.com/ryo05m" class="nav-cta" target="_blank">Get in Touch</a>
+            <a href="https://x.com/ryo05m" class="nav-cta" target="_blank" rel="noopener noreferrer">Get in Touch</a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
@@ -1272,7 +1309,10 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-image-bg">
-            <img src="images/hero-anime.png" alt="" loading="eager">
+            <picture>
+                <source srcset="images/hero-anime.webp" type="image/webp">
+                <img src="images/hero-anime.png" alt="RYO STUDIO hero artwork" loading="eager">
+            </picture>
         </div>
         <div class="hero-video-bg">
             <video autoplay muted loop playsinline id="heroVideo1" class="active">
@@ -1384,7 +1424,7 @@
 
             <div class="works-grid">
                 <!-- KAERUN AI - 最優秀賞 -->
-                <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" target="_blank" class="work-card reveal">
+                <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/maxresdefault.jpg" alt="KAERUN AI" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1399,7 +1439,7 @@
                 </a>
 
                 <!-- 幸手市 - 地域創生 優秀賞 -->
-                <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" target="_blank" class="work-card reveal">
+                <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/xp4sub-rhXM/maxresdefault.jpg" alt="幸手市PR映像" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1414,7 +1454,7 @@
                 </a>
 
                 <!-- 白浜 - 地域創生 SOZO第30回 準グランプリ -->
-                <a href="https://youtube.com/shorts/Uvy3QIx8odM" target="_blank" class="work-card reveal">
+                <a href="https://youtube.com/shorts/Uvy3QIx8odM" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/Uvy3QIx8odM/maxresdefault.jpg" alt="白浜PR映像" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1429,7 +1469,7 @@
                 </a>
 
                 <!-- これも日常の宝物 - SOZO第29回 グランプリ -->
-                <a href="https://youtube.com/shorts/w98sWMe82BQ" target="_blank" class="work-card reveal">
+                <a href="https://youtube.com/shorts/w98sWMe82BQ" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/w98sWMe82BQ/maxresdefault.jpg" alt="これも、日常の宝物。" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1444,7 +1484,7 @@
                 </a>
 
                 <!-- それぞれの午後 - SOZO第29回 グランプリ -->
-                <a href="https://youtube.com/shorts/eioMivdnM5M" target="_blank" class="work-card reveal">
+                <a href="https://youtube.com/shorts/eioMivdnM5M" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/eioMivdnM5M/maxresdefault.jpg" alt="それぞれの午後、一つの想い" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1459,7 +1499,7 @@
                 </a>
 
                 <!-- 夜のゴールライン - SOZO第29回 グランプリ -->
-                <a href="https://youtube.com/shorts/7OEvltA8WbI" target="_blank" class="work-card reveal">
+                <a href="https://youtube.com/shorts/7OEvltA8WbI" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/7OEvltA8WbI/maxresdefault.jpg" alt="夜のゴールライン" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1474,7 +1514,7 @@
                 </a>
 
                 <!-- 最後の宿題 - 泣けるAIショートアニメ 優秀賞 -->
-                <a href="https://www.youtube.com/watch?v=UOXAXAf5mB4" target="_blank" class="work-card reveal">
+                <a href="https://www.youtube.com/watch?v=UOXAXAf5mB4" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/UOXAXAf5mB4/maxresdefault.jpg" alt="最後の宿題" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1489,7 +1529,7 @@
                 </a>
 
                 <!-- 希望への筆跡 - NICIドリームステージ大賞 SNS特別賞 -->
-                <a href="https://www.youtube.com/watch?v=sEeYbHs_qZM" target="_blank" class="work-card reveal">
+                <a href="https://www.youtube.com/watch?v=sEeYbHs_qZM" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/sEeYbHs_qZM/maxresdefault.jpg" alt="希望への筆跡" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1504,7 +1544,7 @@
                 </a>
 
                 <!-- AIスタイリスト降臨 - ミスターAIコンテスト 3位 -->
-                <a href="https://www.youtube.com/watch?v=LaB5PMDItJI" target="_blank" class="work-card reveal">
+                <a href="https://www.youtube.com/watch?v=LaB5PMDItJI" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/LaB5PMDItJI/maxresdefault.jpg" alt="AIスタイリスト降臨" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1519,7 +1559,7 @@
                 </a>
 
                 <!-- Survival Instinct - ViduQreation Challenge Silver賞 -->
-                <a href="https://www.youtube.com/watch?v=D13aAFKnYGQ" target="_blank" class="work-card reveal">
+                <a href="https://www.youtube.com/watch?v=D13aAFKnYGQ" target="_blank" rel="noopener noreferrer" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/D13aAFKnYGQ/maxresdefault.jpg" alt="Survival Instinct" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1545,7 +1585,7 @@
             </div>
 
             <div class="more-works-grid">
-                <a href="https://www.youtube.com/watch?v=KZkzLVDarFY" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=KZkzLVDarFY" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/KZkzLVDarFY/maxresdefault.jpg" alt="GAMBLE KINGDOM" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1558,7 +1598,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=p1KAUBDJQhI" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=p1KAUBDJQhI" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/p1KAUBDJQhI/maxresdefault.jpg" alt="Chrono Heart" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1571,7 +1611,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=nbbz7K2eIME" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=nbbz7K2eIME" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/nbbz7K2eIME/maxresdefault.jpg" alt="CYBER BUSHIDO" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1584,7 +1624,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=mx36xR9Q9Mo" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=mx36xR9Q9Mo" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/mx36xR9Q9Mo/maxresdefault.jpg" alt="ENSEN OP" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1597,7 +1637,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=seTHDd55QjY" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=seTHDd55QjY" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/seTHDd55QjY/maxresdefault.jpg" alt="BEYOND BOUNDARIES" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1610,7 +1650,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=qPU5APmACeo" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=qPU5APmACeo" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/qPU5APmACeo/maxresdefault.jpg" alt="Pieces of Light" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1623,7 +1663,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=mg9MIUcsnb8" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=mg9MIUcsnb8" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/mg9MIUcsnb8/maxresdefault.jpg" alt="黄金の約束" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1636,7 +1676,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=LpsHPhURFTU" target="_blank" class="more-work-card reveal">
+                <a href="https://www.youtube.com/watch?v=LpsHPhURFTU" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/LpsHPhURFTU/maxresdefault.jpg" alt="AIの答え、僕の答え。" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1690,14 +1730,17 @@
 
             <div class="services-grid">
                 <div class="service-card reveal">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="13" height="14" rx="2"/><path d="M15 10l5-3v10l-5-3z"/></svg></div>
                     <h3>Promotion</h3>
                     <p>企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。</p>
                 </div>
                 <div class="service-card reveal">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div>
                     <h3>Animation</h3>
                     <p>物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。</p>
                 </div>
                 <div class="service-card reveal">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
                     <h3>Short Film</h3>
                     <p>心に残るストーリーを、映像という形で紡ぎます。</p>
                 </div>
@@ -1717,7 +1760,7 @@
                 <span>Available for new projects</span>
             </div>
 
-            <a href="https://x.com/ryo05m" target="_blank" class="contact-cta">
+            <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 Get in Touch
             </a>
@@ -1725,10 +1768,10 @@
             <p class="contact-note">24時間以内に返信いたします</p>
 
             <div class="social-links">
-                <a href="https://x.com/ryo05m" class="social-link" target="_blank" aria-label="X">
+                <a href="https://x.com/ryo05m" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X">
                     <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
-                <a href="#" class="social-link" aria-label="YouTube">
+                <a href="https://www.youtube.com/@RyoStudio05" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                     <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
             </div>
@@ -1739,7 +1782,7 @@
     <footer>
         <div class="footer-logo">RYO STUDIO</div>
         <p class="footer-tagline">AI Agent x Video Production</p>
-        <p class="footer-text">&copy; 2025 RYO STUDIO. All Rights Reserved.</p>
+        <p class="footer-text">&copy; 2026 RYO STUDIO. All Rights Reserved.</p>
     </footer>
 
     <script>
@@ -1812,6 +1855,16 @@
             document.querySelector('.nav-links').classList.toggle('active');
             document.querySelector('.menu-toggle').classList.toggle('active');
         }
+
+        // Close mobile menu on outside tap
+        document.addEventListener('click', (e) => {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
 
         // Scroll Effects + Parallax
         const heroImageBg = document.querySelector('.hero-image-bg');
