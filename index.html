@@ -280,13 +280,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 3s ease;
-            filter: saturate(0.5) brightness(0.7);
-        }
-
-        .hero-video-bg video.active {
             opacity: 0.15;
+            filter: saturate(0.5) brightness(0.7);
         }
 
         .hero-overlay {
@@ -565,27 +560,6 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent-warm) 50%, var(--accent) 70%, transparent);
             box-shadow: 0 0 20px rgba(123, 140, 196, 0.3), 0 0 40px rgba(212, 168, 83, 0.15);
-        }
-
-        .featured-video-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-
-        .featured-video-bg video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 3s ease;
-            filter: saturate(0.5) brightness(0.4) blur(2px);
-        }
-
-        .featured-video-bg video.active {
-            opacity: 0.15;
         }
 
         .featured-video-overlay {
@@ -1250,14 +1224,14 @@
             .hero-image-bg picture,
             .hero-image-bg img {
                 object-fit: contain;
-                object-position: center 20%;
+                object-position: center 10%;
+                max-height: 65vh;
             }
             .hero-overlay {
                 background:
                     linear-gradient(to bottom, rgba(10, 10, 18, 0.15) 0%, rgba(10, 10, 18, 0.25) 30%, rgba(10, 10, 18, 0.8) 50%, rgba(10, 10, 18, 0.98) 65%);
             }
-            .hero-video-bg,
-            .featured-video-bg { display: none; }
+            .hero-video-bg { display: none; }
             .bokeh-particle:nth-child(n+9) { display: none; }
             .featured-bokeh .bokeh-particle:nth-child(n+5) { display: none; }
             .featured-works, .about, .contact { padding-top: 6rem; padding-bottom: 6rem; }
@@ -1329,13 +1303,7 @@
             </picture>
         </div>
         <div class="hero-video-bg">
-            <video muted loop playsinline preload="none" id="heroVideo1" class="active">
-                <source src="videos/bg-video-1.mp4" type="video/mp4">
-            </video>
-            <video muted loop playsinline preload="none" id="heroVideo2">
-                <source src="videos/bg-video-2.mp4" type="video/mp4">
-            </video>
-            <video muted loop playsinline preload="none" id="heroVideo3">
+            <video muted loop playsinline preload="none" id="heroVideo" class="active">
                 <source src="videos/bg-video-3.mp4" type="video/mp4">
             </video>
         </div>
@@ -1407,17 +1375,6 @@
 
     <!-- Featured Works Section -->
     <section id="works" class="featured-works">
-        <div class="featured-video-bg">
-            <video muted loop playsinline preload="none" id="featuredVideo1" class="active">
-                <source src="videos/bg-video-2.mp4" type="video/mp4">
-            </video>
-            <video muted loop playsinline preload="none" id="featuredVideo2">
-                <source src="videos/bg-video-3.mp4" type="video/mp4">
-            </video>
-            <video muted loop playsinline preload="none" id="featuredVideo3">
-                <source src="videos/bg-video-1.mp4" type="video/mp4">
-            </video>
-        </div>
         <div class="featured-video-overlay"></div>
         <div class="bokeh-particles featured-bokeh" aria-hidden="true">
             <div class="bokeh-particle gold" style="left:10%;top:20%;width:8px;height:8px;--dur:20s;--del:0s"></div>
@@ -1800,66 +1757,41 @@
     </footer>
 
     <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorDot = document.querySelector('.cursor-dot');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursorDot.style.left = mouseX + 'px';
-            cursorDot.style.top = mouseY + 'px';
-        });
-
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.12;
-            cursorY += (mouseY - cursorY) * 0.12;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        document.querySelectorAll('a, button, .work-card, .more-work-card, .service-card').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // Video Background - Desktop only (skip 37MB on mobile)
         const isDesktop = window.innerWidth > 768;
 
+        // Custom Cursor - Desktop only (no cursor on touch devices)
         if (isDesktop) {
-            const heroVideos = [
-                document.getElementById('heroVideo1'),
-                document.getElementById('heroVideo2'),
-                document.getElementById('heroVideo3')
-            ];
-            let currentHeroVideo = 0;
+            const cursor = document.querySelector('.cursor');
+            const cursorDot = document.querySelector('.cursor-dot');
+            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
 
-            heroVideos.forEach(v => { if (v) { v.preload = 'auto'; v.play(); } });
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX; mouseY = e.clientY;
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+            });
 
-            setInterval(() => {
-                heroVideos[currentHeroVideo].classList.remove('active');
-                currentHeroVideo = (currentHeroVideo + 1) % heroVideos.length;
-                heroVideos[currentHeroVideo].classList.add('active');
-            }, 10000);
+            (function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.12;
+                cursorY += (mouseY - cursorY) * 0.12;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(animateCursor);
+            })();
 
-            const featuredVideos = [
-                document.getElementById('featuredVideo1'),
-                document.getElementById('featuredVideo2'),
-                document.getElementById('featuredVideo3')
-            ];
-            let currentFeaturedVideo = 0;
+            document.querySelectorAll('a, button, .work-card, .more-work-card, .service-card').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        } else {
+            // Hide cursor elements on mobile
+            document.querySelectorAll('.cursor, .cursor-dot').forEach(el => el.style.display = 'none');
+        }
 
-            featuredVideos.forEach(v => { if (v) { v.preload = 'auto'; v.play(); } });
-
-            setInterval(() => {
-                featuredVideos[currentFeaturedVideo].classList.remove('active');
-                currentFeaturedVideo = (currentFeaturedVideo + 1) % featuredVideos.length;
-                featuredVideos[currentFeaturedVideo].classList.add('active');
-            }, 12000);
+        // Single background video - Desktop only, lazy loaded
+        if (isDesktop) {
+            const heroVideo = document.getElementById('heroVideo');
+            if (heroVideo) { heroVideo.preload = 'auto'; heroVideo.play(); }
         }
 
         // Loading - faster on mobile
