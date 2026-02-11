@@ -1078,6 +1078,232 @@
             font-weight: 300;
         }
 
+        /* Process Section */
+        .process {
+            padding: 10rem 4rem;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent-warm) 50%, var(--accent) 70%, transparent);
+            box-shadow: 0 0 20px rgba(123, 140, 196, 0.3), 0 0 40px rgba(212, 168, 83, 0.15);
+        }
+
+        .process-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .process-step-num {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(123, 140, 196, 0.1);
+            border: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--accent-light);
+            position: relative;
+            z-index: 1;
+            transition: var(--transition-smooth);
+        }
+
+        .process-step:hover .process-step-num {
+            background: rgba(123, 140, 196, 0.2);
+            box-shadow: 0 0 20px rgba(123, 140, 196, 0.2);
+        }
+
+        .process-step-connector {
+            position: absolute;
+            top: 24px;
+            left: calc(50% + 30px);
+            right: calc(-50% + 30px);
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), rgba(212, 168, 83, 0.3));
+            z-index: 0;
+        }
+
+        .process-step:last-child .process-step-connector { display: none; }
+
+        .process-step h4 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .process-step p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 10rem 4rem;
+            background: var(--bg-darker);
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-warm) 30%, var(--accent) 50%, var(--accent-warm) 70%, transparent);
+            box-shadow: 0 0 15px rgba(212, 168, 83, 0.2);
+        }
+
+        .pricing-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(123, 140, 196, 0.1);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-warm);
+            background: rgba(212, 168, 83, 0.03);
+        }
+
+        .pricing-card.featured:hover {
+            border-color: var(--accent-warm);
+            box-shadow: 0 12px 40px rgba(212, 168, 83, 0.15);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-warm), #e8c878);
+            color: var(--bg-dark);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+        }
+
+        .pricing-plan {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-price span {
+            font-size: 0.85rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-muted);
+        }
+
+        .pricing-unit {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 300;
+        }
+
+        .pricing-features li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .pricing-card.featured .pricing-features li::before {
+            background: var(--accent-warm);
+        }
+
+        .pricing-note {
+            max-width: 700px;
+            margin: 3rem auto 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
         /* Contact Section */
         .contact {
             padding: 10rem 4rem;
@@ -1359,7 +1585,17 @@
                 animation-name: floatUp;
             }
             .featured-bokeh .bokeh-particle:nth-child(n+5) { display: none; }
-            .featured-works, .about, .contact { padding-top: 6rem; padding-bottom: 6rem; }
+            .featured-works, .about, .contact, .process, .pricing { padding-top: 6rem; padding-bottom: 6rem; }
+            .process-steps {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: center;
+            }
+            .process-step { max-width: 280px; }
+            .process-step-connector {
+                display: none;
+            }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
             .awards-ticker { padding: 0.5rem 0; }
             .ticker-item { padding: 0 1.5rem; font-size: 0.65rem; }
         }
@@ -1635,6 +1871,7 @@
                 <li><a href="#works">Works</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN</button>
@@ -2137,6 +2374,102 @@
         </div>
     </section>
 
+    <!-- Process Section -->
+    <section class="process">
+        <div class="process-container">
+            <div class="section-header reveal">
+                <span class="section-label" data-lang-key="process-label">Process</span>
+                <h2 class="section-title" data-lang-key="process-title">制作の流れ</h2>
+                <p class="section-subtitle" data-lang-key="process-subtitle">お問い合わせから納品まで、スムーズな制作体験を</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step reveal">
+                    <div class="process-step-num">01</div>
+                    <div class="process-step-connector"></div>
+                    <h4 data-lang-key="process-step1-title">お問い合わせ</h4>
+                    <p data-lang-key="process-step1-desc">X(Twitter)のDMまたはお問い合わせからご連絡ください</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-step-num">02</div>
+                    <div class="process-step-connector"></div>
+                    <h4 data-lang-key="process-step2-title">ヒアリング</h4>
+                    <p data-lang-key="process-step2-desc">目的・ターゲット・イメージを丁寧にお伺いします</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-step-num">03</div>
+                    <div class="process-step-connector"></div>
+                    <h4 data-lang-key="process-step3-title">企画・構成</h4>
+                    <p data-lang-key="process-step3-desc">ストーリーボードと演出プランをご提案</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-step-num">04</div>
+                    <div class="process-step-connector"></div>
+                    <h4 data-lang-key="process-step4-title">制作</h4>
+                    <p data-lang-key="process-step4-desc">AI技術と映像制作スキルを融合し、映像を制作します</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-step-num">05</div>
+                    <div class="process-step-connector"></div>
+                    <h4 data-lang-key="process-step5-title">納品</h4>
+                    <p data-lang-key="process-step5-desc">修正対応の上、ご希望のフォーマットで納品</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="pricing-container">
+            <div class="section-header reveal">
+                <span class="section-label" data-lang-key="pricing-label">Pricing</span>
+                <h2 class="section-title" data-lang-key="pricing-title">料金プラン</h2>
+                <p class="section-subtitle" data-lang-key="pricing-subtitle">プロジェクトに合わせた最適なプランを</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <div class="pricing-plan" data-lang-key="pricing-light-plan">Light</div>
+                    <div class="pricing-price">¥80,000<span>〜</span></div>
+                    <div class="pricing-unit" data-lang-key="pricing-light-unit">30秒以下の短尺動画</div>
+                    <ul class="pricing-features">
+                        <li data-lang-key="pricing-light-f1">SNS向けショート動画</li>
+                        <li data-lang-key="pricing-light-f2">シンプルな演出・構成</li>
+                        <li data-lang-key="pricing-light-f3">BGM・効果音込み</li>
+                        <li data-lang-key="pricing-light-f4">修正1回まで</li>
+                        <li data-lang-key="pricing-light-f5">納期：約1週間</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <div class="pricing-badge" data-lang-key="pricing-popular">POPULAR</div>
+                    <div class="pricing-plan" data-lang-key="pricing-standard-plan">Standard</div>
+                    <div class="pricing-price">¥150,000<span>〜</span></div>
+                    <div class="pricing-unit" data-lang-key="pricing-standard-unit">1分程度のアニメ・PR動画</div>
+                    <ul class="pricing-features">
+                        <li data-lang-key="pricing-standard-f1">ストーリーボード付き</li>
+                        <li data-lang-key="pricing-standard-f2">キャラクターデザイン</li>
+                        <li data-lang-key="pricing-standard-f3">演出・アニメーション</li>
+                        <li data-lang-key="pricing-standard-f4">BGM・効果音・SE込み</li>
+                        <li data-lang-key="pricing-standard-f5">修正2回まで</li>
+                        <li data-lang-key="pricing-standard-f6">納期：約2週間</li>
+                    </ul>
+                </div>
+                <div class="pricing-card reveal">
+                    <div class="pricing-plan" data-lang-key="pricing-premium-plan">Premium</div>
+                    <div class="pricing-price">¥300,000<span>〜</span></div>
+                    <div class="pricing-unit" data-lang-key="pricing-premium-unit">2分以上 / 複雑な演出</div>
+                    <ul class="pricing-features">
+                        <li data-lang-key="pricing-premium-f1">フルストーリーボード</li>
+                        <li data-lang-key="pricing-premium-f2">オリジナルキャラ複数体</li>
+                        <li data-lang-key="pricing-premium-f3">高度な演出・VFX</li>
+                        <li data-lang-key="pricing-premium-f4">ナレーション・声優手配</li>
+                        <li data-lang-key="pricing-premium-f5">修正3回まで</li>
+                        <li data-lang-key="pricing-premium-f6">納期：約3〜4週間</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="pricing-note" data-lang-key="pricing-note">※ 上記は目安です。プロジェクトの内容・規模により変動します。まずはお気軽にご相談ください。</p>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="contact-container reveal">
@@ -2403,6 +2736,47 @@
             'contact-note': { jp: '24時間以内に返信いたします', en: "I'll respond within 24 hours" },
             'footer-tagline': { jp: 'AI Agent x Video Production', en: 'AI Agent x Video Production' },
             'footer-text': { jp: '&copy; 2026 RYO STUDIO. All Rights Reserved.', en: '&copy; 2026 RYO STUDIO. All Rights Reserved.' },
+            'process-label': { jp: 'Process', en: 'Process' },
+            'process-title': { jp: '制作の流れ', en: 'How It Works' },
+            'process-subtitle': { jp: 'お問い合わせから納品まで、スムーズな制作体験を', en: 'A smooth creative experience from inquiry to delivery' },
+            'process-step1-title': { jp: 'お問い合わせ', en: 'Contact' },
+            'process-step1-desc': { jp: 'X(Twitter)のDMまたはお問い合わせからご連絡ください', en: 'Reach out via X (Twitter) DM or the contact form' },
+            'process-step2-title': { jp: 'ヒアリング', en: 'Consultation' },
+            'process-step2-desc': { jp: '目的・ターゲット・イメージを丁寧にお伺いします', en: 'We discuss your goals, target audience, and creative vision' },
+            'process-step3-title': { jp: '企画・構成', en: 'Planning' },
+            'process-step3-desc': { jp: 'ストーリーボードと演出プランをご提案', en: 'Storyboard and creative direction proposal' },
+            'process-step4-title': { jp: '制作', en: 'Production' },
+            'process-step4-desc': { jp: 'AI技術と映像制作スキルを融合し、映像を制作します', en: 'Creating your video with AI technology and filmmaking expertise' },
+            'process-step5-title': { jp: '納品', en: 'Delivery' },
+            'process-step5-desc': { jp: '修正対応の上、ご希望のフォーマットで納品', en: 'Final revisions and delivery in your preferred format' },
+            'pricing-label': { jp: 'Pricing', en: 'Pricing' },
+            'pricing-title': { jp: '料金プラン', en: 'Pricing Plans' },
+            'pricing-subtitle': { jp: 'プロジェクトに合わせた最適なプランを', en: 'The right plan for your project' },
+            'pricing-light-plan': { jp: 'Light', en: 'Light' },
+            'pricing-light-unit': { jp: '30秒以下の短尺動画', en: 'Short videos under 30 seconds' },
+            'pricing-light-f1': { jp: 'SNS向けショート動画', en: 'Short videos for social media' },
+            'pricing-light-f2': { jp: 'シンプルな演出・構成', en: 'Simple direction & structure' },
+            'pricing-light-f3': { jp: 'BGM・効果音込み', en: 'BGM & sound effects included' },
+            'pricing-light-f4': { jp: '修正1回まで', en: 'Up to 1 revision' },
+            'pricing-light-f5': { jp: '納期：約1週間', en: 'Delivery: ~1 week' },
+            'pricing-popular': { jp: 'POPULAR', en: 'POPULAR' },
+            'pricing-standard-plan': { jp: 'Standard', en: 'Standard' },
+            'pricing-standard-unit': { jp: '1分程度のアニメ・PR動画', en: 'Anime & PR videos around 1 min' },
+            'pricing-standard-f1': { jp: 'ストーリーボード付き', en: 'Storyboard included' },
+            'pricing-standard-f2': { jp: 'キャラクターデザイン', en: 'Character design' },
+            'pricing-standard-f3': { jp: '演出・アニメーション', en: 'Direction & animation' },
+            'pricing-standard-f4': { jp: 'BGM・効果音・SE込み', en: 'BGM, SFX & sound effects' },
+            'pricing-standard-f5': { jp: '修正2回まで', en: 'Up to 2 revisions' },
+            'pricing-standard-f6': { jp: '納期：約2週間', en: 'Delivery: ~2 weeks' },
+            'pricing-premium-plan': { jp: 'Premium', en: 'Premium' },
+            'pricing-premium-unit': { jp: '2分以上 / 複雑な演出', en: '2+ minutes / complex production' },
+            'pricing-premium-f1': { jp: 'フルストーリーボード', en: 'Full storyboard' },
+            'pricing-premium-f2': { jp: 'オリジナルキャラ複数体', en: 'Multiple original characters' },
+            'pricing-premium-f3': { jp: '高度な演出・VFX', en: 'Advanced direction & VFX' },
+            'pricing-premium-f4': { jp: 'ナレーション・声優手配', en: 'Narration & voice actor casting' },
+            'pricing-premium-f5': { jp: '修正3回まで', en: 'Up to 3 revisions' },
+            'pricing-premium-f6': { jp: '納期：約3〜4週間', en: 'Delivery: ~3-4 weeks' },
+            'pricing-note': { jp: '※ 上記は目安です。プロジェクトの内容・規模により変動します。まずはお気軽にご相談ください。', en: '* Prices are estimates and vary by project scope. Feel free to reach out for a custom quote.' },
             'filter-all': { jp: 'すべて', en: 'All' },
             'filter-animation': { jp: 'アニメ', en: 'Animation' },
             'filter-shortfilm': { jp: 'ショートフィルム', en: 'Short Film' },
