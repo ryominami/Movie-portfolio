@@ -313,12 +313,131 @@
         .bokeh-particle.gold { background: radial-gradient(circle, rgba(212, 168, 83, 0.6), rgba(212, 168, 83, 0)); }
         .bokeh-particle.blue { background: radial-gradient(circle, rgba(123, 140, 196, 0.5), rgba(123, 140, 196, 0)); }
         .bokeh-particle.white { background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+        .bokeh-particle.cyan { background: radial-gradient(circle, rgba(100, 220, 255, 0.7), rgba(100, 220, 255, 0.1), transparent); box-shadow: 0 0 8px rgba(100, 220, 255, 0.3); }
+        .bokeh-particle.teal { background: radial-gradient(circle, rgba(80, 200, 210, 0.5), rgba(80, 200, 210, 0)); }
 
         @keyframes bokehFloat {
             0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
             20% { opacity: 0.7; }
             50% { opacity: 0.3; transform: translateY(-40px) scale(1.2); }
             80% { opacity: 0.6; }
+        }
+
+        /* Mobile Fantasy Particles */
+        .hero-rain-layer, .hero-sparkle-layer, .hero-glow-overlay, .hero-rays { display: none; }
+
+        .hero-rain-layer, .hero-sparkle-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Rain streaks */
+        .rain-drop {
+            position: absolute;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(180, 220, 255, 0.5), transparent);
+            pointer-events: none;
+            opacity: 0;
+            animation: rainFall var(--dur, 2s) var(--del, 0s) infinite linear;
+        }
+
+        @keyframes rainFall {
+            0% { opacity: 0; transform: translateY(-20px); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.4; }
+            100% { opacity: 0; transform: translateY(calc(100vh + 20px)); }
+        }
+
+        /* Sparkle twinkle */
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            pointer-events: none;
+            opacity: 0;
+            animation: twinkle var(--dur, 3s) var(--del, 0s) infinite ease-in-out;
+        }
+        .sparkle::before, .sparkle::after {
+            content: '';
+            position: absolute;
+            background: rgba(200, 240, 255, 0.9);
+        }
+        .sparkle::before {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        .sparkle::after {
+            width: 1px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            30% { opacity: 1; transform: scale(1.2) rotate(45deg); }
+            50% { opacity: 0.6; transform: scale(0.8) rotate(90deg); }
+            70% { opacity: 1; transform: scale(1) rotate(135deg); }
+        }
+
+        /* Float up - for mobile cyan orbs */
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(30px) scale(0.6); }
+            15% { opacity: var(--peak, 0.8); }
+            50% { opacity: var(--mid, 0.4); transform: translateY(-60px) scale(1); }
+            85% { opacity: var(--peak, 0.6); }
+            100% { opacity: 0; transform: translateY(-120px) scale(0.8); }
+        }
+
+        /* Glow pulse overlay */
+        .hero-glow-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 60% 40% at 50% 35%, rgba(100, 220, 255, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 30% 50%, rgba(80, 200, 210, 0.04) 0%, transparent 60%);
+            animation: glowBreath 6s ease-in-out infinite;
+        }
+
+        @keyframes glowBreath {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* God rays */
+        .hero-rays {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-rays::before, .hero-rays::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            width: 120px;
+            height: 140%;
+            background: linear-gradient(180deg, rgba(100, 220, 255, 0.04) 0%, transparent 70%);
+            transform: rotate(15deg);
+            animation: rayShift 12s ease-in-out infinite;
+        }
+        .hero-rays::before { left: 20%; animation-delay: 0s; }
+        .hero-rays::after { left: 55%; width: 80px; animation-delay: 4s; opacity: 0.7; }
+
+        @keyframes rayShift {
+            0%, 100% { opacity: 0.3; transform: rotate(15deg) translateX(0); }
+            50% { opacity: 0.8; transform: rotate(15deg) translateX(30px); }
         }
 
         .hero-container {
@@ -1231,7 +1350,14 @@
                     linear-gradient(to bottom, rgba(10, 10, 18, 0) 0%, rgba(10, 10, 18, 0.15) 35%, rgba(10, 10, 18, 0.7) 55%, rgba(10, 10, 18, 0.95) 70%, var(--bg-darker) 85%);
             }
             .hero-video-bg { display: none; }
-            .bokeh-particle:nth-child(n+9) { display: none; }
+            /* Show all hero particles on mobile + fantasy layers */
+            .hero-rain-layer, .hero-sparkle-layer, .hero-glow-overlay, .hero-rays { display: block; }
+            .bokeh-particle.gold, .bokeh-particle.blue, .bokeh-particle.white {
+                display: none;
+            }
+            .bokeh-particle.cyan, .bokeh-particle.teal {
+                animation-name: floatUp;
+            }
             .featured-bokeh .bokeh-particle:nth-child(n+5) { display: none; }
             .featured-works, .about, .contact { padding-top: 6rem; padding-bottom: 6rem; }
             .awards-ticker { padding: 0.5rem 0; }
@@ -1249,7 +1375,8 @@
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            .bokeh-particle { display: none; }
+            .bokeh-particle, .rain-drop, .sparkle { display: none; }
+            .hero-glow-overlay, .hero-rays { display: none !important; }
             .ticker-track { animation: none; }
             .reveal { opacity: 1; transform: none; transition: none; }
             .hero-badge, .hero-eyebrow, .hero h1, .hero-tagline, .hero-cta-group, .hero-scroll {
@@ -1308,6 +1435,7 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="bokeh-particles" aria-hidden="true">
+            <!-- Desktop: gold/blue/white bokeh -->
             <div class="bokeh-particle gold" style="left:5%;top:15%;width:14px;height:14px;--dur:18s;--del:0s"></div>
             <div class="bokeh-particle blue" style="left:15%;top:60%;width:8px;height:8px;--dur:22s;--del:3s"></div>
             <div class="bokeh-particle white" style="left:25%;top:30%;width:6px;height:6px;--dur:16s;--del:1s"></div>
@@ -1328,7 +1456,60 @@
             <div class="bokeh-particle blue" style="left:82%;top:35%;width:6px;height:6px;--dur:21s;--del:8s"></div>
             <div class="bokeh-particle gold" style="left:92%;top:50%;width:8px;height:8px;--dur:19s;--del:2s"></div>
             <div class="bokeh-particle white" style="left:48%;top:42%;width:15px;height:15px;--dur:26s;--del:0s"></div>
+            <!-- Mobile: cyan/teal floating orbs -->
+            <div class="bokeh-particle cyan" style="left:10%;top:55%;width:16px;height:16px;--dur:8s;--del:0s;--peak:0.9"></div>
+            <div class="bokeh-particle teal" style="left:25%;top:65%;width:10px;height:10px;--dur:10s;--del:2s;--peak:0.7"></div>
+            <div class="bokeh-particle cyan" style="left:45%;top:50%;width:12px;height:12px;--dur:9s;--del:1s;--peak:0.8"></div>
+            <div class="bokeh-particle teal" style="left:65%;top:60%;width:8px;height:8px;--dur:11s;--del:3s;--peak:0.6"></div>
+            <div class="bokeh-particle cyan" style="left:80%;top:70%;width:14px;height:14px;--dur:7s;--del:0.5s;--peak:0.9"></div>
+            <div class="bokeh-particle teal" style="left:35%;top:75%;width:6px;height:6px;--dur:12s;--del:4s;--peak:0.5"></div>
+            <div class="bokeh-particle cyan" style="left:55%;top:45%;width:18px;height:18px;--dur:10s;--del:2.5s;--peak:0.7"></div>
+            <div class="bokeh-particle teal" style="left:15%;top:40%;width:9px;height:9px;--dur:9s;--del:1.5s;--peak:0.6"></div>
+            <div class="bokeh-particle cyan" style="left:75%;top:35%;width:11px;height:11px;--dur:8s;--del:3.5s;--peak:0.8"></div>
+            <div class="bokeh-particle teal" style="left:90%;top:55%;width:7px;height:7px;--dur:11s;--del:0.5s;--peak:0.5"></div>
+            <div class="bokeh-particle cyan" style="left:5%;top:30%;width:13px;height:13px;--dur:10s;--del:5s;--peak:0.7"></div>
+            <div class="bokeh-particle cyan" style="left:50%;top:80%;width:20px;height:20px;--dur:13s;--del:1s;--peak:0.6"></div>
         </div>
+        <!-- Rain layer (mobile only) -->
+        <div class="hero-rain-layer" aria-hidden="true">
+            <div class="rain-drop" style="left:3%;height:60px;--dur:1.8s;--del:0s"></div>
+            <div class="rain-drop" style="left:8%;height:45px;--dur:2.2s;--del:0.3s"></div>
+            <div class="rain-drop" style="left:14%;height:70px;--dur:1.6s;--del:0.8s"></div>
+            <div class="rain-drop" style="left:21%;height:50px;--dur:2.0s;--del:0.1s"></div>
+            <div class="rain-drop" style="left:27%;height:65px;--dur:1.9s;--del:0.6s"></div>
+            <div class="rain-drop" style="left:33%;height:40px;--dur:2.4s;--del:1.2s"></div>
+            <div class="rain-drop" style="left:40%;height:55px;--dur:1.7s;--del:0.4s"></div>
+            <div class="rain-drop" style="left:47%;height:75px;--dur:2.1s;--del:0.9s"></div>
+            <div class="rain-drop" style="left:53%;height:48px;--dur:1.5s;--del:0.2s"></div>
+            <div class="rain-drop" style="left:60%;height:62px;--dur:2.3s;--del:0.7s"></div>
+            <div class="rain-drop" style="left:67%;height:42px;--dur:1.8s;--del:1.0s"></div>
+            <div class="rain-drop" style="left:73%;height:58px;--dur:2.0s;--del:0.5s"></div>
+            <div class="rain-drop" style="left:80%;height:68px;--dur:1.6s;--del:1.1s"></div>
+            <div class="rain-drop" style="left:87%;height:44px;--dur:2.2s;--del:0.3s"></div>
+            <div class="rain-drop" style="left:93%;height:52px;--dur:1.9s;--del:0.8s"></div>
+            <div class="rain-drop" style="left:11%;height:38px;--dur:2.5s;--del:1.4s"></div>
+            <div class="rain-drop" style="left:37%;height:72px;--dur:1.7s;--del:0.6s"></div>
+            <div class="rain-drop" style="left:57%;height:46px;--dur:2.1s;--del:1.3s"></div>
+            <div class="rain-drop" style="left:71%;height:56px;--dur:1.8s;--del:0.2s"></div>
+            <div class="rain-drop" style="left:85%;height:64px;--dur:2.0s;--del:0.9s"></div>
+        </div>
+        <!-- Sparkle layer (mobile only) -->
+        <div class="hero-sparkle-layer" aria-hidden="true">
+            <div class="sparkle" style="left:12%;top:18%;--dur:4s;--del:0s"></div>
+            <div class="sparkle" style="left:28%;top:25%;--dur:3.5s;--del:1.2s"></div>
+            <div class="sparkle" style="left:42%;top:12%;--dur:5s;--del:0.5s"></div>
+            <div class="sparkle" style="left:58%;top:22%;--dur:3.8s;--del:2s"></div>
+            <div class="sparkle" style="left:72%;top:15%;--dur:4.5s;--del:0.8s"></div>
+            <div class="sparkle" style="left:88%;top:28%;--dur:3.2s;--del:1.5s"></div>
+            <div class="sparkle" style="left:20%;top:42%;--dur:4.2s;--del:2.5s"></div>
+            <div class="sparkle" style="left:50%;top:35%;--dur:3.6s;--del:0.3s"></div>
+            <div class="sparkle" style="left:78%;top:48%;--dur:5.2s;--del:1.8s"></div>
+            <div class="sparkle" style="left:35%;top:55%;--dur:4s;--del:3s"></div>
+        </div>
+        <!-- Glow overlay (mobile only) -->
+        <div class="hero-glow-overlay"></div>
+        <!-- God rays (mobile only) -->
+        <div class="hero-rays"></div>
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">AI Agent x Video Production</div>
