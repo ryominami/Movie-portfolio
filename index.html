@@ -1384,6 +1384,231 @@
             }
             .about-title em { animation: none; }
         }
+
+        /* === Showreel Button === */
+        .showreel-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--accent-warm);
+            color: var(--accent-warm);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            border-radius: 100px;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .showreel-btn:hover {
+            background: rgba(212, 168, 83, 0.12);
+            border-color: #e8c878;
+            color: #e8c878;
+        }
+
+        .showreel-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .showreel-btn:hover svg {
+            transform: scale(1.15);
+        }
+
+        /* === Video Lightbox === */
+        .video-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .video-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .video-lightbox-content {
+            position: relative;
+            width: 90%;
+            max-width: 960px;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .video-lightbox.active .video-lightbox-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .video-lightbox-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition-smooth);
+        }
+
+        .video-lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .video-lightbox-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-primary);
+            stroke-width: 2;
+        }
+
+        /* === Language Toggle === */
+        .lang-toggle {
+            padding: 0.4rem 0.9rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .lang-toggle:hover {
+            background: var(--accent-soft);
+            border-color: var(--border-subtle);
+            color: var(--text-secondary);
+        }
+
+        /* === Category Filter Tabs === */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            white-space: nowrap;
+        }
+
+        .filter-tab:hover {
+            border-color: var(--border-subtle);
+            color: var(--text-primary);
+            background: var(--accent-soft);
+        }
+
+        .filter-tab.active {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--accent-light);
+        }
+
+        /* Filter card transitions */
+        .work-card,
+        .more-work-card {
+            transition: var(--transition-smooth), opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .work-card.filtered-out,
+        .more-work-card.filtered-out {
+            opacity: 0;
+            transform: scale(0.95) translateY(10px);
+            pointer-events: none;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 1024px) {
+            .lang-toggle {
+                position: absolute;
+                top: 2rem;
+                right: 4.5rem;
+            }
+            nav.scrolled .lang-toggle {
+                top: 1.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lang-toggle {
+                right: 3.5rem;
+            }
+            .filter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 0.5rem;
+            }
+            .filter-tabs::-webkit-scrollbar { display: none; }
+            .video-lightbox-content {
+                width: 95%;
+            }
+            .video-lightbox-close {
+                top: 0.75rem;
+                right: 0.75rem;
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .showreel-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1412,6 +1637,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN</button>
             <a href="https://x.com/ryo05m" class="nav-cta" target="_blank" rel="noopener noreferrer">Get in Touch</a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -1513,16 +1739,20 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">AI Agent x Video Production</div>
-                <p class="hero-eyebrow">Visual Storyteller</p>
-                <h1>Where <em>Stories</em><br>Come Alive</h1>
-                <p class="hero-tagline">映像という言葉で、あなたの物語を紡ぎます</p>
+                <p class="hero-eyebrow" data-lang-key="hero-eyebrow">Visual Storyteller</p>
+                <h1 data-lang-key="hero-h1">Where <em>Stories</em><br>Come Alive</h1>
+                <p class="hero-tagline" data-lang-key="hero-tagline">映像という言葉で、あなたの物語を紡ぎます</p>
                 <div class="hero-cta-group">
-                    <a href="#works" class="hero-cta primary">
+                    <a href="#works" class="hero-cta primary" data-lang-key="hero-cta-works">
                         View Works
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="#contact" class="hero-cta">
+                    <a href="#contact" class="hero-cta" data-lang-key="hero-cta-contact">
                         Contact
+                    </a>
+                    <a href="#" class="showreel-btn" data-video="UO9ty4c_ntQ" data-lang-key="hero-showreel">
+                        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        Showreel
                     </a>
                 </div>
             </div>
@@ -1568,14 +1798,22 @@
         </div>
         <div class="featured-works-container">
             <div class="section-header reveal">
-                <span class="section-label">Selected Works</span>
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">心を動かす映像作品たち</p>
+                <span class="section-label" data-lang-key="works-label">Selected Works</span>
+                <h2 class="section-title" data-lang-key="works-title">Featured Projects</h2>
+                <p class="section-subtitle" data-lang-key="works-subtitle">心を動かす映像作品たち</p>
+            </div>
+
+            <div class="filter-tabs reveal" id="filterTabs">
+                <button class="filter-tab active" data-filter="all" data-lang-key="filter-all">すべて</button>
+                <button class="filter-tab" data-filter="animation" data-lang-key="filter-animation">アニメ</button>
+                <button class="filter-tab" data-filter="shortfilm" data-lang-key="filter-shortfilm">ショートフィルム</button>
+                <button class="filter-tab" data-filter="commercial" data-lang-key="filter-commercial">CM・PR</button>
+                <button class="filter-tab" data-filter="other" data-lang-key="filter-other">その他</button>
             </div>
 
             <div class="works-grid">
                 <!-- KAERUN AI - 最優秀賞 -->
-                <a href="https://www.youtube.com/watch?v=UO9ty4c_ntQ" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="UO9ty4c_ntQ" data-category="commercial" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/hqdefault.jpg" alt="KAERUN AI" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1590,7 +1828,7 @@
                 </a>
 
                 <!-- 幸手市 - 地域創生 優秀賞 -->
-                <a href="https://www.youtube.com/watch?v=xp4sub-rhXM" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="xp4sub-rhXM" data-category="commercial" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/xp4sub-rhXM/hqdefault.jpg" alt="幸手市PR映像" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1605,7 +1843,7 @@
                 </a>
 
                 <!-- 白浜 - 地域創生 SOZO第30回 準グランプリ -->
-                <a href="https://youtube.com/shorts/Uvy3QIx8odM" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="Uvy3QIx8odM" data-category="commercial" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/Uvy3QIx8odM/hqdefault.jpg" alt="白浜PR映像" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1620,7 +1858,7 @@
                 </a>
 
                 <!-- これも日常の宝物 - SOZO第29回 グランプリ -->
-                <a href="https://youtube.com/shorts/w98sWMe82BQ" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="w98sWMe82BQ" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/w98sWMe82BQ/hqdefault.jpg" alt="これも、日常の宝物。" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1635,7 +1873,7 @@
                 </a>
 
                 <!-- それぞれの午後 - SOZO第29回 グランプリ -->
-                <a href="https://youtube.com/shorts/eioMivdnM5M" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="eioMivdnM5M" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/eioMivdnM5M/hqdefault.jpg" alt="それぞれの午後、一つの想い" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1650,7 +1888,7 @@
                 </a>
 
                 <!-- 夜のゴールライン - SOZO第29回 グランプリ -->
-                <a href="https://youtube.com/shorts/7OEvltA8WbI" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="7OEvltA8WbI" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/7OEvltA8WbI/hqdefault.jpg" alt="夜のゴールライン" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1665,7 +1903,7 @@
                 </a>
 
                 <!-- 最後の宿題 - 泣けるAIショートアニメ 優秀賞 -->
-                <a href="https://www.youtube.com/watch?v=UOXAXAf5mB4" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="UOXAXAf5mB4" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/UOXAXAf5mB4/hqdefault.jpg" alt="最後の宿題" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1680,7 +1918,7 @@
                 </a>
 
                 <!-- 希望への筆跡 - NICIドリームステージ大賞 SNS特別賞 -->
-                <a href="https://www.youtube.com/watch?v=sEeYbHs_qZM" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="sEeYbHs_qZM" data-category="other" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/sEeYbHs_qZM/hqdefault.jpg" alt="希望への筆跡" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1695,7 +1933,7 @@
                 </a>
 
                 <!-- AIスタイリスト降臨 - ミスターAIコンテスト 3位 -->
-                <a href="https://www.youtube.com/watch?v=LaB5PMDItJI" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="LaB5PMDItJI" data-category="commercial" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/LaB5PMDItJI/hqdefault.jpg" alt="AIスタイリスト降臨" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1710,7 +1948,7 @@
                 </a>
 
                 <!-- Survival Instinct - ViduQreation Challenge Silver賞 -->
-                <a href="https://www.youtube.com/watch?v=D13aAFKnYGQ" target="_blank" rel="noopener noreferrer" class="work-card reveal">
+                <a href="#" data-video="D13aAFKnYGQ" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/D13aAFKnYGQ/hqdefault.jpg" alt="Survival Instinct" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1731,12 +1969,12 @@
     <section class="more-works">
         <div class="more-works-container">
             <div class="section-header reveal">
-                <span class="section-label">More Works</span>
-                <h2 class="section-title">Other Projects</h2>
+                <span class="section-label" data-lang-key="more-works-label">More Works</span>
+                <h2 class="section-title" data-lang-key="more-works-title">Other Projects</h2>
             </div>
 
             <div class="more-works-grid">
-                <a href="https://www.youtube.com/watch?v=KZkzLVDarFY" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="KZkzLVDarFY" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/KZkzLVDarFY/hqdefault.jpg" alt="GAMBLE KINGDOM" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1749,7 +1987,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=p1KAUBDJQhI" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="p1KAUBDJQhI" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/p1KAUBDJQhI/hqdefault.jpg" alt="Chrono Heart" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1762,7 +2000,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=nbbz7K2eIME" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="nbbz7K2eIME" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/nbbz7K2eIME/hqdefault.jpg" alt="CYBER BUSHIDO" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1775,7 +2013,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=mx36xR9Q9Mo" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="mx36xR9Q9Mo" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/mx36xR9Q9Mo/hqdefault.jpg" alt="ENSEN OP" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1788,7 +2026,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=seTHDd55QjY" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="seTHDd55QjY" data-category="commercial" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/seTHDd55QjY/hqdefault.jpg" alt="BEYOND BOUNDARIES" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1801,7 +2039,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=qPU5APmACeo" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="qPU5APmACeo" data-category="other" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/qPU5APmACeo/hqdefault.jpg" alt="Pieces of Light" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1814,7 +2052,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=mg9MIUcsnb8" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="mg9MIUcsnb8" data-category="shortfilm" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/mg9MIUcsnb8/hqdefault.jpg" alt="黄金の約束" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1827,7 +2065,7 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=LpsHPhURFTU" target="_blank" rel="noopener noreferrer" class="more-work-card reveal">
+                <a href="#" data-video="LpsHPhURFTU" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/LpsHPhURFTU/hqdefault.jpg" alt="AIの答え、僕の答え。" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1847,8 +2085,8 @@
     <section id="about" class="about">
         <div class="about-container reveal">
             <span class="section-label">About</span>
-            <h2 class="about-title">映像という言葉で<br><em>物語を紡ぐ</em></h2>
-            <p class="about-text">
+            <h2 class="about-title" data-lang-key="about-title">映像という言葉で<br><em>物語を紡ぐ</em></h2>
+            <p class="about-text" data-lang-key="about-text">
                 アニメーション、プロモーション映像、ショートフィルムなど、<br>
                 幅広いジャンルの映像制作を手がけています。<br>
                 最新のAI技術と映像制作の技術を組み合わせ、<br>
@@ -1876,24 +2114,24 @@
         <div class="services-container">
             <div class="section-header reveal">
                 <span class="section-label">Services</span>
-                <h2 class="section-title">What I Create</h2>
+                <h2 class="section-title" data-lang-key="services-title">What I Create</h2>
             </div>
 
             <div class="services-grid">
                 <div class="service-card reveal">
                     <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="13" height="14" rx="2"/><path d="M15 10l5-3v10l-5-3z"/></svg></div>
                     <h3>Promotion</h3>
-                    <p>企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。</p>
+                    <p data-lang-key="service-promotion-desc">企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。</p>
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div>
                     <h3>Animation</h3>
-                    <p>物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。</p>
+                    <p data-lang-key="service-animation-desc">物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。</p>
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
                     <h3>Short Film</h3>
-                    <p>心に残るストーリーを、映像という形で紡ぎます。</p>
+                    <p data-lang-key="service-shortfilm-desc">心に残るストーリーを、映像という形で紡ぎます。</p>
                 </div>
             </div>
         </div>
@@ -1903,12 +2141,12 @@
     <section id="contact" class="contact">
         <div class="contact-container reveal">
             <span class="section-label">Contact</span>
-            <h2 class="contact-title">Let's Create Together</h2>
-            <p class="contact-subtitle">プロジェクトのご相談はお気軽にどうぞ。<br>アイデア段階からでも喜んでお伺いします。</p>
+            <h2 class="contact-title" data-lang-key="contact-title">Let's Create Together</h2>
+            <p class="contact-subtitle" data-lang-key="contact-subtitle">プロジェクトのご相談はお気軽にどうぞ。<br>アイデア段階からでも喜んでお伺いします。</p>
 
             <div class="contact-availability">
                 <div class="dot"></div>
-                <span>Available for new projects</span>
+                <span data-lang-key="contact-availability">Available for new projects</span>
             </div>
 
             <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta">
@@ -1916,7 +2154,7 @@
                 Get in Touch
             </a>
 
-            <p class="contact-note">24時間以内に返信いたします</p>
+            <p class="contact-note" data-lang-key="contact-note">24時間以内に返信いたします</p>
 
             <div class="social-links">
                 <a href="https://x.com/ryo05m" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X">
@@ -1932,9 +2170,19 @@
     <!-- Footer -->
     <footer>
         <div class="footer-logo">RYO STUDIO</div>
-        <p class="footer-tagline">AI Agent x Video Production</p>
-        <p class="footer-text">&copy; 2026 RYO STUDIO. All Rights Reserved.</p>
+        <p class="footer-tagline" data-lang-key="footer-tagline">AI Agent x Video Production</p>
+        <p class="footer-text" data-lang-key="footer-text">&copy; 2026 RYO STUDIO. All Rights Reserved.</p>
     </footer>
+
+    <!-- Video Lightbox -->
+    <div class="video-lightbox" id="videoLightbox">
+        <button class="video-lightbox-close" id="lightboxClose" aria-label="Close video">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="video-lightbox-content">
+            <iframe id="lightboxIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
 
     <script>
         const isDesktop = window.innerWidth > 768;
@@ -2014,8 +2262,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Smooth Scroll
+        // Smooth Scroll (skip data-video elements handled by lightbox)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            if (anchor.hasAttribute('data-video')) return;
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
@@ -2082,6 +2331,131 @@
 
         const aboutStats = document.querySelector('.about-stats');
         if (aboutStats) statsObserver.observe(aboutStats);
+
+        // =============================================
+        // Video Lightbox
+        // =============================================
+        const lightbox = document.getElementById('videoLightbox');
+        const lightboxIframe = document.getElementById('lightboxIframe');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        function openLightbox(videoId) {
+            lightboxIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => { lightboxIframe.src = ''; }, 400);
+        }
+
+        // Click handler for all [data-video] elements
+        document.addEventListener('click', (e) => {
+            const videoEl = e.target.closest('[data-video]');
+            if (videoEl) {
+                e.preventDefault();
+                openLightbox(videoEl.getAttribute('data-video'));
+            }
+        });
+
+        // Close on X button
+        lightboxClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        // Close on backdrop click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+        });
+
+        // =============================================
+        // Language Toggle (EN/JP)
+        // =============================================
+        const translations = {
+            'hero-eyebrow': { jp: 'Visual Storyteller', en: 'Visual Storyteller' },
+            'hero-h1': { jp: 'Where <em>Stories</em><br>Come Alive', en: 'Where <em>Stories</em><br>Come Alive' },
+            'hero-tagline': { jp: '映像という言葉で、あなたの物語を紡ぎます', en: 'Crafting your story through the art of visual storytelling' },
+            'hero-cta-works': { jp: 'View Works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>', en: 'View Works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' },
+            'hero-cta-contact': { jp: 'Contact', en: 'Contact' },
+            'hero-showreel': { jp: '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Showreel', en: '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Showreel' },
+            'works-label': { jp: 'Selected Works', en: 'Selected Works' },
+            'works-title': { jp: 'Featured Projects', en: 'Featured Projects' },
+            'works-subtitle': { jp: '心を動かす映像作品たち', en: 'Works that move hearts' },
+            'more-works-label': { jp: 'More Works', en: 'More Works' },
+            'more-works-title': { jp: 'Other Projects', en: 'Other Projects' },
+            'about-title': { jp: '映像という言葉で<br><em>物語を紡ぐ</em>', en: 'Weaving <em>Stories</em><br>Through Film' },
+            'about-text': { jp: 'アニメーション、プロモーション映像、ショートフィルムなど、<br>幅広いジャンルの映像制作を手がけています。<br>最新のAI技術と映像制作の技術を組み合わせ、<br>視聴者の心に響く作品をお届けします。', en: 'I create a wide range of video content including<br>animation, promotional videos, and short films.<br>Combining cutting-edge AI technology with filmmaking,<br>I deliver works that resonate with viewers.' },
+            'services-title': { jp: 'What I Create', en: 'What I Create' },
+            'service-promotion-desc': { jp: '企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。', en: 'Creating promotional videos that maximize the appeal of your brand, service, or product.' },
+            'service-animation-desc': { jp: '物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。', en: 'Delivering emotionally compelling visual experiences through narrative animation.' },
+            'service-shortfilm-desc': { jp: '心に残るストーリーを、映像という形で紡ぎます。', en: 'Weaving memorable stories through the medium of film.' },
+            'contact-title': { jp: "Let's Create Together", en: "Let's Create Together" },
+            'contact-subtitle': { jp: 'プロジェクトのご相談はお気軽にどうぞ。<br>アイデア段階からでも喜んでお伺いします。', en: 'Feel free to reach out about your project.<br>I\'m happy to discuss from the idea stage.' },
+            'contact-availability': { jp: 'Available for new projects', en: 'Available for new projects' },
+            'contact-note': { jp: '24時間以内に返信いたします', en: "I'll respond within 24 hours" },
+            'footer-tagline': { jp: 'AI Agent x Video Production', en: 'AI Agent x Video Production' },
+            'footer-text': { jp: '&copy; 2026 RYO STUDIO. All Rights Reserved.', en: '&copy; 2026 RYO STUDIO. All Rights Reserved.' },
+            'filter-all': { jp: 'すべて', en: 'All' },
+            'filter-animation': { jp: 'アニメ', en: 'Animation' },
+            'filter-shortfilm': { jp: 'ショートフィルム', en: 'Short Film' },
+            'filter-commercial': { jp: 'CM・PR', en: 'Commercial' },
+            'filter-other': { jp: 'その他', en: 'Other' }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'jp';
+        const langToggleBtn = document.getElementById('langToggle');
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            // Button shows the language you can switch TO
+            langToggleBtn.textContent = lang === 'jp' ? 'EN' : 'JP';
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[key] && translations[key][lang]) {
+                    el.innerHTML = translations[key][lang];
+                }
+            });
+        }
+
+        langToggleBtn.addEventListener('click', () => {
+            setLanguage(currentLang === 'jp' ? 'en' : 'jp');
+        });
+
+        // Initialize language on load
+        setLanguage(currentLang);
+
+        // =============================================
+        // Category Filter
+        // =============================================
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const allCards = document.querySelectorAll('.work-card[data-category], .more-work-card[data-category]');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.getAttribute('data-filter');
+
+                allCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.classList.remove('filtered-out');
+                    } else {
+                        card.classList.add('filtered-out');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
