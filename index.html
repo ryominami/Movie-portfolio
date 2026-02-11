@@ -1223,13 +1223,12 @@
             .hero-cta-group { justify-content: center; }
             .hero-image-bg picture,
             .hero-image-bg img {
-                object-fit: contain;
-                object-position: center 10%;
-                max-height: 65vh;
+                object-fit: cover;
+                object-position: 20% top;
             }
             .hero-overlay {
                 background:
-                    linear-gradient(to bottom, rgba(10, 10, 18, 0.15) 0%, rgba(10, 10, 18, 0.25) 30%, rgba(10, 10, 18, 0.8) 50%, rgba(10, 10, 18, 0.98) 65%);
+                    linear-gradient(to bottom, rgba(10, 10, 18, 0) 0%, rgba(10, 10, 18, 0.15) 35%, rgba(10, 10, 18, 0.7) 55%, rgba(10, 10, 18, 0.95) 70%, var(--bg-darker) 85%);
             }
             .hero-video-bg { display: none; }
             .bokeh-particle:nth-child(n+9) { display: none; }
