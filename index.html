@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RYO STUDIO | Visual Storyteller</title>
-    <meta name="description" content="映像で物語を紡ぐクリエイター。アニメーション、プロモーション映像など、心に響く映像作品を制作します。">
+    <meta name="description" content="受賞歴10以上の映像クリエイター RYO STUDIO。CM・PR映像、アニメーション、ショートフィルムを企画から納品までワンストップで制作。お見積もり無料、オンライン完結で全国対応。">
     <meta property="og:title" content="RYO STUDIO | Visual Storyteller">
     <meta property="og:description" content="映像で物語を紡ぐクリエイター">
     <meta property="og:type" content="website">
@@ -32,7 +32,17 @@
         "description": "映像で物語を紡ぐクリエイター。アニメーション、プロモーション映像など、心に響く映像作品を制作します。",
         "sameAs": ["https://x.com/ryo05m"],
         "jobTitle": "Visual Storyteller / Video Creator",
-        "knowsAbout": ["Video Production", "Animation", "AI Video", "Short Film", "Promotion Video"]
+        "knowsAbout": ["Video Production", "Animation", "AI Video", "Short Film", "Promotion Video"],
+        "award": [
+            "最優秀賞 — KAERUN AI「あったらいいな」CMコンテスト",
+            "グランプリ×3 — SOZO美術館 第29回コンペ",
+            "準グランプリ — SOZO美術館 第30回コンペ",
+            "優秀賞 — 幸手市映像コンテスト",
+            "優秀賞 — 泣けるAIショートアニメ",
+            "SNS特別賞 — NICIドリームステージ大賞",
+            "Silver賞 — ViduQreation Challenge",
+            "3位 — ミスターAIコンテスト"
+        ]
     }
     </script>
     <style>
@@ -266,22 +276,6 @@
             height: 100%;
             object-fit: cover;
             object-position: 25% center;
-        }
-
-        .hero-video-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .hero-video-bg video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.15;
-            filter: saturate(0.5) brightness(0.7);
         }
 
         .hero-overlay {
@@ -1575,7 +1569,6 @@
                 background:
                     linear-gradient(to bottom, rgba(10, 10, 18, 0) 0%, rgba(10, 10, 18, 0.15) 35%, rgba(10, 10, 18, 0.7) 55%, rgba(10, 10, 18, 0.95) 70%, var(--bg-darker) 85%);
             }
-            .hero-video-bg { display: none; }
             /* Show all hero particles on mobile + fantasy layers */
             .hero-rain-layer, .hero-sparkle-layer, .hero-glow-overlay, .hero-rays { display: block; }
             .bokeh-particle.gold, .bokeh-particle.blue, .bokeh-particle.white {
@@ -1845,6 +1838,269 @@
                 font-size: 0.75rem;
             }
         }
+
+        /* === About Profile === */
+        .about-profile {
+            max-width: 640px;
+            margin: 0 auto 3.5rem;
+            padding: 2rem 2.25rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .about-profile-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--text-primary);
+        }
+
+        .about-profile-role {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            margin: 0.4rem 0 1.25rem;
+        }
+
+        .about-profile-bio {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            font-weight: 300;
+            text-align: left;
+        }
+
+        /* === Awards Block === */
+        .awards-block {
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        .awards-heading {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent-warm);
+            margin-bottom: 2rem;
+        }
+
+        .awards-heading::before,
+        .awards-heading::after {
+            content: '——';
+            margin: 0 0.75rem;
+            opacity: 0.35;
+        }
+
+        .awards-grid {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem 1.5rem;
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .awards-grid li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.9rem;
+            padding: 0.85rem 1.1rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            transition: var(--transition-smooth);
+        }
+
+        .awards-grid li:hover {
+            border-color: rgba(212, 168, 83, 0.3);
+            background: rgba(212, 168, 83, 0.04);
+        }
+
+        .award-prize {
+            flex-shrink: 0;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent-warm);
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
+        .award-name {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        /* === Pricing CTA === */
+        .pricing-cta {
+            display: block;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 100px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .pricing-cta:hover {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .pricing-cta.featured {
+            background: linear-gradient(135deg, var(--accent-warm), #e8c878);
+            border-color: transparent;
+            color: var(--bg-dark);
+            font-weight: 600;
+        }
+
+        .pricing-cta.featured:hover {
+            background: linear-gradient(135deg, #e8c878, var(--accent-warm));
+            box-shadow: 0 10px 30px rgba(212, 168, 83, 0.25);
+        }
+
+        /* === FAQ Section === */
+        .faq {
+            padding: 10rem 4rem;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .faq::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent-warm) 50%, var(--accent) 70%, transparent);
+            box-shadow: 0 0 15px rgba(123, 140, 196, 0.2);
+        }
+
+        .faq-container {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .faq-item {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-item[open] {
+            border-color: var(--border-subtle);
+            background: rgba(123, 140, 196, 0.04);
+        }
+
+        .faq-item summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary:hover { color: var(--accent-light); }
+
+        .faq-item summary svg {
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-item[open] summary svg { transform: rotate(180deg); }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.4rem;
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        /* === Contact Trust Chips + CTA Group === */
+        .contact-trust {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .trust-chip {
+            padding: 0.45rem 1.1rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.03em;
+        }
+
+        .contact-cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .contact-cta-group .contact-cta { margin-bottom: 0; }
+
+        .contact-cta.secondary {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        .contact-cta.secondary:hover {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .faq { padding: 6rem 2rem; }
+            .awards-grid { grid-template-columns: 1fr; }
+            .about-profile { padding: 1.5rem 1.25rem; }
+        }
+
+        @media (max-width: 640px) {
+            .contact-cta-group { flex-direction: column; align-items: stretch; }
+            .contact-cta-group .contact-cta { justify-content: center; }
+        }
     </style>
 </head>
 <body>
@@ -1872,6 +2128,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN</button>
@@ -1888,13 +2145,8 @@
             <picture>
                 <source srcset="images/hero-anime-mobile.webp" type="image/webp" media="(max-width: 768px)">
                 <source srcset="images/hero-anime.webp" type="image/webp">
-                <img src="images/hero-anime.png" alt="RYO STUDIO hero artwork" loading="eager" fetchpriority="high">
+                <img src="images/hero-anime.webp" alt="RYO STUDIO hero artwork" loading="eager" fetchpriority="high">
             </picture>
-        </div>
-        <div class="hero-video-bg">
-            <video muted loop playsinline preload="none" id="heroVideo" class="active">
-                <source src="videos/bg-video-3.mp4" type="video/mp4">
-            </video>
         </div>
         <div class="hero-overlay"></div>
         <div class="bokeh-particles" aria-hidden="true">
@@ -2329,6 +2581,11 @@
                 最新のAI技術と映像制作の技術を組み合わせ、<br>
                 視聴者の心に響く作品をお届けします。
             </p>
+            <div class="about-profile">
+                <div class="about-profile-name">Ryo</div>
+                <div class="about-profile-role" data-lang-key="about-profile-role">Visual Storyteller / RYO STUDIO 代表</div>
+                <p class="about-profile-bio" data-lang-key="about-profile-bio">国内外の映像コンテストで10以上の受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。</p>
+            </div>
             <div class="about-stats">
                 <div class="about-stat">
                     <div class="about-stat-number" data-target="10+">0+</div>
@@ -2342,6 +2599,19 @@
                     <div class="about-stat-number" data-target="24h">0h</div>
                     <div class="about-stat-label">Response</div>
                 </div>
+            </div>
+            <div class="awards-block reveal">
+                <h3 class="awards-heading" data-lang-key="awards-heading">主な受賞歴</h3>
+                <ul class="awards-grid">
+                    <li><span class="award-prize">最優秀賞</span><span class="award-name">KAERUN AI「あったらいいな」CMコンテスト</span></li>
+                    <li><span class="award-prize">グランプリ ×3</span><span class="award-name">SOZO美術館 第29回コンペ</span></li>
+                    <li><span class="award-prize">準グランプリ</span><span class="award-name">SOZO美術館 第30回コンペ</span></li>
+                    <li><span class="award-prize">優秀賞</span><span class="award-name">幸手市映像コンテスト</span></li>
+                    <li><span class="award-prize">優秀賞</span><span class="award-name">泣けるAIショートアニメ</span></li>
+                    <li><span class="award-prize">SNS特別賞</span><span class="award-name">NICIドリームステージ大賞</span></li>
+                    <li><span class="award-prize">Silver賞</span><span class="award-name">ViduQreation Challenge</span></li>
+                    <li><span class="award-prize">3位</span><span class="award-name">ミスターAIコンテスト</span></li>
+                </ul>
             </div>
         </div>
     </section>
@@ -2437,6 +2707,7 @@
                         <li data-lang-key="pricing-light-f4">修正1回まで</li>
                         <li data-lang-key="pricing-light-f5">納期：約1週間</li>
                     </ul>
+                    <a href="#contact" class="pricing-cta" data-lang-key="pricing-cta">このプランで相談する</a>
                 </div>
                 <div class="pricing-card featured reveal">
                     <div class="pricing-badge" data-lang-key="pricing-popular">POPULAR</div>
@@ -2451,6 +2722,7 @@
                         <li data-lang-key="pricing-standard-f5">修正2回まで</li>
                         <li data-lang-key="pricing-standard-f6">納期：約2週間</li>
                     </ul>
+                    <a href="#contact" class="pricing-cta featured" data-lang-key="pricing-cta">このプランで相談する</a>
                 </div>
                 <div class="pricing-card reveal">
                     <div class="pricing-plan" data-lang-key="pricing-premium-plan">Premium</div>
@@ -2464,9 +2736,47 @@
                         <li data-lang-key="pricing-premium-f5">修正3回まで</li>
                         <li data-lang-key="pricing-premium-f6">納期：約3〜4週間</li>
                     </ul>
+                    <a href="#contact" class="pricing-cta" data-lang-key="pricing-cta">このプランで相談する</a>
                 </div>
             </div>
             <p class="pricing-note" data-lang-key="pricing-note">※ 上記は目安です。プロジェクトの内容・規模により変動します。まずはお気軽にご相談ください。</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="faq-container">
+            <div class="section-header reveal">
+                <span class="section-label">FAQ</span>
+                <h2 class="section-title" data-lang-key="faq-title">よくあるご質問</h2>
+                <p class="section-subtitle" data-lang-key="faq-subtitle">ご依頼前の不安にお答えします</p>
+            </div>
+            <div class="faq-list reveal">
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q1">どんな映像を依頼できますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a1">CM・PR映像、アニメーション、ショートフィルム、ミュージックビデオなどに対応しています。実写撮影を伴わない、AI生成と映像編集を組み合わせた制作が中心です。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q2">納品された映像は商用利用できますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a2">はい。広告・SNS・Webサイト・イベント上映など、ご契約時に取り決めた範囲で自由にご利用いただけます。権利の取り扱いはお見積もり時に明確にご説明します。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q3">AIで制作するメリットは何ですか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a3">従来の映像制作と比べて、短い納期と抑えたコストでアニメーション表現が可能になります。生成だけに頼らず、企画・構成・演出・編集は人の手で丁寧に仕上げるため、品質と再現性を両立できます。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q4">修正には対応してもらえますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a4">プランに応じて1〜3回の修正が料金に含まれています。それ以上の修正や大きな方針変更も、追加費用のご相談のうえで柔軟に対応します。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q5">納期はどのくらいかかりますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a5">内容や尺により約1〜4週間が目安です。お急ぎの場合はスケジュールをご相談ください。可能な範囲で調整します。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q6">打ち合わせはどのように進めますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a6">お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。メールまたはX(Twitter)のDMでテキストのみのやり取りでも問題ありません。</p>
+                </details>
+            </div>
         </div>
     </section>
 
@@ -2482,12 +2792,24 @@
                 <span data-lang-key="contact-availability">Available for new projects</span>
             </div>
 
-            <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                Get in Touch
-            </a>
+            <div class="contact-trust">
+                <span class="trust-chip" data-lang-key="contact-trust-1">お見積もり無料</span>
+                <span class="trust-chip" data-lang-key="contact-trust-2">企画段階からの相談OK</span>
+                <span class="trust-chip" data-lang-key="contact-trust-3">オンライン完結・全国対応</span>
+            </div>
 
-            <p class="contact-note" data-lang-key="contact-note">24時間以内に返信いたします</p>
+            <div class="contact-cta-group">
+                <a href="#" class="contact-cta js-mail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+                    <span data-lang-key="contact-cta-mail">メールで相談する</span>
+                </a>
+                <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta secondary">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    <span data-lang-key="contact-cta-dm">XのDMで相談する</span>
+                </a>
+            </div>
+
+            <p class="contact-note" data-lang-key="contact-note">24時間以内に返信いたします。営業や売り込みは一切いたしませんので、お気軽にどうぞ。</p>
 
             <div class="social-links">
                 <a href="https://x.com/ryo05m" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X">
@@ -2513,7 +2835,7 @@
             <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
         <div class="video-lightbox-content">
-            <iframe id="lightboxIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="lightboxIframe" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -2547,12 +2869,6 @@
         } else {
             // Hide cursor elements on mobile
             document.querySelectorAll('.cursor, .cursor-dot').forEach(el => el.style.display = 'none');
-        }
-
-        // Single background video - Desktop only, lazy loaded
-        if (isDesktop) {
-            const heroVideo = document.getElementById('heroVideo');
-            if (heroVideo) { heroVideo.preload = 'auto'; heroVideo.play(); }
         }
 
         // Loading - faster on mobile
@@ -2733,7 +3049,30 @@
             'contact-title': { jp: "Let's Create Together", en: "Let's Create Together" },
             'contact-subtitle': { jp: 'プロジェクトのご相談はお気軽にどうぞ。<br>アイデア段階からでも喜んでお伺いします。', en: 'Feel free to reach out about your project.<br>I\'m happy to discuss from the idea stage.' },
             'contact-availability': { jp: 'Available for new projects', en: 'Available for new projects' },
-            'contact-note': { jp: '24時間以内に返信いたします', en: "I'll respond within 24 hours" },
+            'contact-note': { jp: '24時間以内に返信いたします。営業や売り込みは一切いたしませんので、お気軽にどうぞ。', en: "I'll respond within 24 hours. No sales pitch — just an honest conversation about your project." },
+            'contact-trust-1': { jp: 'お見積もり無料', en: 'Free estimates' },
+            'contact-trust-2': { jp: '企画段階からの相談OK', en: 'Idea-stage consultations welcome' },
+            'contact-trust-3': { jp: 'オンライン完結・全国対応', en: 'Fully online — available nationwide' },
+            'contact-cta-mail': { jp: 'メールで相談する', en: 'Contact via Email' },
+            'contact-cta-dm': { jp: 'XのDMで相談する', en: 'DM on X' },
+            'about-profile-role': { jp: 'Visual Storyteller / RYO STUDIO 代表', en: 'Visual Storyteller / Founder, RYO STUDIO' },
+            'about-profile-bio': { jp: '国内外の映像コンテストで10以上の受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。', en: 'Winner of 10+ awards in video contests in Japan and abroad. I handle everything from planning and storyboarding to final delivery — from corporate and municipal PR videos to narrative short films. Also active as an instructor at an AI video production school.' },
+            'awards-heading': { jp: '主な受賞歴', en: 'Selected Awards' },
+            'pricing-cta': { jp: 'このプランで相談する', en: 'Discuss this plan' },
+            'faq-title': { jp: 'よくあるご質問', en: 'Frequently Asked Questions' },
+            'faq-subtitle': { jp: 'ご依頼前の不安にお答えします', en: 'Answers to common questions before you commission' },
+            'faq-q1': { jp: 'どんな映像を依頼できますか？', en: 'What kind of videos can I commission?' },
+            'faq-a1': { jp: 'CM・PR映像、アニメーション、ショートフィルム、ミュージックビデオなどに対応しています。実写撮影を伴わない、AI生成と映像編集を組み合わせた制作が中心です。', en: 'Commercials, PR videos, animation, short films, and music videos. My work centers on AI-generated visuals combined with hands-on editing — no live-action filming required.' },
+            'faq-q2': { jp: '納品された映像は商用利用できますか？', en: 'Can I use the delivered video commercially?' },
+            'faq-a2': { jp: 'はい。広告・SNS・Webサイト・イベント上映など、ご契約時に取り決めた範囲で自由にご利用いただけます。権利の取り扱いはお見積もり時に明確にご説明します。', en: 'Yes. You can freely use it for advertising, social media, websites, and event screenings within the scope agreed in the contract. Rights handling is clearly explained at the estimate stage.' },
+            'faq-q3': { jp: 'AIで制作するメリットは何ですか？', en: 'What are the benefits of AI-assisted production?' },
+            'faq-a3': { jp: '従来の映像制作と比べて、短い納期と抑えたコストでアニメーション表現が可能になります。生成だけに頼らず、企画・構成・演出・編集は人の手で丁寧に仕上げるため、品質と再現性を両立できます。', en: 'Compared to traditional production, animation becomes possible on shorter timelines and lower budgets. Planning, direction, and editing are still done carefully by hand, balancing quality with consistency.' },
+            'faq-q4': { jp: '修正には対応してもらえますか？', en: 'Are revisions included?' },
+            'faq-a4': { jp: 'プランに応じて1〜3回の修正が料金に含まれています。それ以上の修正や大きな方針変更も、追加費用のご相談のうえで柔軟に対応します。', en: '1–3 revision rounds are included depending on the plan. Additional revisions or major direction changes can be handled flexibly with a separate quote.' },
+            'faq-q5': { jp: '納期はどのくらいかかりますか？', en: 'How long does production take?' },
+            'faq-a5': { jp: '内容や尺により約1〜4週間が目安です。お急ぎの場合はスケジュールをご相談ください。可能な範囲で調整します。', en: 'Roughly 1–4 weeks depending on content and length. If you are in a hurry, let me know — I will adjust the schedule where possible.' },
+            'faq-q6': { jp: '打ち合わせはどのように進めますか？', en: 'How do meetings work?' },
+            'faq-a6': { jp: 'お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。メールまたはX(Twitter)のDMでテキストのみのやり取りでも問題ありません。', en: 'All meetings are held online, so you can commission from anywhere. Text-only communication via email or X (Twitter) DM works fine too.' },
             'footer-tagline': { jp: 'AI Agent x Video Production', en: 'AI Agent x Video Production' },
             'footer-text': { jp: '&copy; 2026 RYO STUDIO. All Rights Reserved.', en: '&copy; 2026 RYO STUDIO. All Rights Reserved.' },
             'process-label': { jp: 'Process', en: 'Process' },
@@ -2829,6 +3168,30 @@
                     }
                 });
             });
+        });
+
+        // =============================================
+        // Email CTA (assembled at runtime to avoid scraping)
+        // =============================================
+        (function() {
+            const user = 'ryo.minami0511';
+            const domain = 'gmail.com';
+            const subject = encodeURIComponent('映像制作のご相談');
+            document.querySelectorAll('.js-mail').forEach(a => {
+                a.href = 'mailto:' + user + '@' + domain + '?subject=' + subject;
+            });
+        })();
+
+        // =============================================
+        // Upgrade featured thumbnails to maxresdefault when available
+        // =============================================
+        document.querySelectorAll('.works-grid .work-card-thumbnail img').forEach(img => {
+            const maxres = img.src.replace('hqdefault', 'maxresdefault');
+            const probe = new Image();
+            probe.onload = () => {
+                if (probe.naturalWidth > 1000) img.src = maxres;
+            };
+            probe.src = maxres;
         });
     </script>
 </body>
