@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RYO STUDIO | Visual Storyteller</title>
-    <meta name="description" content="受賞歴10以上の映像クリエイター RYO STUDIO。CM・PR映像、アニメーション、ショートフィルムを企画から納品までワンストップで制作。お見積もり無料、オンライン完結で全国対応。">
+    <meta name="description" content="受賞歴10以上の映像クリエイター RYO STUDIO。CM・PR映像、アニメーション(横型/縦型)、ショートフィルムを企画から納品までワンストップで制作。お見積もり無料、オンライン完結で全国対応。">
     <meta property="og:title" content="RYO STUDIO | Visual Storyteller">
     <meta property="og:description" content="映像で物語を紡ぐクリエイター">
     <meta property="og:type" content="website">
@@ -2104,6 +2104,111 @@
             .contact-cta-group { flex-direction: column; align-items: stretch; }
             .contact-cta-group .contact-cta { justify-content: center; }
         }
+
+        /* === Portrait Video Lightbox === */
+        .video-lightbox.portrait .video-lightbox-content {
+            width: auto;
+            aspect-ratio: 9/16;
+            height: min(85vh, 160vw);
+            max-width: 92vw;
+        }
+
+        /* === More Works Footer (YouTube link) === */
+        .more-works-footer {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .yt-channel-link {
+            display: inline-block;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 0.3rem;
+            transition: var(--transition-smooth);
+        }
+
+        .yt-channel-link:hover {
+            color: var(--accent-light);
+            border-color: var(--accent);
+        }
+
+        /* === Mid-page CTA Band === */
+        .cta-band {
+            padding: 6rem 4rem;
+            background: var(--bg-darker);
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .cta-band::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-warm) 35%, var(--accent) 65%, transparent);
+            box-shadow: 0 0 15px rgba(212, 168, 83, 0.2);
+        }
+
+        .cta-band::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(123, 140, 196, 0.06), transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-band-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-band-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+            font-weight: 300;
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-band-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.9;
+            margin-bottom: 2.25rem;
+        }
+
+        .cta-band .contact-cta { margin-bottom: 0; }
+
+        /* === Footer Links === */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.75rem;
+            flex-wrap: wrap;
+            margin: 1.25rem 0;
+        }
+
+        .footer-links a {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-links a:hover { color: var(--accent-light); }
+
+        @media (max-width: 768px) {
+            .cta-band { padding: 4.5rem 2rem; }
+        }
     </style>
 </head>
 <body>
@@ -2135,7 +2240,7 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN</button>
-            <a href="https://x.com/ryo05m" class="nav-cta" target="_blank" rel="noopener noreferrer">Get in Touch</a>
+            <a href="#contact" class="nav-cta">Get in Touch</a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
@@ -2326,7 +2431,7 @@
                 </a>
 
                 <!-- 無銘 - Vidu Duscar Best Director + Anipop 優秀賞 -->
-                <a href="#" data-video="Z8TOiDzkGac" data-category="animation" class="work-card reveal">
+                <a href="#" data-video="Z8TOiDzkGac" data-category="animation" data-orientation="portrait" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/Z8TOiDzkGac/hqdefault.jpg" alt="無銘 -MUMEI-" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -2619,6 +2724,18 @@
                     </div>
                 </a>
             </div>
+            <div class="more-works-footer reveal">
+                <a class="yt-channel-link" href="https://www.youtube.com/@RyoStudio05" target="_blank" rel="noopener noreferrer" data-lang-key="more-works-yt">その他の作品は YouTube チャンネルでご覧いただけます →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mid-page CTA Band -->
+    <section class="cta-band">
+        <div class="cta-band-container reveal">
+            <h2 class="cta-band-title" data-lang-key="cta-band-title">こんな映像を、あなたのプロジェクトでも。</h2>
+            <p class="cta-band-text" data-lang-key="cta-band-text">目的や予算がまだ固まっていなくても大丈夫です。<br>作りたいイメージをお聞かせいただければ、最適な形をご提案します。</p>
+            <a href="#contact" class="contact-cta" data-lang-key="cta-band-btn">無料で相談する</a>
         </div>
     </section>
 
@@ -2636,11 +2753,11 @@
             <div class="about-profile">
                 <div class="about-profile-name">Ryo</div>
                 <div class="about-profile-role" data-lang-key="about-profile-role">Visual Storyteller / RYO STUDIO 代表</div>
-                <p class="about-profile-bio" data-lang-key="about-profile-bio">国内外の映像コンテストで10以上の受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。</p>
+                <p class="about-profile-bio" data-lang-key="about-profile-bio">国内外の映像コンテストで数多くの受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。</p>
             </div>
             <div class="about-stats">
                 <div class="about-stat">
-                    <div class="about-stat-number" data-target="13+">0+</div>
+                    <div class="about-stat-number" data-target="10+">0+</div>
                     <div class="about-stat-label">Awards</div>
                 </div>
                 <div class="about-stat">
@@ -2712,7 +2829,7 @@
                     <div class="process-step-num">01</div>
                     <div class="process-step-connector"></div>
                     <h4 data-lang-key="process-step1-title">お問い合わせ</h4>
-                    <p data-lang-key="process-step1-desc">X(Twitter)のDMまたはお問い合わせからご連絡ください</p>
+                    <p data-lang-key="process-step1-desc">X(Twitter)のDMからお気軽にご連絡ください</p>
                 </div>
                 <div class="process-step reveal">
                     <div class="process-step-num">02</div>
@@ -2829,7 +2946,7 @@
                 </details>
                 <details class="faq-item">
                     <summary><span data-lang-key="faq-q6">打ち合わせはどのように進めますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
-                    <p class="faq-answer" data-lang-key="faq-a6">お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。メールまたはX(Twitter)のDMでテキストのみのやり取りでも問題ありません。</p>
+                    <p class="faq-answer" data-lang-key="faq-a6">お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。X(Twitter)のDMでテキストのみのやり取りでも問題ありません。</p>
                 </details>
             </div>
         </div>
@@ -2854,11 +2971,7 @@
             </div>
 
             <div class="contact-cta-group">
-                <a href="#" class="contact-cta js-mail">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
-                    <span data-lang-key="contact-cta-mail">メールで相談する</span>
-                </a>
-                <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta secondary">
+                <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     <span data-lang-key="contact-cta-dm">XのDMで相談する</span>
                 </a>
@@ -2881,6 +2994,14 @@
     <footer>
         <div class="footer-logo">RYO STUDIO</div>
         <p class="footer-tagline" data-lang-key="footer-tagline">AI Agent x Video Production</p>
+        <div class="footer-links" role="navigation" aria-label="Footer">
+            <a href="#works">Works</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </div>
         <p class="footer-text" data-lang-key="footer-text">&copy; 2026 RYO STUDIO. All Rights Reserved.</p>
     </footer>
 
@@ -3043,8 +3164,9 @@
         const lightboxIframe = document.getElementById('lightboxIframe');
         const lightboxClose = document.getElementById('lightboxClose');
 
-        function openLightbox(videoId) {
+        function openLightbox(videoId, portrait) {
             lightboxIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            lightbox.classList.toggle('portrait', !!portrait);
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -3060,7 +3182,7 @@
             const videoEl = e.target.closest('[data-video]');
             if (videoEl) {
                 e.preventDefault();
-                openLightbox(videoEl.getAttribute('data-video'));
+                openLightbox(videoEl.getAttribute('data-video'), videoEl.getAttribute('data-orientation') === 'portrait');
             }
         });
 
@@ -3095,6 +3217,10 @@
             'works-subtitle': { jp: '心を動かす映像作品たち', en: 'Works that move hearts' },
             'more-works-label': { jp: 'More Works', en: 'More Works' },
             'more-works-title': { jp: 'Other Projects', en: 'Other Projects' },
+            'more-works-yt': { jp: 'その他の作品は YouTube チャンネルでご覧いただけます →', en: 'See more works on my YouTube channel →' },
+            'cta-band-title': { jp: 'こんな映像を、あなたのプロジェクトでも。', en: 'Videos like these, for your project.' },
+            'cta-band-text': { jp: '目的や予算がまだ固まっていなくても大丈夫です。<br>作りたいイメージをお聞かせいただければ、最適な形をご提案します。', en: "It's fine if your goals or budget aren't set yet.<br>Tell me the image you have in mind, and I'll propose the best approach." },
+            'cta-band-btn': { jp: '無料で相談する', en: 'Get a Free Consultation' },
             'about-title': { jp: '映像という言葉で<br><em>物語を紡ぐ</em>', en: 'Weaving <em>Stories</em><br>Through Film' },
             'about-text': { jp: 'アニメーション、プロモーション映像、ショートフィルムなど、<br>幅広いジャンルの映像制作を手がけています。<br>最新のAI技術と映像制作の技術を組み合わせ、<br>視聴者の心に響く作品をお届けします。', en: 'I create a wide range of video content including<br>animation, promotional videos, and short films.<br>Combining cutting-edge AI technology with filmmaking,<br>I deliver works that resonate with viewers.' },
             'services-title': { jp: 'What I Create', en: 'What I Create' },
@@ -3108,10 +3234,9 @@
             'contact-trust-1': { jp: 'お見積もり無料', en: 'Free estimates' },
             'contact-trust-2': { jp: '企画段階からの相談OK', en: 'Idea-stage consultations welcome' },
             'contact-trust-3': { jp: 'オンライン完結・全国対応', en: 'Fully online — available nationwide' },
-            'contact-cta-mail': { jp: 'メールで相談する', en: 'Contact via Email' },
-            'contact-cta-dm': { jp: 'XのDMで相談する', en: 'DM on X' },
+            'contact-cta-dm': { jp: 'XのDMで相談する', en: 'DM me on X' },
             'about-profile-role': { jp: 'Visual Storyteller / RYO STUDIO 代表', en: 'Visual Storyteller / Founder, RYO STUDIO' },
-            'about-profile-bio': { jp: '国内外の映像コンテストで10以上の受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。', en: 'Winner of 10+ awards in video contests in Japan and abroad. I handle everything from planning and storyboarding to final delivery — from corporate and municipal PR videos to narrative short films. Also active as an instructor at an AI video production school.' },
+            'about-profile-bio': { jp: '国内外の映像コンテストで数多くの受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。', en: 'Winner of numerous awards in video contests in Japan and abroad. I handle everything from planning and storyboarding to final delivery — from corporate and municipal PR videos to narrative short films. Also active as an instructor at an AI video production school.' },
             'awards-heading': { jp: '主な受賞歴', en: 'Selected Awards' },
             'pricing-cta': { jp: 'このプランで相談する', en: 'Discuss this plan' },
             'faq-title': { jp: 'よくあるご質問', en: 'Frequently Asked Questions' },
@@ -3127,14 +3252,14 @@
             'faq-q5': { jp: '納期はどのくらいかかりますか？', en: 'How long does production take?' },
             'faq-a5': { jp: '内容や尺により約1〜4週間が目安です。お急ぎの場合はスケジュールをご相談ください。可能な範囲で調整します。', en: 'Roughly 1–4 weeks depending on content and length. If you are in a hurry, let me know — I will adjust the schedule where possible.' },
             'faq-q6': { jp: '打ち合わせはどのように進めますか？', en: 'How do meetings work?' },
-            'faq-a6': { jp: 'お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。メールまたはX(Twitter)のDMでテキストのみのやり取りでも問題ありません。', en: 'All meetings are held online, so you can commission from anywhere. Text-only communication via email or X (Twitter) DM works fine too.' },
+            'faq-a6': { jp: 'お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。X(Twitter)のDMでテキストのみのやり取りでも問題ありません。', en: 'All meetings are held online, so you can commission from anywhere. Text-only communication via X (Twitter) DM works fine too.' },
             'footer-tagline': { jp: 'AI Agent x Video Production', en: 'AI Agent x Video Production' },
             'footer-text': { jp: '&copy; 2026 RYO STUDIO. All Rights Reserved.', en: '&copy; 2026 RYO STUDIO. All Rights Reserved.' },
             'process-label': { jp: 'Process', en: 'Process' },
             'process-title': { jp: '制作の流れ', en: 'How It Works' },
             'process-subtitle': { jp: 'お問い合わせから納品まで、スムーズな制作体験を', en: 'A smooth creative experience from inquiry to delivery' },
             'process-step1-title': { jp: 'お問い合わせ', en: 'Contact' },
-            'process-step1-desc': { jp: 'X(Twitter)のDMまたはお問い合わせからご連絡ください', en: 'Reach out via X (Twitter) DM or the contact form' },
+            'process-step1-desc': { jp: 'X(Twitter)のDMからお気軽にご連絡ください', en: 'Reach out via X (Twitter) DM' },
             'process-step2-title': { jp: 'ヒアリング', en: 'Consultation' },
             'process-step2-desc': { jp: '目的・ターゲット・イメージを丁寧にお伺いします', en: 'We discuss your goals, target audience, and creative vision' },
             'process-step3-title': { jp: '企画・構成', en: 'Planning' },
@@ -3184,6 +3309,7 @@
         function setLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
             // Button shows the language you can switch TO
             langToggleBtn.textContent = lang === 'jp' ? 'EN' : 'JP';
             document.querySelectorAll('[data-lang-key]').forEach(el => {
@@ -3224,18 +3350,6 @@
                 });
             });
         });
-
-        // =============================================
-        // Email CTA (assembled at runtime to avoid scraping)
-        // =============================================
-        (function() {
-            const user = 'ryo.minami0511';
-            const domain = 'gmail.com';
-            const subject = encodeURIComponent('映像制作のご相談');
-            document.querySelectorAll('.js-mail').forEach(a => {
-                a.href = 'mailto:' + user + '@' + domain + '?subject=' + subject;
-            });
-        })();
 
         // =============================================
         // Upgrade featured thumbnails to maxresdefault when available
