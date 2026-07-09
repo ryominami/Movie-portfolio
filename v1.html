@@ -81,6 +81,7 @@
             color: var(--text-hi);
             line-height: 1.7;
             overflow-x: hidden;
+            cursor: none;
         }
 
         h1, h2, .section-title, .spotlight-title { font-optical-sizing: auto; }
@@ -708,7 +709,7 @@
         .back-to-top svg { width: 16px; height: 16px; stroke: var(--gold); stroke-width: 2; }
 
         /* Reveal Animation */
-        html.motion-ok .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s var(--ease-out-expo), transform .6s var(--ease-out-expo); }
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s var(--ease-out-expo), transform .6s var(--ease-out-expo); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* Video Lightbox */
@@ -815,266 +816,8 @@
 
         .laurel--mirror svg { transform: scaleX(-1); }
     </style>
-    <style id="v2-motion">
-    /* ===== V2 MOTION (projector) ===== */
-    :root{
-        --e-out: cubic-bezier(0.16,1,0.3,1);
-        --e-soft: cubic-bezier(0.45,0,0.15,1);
-        --e-spring: cubic-bezier(.34,1.56,.64,1);
-    }
-
-    /* --- F1 Loader: iris-in --- */
-    .loading-screen{ clip-path: circle(150% at 50% 50%); }
-    .loading-screen.hidden{
-        clip-path: circle(0% at 50% 50%);
-        transition: clip-path .9s var(--e-soft), opacity .5s ease .6s, visibility 0s 1.1s;
-    }
-    html.reduced .loading-screen,
-    html.reduced .loading-screen.hidden{ clip-path: none !important; transition: opacity 1s ease .2s, visibility 1s ease .2s !important; }
-
-    /* --- F2 Hero: per-char split-in, gold sheen, cursor spotlight, rotating badge --- */
-    @keyframes v2CharIn{
-        from{ opacity:0; transform:translateY(.45em) rotate(4deg); filter:blur(7px); }
-        to{ opacity:1; transform:translateY(0) rotate(0deg); filter:blur(0); }
-    }
-    @keyframes v2Sheen{
-        0%,90%{ color:inherit; text-shadow:none; }
-        94%{ color:var(--gold-bright); text-shadow:0 0 24px rgba(232,200,106,.75); }
-        100%{ color:inherit; text-shadow:none; }
-    }
-    .v2-ch{ display:inline-block; }
-    html.motion-ok .hero h1 .v2-ch{
-        opacity:0; will-change:transform,opacity,filter;
-        animation: v2CharIn .9s cubic-bezier(.16,.8,.24,1) forwards, v2Sheen 6.5s linear infinite;
-        animation-delay: calc(.55s + var(--ci,0) * .045s), calc(3s + var(--ci,0) * .07s);
-    }
-    .hero::after{
-        content:''; position:absolute; top:0; right:0; bottom:0; left:0; height:auto; border:none;
-        z-index:3; pointer-events:none; opacity:0; transition: opacity .4s ease;
-        background: radial-gradient(640px circle at var(--hx,50%) var(--hy,42%), rgba(212,168,83,.08), transparent 62%);
-    }
-    @media (min-width:769px) and (pointer:fine){
-        html.motion-ok .hero:hover::after{ opacity:1; }
-    }
-    .v2-badge{
-        position:absolute; right: clamp(1.5rem,3vw,2.5rem); bottom: clamp(4.5rem,9vh,6.5rem);
-        width:120px; height:120px; z-index:5; pointer-events:none; opacity:.85; color:var(--gold);
-    }
-    .v2-badge-text{ font-family: var(--font-ui); font-size:10px; letter-spacing:.18em; fill: var(--gold); opacity:.55; text-transform:uppercase; }
-    html.motion-ok .v2-badge{ animation: v2BadgeRotate 26s linear infinite; }
-    @keyframes v2BadgeRotate{ to{ transform: rotate(360deg); } }
-    @media (max-width:899px){ .v2-badge{ display:none; } }
-    html.reduced .v2-badge{ animation:none !important; }
-
-    /* --- F3 Scroll system: progress bar + heading mask reveal --- */
-    #v2-progress{
-        position:fixed; top:0; left:0; width:100%; height:2px; z-index:10002;
-        background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-bright));
-        transform: scaleX(0); transform-origin:left; will-change:transform;
-    }
-    .v2-mask{ display:inline-block; overflow:hidden; vertical-align:top; }
-    .v2-mask-inner{ display:inline-block; }
-    html.motion-ok .v2-mask-inner{ transform: translateY(112%) rotate(1.1deg); transition: transform 1.15s var(--e-out); }
-    html.motion-ok [data-reveal-mask].visible .v2-mask-inner{ transform: translateY(0) rotate(0deg); }
-    html.reduced .v2-mask-inner{ transform:none !important; transition:none !important; }
-    /* Fallback hidden-state for any [data-reveal] element that does NOT also carry the
-       legacy .reveal class (that class already supplies opacity:0 -> .visible above). */
-    html.motion-ok [data-reveal]:not(.reveal){ opacity:0; transform: translateY(32px); transition: opacity 1s var(--e-out), transform 1s var(--e-out); }
-    html.motion-ok [data-reveal]:not(.reveal).visible{ opacity:1; transform: translateY(0); }
-
-    /* --- F4 Spotlight signature: letterbox bars + statement char-scrub base state --- */
-    .spotlight-frame{ --lb:0; }
-    .spotlight-frame::before{
-        content:''; position:absolute; inset:0; z-index:3; pointer-events:none;
-        background-image: linear-gradient(var(--ink-900), var(--ink-900)), linear-gradient(var(--ink-900), var(--ink-900));
-        background-repeat: no-repeat, no-repeat;
-        background-position: top, bottom;
-        background-size: 100% calc(var(--lb) * 7.5%), 100% calc(var(--lb) * 7.5%);
-    }
-    html.motion-ok .spotlight-statement .v2-ch{ opacity:.14; }
-    html.reduced .spotlight-statement .v2-ch{ opacity:1 !important; }
-    html.reduced .spotlight-frame{ --lb:0 !important; }
-
-    /* --- F5 Works cards: multi-consequence hover (idle dim -> wake) --- */
-    html.motion-ok .work-card .work-card-thumbnail img,
-    html.motion-ok .more-work-card .work-card-thumbnail img{
-        filter: brightness(.86) saturate(.92);
-        transition: filter .5s var(--e-soft), transform 1s var(--ease-cinematic);
-    }
-    html.motion-ok .work-card:hover .work-card-thumbnail img,
-    html.motion-ok .more-work-card:hover .work-card-thumbnail img,
-    html.motion-ok .work-card.is-awake .work-card-thumbnail img,
-    html.motion-ok .more-work-card.is-awake .work-card-thumbnail img{
-        filter: brightness(1) saturate(1);
-    }
-    .work-card::after, .more-work-card::after{
-        content:''; position:absolute; top:0; left:0; right:0; height:2px; z-index:3;
-        background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
-        transform: scaleX(0); transform-origin:left; transition: transform .6s ease-out;
-    }
-    .work-card:hover::after, .more-work-card:hover::after,
-    .work-card.is-awake::after, .more-work-card.is-awake::after{ transform: scaleX(1); }
-    .work-card::before, .more-work-card::before{
-        content:''; position:absolute; inset:0; z-index:1; opacity:0; pointer-events:none;
-        background: radial-gradient(300px circle at var(--mx,50%) var(--my,50%), rgba(246,244,239,.10), transparent);
-        transition: opacity .4s ease;
-    }
-    .work-card:hover::before, .more-work-card:hover::before,
-    .work-card.is-awake::before, .more-work-card.is-awake::before{ opacity:1; }
-    .work-card-info{ position:relative; z-index:2; }
-    html.motion-ok .work-card:hover .work-card-title,
-    html.motion-ok .more-work-card:hover .work-card-title,
-    html.motion-ok .work-card.is-awake .work-card-title,
-    html.motion-ok .more-work-card.is-awake .work-card-title{
-        transform: translateY(-4px); transition: transform .3s var(--e-soft);
-    }
-    @media (min-width:769px) and (pointer:fine){
-        html.motion-ok .work-card[data-tilt],
-        html.motion-ok .more-work-card[data-tilt]{
-            transform: perspective(1100px) rotateX(var(--rx,0)) rotateY(var(--ry,0));
-        }
-        html.motion-ok .work-card[data-tilt]:hover,
-        html.motion-ok .more-work-card[data-tilt]:hover{
-            transform: perspective(1100px) rotateX(var(--rx,0)) rotateY(var(--ry,0)) translateY(-6px);
-        }
-    }
-    html.reduced .work-card .work-card-thumbnail img,
-    html.reduced .more-work-card .work-card-thumbnail img{ filter:none !important; }
-    html.reduced [data-tilt]{ transform:none !important; }
-
-    /* --- F6 Awards: filmstrip marquee + idle glint --- */
-    .v2-marquee{ position:relative; margin: 0 0 clamp(2.5rem,5vw,3.5rem); }
-    .v2-marquee-row{ position:relative; overflow:hidden; padding: .55rem 0; }
-    .v2-marquee-row::before, .v2-marquee-row::after{
-        content:''; position:absolute; left:0; right:0; height:10px; z-index:2; pointer-events:none;
-        background: repeating-linear-gradient(90deg, transparent 0 6px, rgba(246,244,239,.13) 6px 14px);
-    }
-    .v2-marquee-row::before{ top:0; }
-    .v2-marquee-row::after{ bottom:0; }
-    .v2-marquee-track{ display:inline-flex; align-items:center; white-space:nowrap; will-change:transform; }
-    .v2-marquee-track span{
-        font-family: var(--font-ui); font-weight:700; text-transform:uppercase;
-        font-size: clamp(1.1rem,2.2vw,1.6rem); padding: 0 .5em; line-height:1.4;
-        color:transparent; -webkit-text-stroke: 1px rgba(212,168,83,.5);
-        transition: color .3s ease, -webkit-text-fill-color .3s ease;
-    }
-    .v2-marquee-row:hover .v2-marquee-track span{ -webkit-text-fill-color: var(--gold); color:var(--gold); }
-    .v2-marquee-sep{ color: var(--gold) !important; -webkit-text-stroke:0 !important; -webkit-text-fill-color: var(--gold) !important; opacity:.6; }
-    html.motion-ok .v2-marquee-row--1 .v2-marquee-track{ animation: v2Marquee 30s linear infinite; }
-    html.motion-ok .v2-marquee-row--2 .v2-marquee-track{ animation: v2Marquee 38s linear infinite reverse; }
-    .v2-marquee-row:hover .v2-marquee-track{ animation-play-state: paused; }
-    @keyframes v2Marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-    html.reduced .v2-marquee-track{ animation:none !important; }
-    html.reduced .v2-marquee-row--2{ display:none; }
-    @keyframes v2Glint{ 0%{ background-position: -150% 0; } 100%{ background-position: 250% 0; } }
-    .award-card.v2-glint{
-        background-image: linear-gradient(75deg, transparent 40%, rgba(232,200,106,.5) 50%, transparent 60%);
-        background-size: 250% 100%; animation: v2Glint 1.2s ease;
-    }
-
-    /* --- F9 Magnetic CTAs + contact textPath ring --- */
-    [data-magnetic]{ will-change:transform; }
-    .v2-cta-ring-wrap{ position:relative; display:inline-flex; }
-    .v2-cta-ring{
-        position:absolute; top:50%; left:50%; width:150px; height:150px;
-        transform: translate(-50%,-50%); pointer-events:none; z-index:0; opacity:.45;
-    }
-    .v2-cta-ring-text{ font-family: var(--font-ui); font-size:9px; letter-spacing:.16em; fill:var(--gold); text-transform:uppercase; }
-    html.motion-ok .v2-cta-ring{ animation: v2BadgeRotate 20s linear infinite; }
-    .v2-cta-ring-wrap .contact-cta{ position:relative; z-index:1; }
-    @media (max-width:768px), (pointer:coarse){ .v2-cta-ring{ display:none; } }
-    html.reduced .v2-cta-ring{ animation:none !important; }
-
-    /* --- F10 Custom cursor v2 (dot/ring/play-label) --- */
-    html.motion-ok .cursor{ width:34px; height:34px; }
-    html.motion-ok .cursor.hover{ width:34px; height:34px; transform: translate(-50%,-50%) scale(1.6); border-color:var(--gold); background:var(--gold-glow); }
-    html.motion-ok .cursor.play{ display:flex; align-items:center; justify-content:center; }
-    html.motion-ok .cursor.play::after{ content:'▶'; font-size:9px; color:var(--gold); opacity:.9; transform: translateX(1px); }
-    html.reduced .cursor, html.reduced .cursor-dot{ display:none !important; }
-    /* cursor elements hidden until the engine sees a real pointer move */
-    .cursor, .cursor-dot{ visibility:hidden; }
-    body.v2-cursor-live{ cursor:none; }
-    body.v2-cursor-live .cursor, body.v2-cursor-live .cursor-dot{ visibility:visible; }
-    html.reduced body{ cursor:auto !important; }
-
-    /* --- F11 Ambience: animated grain (body::before, distinct from the existing static body::after) + hero dust --- */
-    body::before{
-        content:''; position:fixed; inset:-100px; z-index:9998; pointer-events:none;
-        opacity:.05; mix-blend-mode:overlay; display:none;
-        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='vg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23vg)'/%3E%3C/svg%3E");
-        background-size:140px 140px;
-    }
-    html.motion-ok body::before{ display:block; }
-    @media (min-width:769px) and (pointer:fine){
-        html.motion-ok body::before{ animation: v2Grain .9s steps(6) infinite; }
-    }
-    @media (max-width:768px), (pointer:coarse){
-        html.motion-ok body::before{ opacity:.035; }
-    }
-    @keyframes v2Grain{
-        0%{ background-position:0 0; } 16%{ background-position:-10% 4%; }
-        32%{ background-position:6% -8%; } 48%{ background-position:-4% 10%; }
-        64%{ background-position:10% 2%; } 80%{ background-position:-8% -6%; }
-        100%{ background-position:0 0; }
-    }
-    html.reduced body::before{ display:none !important; }
-    #v2-dust{ position:absolute; inset:0; z-index:3; pointer-events:none; opacity:.8; }
-    @media (max-width:768px), (pointer:coarse){ #v2-dust{ display:none; } }
-    html.reduced #v2-dust{ display:none !important; }
-
-    /* --- F12 Velocity skew --- */
-    [data-skew]{ will-change:transform; }
-    html.reduced [data-skew]{ transform:none !important; }
-
-    /* --- F13 Back-to-top progress ring --- */
-    .v2-btt-ring{ position:absolute; inset:0; pointer-events:none; transform:rotate(-90deg); }
-    .back-to-top .v2-btt-ring{ width:100%; height:100%; }
-    .v2-btt-ring-track{ fill:none; stroke:var(--line); stroke-width:1.5; }
-    .v2-btt-ring-fill{
-        fill:none; stroke:var(--gold); stroke-width:1.5; stroke-linecap:round;
-        stroke-dasharray:125.6px;
-        stroke-dashoffset: calc(125.6px * (1 - var(--v2-btt-progress,0)));
-        transition: stroke-dashoffset .1s linear;
-    }
-    .back-to-top svg:not(.v2-btt-ring){ position:relative; z-index:1; transition: transform .8s var(--e-spring); }
-    .back-to-top:hover svg:not(.v2-btt-ring){ transform: rotate(360deg); }
-    html.reduced .v2-btt-ring-fill{ transition:none !important; }
-
-    /* --- F15 Lightbox: letterbox curtain flash on open --- */
-    .video-lightbox-content{ position:relative; }
-    .video-lightbox-content::before, .video-lightbox-content::after{
-        content:''; position:absolute; left:0; right:0; height:52%; background:var(--ink-900); z-index:5; pointer-events:none;
-        transition: transform .5s var(--e-soft);
-    }
-    .video-lightbox-content::before{ top:0; transform:translateY(0); }
-    .video-lightbox-content::after{ bottom:0; transform:translateY(0); }
-    .video-lightbox.active .video-lightbox-content::before{ transform:translateY(-100%); }
-    .video-lightbox.active .video-lightbox-content::after{ transform:translateY(100%); }
-    html.reduced .video-lightbox-content::before, html.reduced .video-lightbox-content::after{ display:none; }
-
-    /* --- F16 FAQ: pure-CSS smooth open (progressive enhancement, Chrome) --- */
-    :root{ interpolate-size: allow-keywords; }
-    .faq-item::details-content{
-        block-size:0; overflow:hidden;
-        transition: block-size .4s var(--e-soft), content-visibility .4s allow-discrete;
-    }
-    .faq-item[open]::details-content{ block-size:auto; }
-
-    /* --- Mobile / coarse-pointer exclusions (perf+a11y rules, spec §3) --- */
-    @media (max-width:768px), (pointer:coarse){
-        html.motion-ok [data-tilt]{ transform:none !important; }
-        html.motion-ok .hero::after{ opacity:0 !important; }
-    }
-
-    /* --- html.reduced global kill-switch --- */
-    html.reduced .v2-ch{ opacity:1 !important; transform:none !important; filter:none !important; animation:none !important; }
-    html.reduced #v2-progress{ transition:none !important; }
-    html.reduced [data-magnetic]{ transform:none !important; }
-    </style>
 </head>
 <body>
-    <div id="v2-progress" aria-hidden="true"></div>
-
     <!-- Laurel SVG symbols (reusable ornament) -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <symbol id="laurel-branch" viewBox="0 0 60 120">
@@ -1105,11 +848,7 @@
     </div>
 
     <!-- Back to Top -->
-    <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top" data-magnetic>
-        <svg class="v2-btt-ring" viewBox="0 0 44 44" aria-hidden="true">
-            <circle class="v2-btt-ring-track" cx="22" cy="22" r="20"/>
-            <circle class="v2-btt-ring-fill" cx="22" cy="22" r="20"/>
-        </svg>
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
         <svg viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6"/></svg>
     </button>
 
@@ -1143,7 +882,6 @@
             </picture>
         </div>
         <div class="hero-overlay"></div>
-        <canvas id="v2-dust" aria-hidden="true"></canvas>
         <div class="hero-container">
             <div class="hero-content">
                 <a href="#spotlight" class="award-line">
@@ -1152,14 +890,14 @@
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </a>
                 <p class="hero-eyebrow" data-lang-key="hero-eyebrow">Visual Storyteller</p>
-                <h1 data-split data-lang-key="hero-h1">Where <em>Stories</em><br>Come Alive</h1>
+                <h1 data-lang-key="hero-h1">Where <em>Stories</em><br>Come Alive</h1>
                 <p class="hero-tagline" data-lang-key="hero-tagline">映像という言葉で、あなたの物語を紡ぎます</p>
                 <div class="hero-cta-group">
-                    <a href="#spotlight" class="hero-cta primary" data-magnetic data-lang-key="hero-cta-works">
+                    <a href="#spotlight" class="hero-cta primary" data-lang-key="hero-cta-works">
                         作品を観る
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="#contact" class="hero-cta" data-magnetic data-lang-key="hero-cta-contact">お問い合わせ</a>
+                    <a href="#contact" class="hero-cta" data-lang-key="hero-cta-contact">お問い合わせ</a>
                     <a href="#" class="showreel-link" data-video="UO9ty4c_ntQ" data-lang-key="hero-showreel">
                         <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                         Showreel
@@ -1167,11 +905,6 @@
                 </div>
             </div>
         </div>
-        <svg class="v2-badge" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-            <defs><path id="v2-badge-path" d="M60,10 a50,50 0 1,1 -0.1,0"/></defs>
-            <text class="v2-badge-text"><textPath href="#v2-badge-path" startOffset="0">AI AGENT × VIDEO PRODUCTION • RYO STUDIO • AI AGENT × VIDEO PRODUCTION • RYO STUDIO • </textPath></text>
-            <use href="#laurel-wreath" width="30" height="30" x="45" y="45" opacity="0.75"></use>
-        </svg>
         <div class="hero-scroll">
             <span>Scroll</span>
             <div class="hero-scroll-line"></div>
@@ -1181,13 +914,13 @@
     <!-- Grand Prix Spotlight -->
     <section id="spotlight" class="spotlight">
         <div class="spotlight-glow" aria-hidden="true"></div>
-        <div class="spotlight-container reveal" data-reveal>
+        <div class="spotlight-container reveal">
             <div class="laurel laurel--wreath" aria-hidden="true">
                 <svg viewBox="0 0 120 120"><use href="#laurel-wreath"></use></svg>
                 <span class="laurel-cap">GRAND PRIX</span>
             </div>
-            <p class="spotlight-eyebrow" data-scramble data-lang-key="spotlight-eyebrow">JAPAN AI VIDEO AWARDS 2026 ／ 予防医療普及部門 グランプリ</p>
-            <h2 data-reveal-mask class="spotlight-title">『約束』</h2>
+            <p class="spotlight-eyebrow" data-lang-key="spotlight-eyebrow">JAPAN AI VIDEO AWARDS 2026 ／ 予防医療普及部門 グランプリ</p>
+            <h2 class="spotlight-title">『約束』</h2>
             <a href="#" class="spotlight-frame" data-video="HpPsWhL5luM" aria-label="『約束』を再生">
                 <img src="https://img.youtube.com/vi/HpPsWhL5luM/hqdefault.jpg" alt="『約束』" loading="lazy">
                 <span class="spotlight-play" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
@@ -1200,21 +933,13 @@
     <!-- Awards -->
     <section id="awards" class="awards">
         <div class="awards-container">
-            <div class="section-head reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span>01 — RECOGNITION</p>
-                <h2 data-reveal-mask class="section-title" data-lang-key="awards-title">Awards</h2>
+            <div class="section-head reveal">
+                <p class="kicker"><span class="kicker-dot"></span>01 — RECOGNITION</p>
+                <h2 class="section-title" data-lang-key="awards-title">Awards</h2>
                 <p class="section-sub" data-lang-key="awards-sub">受賞歴</p>
             </div>
-            <div class="v2-marquee" aria-hidden="true">
-                <div class="v2-marquee-row v2-marquee-row--1">
-                    <div class="v2-marquee-track"><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span></div>
-                </div>
-                <div class="v2-marquee-row v2-marquee-row--2">
-                    <div class="v2-marquee-track"><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span></div>
-                </div>
-            </div>
             <ul class="awards-grid">
-                <li class="award-card award-card--grand reveal" data-reveal data-reveal-delay="0.0">
+                <li class="award-card award-card--grand reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body">
                         <span class="award-card-prize">グランプリ</span>
@@ -1223,52 +948,52 @@
                     </div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.04">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">Best Director賞</span><span class="award-card-name">Vidu「Duscar」Awards</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.08">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">優秀賞</span><span class="award-card-name">Anipop Award</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.12">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">最優秀賞</span><span class="award-card-name">KAERUN AI「あったらいいな」CMコンテスト</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.16">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">グランプリ ×3</span><span class="award-card-name">SOZO美術館 第29回コンペ</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.2">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">準グランプリ</span><span class="award-card-name">SOZO美術館 第30回コンペ</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.24">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">優秀賞</span><span class="award-card-name">幸手市映像コンテスト</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.28">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">優秀賞</span><span class="award-card-name">泣けるAIショートアニメ</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.32">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">SNS特別賞</span><span class="award-card-name">NICIドリームステージ大賞</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.36">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">Silver賞</span><span class="award-card-name">ViduQreation Challenge</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                 </li>
-                <li class="award-card reveal" data-reveal data-reveal-delay="0.4">
+                <li class="award-card reveal">
                     <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
                     <div class="award-card-body"><span class="award-card-prize">3位</span><span class="award-card-name">ミスターAIコンテスト</span></div>
                     <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
@@ -1280,13 +1005,13 @@
     <!-- Works -->
     <section id="works" class="works">
         <div class="works-container">
-            <div class="section-head reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span>02 — SELECTED WORK</p>
-                <h2 data-reveal-mask class="section-title" data-lang-key="works-title">Works</h2>
+            <div class="section-head reveal">
+                <p class="kicker"><span class="kicker-dot"></span>02 — SELECTED WORK</p>
+                <h2 class="section-title" data-lang-key="works-title">Works</h2>
                 <p class="section-sub" data-lang-key="works-subtitle">受賞歴のある映像作品</p>
             </div>
 
-            <div class="filter-tabs reveal" data-reveal id="filterTabs">
+            <div class="filter-tabs reveal" id="filterTabs">
                 <button class="filter-tab active" data-filter="all" data-lang-key="filter-all">すべて</button>
                 <button class="filter-tab" data-filter="animation" data-lang-key="filter-animation">アニメ</button>
                 <button class="filter-tab" data-filter="shortfilm" data-lang-key="filter-shortfilm">ショートフィルム</button>
@@ -1296,7 +1021,7 @@
 
             <div class="works-featured">
                 <!-- これも、日常の宝物。- SOZO第29回 グランプリ (lead) -->
-                <a href="#" data-video="w98sWMe82BQ" data-category="shortfilm" class="work-card work-card--lead reveal" data-reveal data-reveal-delay="0" data-tilt data-cursor="play">
+                <a href="#" data-video="w98sWMe82BQ" data-category="shortfilm" class="work-card work-card--lead reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/w98sWMe82BQ/hqdefault.jpg" alt="これも、日常の宝物。" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1311,7 +1036,7 @@
                 </a>
                 <div class="works-support">
                     <!-- 無銘 - Vidu Duscar Best Director + Anipop 優秀賞 -->
-                    <a href="#" data-video="Z8TOiDzkGac" data-category="animation" data-orientation="portrait" class="work-card work-card--support reveal" data-reveal data-reveal-delay="0.08" data-tilt data-cursor="play">
+                    <a href="#" data-video="Z8TOiDzkGac" data-category="animation" data-orientation="portrait" class="work-card work-card--support reveal">
                         <div class="work-card-thumbnail">
                             <img src="https://img.youtube.com/vi/Z8TOiDzkGac/hqdefault.jpg" alt="無銘 -MUMEI-" loading="lazy">
                             <div class="work-card-overlay"></div>
@@ -1325,7 +1050,7 @@
                         </div>
                     </a>
                     <!-- KAERUN AI - 最優秀賞 -->
-                    <a href="#" data-video="UO9ty4c_ntQ" data-category="commercial" class="work-card work-card--support reveal" data-reveal data-reveal-delay="0.16" data-tilt data-cursor="play">
+                    <a href="#" data-video="UO9ty4c_ntQ" data-category="commercial" class="work-card work-card--support reveal">
                         <div class="work-card-thumbnail">
                             <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/hqdefault.jpg" alt="KAERUN AI" loading="lazy">
                             <div class="work-card-overlay"></div>
@@ -1341,9 +1066,9 @@
                 </div>
             </div>
 
-            <div class="works-grid" data-skew>
+            <div class="works-grid">
                 <!-- 幸手市 - 地域創生 優秀賞 -->
-                <a href="#" data-video="xp4sub-rhXM" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.0" data-tilt data-cursor="play">
+                <a href="#" data-video="xp4sub-rhXM" data-category="commercial" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/xp4sub-rhXM/hqdefault.jpg" alt="幸手市PR映像" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1358,7 +1083,7 @@
                 </a>
 
                 <!-- 白浜 - 地域創生 SOZO第30回 準グランプリ -->
-                <a href="#" data-video="Uvy3QIx8odM" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.05" data-tilt data-cursor="play">
+                <a href="#" data-video="Uvy3QIx8odM" data-category="commercial" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/Uvy3QIx8odM/hqdefault.jpg" alt="白浜PR映像" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1373,7 +1098,7 @@
                 </a>
 
                 <!-- それぞれの午後 - SOZO第29回 グランプリ -->
-                <a href="#" data-video="eioMivdnM5M" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.1" data-tilt data-cursor="play">
+                <a href="#" data-video="eioMivdnM5M" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/eioMivdnM5M/hqdefault.jpg" alt="それぞれの午後、一つの想い" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1388,7 +1113,7 @@
                 </a>
 
                 <!-- 夜のゴールライン - SOZO第29回 グランプリ -->
-                <a href="#" data-video="7OEvltA8WbI" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.15" data-tilt data-cursor="play">
+                <a href="#" data-video="7OEvltA8WbI" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/7OEvltA8WbI/hqdefault.jpg" alt="夜のゴールライン" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1403,7 +1128,7 @@
                 </a>
 
                 <!-- 最後の宿題 - 泣けるAIショートアニメ 優秀賞 -->
-                <a href="#" data-video="UOXAXAf5mB4" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.2" data-tilt data-cursor="play">
+                <a href="#" data-video="UOXAXAf5mB4" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/UOXAXAf5mB4/hqdefault.jpg" alt="最後の宿題" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1418,7 +1143,7 @@
                 </a>
 
                 <!-- 希望への筆跡 - NICIドリームステージ大賞 SNS特別賞 -->
-                <a href="#" data-video="sEeYbHs_qZM" data-category="other" class="work-card reveal" data-reveal data-reveal-delay="0.25" data-tilt data-cursor="play">
+                <a href="#" data-video="sEeYbHs_qZM" data-category="other" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/sEeYbHs_qZM/hqdefault.jpg" alt="希望への筆跡" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1433,7 +1158,7 @@
                 </a>
 
                 <!-- AIスタイリスト降臨 - ミスターAIコンテスト 3位 -->
-                <a href="#" data-video="LaB5PMDItJI" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.3" data-tilt data-cursor="play">
+                <a href="#" data-video="LaB5PMDItJI" data-category="commercial" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/LaB5PMDItJI/hqdefault.jpg" alt="AIスタイリスト降臨" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1448,7 +1173,7 @@
                 </a>
 
                 <!-- Survival Instinct - ViduQreation Challenge Silver賞 -->
-                <a href="#" data-video="D13aAFKnYGQ" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.35" data-tilt data-cursor="play">
+                <a href="#" data-video="D13aAFKnYGQ" data-category="shortfilm" class="work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/D13aAFKnYGQ/hqdefault.jpg" alt="Survival Instinct" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1468,13 +1193,13 @@
     <!-- More Works (contact sheet) -->
     <section class="more-works">
         <div class="more-works-container">
-            <div class="section-head reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span><span data-lang-key="more-works-label">More Works</span></p>
-                <h2 data-reveal-mask class="section-title" data-lang-key="more-works-title">Other Projects</h2>
+            <div class="section-head reveal">
+                <p class="kicker"><span class="kicker-dot"></span><span data-lang-key="more-works-label">More Works</span></p>
+                <h2 class="section-title" data-lang-key="more-works-title">Other Projects</h2>
             </div>
 
-            <div class="more-works-grid" data-skew>
-                <a href="#" data-video="Jw2OGiHJNf4" data-category="commercial" class="more-work-card reveal" data-reveal data-reveal-delay="0.0" data-tilt data-cursor="play">
+            <div class="more-works-grid">
+                <a href="#" data-video="Jw2OGiHJNf4" data-category="commercial" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/Jw2OGiHJNf4/hqdefault.jpg" alt="BreakingDown19 PV" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1488,7 +1213,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="KZkzLVDarFY" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.04" data-tilt data-cursor="play">
+                <a href="#" data-video="KZkzLVDarFY" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/KZkzLVDarFY/hqdefault.jpg" alt="GAMBLE KINGDOM" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1502,7 +1227,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="p1KAUBDJQhI" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.08" data-tilt data-cursor="play">
+                <a href="#" data-video="p1KAUBDJQhI" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/p1KAUBDJQhI/hqdefault.jpg" alt="Chrono Heart" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1516,7 +1241,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="nbbz7K2eIME" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.12" data-tilt data-cursor="play">
+                <a href="#" data-video="nbbz7K2eIME" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/nbbz7K2eIME/hqdefault.jpg" alt="CYBER BUSHIDO" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1530,7 +1255,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="mx36xR9Q9Mo" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.16" data-tilt data-cursor="play">
+                <a href="#" data-video="mx36xR9Q9Mo" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/mx36xR9Q9Mo/hqdefault.jpg" alt="ENSEN OP" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1544,7 +1269,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="seTHDd55QjY" data-category="commercial" class="more-work-card reveal" data-reveal data-reveal-delay="0.2" data-tilt data-cursor="play">
+                <a href="#" data-video="seTHDd55QjY" data-category="commercial" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/seTHDd55QjY/hqdefault.jpg" alt="BEYOND BOUNDARIES" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1558,7 +1283,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="qPU5APmACeo" data-category="other" class="more-work-card reveal" data-reveal data-reveal-delay="0.24" data-tilt data-cursor="play">
+                <a href="#" data-video="qPU5APmACeo" data-category="other" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/qPU5APmACeo/hqdefault.jpg" alt="Pieces of Light" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1572,7 +1297,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="mg9MIUcsnb8" data-category="shortfilm" class="more-work-card reveal" data-reveal data-reveal-delay="0.28" data-tilt data-cursor="play">
+                <a href="#" data-video="mg9MIUcsnb8" data-category="shortfilm" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/mg9MIUcsnb8/hqdefault.jpg" alt="黄金の約束" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1586,7 +1311,7 @@
                     </div>
                 </a>
 
-                <a href="#" data-video="LpsHPhURFTU" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.32" data-tilt data-cursor="play">
+                <a href="#" data-video="LpsHPhURFTU" data-category="animation" class="more-work-card reveal">
                     <div class="work-card-thumbnail">
                         <img src="https://img.youtube.com/vi/LpsHPhURFTU/hqdefault.jpg" alt="AIの答え、僕の答え。" loading="lazy">
                         <div class="work-card-overlay"></div>
@@ -1600,7 +1325,7 @@
                     </div>
                 </a>
             </div>
-            <div class="more-works-footer reveal" data-reveal>
+            <div class="more-works-footer reveal">
                 <a class="yt-channel-link" href="https://www.youtube.com/@RyoStudio05" target="_blank" rel="noopener noreferrer" data-lang-key="more-works-yt">その他の作品は YouTube チャンネルでご覧いただけます →</a>
             </div>
         </div>
@@ -1608,19 +1333,19 @@
 
     <!-- Mid-page CTA Band -->
     <section class="cta-band">
-        <div class="cta-band-container reveal" data-reveal>
-            <h2 data-reveal-mask class="cta-band-title" data-lang-key="cta-band-title">こんな映像を、あなたのプロジェクトでも。</h2>
+        <div class="cta-band-container reveal">
+            <h2 class="cta-band-title" data-lang-key="cta-band-title">こんな映像を、あなたのプロジェクトでも。</h2>
             <p class="cta-band-text" data-lang-key="cta-band-text">目的や予算がまだ固まっていなくても大丈夫です。<br>作りたいイメージをお聞かせいただければ、最適な形をご提案します。</p>
-            <a href="#contact" class="contact-cta" data-magnetic data-lang-key="cta-band-btn">無料で相談する</a>
+            <a href="#contact" class="contact-cta" data-lang-key="cta-band-btn">無料で相談する</a>
         </div>
     </section>
 
     <!-- About -->
     <section id="about" class="about">
         <div class="about-container">
-            <div class="about-intro reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span>03 — ABOUT</p>
-                <h2 data-reveal-mask class="about-title" data-lang-key="about-title">映像という言葉で<br><em>物語を紡ぐ</em></h2>
+            <div class="about-intro reveal">
+                <p class="kicker"><span class="kicker-dot"></span>03 — ABOUT</p>
+                <h2 class="about-title" data-lang-key="about-title">映像という言葉で<br><em>物語を紡ぐ</em></h2>
                 <p class="about-text" data-lang-key="about-text">
                     アニメーション、プロモーション映像、ショートフィルムなど、<br>
                     幅広いジャンルの映像制作を手がけています。<br>
@@ -1628,7 +1353,7 @@
                     視聴者の心に響く作品をお届けします。
                 </p>
             </div>
-            <div class="about-grid reveal" data-reveal>
+            <div class="about-grid reveal">
                 <div class="about-mark">
                     <div class="about-mark-word">Ryo</div>
                     <div class="about-mark-role" data-lang-key="about-profile-role">Visual Storyteller / RYO STUDIO 代表</div>
@@ -1658,23 +1383,23 @@
     <!-- Services -->
     <section id="services" class="services">
         <div class="services-container">
-            <div class="section-head reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span>04 — SERVICES</p>
-                <h2 data-reveal-mask class="section-title" data-lang-key="services-title">What I Create</h2>
+            <div class="section-head reveal">
+                <p class="kicker"><span class="kicker-dot"></span>04 — SERVICES</p>
+                <h2 class="section-title" data-lang-key="services-title">What I Create</h2>
             </div>
 
             <div class="services-grid">
-                <div class="service-card reveal" data-reveal data-reveal-delay="0.0">
+                <div class="service-card reveal">
                     <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="13" height="14" rx="2"/><path d="M15 10l5-3v10l-5-3z"/></svg></div>
                     <h3>Promotion</h3>
                     <p data-lang-key="service-promotion-desc">企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。</p>
                 </div>
-                <div class="service-card reveal" data-reveal data-reveal-delay="0.1">
+                <div class="service-card reveal">
                     <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div>
                     <h3>Animation</h3>
                     <p data-lang-key="service-animation-desc">物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。SNS・スマホ視聴に最適な縦型ショートアニメにも対応。</p>
                 </div>
-                <div class="service-card reveal" data-reveal data-reveal-delay="0.2">
+                <div class="service-card reveal">
                     <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
                     <h3>Short Film</h3>
                     <p data-lang-key="service-shortfilm-desc">心に残るストーリーを、映像という形で紡ぎます。</p>
@@ -1686,37 +1411,37 @@
     <!-- Process -->
     <section class="process">
         <div class="process-container">
-            <div class="section-head reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span>05 — PROCESS</p>
-                <h2 data-reveal-mask class="section-title" data-lang-key="process-title">制作の流れ</h2>
+            <div class="section-head reveal">
+                <p class="kicker"><span class="kicker-dot"></span>05 — PROCESS</p>
+                <h2 class="section-title" data-lang-key="process-title">制作の流れ</h2>
                 <p class="section-sub" data-lang-key="process-subtitle">お問い合わせから納品まで、スムーズな制作体験を</p>
             </div>
             <div class="process-steps">
-                <div class="process-step reveal" data-reveal data-reveal-delay="0.0">
+                <div class="process-step reveal">
                     <div class="process-step-num">01</div>
                     <div class="process-step-connector"></div>
                     <h4 data-lang-key="process-step1-title">お問い合わせ</h4>
                     <p data-lang-key="process-step1-desc">X(Twitter)のDMからお気軽にご連絡ください</p>
                 </div>
-                <div class="process-step reveal" data-reveal data-reveal-delay="0.08">
+                <div class="process-step reveal">
                     <div class="process-step-num">02</div>
                     <div class="process-step-connector"></div>
                     <h4 data-lang-key="process-step2-title">ヒアリング</h4>
                     <p data-lang-key="process-step2-desc">目的・ターゲット・イメージを丁寧にお伺いします</p>
                 </div>
-                <div class="process-step reveal" data-reveal data-reveal-delay="0.16">
+                <div class="process-step reveal">
                     <div class="process-step-num">03</div>
                     <div class="process-step-connector"></div>
                     <h4 data-lang-key="process-step3-title">企画・構成</h4>
                     <p data-lang-key="process-step3-desc">ストーリーボードと演出プランをご提案</p>
                 </div>
-                <div class="process-step reveal" data-reveal data-reveal-delay="0.24">
+                <div class="process-step reveal">
                     <div class="process-step-num">04</div>
                     <div class="process-step-connector"></div>
                     <h4 data-lang-key="process-step4-title">制作</h4>
                     <p data-lang-key="process-step4-desc">AI技術と映像制作スキルを融合し、映像を制作します</p>
                 </div>
-                <div class="process-step reveal" data-reveal data-reveal-delay="0.32">
+                <div class="process-step reveal">
                     <div class="process-step-num">05</div>
                     <div class="process-step-connector"></div>
                     <h4 data-lang-key="process-step5-title">納品</h4>
@@ -1729,13 +1454,13 @@
     <!-- Pricing -->
     <section id="pricing" class="pricing">
         <div class="pricing-container">
-            <div class="section-head reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span>06 — PRICING</p>
-                <h2 data-reveal-mask class="section-title" data-lang-key="pricing-title">料金プラン</h2>
+            <div class="section-head reveal">
+                <p class="kicker"><span class="kicker-dot"></span>06 — PRICING</p>
+                <h2 class="section-title" data-lang-key="pricing-title">料金プラン</h2>
                 <p class="section-sub" data-lang-key="pricing-subtitle">プロジェクトに合わせた最適なプランを</p>
             </div>
             <div class="pricing-grid">
-                <div class="pricing-card reveal" data-reveal data-reveal-delay="0.0">
+                <div class="pricing-card reveal">
                     <div class="pricing-plan" data-lang-key="pricing-light-plan">Light</div>
                     <div class="pricing-price">¥50,000<span>〜</span></div>
                     <div class="pricing-unit" data-lang-key="pricing-light-unit">30秒以下の短尺動画</div>
@@ -1748,7 +1473,7 @@
                     </ul>
                     <a href="#contact" class="pricing-cta" data-lang-key="pricing-cta">このプランで相談する</a>
                 </div>
-                <div class="pricing-card featured reveal" data-reveal data-reveal-delay="0.1">
+                <div class="pricing-card featured reveal">
                     <div class="pricing-badge" data-lang-key="pricing-popular">POPULAR</div>
                     <div class="pricing-plan" data-lang-key="pricing-standard-plan">Standard</div>
                     <div class="pricing-price">¥100,000<span>〜</span></div>
@@ -1763,7 +1488,7 @@
                     </ul>
                     <a href="#contact" class="pricing-cta featured" data-lang-key="pricing-cta">このプランで相談する</a>
                 </div>
-                <div class="pricing-card reveal" data-reveal data-reveal-delay="0.2">
+                <div class="pricing-card reveal">
                     <div class="pricing-plan" data-lang-key="pricing-premium-plan">Premium</div>
                     <div class="pricing-price">¥200,000<span>〜</span></div>
                     <div class="pricing-unit" data-lang-key="pricing-premium-unit">2分以上 / 複雑な演出</div>
@@ -1785,12 +1510,12 @@
     <!-- FAQ -->
     <section id="faq" class="faq">
         <div class="faq-container">
-            <div class="section-head reveal" data-reveal>
-                <p class="kicker" data-scramble><span class="kicker-dot"></span>07 — FAQ</p>
-                <h2 data-reveal-mask class="section-title" data-lang-key="faq-title">よくあるご質問</h2>
+            <div class="section-head reveal">
+                <p class="kicker"><span class="kicker-dot"></span>07 — FAQ</p>
+                <h2 class="section-title" data-lang-key="faq-title">よくあるご質問</h2>
                 <p class="section-sub" data-lang-key="faq-subtitle">ご依頼前の不安にお答えします</p>
             </div>
-            <div class="faq-list reveal" data-reveal>
+            <div class="faq-list reveal">
                 <details class="faq-item">
                     <summary><span data-lang-key="faq-q1">どんな映像を依頼できますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
                     <p class="faq-answer" data-lang-key="faq-a1">CM・PR映像、アニメーション、ショートフィルム、ミュージックビデオなどに対応しています。横型(16:9)・縦型(9:16のショートアニメ等)どちらの形式も制作可能です。実写撮影を伴わない、AI生成と映像編集を組み合わせた制作が中心です。</p>
@@ -1821,9 +1546,9 @@
 
     <!-- Contact -->
     <section id="contact" class="contact">
-        <div class="contact-container reveal" data-reveal>
-            <p class="kicker" data-scramble><span class="kicker-dot"></span>08 — CONTACT</p>
-            <h2 data-reveal-mask class="contact-title" data-lang-key="contact-title">Let's Create Together</h2>
+        <div class="contact-container reveal">
+            <p class="kicker"><span class="kicker-dot"></span>08 — CONTACT</p>
+            <h2 class="contact-title" data-lang-key="contact-title">Let's Create Together</h2>
             <p class="contact-subtitle" data-lang-key="contact-subtitle">プロジェクトのご相談はお気軽にどうぞ。<br>アイデア段階からでも喜んでお伺いします。</p>
 
             <div class="contact-availability">
@@ -1838,16 +1563,10 @@
             </div>
 
             <div class="contact-cta-group">
-                <div class="v2-cta-ring-wrap">
-                    <svg class="v2-cta-ring" viewBox="0 0 150 150" aria-hidden="true" focusable="false">
-                        <defs><path id="v2-contact-ring-path" d="M75,10 a65,65 0 1,1 -0.1,0"/></defs>
-                        <text class="v2-cta-ring-text"><textPath href="#v2-contact-ring-path" startOffset="0">LET'S CREATE TOGETHER • RYO STUDIO • LET'S CREATE TOGETHER • RYO STUDIO • </textPath></text>
-                    </svg>
-                    <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta" data-magnetic>
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        <span data-lang-key="contact-cta-dm">XのDMで相談する</span>
-                    </a>
-                </div>
+                <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    <span data-lang-key="contact-cta-dm">XのDMで相談する</span>
+                </a>
             </div>
 
             <p class="contact-note" data-lang-key="contact-note">24時間以内に返信いたします。営業や売り込みは一切いたしませんので、お気軽にどうぞ。</p>
@@ -1892,14 +1611,36 @@
         </div>
     </div>
 
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script>
         const isDesktop = window.innerWidth > 768;
 
-        // Custom cursor v2 (dot/ring/play-label, magnetic buttons, tilt) is driven
-        // entirely by window.__v2* (see <script id="v2-engine"> below). No inline JS here.
+        // Custom Cursor - Desktop only (no cursor on touch devices)
+        if (isDesktop) {
+            const cursor = document.querySelector('.cursor');
+            const cursorDot = document.querySelector('.cursor-dot');
+            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX; mouseY = e.clientY;
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+            });
+
+            (function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.12;
+                cursorY += (mouseY - cursorY) * 0.12;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(animateCursor);
+            })();
+
+            document.querySelectorAll('a, button, .work-card, .more-work-card, .service-card').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        } else {
+            document.querySelectorAll('.cursor, .cursor-dot').forEach(el => el.style.display = 'none');
+        }
 
         // Loading - faster on mobile
         window.addEventListener('load', () => {
@@ -1922,11 +1663,18 @@
             }
         });
 
-        // Scroll Effects (hero parallax is now a ScrollTrigger scrub in the v2 engine)
+        // Scroll Effects + Parallax
+        const heroImageBg = document.querySelector('.hero-image-bg');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             document.querySelector('nav').classList.toggle('scrolled', scrollY > 50);
             document.querySelector('.back-to-top').classList.toggle('visible', scrollY > 500);
+
+            if (!prefersReducedMotion && heroImageBg && scrollY < window.innerHeight) {
+                heroImageBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+            }
         }, { passive: true });
 
         function scrollToTop() {
@@ -1940,19 +1688,27 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    if (window.__v2ScrollTo) {
-                        window.__v2ScrollTo(target);
-                    } else {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     document.querySelector('.nav-links').classList.remove('active');
                     document.querySelector('.menu-toggle').classList.remove('active');
                 }
             });
         });
 
-        // Reveal-on-scroll for [data-reveal]/[data-reveal-mask] is now owned by the
-        // v2 engine's ScrollTrigger (adds .visible, keeps legacy laurel-draw CSS working).
+        // Reveal Animation with stagger
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 60);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // Count-up Animation for Stats
         function animateCountUp(el) {
@@ -2153,7 +1909,6 @@
                     el.innerHTML = translations[key][lang];
                 }
             });
-            window.__v2Refresh && window.__v2Refresh();
         }
 
         langToggleBtn.addEventListener('click', () => {
@@ -2175,17 +1930,13 @@
 
                 const filter = tab.getAttribute('data-filter');
 
-                if (window.__v2Filter) {
-                    window.__v2Filter(filter);
-                } else {
-                    allCards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                            card.classList.remove('filtered-out');
-                        } else {
-                            card.classList.add('filtered-out');
-                        }
-                    });
-                }
+                allCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.classList.remove('filtered-out');
+                    } else {
+                        card.classList.add('filtered-out');
+                    }
+                });
             });
         });
 
@@ -2201,714 +1952,5 @@
             probe.src = maxres;
         });
     </script>
-
-    <!-- ===== V2 ENGINE ===== -->
-    <script id="v2-engine">// ===== V2 ENGINE =====
-(function () {
-    'use strict';
-
-    var doc = document;
-    var html = doc.documentElement;
-
-    function qs(sel, ctx) { return (ctx || doc).querySelector(sel); }
-    function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
-    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-    function onReady(fn) {
-        if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', fn);
-        else fn();
-    }
-
-    var reduceMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var engineBooted = false;
-    var staticBooted = false;
-
-    function applyReducedClass() {
-        html.classList.toggle('reduced', reduceMedia.matches);
-    }
-
-    // -----------------------------------------------------------------
-    // Static / reduced-motion fallback
-    // -----------------------------------------------------------------
-    function staticFallback() {
-        if (staticBooted) return;
-        staticBooted = true;
-        qsa('[data-reveal], [data-reveal-mask], .reveal').forEach(function (el) {
-            el.classList.add('visible');
-        });
-        window.__v2ScrollTo = function (el) {
-            if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        };
-        window.__v2Refresh = function () {};
-        // window.__v2Filter intentionally left undefined here: the original
-        // inline script's filter handler falls back to its own class-toggle
-        // logic only when window.__v2Filter is absent — defining a no-op
-        // would silently break filtering under reduced-motion/no-CDN.
-    }
-
-    // -----------------------------------------------------------------
-    // Runtime DOM helpers shared by hero split + signature statement
-    // -----------------------------------------------------------------
-    function unsplitChars(root) {
-        qsa('.v2-ch', root).forEach(function (span) {
-            var text = doc.createTextNode(span.textContent);
-            span.parentNode.replaceChild(text, span);
-        });
-        if (root.normalize) root.normalize();
-    }
-
-    function splitChars(root) {
-        if (!root) return;
-        if (qs('.v2-ch', root)) unsplitChars(root);
-        var ci = 0;
-        function walk(node) {
-            if (node.nodeType === 3) {
-                var text = node.textContent;
-                if (!text) return;
-                var frag = doc.createDocumentFragment();
-                for (var i = 0; i < text.length; i++) {
-                    var ch = text[i];
-                    if (/\s/.test(ch)) {
-                        frag.appendChild(doc.createTextNode(ch));
-                    } else {
-                        var span = doc.createElement('span');
-                        span.className = 'v2-ch';
-                        span.style.setProperty('--ci', ci);
-                        span.textContent = ch;
-                        frag.appendChild(span);
-                    }
-                    ci++;
-                }
-                node.parentNode.replaceChild(frag, node);
-            } else if (node.nodeType === 1) {
-                Array.prototype.slice.call(node.childNodes).forEach(walk);
-            }
-        }
-        Array.prototype.slice.call(root.childNodes).forEach(walk);
-    }
-
-    function wrapMask(el) {
-        if (!el) return;
-        var existing = el.querySelector(':scope > .v2-mask');
-        if (existing) {
-            var innerEl = existing.querySelector('.v2-mask-inner');
-            if (innerEl) {
-                while (innerEl.firstChild) el.insertBefore(innerEl.firstChild, existing);
-            }
-            existing.parentNode.removeChild(existing);
-        }
-        var inner = doc.createElement('span');
-        inner.className = 'v2-mask-inner';
-        while (el.firstChild) inner.appendChild(el.firstChild);
-        var outer = doc.createElement('span');
-        outer.className = 'v2-mask';
-        outer.appendChild(inner);
-        el.appendChild(outer);
-        return inner;
-    }
-
-    // -----------------------------------------------------------------
-    // Boot
-    // -----------------------------------------------------------------
-    onReady(function () {
-        applyReducedClass();
-        if (reduceMedia.matches) { staticFallback(); return; }
-        if (!window.gsap || !window.ScrollTrigger) { staticFallback(); return; }
-        html.classList.add('motion-ok');
-        initEngine();
-    });
-
-    function onReducedChange() {
-        applyReducedClass();
-        if (reduceMedia.matches) {
-            if (engineBooted) {
-                qsa('[data-reveal], [data-reveal-mask], .reveal').forEach(function (el) {
-                    el.classList.add('visible');
-                });
-                if (window.gsap) {
-                    qsa('[data-reveal]').forEach(function (el) { window.gsap.set(el, { opacity: 1, y: 0, clearProps: 'transform' }); });
-                    qsa('.v2-mask-inner').forEach(function (el) { window.gsap.set(el, { yPercent: 0, rotate: 0 }); });
-                }
-                if (typeof deactivateCursorGlobal === 'function') deactivateCursorGlobal();
-            } else {
-                staticFallback();
-            }
-        } else if (!engineBooted && window.gsap && window.ScrollTrigger) {
-            html.classList.add('motion-ok');
-            initEngine();
-        }
-    }
-    if (reduceMedia.addEventListener) reduceMedia.addEventListener('change', onReducedChange);
-    else if (reduceMedia.addListener) reduceMedia.addListener(onReducedChange);
-
-    var deactivateCursorGlobal = null;
-
-    // -----------------------------------------------------------------
-    // Main engine
-    // -----------------------------------------------------------------
-    function initEngine() {
-        if (engineBooted) return;
-        engineBooted = true;
-
-        var gsap = window.gsap;
-        var ScrollTrigger = window.ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger);
-
-        var isMobile = window.innerWidth < 769;
-        var isCoarse = window.matchMedia('(pointer: coarse)').matches;
-        var finePointer = window.matchMedia('(pointer: fine)');
-        var desktopFine = !isMobile && !isCoarse && finePointer.matches;
-
-        var lenis = null;
-        if (window.Lenis) {
-            try {
-                lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true });
-                lenis.on('scroll', ScrollTrigger.update);
-                gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-                gsap.ticker.lagSmoothing(0);
-            } catch (err) { lenis = null; }
-        }
-
-        // ---- window.__v2ScrollTo ----
-        window.__v2ScrollTo = function (el) {
-            if (!el) return;
-            var navEl = qs('nav');
-            var offset = navEl ? -navEl.getBoundingClientRect().height : 0;
-            if (lenis) lenis.scrollTo(el, { offset: offset, duration: 1.2 });
-            else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        };
-
-        // ---- #v2-progress ----
-        (function initProgress() {
-            var bar = qs('#v2-progress');
-            if (!bar) return;
-            gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
-            ScrollTrigger.create({
-                trigger: html,
-                start: 'top top',
-                end: 'bottom bottom',
-                onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); }
-            });
-        })();
-
-        // ---- Reveals: [data-reveal] / [data-reveal-mask] / bare .reveal ----
-        var revealTriggers = [];
-        function initReveals() {
-            var els = qsa('[data-reveal], [data-reveal-mask], .reveal');
-            var seen = [];
-            els.forEach(function (el) {
-                if (seen.indexOf(el) !== -1) return;
-                seen.push(el);
-                var hasReveal = el.hasAttribute('data-reveal');
-                var hasMask = el.hasAttribute('data-reveal-mask');
-                var delay = parseFloat(el.getAttribute('data-reveal-delay')) || 0;
-                var maskInner = null;
-
-                if (hasMask) {
-                    maskInner = wrapMask(el);
-                    gsap.set(maskInner, { yPercent: 112, rotate: 1.1 });
-                }
-                if (hasReveal) {
-                    gsap.set(el, { opacity: 0, y: 32 });
-                }
-
-                var st = ScrollTrigger.create({
-                    trigger: el,
-                    start: 'top 85%',
-                    once: true,
-                    onEnter: function () {
-                        el.classList.add('visible');
-                        if (hasReveal) gsap.to(el, { opacity: 1, y: 0, duration: 1.0, delay: delay, ease: 'expo.out' });
-                        if (hasMask && maskInner) gsap.to(maskInner, { yPercent: 0, rotate: 0, duration: 1.15, delay: delay, ease: 'expo.out' });
-                    }
-                });
-                revealTriggers.push(st);
-            });
-        }
-        initReveals();
-
-        // ---- Hero char-split (F2) ----
-        var heroH1 = qs('[data-split]');
-        function initHeroSplit() {
-            if (!heroH1) return;
-            splitChars(heroH1);
-        }
-        initHeroSplit();
-
-        // ---- Hero cursor spotlight (F2, desktop fine only) ----
-        var heroEl = qs('.hero');
-        var heroSpotActive = false;
-        var heroSpotX = 50, heroSpotY = 42, heroTargetX = 50, heroTargetY = 42;
-        function initHeroSpotlight() {
-            if (!heroEl || !desktopFine) return;
-            heroSpotActive = true;
-            heroEl.addEventListener('pointermove', function (e) {
-                var rect = heroEl.getBoundingClientRect();
-                if (!rect.width || !rect.height) return;
-                heroTargetX = clamp(((e.clientX - rect.left) / rect.width) * 100, 0, 100);
-                heroTargetY = clamp(((e.clientY - rect.top) / rect.height) * 100, 0, 100);
-            }, { passive: true });
-        }
-        initHeroSpotlight();
-        function heroSpotlightFrame() {
-            if (!heroSpotActive || !heroEl) return;
-            heroSpotX += (heroTargetX - heroSpotX) * 0.1;
-            heroSpotY += (heroTargetY - heroSpotY) * 0.1;
-            heroEl.style.setProperty('--hx', heroSpotX.toFixed(2) + '%');
-            heroEl.style.setProperty('--hy', heroSpotY.toFixed(2) + '%');
-        }
-
-        // ---- Hero scroll-out rack focus / parallax (F2) ----
-        function initHeroExitScrub() {
-            var bg = qs('.hero-image-bg');
-            if (!heroEl || !bg) return;
-            gsap.fromTo(bg,
-                { filter: 'blur(0px)', opacity: 1, y: 0 },
-                {
-                    filter: 'blur(6px)', opacity: 0.6, y: function () { return window.innerHeight * 0.3; },
-                    ease: 'none',
-                    scrollTrigger: { trigger: heroEl, start: 'top top', end: 'bottom top', scrub: true }
-                }
-            );
-        }
-        initHeroExitScrub();
-
-        // ---- Signature spotlight scrub (F4) ----
-        var signatureTween = null;
-        function setupSignature() {
-            var section = qs('.spotlight');
-            var frame = qs('.spotlight-frame');
-            var statement = qs('.spotlight-statement');
-            if (signatureTween) { signatureTween.scrollTrigger && signatureTween.scrollTrigger.kill(); signatureTween.kill(); signatureTween = null; }
-            if (!section || !frame) return;
-
-            frame.style.setProperty('--lb', 0);
-            var thumbImg = frame.querySelector('img');
-
-            if (isMobile) return;
-
-            var statementChars = null;
-            if (statement) {
-                splitChars(statement);
-                statementChars = qsa('.v2-ch', statement);
-                if (statementChars.length) gsap.set(statementChars, { opacity: 0.14 });
-            }
-
-            var tl = gsap.timeline({
-                scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: true }
-            });
-            tl.fromTo(frame, { '--lb': 0 }, { '--lb': 1, duration: 0.35, ease: 'none' }, 0);
-            if (thumbImg) {
-                tl.fromTo(thumbImg, { scale: 1.07, filter: 'blur(7px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.4, ease: 'none' }, 0);
-            }
-            if (statementChars && statementChars.length) {
-                tl.to(statementChars, { opacity: 1, stagger: 1, ease: 'none', duration: 0.6 }, 0.25);
-            }
-            tl.set({}, {}, 1);
-            signatureTween = tl;
-        }
-        setupSignature();
-
-        // ---- Works card tilt / wake (F5) ----
-        var tiltState = [];
-        function initTilt() {
-            var touchMode = isMobile || isCoarse || !finePointer.matches;
-            if (touchMode) {
-                var io = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        entry.target.classList.toggle('is-awake', entry.isIntersecting);
-                    });
-                }, { rootMargin: '-35% 0px -35% 0px' });
-                qsa('.work-card, .more-work-card').forEach(function (card) { io.observe(card); });
-                return;
-            }
-            qsa('[data-tilt]').forEach(function (card) {
-                var st = { card: card, rx: 0, ry: 0, tx: 0, ty: 0 };
-                tiltState.push(st);
-                card.addEventListener('pointermove', function (e) {
-                    var rect = card.getBoundingClientRect();
-                    if (!rect.width || !rect.height) return;
-                    var nx = (e.clientX - rect.left) / rect.width;
-                    var ny = (e.clientY - rect.top) / rect.height;
-                    card.style.setProperty('--mx', (nx * 100).toFixed(2) + '%');
-                    card.style.setProperty('--my', (ny * 100).toFixed(2) + '%');
-                    st.tx = (0.5 - ny) * 3.2;
-                    st.ty = (nx - 0.5) * 4;
-                }, { passive: true });
-                card.addEventListener('pointerleave', function () {
-                    st.tx = 0; st.ty = 0;
-                }, { passive: true });
-            });
-        }
-        initTilt();
-        function tiltFrame() {
-            for (var i = 0; i < tiltState.length; i++) {
-                var st = tiltState[i];
-                st.rx += (st.tx - st.rx) * 0.14;
-                st.ry += (st.ty - st.ry) * 0.14;
-                st.card.style.setProperty('--rx', st.rx.toFixed(3) + 'deg');
-                st.card.style.setProperty('--ry', st.ry.toFixed(3) + 'deg');
-            }
-        }
-
-        // ---- Scramble (F7) ----
-        var SCRAMBLE_CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン・#%&*+=<>/';
-        var scrambleResolved = [];
-        function ensureScrambleTarget(el) {
-            var existing = el.querySelector(':scope > .v2-scramble-text');
-            if (existing) return existing;
-            var textNodes = Array.prototype.filter.call(el.childNodes, function (n) {
-                return n.nodeType === 3 && n.textContent.replace(/\s/g, '').length > 0;
-            });
-            var span = doc.createElement('span');
-            span.className = 'v2-scramble-text';
-            if (!textNodes.length) {
-                while (el.firstChild) span.appendChild(el.firstChild);
-            } else {
-                textNodes.forEach(function (tn) {
-                    span.appendChild(doc.createTextNode(tn.textContent));
-                    tn.parentNode.removeChild(tn);
-                });
-            }
-            el.appendChild(span);
-            return span;
-        }
-        function runScramble(el) {
-            var target = ensureScrambleTarget(el);
-            var original = target.getAttribute('data-v2-original');
-            if (original === null) {
-                original = target.textContent;
-                target.setAttribute('data-v2-original', original);
-            }
-            var len = original.length;
-            var totalFrames = 30;
-            var frame = 0;
-            if (el.__v2ScrambleTimer) clearInterval(el.__v2ScrambleTimer);
-            el.__v2ScrambleTimer = setInterval(function () {
-                frame++;
-                var resolvedCount = Math.floor((frame / totalFrames) * len);
-                var out = '';
-                for (var i = 0; i < len; i++) {
-                    var ch = original[i];
-                    if (i < resolvedCount || /\s/.test(ch)) out += ch;
-                    else out += SCRAMBLE_CHARS.charAt(Math.floor(Math.random() * SCRAMBLE_CHARS.length));
-                }
-                target.textContent = out;
-                if (frame >= totalFrames) {
-                    target.textContent = original;
-                    clearInterval(el.__v2ScrambleTimer);
-                    el.__v2ScrambleTimer = null;
-                }
-            }, 30);
-        }
-        var scrambleIO = null;
-        function initScramble() {
-            var els = qsa('[data-scramble]');
-            if (!els.length) return;
-            scrambleIO = new IntersectionObserver(function (entries, obs) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        runScramble(entry.target);
-                        if (scrambleResolved.indexOf(entry.target) === -1) scrambleResolved.push(entry.target);
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            els.forEach(function (el) { scrambleIO.observe(el); });
-        }
-        initScramble();
-
-        // ---- Magnetic buttons (F9) ----
-        function initMagnetic() {
-            if (!desktopFine) return;
-            qsa('[data-magnetic]').forEach(function (btn) {
-                btn.addEventListener('mousemove', function (e) {
-                    var rect = btn.getBoundingClientRect();
-                    var relX = e.clientX - rect.left - rect.width / 2;
-                    var relY = e.clientY - rect.top - rect.height / 2;
-                    gsap.to(btn, { x: relX * 0.3, y: relY * 0.3, duration: 0.5, ease: 'expo.out' });
-                });
-                btn.addEventListener('mouseleave', function () {
-                    gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1,0.45)' });
-                });
-            });
-        }
-        initMagnetic();
-
-        // ---- Cursor v2 (F10) ----
-        var cursorRing = null, cursorDot = null, cursorActive = false;
-        var cursorPos = { x: 0, y: 0 }, cursorRingPos = { x: 0, y: 0 }, cursorInit = false, cursorSeen = false;
-        function ensureCursorEls() {
-            cursorRing = qs('.cursor');
-            cursorDot = qs('.cursor-dot');
-            if (!cursorRing) { cursorRing = doc.createElement('div'); cursorRing.className = 'cursor'; doc.body.appendChild(cursorRing); }
-            if (!cursorDot) { cursorDot = doc.createElement('div'); cursorDot.className = 'cursor-dot'; doc.body.appendChild(cursorDot); }
-            if (!cursorRing.querySelector('.v2-cursor-play')) {
-                var lbl = doc.createElement('span');
-                lbl.className = 'v2-cursor-play';
-                lbl.textContent = '▶';
-                lbl.style.opacity = '0';
-                cursorRing.appendChild(lbl);
-            }
-        }
-        function onCursorMove(e) {
-            cursorPos.x = e.clientX; cursorPos.y = e.clientY;
-            if (!cursorSeen) {
-                cursorSeen = true;
-                cursorRingPos.x = e.clientX; cursorRingPos.y = e.clientY;
-                if (cursorRing) { cursorRing.style.left = e.clientX + 'px'; cursorRing.style.top = e.clientY + 'px'; }
-                doc.body.classList.add('v2-cursor-live');
-            }
-            if (cursorDot) { cursorDot.style.left = e.clientX + 'px'; cursorDot.style.top = e.clientY + 'px'; }
-        }
-        function onCursorOver(e) {
-            if (!cursorRing) return;
-            var target = e.target;
-            var hoverEl = target && target.closest ? target.closest('a, button, [data-video]') : null;
-            var playLabel = cursorRing.querySelector('.v2-cursor-play');
-            if (hoverEl) {
-                cursorRing.classList.add('hover');
-                var playEl = target.closest ? target.closest('[data-cursor="play"]') : null;
-                if (playLabel) playLabel.style.opacity = playEl ? '.9' : '0';
-            } else {
-                cursorRing.classList.remove('hover');
-                if (playLabel) playLabel.style.opacity = '0';
-            }
-        }
-        function activateCursor() {
-            if (cursorActive) return;
-            ensureCursorEls();
-            cursorActive = true;
-            cursorRing.style.display = '';
-            cursorDot.style.display = '';
-            doc.addEventListener('mousemove', onCursorMove, { passive: true });
-            doc.addEventListener('mouseover', onCursorOver, { passive: true });
-        }
-        function deactivateCursor() {
-            if (!cursorActive) return;
-            cursorActive = false;
-            cursorSeen = false;
-            doc.body.classList.remove('v2-cursor-live');
-            if (cursorRing) cursorRing.style.display = 'none';
-            if (cursorDot) cursorDot.style.display = 'none';
-            doc.removeEventListener('mousemove', onCursorMove);
-            doc.removeEventListener('mouseover', onCursorOver);
-        }
-        deactivateCursorGlobal = deactivateCursor;
-        function cursorEval() {
-            if (finePointer.matches && !html.classList.contains('reduced')) activateCursor();
-            else deactivateCursor();
-        }
-        function initCursor() {
-            if (!cursorInit) {
-                cursorInit = true;
-                cursorEval();
-                if (finePointer.addEventListener) finePointer.addEventListener('change', cursorEval);
-                else if (finePointer.addListener) finePointer.addListener(cursorEval);
-            }
-        }
-        initCursor();
-        function cursorRingFrame() {
-            if (!cursorActive || !cursorRing) return;
-            cursorRingPos.x += (cursorPos.x - cursorRingPos.x) * 0.16;
-            cursorRingPos.y += (cursorPos.y - cursorRingPos.y) * 0.16;
-            cursorRing.style.left = cursorRingPos.x + 'px';
-            cursorRing.style.top = cursorRingPos.y + 'px';
-        }
-
-        // ---- Dust motes canvas (F11) ----
-        function initDust() {
-            if (!desktopFine) return;
-            var canvas = qs('#v2-dust');
-            if (!canvas || !heroEl) return;
-            var ctx = canvas.getContext && canvas.getContext('2d');
-            if (!ctx) return;
-
-            var dpr = Math.min(window.devicePixelRatio || 1, 2);
-            var w = 0, h = 0;
-            function resize() {
-                w = heroEl.clientWidth; h = heroEl.clientHeight;
-                if (!w || !h) return;
-                canvas.width = w * dpr; canvas.height = h * dpr;
-                canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            }
-            resize();
-            window.addEventListener('resize', resize, { passive: true });
-
-            var motes = [];
-            for (var i = 0; i < 28; i++) {
-                motes.push({
-                    x: Math.random() * (w || 1),
-                    y: Math.random() * (h || 1),
-                    r: 0.6 + Math.random() * 1.4,
-                    a: 0.05 + Math.random() * 0.11,
-                    vx: 0.06 + Math.random() * 0.10,
-                    vy: -(0.05 + Math.random() * 0.09),
-                    tw: Math.random() * Math.PI * 2,
-                    tws: 0.01 + Math.random() * 0.02
-                });
-            }
-
-            var heroVisible = true;
-            var dustIO = new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) { heroVisible = e.isIntersecting; });
-            }, { threshold: 0 });
-            dustIO.observe(heroEl);
-
-            function frame() {
-                if (!doc.hidden && heroVisible && w && h) {
-                    ctx.clearRect(0, 0, w, h);
-                    for (var j = 0; j < motes.length; j++) {
-                        var m = motes[j];
-                        m.x += m.vx; m.y += m.vy; m.tw += m.tws;
-                        if (m.x > w + 5) m.x = -5;
-                        if (m.y < -5) m.y = h + 5;
-                        var alpha = m.a * (0.6 + 0.4 * Math.sin(m.tw));
-                        ctx.beginPath();
-                        ctx.fillStyle = 'rgba(212,168,83,' + alpha.toFixed(3) + ')';
-                        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-                requestAnimationFrame(frame);
-            }
-            requestAnimationFrame(frame);
-        }
-        initDust();
-
-        // ---- Velocity skew (F12) ----
-        var skewEls = [];
-        function initSkew() {
-            if (!lenis) return;
-            skewEls = qsa('[data-skew]');
-        }
-        initSkew();
-        var skewCur = [];
-        function skewFrame() {
-            if (!lenis || !skewEls.length) return;
-            var vel = lenis.velocity || 0;
-            var target = clamp(vel * 0.02, -1.2, 1.2);
-            for (var i = 0; i < skewEls.length; i++) {
-                var cur = skewCur[i] || 0;
-                cur += (target - cur) * 0.12;
-                skewCur[i] = cur;
-                skewEls[i].style.transform = 'skewY(' + cur.toFixed(3) + 'deg)';
-            }
-        }
-
-        // ---- Awards idle glint (F6) ----
-        function initGlint() {
-            var cards = qsa('.award-card');
-            if (!cards.length) return;
-            function schedule() {
-                var delay = 7000 + Math.random() * 4000;
-                setTimeout(function () {
-                    if (doc.hidden) { schedule(); return; }
-                    var card = cards[Math.floor(Math.random() * cards.length)];
-                    card.classList.add('v2-glint');
-                    setTimeout(function () { card.classList.remove('v2-glint'); }, 1200);
-                    schedule();
-                }, delay);
-            }
-            schedule();
-        }
-        initGlint();
-
-        // ---- Back-to-top progress ring (F13) ----
-        function initBackToTopRing() {
-            var candidates = [
-                '#v2-btt-progress',
-                '.back-to-top .v2-ring-progress',
-                '.back-to-top circle.v2-ring',
-                '.back-to-top svg circle[data-v2-ring]'
-            ];
-            var ring = null;
-            for (var i = 0; i < candidates.length; i++) {
-                ring = qs(candidates[i]);
-                if (ring) break;
-            }
-            if (!ring) return;
-            var r = ring.r && ring.r.baseVal ? ring.r.baseVal.value : parseFloat(ring.getAttribute('r'));
-            if (!r) return;
-            var circumference = 2 * Math.PI * r;
-            ring.style.strokeDasharray = String(circumference);
-            ring.style.strokeDashoffset = String(circumference);
-            ScrollTrigger.create({
-                trigger: html,
-                start: 'top top',
-                end: 'bottom bottom',
-                onUpdate: function (self) {
-                    ring.style.strokeDashoffset = String(circumference * (1 - self.progress));
-                }
-            });
-        }
-        initBackToTopRing();
-
-        // ---- Works filter (F14) ----
-        window.__v2Filter = function (category) {
-            var cards = qsa('.work-card[data-category], .more-work-card[data-category]');
-            var outgoing = [], incoming = [];
-            cards.forEach(function (card) {
-                var match = category === 'all' || card.getAttribute('data-category') === category;
-                var hidden = card.style.display === 'none';
-                if (match && hidden) incoming.push(card);
-                else if (!match && !hidden) outgoing.push(card);
-            });
-            function showIncoming() {
-                incoming.forEach(function (c) { c.style.display = ''; });
-                if (incoming.length) {
-                    gsap.fromTo(incoming, { opacity: 0, y: 16 }, {
-                        opacity: 1, y: 0, duration: 0.45, stagger: 0.045, ease: 'expo.out',
-                        onComplete: function () { ScrollTrigger.refresh(); }
-                    });
-                } else {
-                    ScrollTrigger.refresh();
-                }
-            }
-            if (outgoing.length) {
-                gsap.to(outgoing, {
-                    opacity: 0, scale: 0.96, y: 8, duration: 0.28, stagger: 0.02, ease: 'power1.out',
-                    onComplete: function () {
-                        outgoing.forEach(function (c) { c.style.display = 'none'; });
-                        showIncoming();
-                    }
-                });
-            } else {
-                showIncoming();
-            }
-        };
-
-        // ---- Refresh (post i18n swap) ----
-        window.__v2Refresh = function () {
-            initHeroSplit();
-            qsa('[data-reveal-mask]').forEach(function (el) {
-                var wasVisible = el.classList.contains('visible');
-                var inner = wrapMask(el);
-                if (wasVisible) gsap.set(inner, { yPercent: 0, rotate: 0 });
-                else gsap.set(inner, { yPercent: 112, rotate: 1.1 });
-            });
-            scrambleResolved.forEach(function (el) {
-                var target = el.querySelector('.v2-scramble-text');
-                if (target) target.removeAttribute('data-v2-original');
-                runScramble(el);
-            });
-            setupSignature();
-            ScrollTrigger.refresh();
-        };
-
-        // ---- Shared rAF loop (cursor ring, tilt, hero spotlight, skew) ----
-        function sharedFrame() {
-            if (!doc.hidden) {
-                heroSpotlightFrame();
-                tiltFrame();
-                cursorRingFrame();
-                skewFrame();
-            }
-            requestAnimationFrame(sharedFrame);
-        }
-        requestAnimationFrame(sharedFrame);
-    }
-})();
-</script>
 </body>
 </html>
