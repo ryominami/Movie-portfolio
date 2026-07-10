@@ -119,7 +119,10 @@
 
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; opacity: 0.5; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; opacity: 0.5; }
+        /* V3 L-6: micro polish */
+        ::selection { background: rgba(212,168,83,.28); }
+        :focus-visible { outline: 1.5px solid var(--gold); outline-offset: 3px; }
 
         /* Loading Screen */
         .loading-screen {
@@ -226,6 +229,11 @@
 
         /* Section head (kicker + title + sub) */
         .section-head { text-align: center; margin-bottom: 3.5rem; }
+        /* V3 L-3: rhythm break — works/about/pricing heads left-align on desktop only */
+        @media (min-width:769px){
+            #works .section-head, #pricing .section-head{ text-align:left; }
+            #about .about-intro{ text-align:left; margin-left:0; margin-right:auto; }
+        }
         .kicker {
             display: inline-flex; align-items: center; gap: .55rem;
             font-family: var(--font-ui); font-size: .72rem; font-weight: 500;
@@ -362,7 +370,8 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Spotlight (Grand Prix) */
-        .spotlight { position: relative; background: var(--ink-900); padding: clamp(6rem,14vh,9rem) var(--gutter) clamp(5rem,10vh,7rem); overflow: hidden; }
+        /* V3 L-5: unified section top-rhythm (kills the ~300px stacked-padding dead gap) */
+        .spotlight { position: relative; background: var(--ink-900); padding: clamp(6rem,14vh,9rem) var(--gutter) clamp(5rem,10vh,7rem); padding-top: clamp(80px,10vw,160px); overflow: hidden; }
         .spotlight-glow {
             position: absolute; inset: 0; z-index: 0; pointer-events: none;
             background: radial-gradient(60% 50% at 50% 38%, var(--gold-glow), transparent 70%);
@@ -429,7 +438,7 @@
         }
 
         /* Awards section (laurel wall) */
-        .awards { padding: clamp(5rem,10vw,8rem) var(--gutter); background: var(--ink-850); }
+        .awards { padding: clamp(5rem,10vw,8rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-850); }
         .awards-container { max-width: var(--maxw); margin: 0 auto; }
         .awards-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
         .award-card {
@@ -456,7 +465,7 @@
         .award-card-year { font-family: var(--font-ui); font-size: .68rem; letter-spacing: .1em; color: var(--text-low); font-variant-numeric: tabular-nums; }
 
         /* Works */
-        .works { padding: clamp(5rem,10vw,8rem) var(--gutter); background: var(--ink-900); }
+        .works { padding: clamp(5rem,10vw,8rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-900); }
         .works-container { max-width: var(--maxw); margin: 0 auto; }
 
         .filter-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
@@ -526,7 +535,7 @@
         .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
 
         /* More Works (contact sheet) */
-        .more-works { padding: clamp(4rem,8vw,6rem) var(--gutter); background: var(--ink-900); }
+        .more-works { padding: clamp(4rem,8vw,6rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-900); }
         .more-works-container { max-width: var(--maxw); margin: 0 auto; }
         .more-works-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
         .more-work-card {
@@ -554,7 +563,7 @@
         .yt-channel-link:hover { color: var(--text-hi); border-color: var(--gold-line); }
 
         /* CTA band */
-        .cta-band { padding: clamp(4rem,8vw,6rem) var(--gutter); background: var(--ink-900); position: relative; text-align: center; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); }
+        .cta-band { padding: clamp(4rem,8vw,6rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-900); position: relative; text-align: center; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); }
         .cta-band-container { max-width: 700px; margin: 0 auto; }
         .cta-band-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 2.35rem); font-weight: 360; margin-bottom: 1.25rem; }
         .cta-band-text { font-family: var(--font-jp); font-size: 0.9rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 2.25rem; }
@@ -564,13 +573,14 @@
             color: var(--gold-ink); text-decoration: none; font-weight: 600;
             font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.06em;
             border-radius: var(--r-pill); transition: var(--transition-smooth);
+            white-space: nowrap;
         }
         .contact-cta:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: var(--shadow-card); }
         .contact-cta.secondary { background: transparent; border: 1px solid var(--line-strong); color: var(--text-hi); }
         .contact-cta.secondary:hover { background: var(--gold-glow); border-color: var(--gold-line); filter: none; box-shadow: none; }
 
         /* About */
-        .about { padding: clamp(5rem,10vw,8rem) var(--gutter); background: var(--ink-850); }
+        .about { padding: clamp(5rem,10vw,8rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-850); }
         .about-container { max-width: var(--maxw); margin: 0 auto; }
         .about-intro { text-align: center; max-width: 720px; margin: 0 auto 3.5rem; }
         .about-title { font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 360; line-height: 1.4; margin-bottom: 1.25rem; }
@@ -590,7 +600,7 @@
         .about-more a:hover { color: var(--gold); }
 
         /* Services */
-        .services { padding: clamp(4rem,8vw,6rem) var(--gutter); background: var(--ink-900); }
+        .services { padding: clamp(4rem,8vw,6rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-900); }
         .services-container { max-width: 1100px; margin: 0 auto; }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         .service-card { background: var(--ink-800); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 2.25rem; transition: var(--transition-smooth); }
@@ -601,7 +611,7 @@
         .service-card p { font-family: var(--font-jp); font-size: 0.85rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; }
 
         /* Process */
-        .process { padding: clamp(5rem,10vw,8rem) var(--gutter); background: var(--ink-850); }
+        .process { padding: clamp(5rem,10vw,8rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-850); }
         .process-container { max-width: 1100px; margin: 0 auto; }
         .process-steps { display: flex; align-items: flex-start; justify-content: center; gap: 0; margin-top: 3.5rem; position: relative; }
         .process-step { flex: 1; text-align: center; position: relative; padding: 0 1rem; }
@@ -613,26 +623,21 @@
         .process-step p { font-family: var(--font-jp); font-size: 0.76rem; color: var(--text-low); line-height: 1.7; font-weight: 300; }
 
         /* Pricing */
-        .pricing { padding: clamp(5rem,10vw,8rem) var(--gutter); background: var(--ink-900); }
+        .pricing { padding: clamp(5rem,10vw,8rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-900); }
         .pricing-container { max-width: 1100px; margin: 0 auto; }
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; margin-top: 3.5rem; }
         .pricing-card { background: var(--ink-800); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 2.5rem 2rem; text-align: center; position: relative; transition: var(--transition-smooth); }
         .pricing-card:hover { border-color: var(--line-strong); transform: translateY(-4px); }
         .pricing-card.featured { border-color: var(--gold-line); background: linear-gradient(180deg, var(--gold-glow), transparent 60%), var(--ink-800); }
-        .pricing-badge {
-            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--gold); color: var(--gold-ink);
-            font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em;
-            padding: 0.3rem 1rem; border-radius: var(--r-pill);
-        }
         .pricing-plan { font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-low); text-transform: uppercase; margin-bottom: 0.75rem; }
-        .pricing-price { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 400; color: var(--text-hi); margin-bottom: 0.25rem; }
-        .pricing-card.featured .pricing-price { color: var(--gold); }
-        .pricing-price span { font-size: 0.85rem; font-family: var(--font-ui); color: var(--text-low); }
+        /* V3 L-1: de-SaaS — numerals stay --text-hi on every card; gold is reserved for the ¥/〜 spans only */
+        .pricing-price { font-family: var(--font-display); font-size: clamp(1.6rem,2.6vw,2.1rem); font-weight: 400; color: var(--text-hi); margin-bottom: 0.25rem; }
+        .pricing-price span { font-size: 0.85rem; font-family: var(--font-ui); color: var(--gold); }
         .pricing-unit { font-family: var(--font-jp); font-size: 0.75rem; color: var(--text-low); margin-bottom: 2rem; }
         .pricing-features { list-style: none; padding: 0; margin: 0 0 2rem; text-align: left; }
         .pricing-features li { font-family: var(--font-jp); font-size: 0.8rem; color: var(--text-mid); padding: 0.55rem 0; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 0.6rem; font-weight: 300; }
-        .pricing-features li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+        .pricing-features li::before { content: '—'; color: var(--gold); opacity: .7; font-family: var(--font-ui); font-size: .75rem; flex-shrink: 0; }
+        .pricing-custom { max-width: 700px; margin: 1.25rem auto 0; text-align: center; font-family: var(--font-ui); font-size: 12px; color: var(--text-mid); letter-spacing: .02em; }
         .pricing-note { max-width: 700px; margin: 3rem auto 0; text-align: center; font-family: var(--font-jp); font-size: 0.75rem; color: var(--text-low); line-height: 1.8; }
         .pricing-cta {
             display: block; padding: 0.8rem 1rem; border: 1px solid var(--line-strong); border-radius: var(--r-pill);
@@ -644,7 +649,7 @@
         .pricing-cta.featured:hover { filter: brightness(1.08); }
 
         /* FAQ */
-        .faq { padding: clamp(5rem,10vw,8rem) var(--gutter); background: var(--ink-850); }
+        .faq { padding: clamp(5rem,10vw,8rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-850); }
         .faq-container { max-width: 760px; margin: 0 auto; }
         .faq-list { display: flex; flex-direction: column; }
         .faq-item { border-bottom: 1px solid var(--line); transition: var(--transition-smooth); }
@@ -661,20 +666,20 @@
         .faq-answer { padding: 0 0.25rem 1.6rem; font-family: var(--font-jp); font-size: 0.83rem; color: var(--text-mid); line-height: 1.9; font-weight: 300; }
 
         /* Contact */
-        .contact { padding: clamp(5rem,10vw,8rem) var(--gutter); background: var(--ink-900); }
+        .contact { padding: clamp(5rem,10vw,8rem) var(--gutter); padding-top: clamp(80px,10vw,160px); background: var(--ink-900); }
         .contact-container { max-width: 760px; margin: 0 auto; text-align: center; }
         .contact-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 360; margin-bottom: 1rem; }
         .contact-subtitle { font-family: var(--font-jp); font-size: 1rem; color: var(--text-mid); margin-bottom: 2.5rem; font-weight: 300; line-height: 1.9; }
         .contact-availability {
             display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.55rem 1.2rem;
-            border: 1px solid var(--line-strong); border-radius: var(--r-pill); margin-bottom: 2.25rem;
+            border: 1px solid var(--line-strong); border-radius: var(--r-sm); margin-bottom: 2.25rem;
         }
         .contact-availability .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         .contact-availability span { font-family: var(--font-ui); font-size: 0.74rem; color: var(--text-mid); letter-spacing: 0.02em; }
         .contact-trust { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
         .trust-chip {
-            padding: 0.45rem 1.1rem; border: 1px solid var(--line); border-radius: var(--r-pill);
+            padding: 0.45rem 1.1rem; border: 1px solid var(--line); border-radius: var(--r-sm);
             font-family: var(--font-ui); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.03em;
         }
         .contact-cta-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
@@ -690,6 +695,15 @@
         footer { padding: 2.75rem var(--gutter); background: var(--ink-900); border-top: 1px solid var(--line); text-align: center; }
         .footer-logo { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-display); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.18em; margin-bottom: 0.75rem; color: var(--text-mid); }
         .footer-logo .laurel--half svg { width: 14px; height: 28px; }
+        /* V3 L-6: footer wordmark — outline fill that fills solid on hover (desktop) */
+        .v3-footer-word{
+            font-family: var(--font-display); font-size: clamp(2.2rem,5vw,4rem); font-weight: 400;
+            letter-spacing: .05em; color: transparent; -webkit-text-stroke: 1px var(--gold);
+            transition: color .5s var(--e-soft, ease);
+        }
+        @media (min-width:769px){
+            .footer-logo:hover .v3-footer-word{ color: var(--text-hi); }
+        }
         .footer-tagline { font-family: var(--font-ui); font-size: 0.68rem; color: var(--gold); letter-spacing: 0.14em; margin-bottom: 1rem; opacity: 0.85; }
         .footer-links { display: flex; justify-content: center; gap: 1.6rem; flex-wrap: wrap; margin: 1.1rem 0; }
         .footer-links a { font-family: var(--font-ui); font-size: 0.7rem; color: var(--text-low); text-decoration: none; letter-spacing: 0.08em; transition: color 0.3s ease; }
@@ -708,13 +722,16 @@
         .back-to-top svg { width: 16px; height: 16px; stroke: var(--gold); stroke-width: 2; }
 
         /* Reveal Animation */
-        html.motion-ok .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s var(--ease-out-expo), transform .6s var(--ease-out-expo); }
+        /* V3 P0-3: transition:none — GSAP ScrollTrigger owns the opacity/transform tween;
+           this legacy CSS transition only ever carried those two props (verified), so killing
+           it removes the double-animation fight while keeping the from-state below. */
+        html.motion-ok .reveal { opacity: 0; transform: translateY(24px); transition: none; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* Video Lightbox */
         .video-lightbox {
             position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center;
-            background: rgba(6,6,7,.9); backdrop-filter: blur(18px);
+            background: rgba(2,2,3,.96); backdrop-filter: blur(18px);
             opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease;
         }
         .video-lightbox.active { opacity: 1; visibility: visible; }
@@ -727,6 +744,24 @@
         .video-lightbox.active .video-lightbox-content { transform: scale(1) translateY(0); }
         .video-lightbox-content iframe { width: 100%; height: 100%; border: none; }
         .video-lightbox.portrait .video-lightbox-content { width: auto; aspect-ratio: 9/16; height: min(85vh, 160vw); max-width: 92vw; }
+        /* V3 S-3: cinema chrome — "NOW SCREENING" slate above the iframe */
+        .v2-screening{
+            position: absolute; top: 1.25rem; left: 1.75rem; z-index: 6; pointer-events: none;
+            display: flex; flex-direction: column; gap: .25rem;
+        }
+        .v2-screening-label{
+            font-family: var(--font-ui); font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+            color: var(--gold); text-shadow: 0 2px 10px rgba(0,0,0,.7);
+        }
+        .v2-screening-title{
+            font-family: var(--font-jp-serif); font-size: 15px; font-weight: 600; color: var(--text-hi);
+            text-shadow: 0 2px 12px rgba(0,0,0,.7);
+        }
+        @keyframes v2-flicker{ 0%{opacity:1;} 20%{opacity:.75;} 45%{opacity:1;} 70%{opacity:.9;} 100%{opacity:1;} }
+        .video-lightbox.v2-flicker .video-lightbox-content,
+        .video-lightbox-content.v2-flicker{ animation: v2-flicker .45s ease; }
+        html.reduced .video-lightbox.v2-flicker .video-lightbox-content,
+        html.reduced .video-lightbox-content.v2-flicker{ animation: none !important; }
         .video-lightbox-close {
             position: absolute; top: 1.5rem; right: 1.5rem; width: 42px; height: 42px;
             background: rgba(255,255,255,.06); backdrop-filter: blur(10px); border: 1px solid var(--line-strong);
@@ -821,6 +856,10 @@
         --e-out: cubic-bezier(0.16,1,0.3,1);
         --e-soft: cubic-bezier(0.45,0,0.15,1);
         --e-spring: cubic-bezier(.34,1.56,.64,1);
+        /* V3 L-8: --e-out/--e-soft are canonical; alias the legacy names so every
+           transition (old and new) resolves to the same two easings. */
+        --ease-out-expo: var(--e-out);
+        --ease-cinematic: var(--e-soft);
     }
 
     /* --- F1 Loader: iris-in --- */
@@ -845,8 +884,11 @@
     .v2-ch{ display:inline-block; }
     html.motion-ok .hero h1 .v2-ch{
         opacity:0; will-change:transform,opacity,filter;
+        /* V3 L-8: this custom bezier is an intentional snap-in for char reveal, distinct
+           from the canonical --e-out/--e-soft tokens — keep as-is. */
         animation: v2CharIn .9s cubic-bezier(.16,.8,.24,1) forwards, v2Sheen 6.5s linear infinite;
-        animation-delay: calc(.55s + var(--ci,0) * .045s), calc(3s + var(--ci,0) * .07s);
+        /* V3 P0-4: re-based to loader-exit t=0 (see body.is-loaded play-state gate below) */
+        animation-delay: calc(.15s + var(--ci,0) * .045s), calc(3s + var(--ci,0) * .07s);
     }
     .hero::after{
         content:''; position:absolute; top:0; right:0; bottom:0; left:0; height:auto; border:none;
@@ -865,6 +907,21 @@
     @keyframes v2BadgeRotate{ to{ transform: rotate(360deg); } }
     @media (max-width:899px){ .v2-badge{ display:none; } }
     html.reduced .v2-badge{ animation:none !important; }
+
+    /* --- V3 P0-4: loader/hero sync — freeze char + fadeIn/rotate animations until
+       body.is-loaded fires (loader hides), then resume with delays re-based to that moment --- */
+    html.motion-ok .hero .v2-ch,
+    html.motion-ok .award-line,
+    html.motion-ok .hero-eyebrow,
+    html.motion-ok .hero-tagline,
+    html.motion-ok .hero-cta-group,
+    html.motion-ok .v2-badge{ animation-play-state:paused; }
+    html.motion-ok body.is-loaded .hero .v2-ch{ animation-play-state:running; }
+    html.motion-ok body.is-loaded .award-line{ animation-play-state:running; animation-delay:0s; }
+    html.motion-ok body.is-loaded .hero-eyebrow{ animation-play-state:running; animation-delay:.1s; }
+    html.motion-ok body.is-loaded .hero-tagline{ animation-play-state:running; animation-delay:.8s; }
+    html.motion-ok body.is-loaded .hero-cta-group{ animation-play-state:running; animation-delay:1.0s; }
+    html.motion-ok body.is-loaded .v2-badge{ animation-play-state:running; animation-delay:1.2s; }
 
     /* --- F3 Scroll system: progress bar + heading mask reveal --- */
     #v2-progress{
@@ -942,45 +999,50 @@
     html.reduced .more-work-card .work-card-thumbnail img{ filter:none !important; }
     html.reduced [data-tilt]{ transform:none !important; }
 
-    /* --- F6 Awards: filmstrip marquee + idle glint --- */
+    /* --- V3 S-2: flipbook hover swap affordance --- */
+    .work-card.is-flipping .work-card-thumbnail img,
+    .more-work-card.is-flipping .work-card-thumbnail img{ filter: contrast(1.02); }
+    .work-card.is-flipping .work-card-play,
+    .more-work-card.is-flipping .work-card-play{ opacity:1; }
+
+    /* --- F6 Awards: filmstrip marquee (V3 L-2: quiet single row, top-tier awards only) --- */
     .v2-marquee{ position:relative; margin: 0 0 clamp(2.5rem,5vw,3.5rem); }
     .v2-marquee-row{ position:relative; overflow:hidden; padding: .55rem 0; }
     .v2-marquee-row::before, .v2-marquee-row::after{
-        content:''; position:absolute; left:0; right:0; height:10px; z-index:2; pointer-events:none;
-        background: repeating-linear-gradient(90deg, transparent 0 6px, rgba(246,244,239,.13) 6px 14px);
+        content:''; position:absolute; left:0; right:0; height:3px; z-index:2; pointer-events:none;
+        background-image:
+            linear-gradient(rgba(246,244,239,.10), rgba(246,244,239,.10)),
+            repeating-linear-gradient(90deg, rgba(246,244,239,.12) 0 3px, transparent 3px 56px);
+        background-size: 100% 1px, 100% 3px;
+        background-position: center, center;
+        background-repeat: no-repeat, repeat-x;
     }
     .v2-marquee-row::before{ top:0; }
     .v2-marquee-row::after{ bottom:0; }
     .v2-marquee-track{ display:inline-flex; align-items:center; white-space:nowrap; will-change:transform; }
     .v2-marquee-track span{
-        font-family: var(--font-ui); font-weight:700; text-transform:uppercase;
-        font-size: clamp(1.1rem,2.2vw,1.6rem); padding: 0 .5em; line-height:1.4;
+        font-family: var(--font-ui); font-weight:500; text-transform:uppercase;
+        font-size: clamp(1rem,1.8vw,1.35rem); letter-spacing:.12em; padding: 0 .5em; line-height:1.4;
         color:transparent; -webkit-text-stroke: 1px rgba(212,168,83,.5);
         transition: color .3s ease, -webkit-text-fill-color .3s ease;
     }
     .v2-marquee-row:hover .v2-marquee-track span{ -webkit-text-fill-color: var(--gold); color:var(--gold); }
     .v2-marquee-sep{ color: var(--gold) !important; -webkit-text-stroke:0 !important; -webkit-text-fill-color: var(--gold) !important; opacity:.6; }
-    html.motion-ok .v2-marquee-row--1 .v2-marquee-track{ animation: v2Marquee 30s linear infinite; }
-    html.motion-ok .v2-marquee-row--2 .v2-marquee-track{ animation: v2Marquee 38s linear infinite reverse; }
+    html.motion-ok .v2-marquee-row--1 .v2-marquee-track{ animation: v2Marquee 55s linear infinite; }
     .v2-marquee-row:hover .v2-marquee-track{ animation-play-state: paused; }
     @keyframes v2Marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
     html.reduced .v2-marquee-track{ animation:none !important; }
-    html.reduced .v2-marquee-row--2{ display:none; }
-    @keyframes v2Glint{ 0%{ background-position: -150% 0; } 100%{ background-position: 250% 0; } }
-    .award-card.v2-glint{
-        background-image: linear-gradient(75deg, transparent 40%, rgba(232,200,106,.5) 50%, transparent 60%);
-        background-size: 250% 100%; animation: v2Glint 1.2s ease;
-    }
 
     /* --- F9 Magnetic CTAs + contact textPath ring --- */
     [data-magnetic]{ will-change:transform; }
-    .v2-cta-ring-wrap{ position:relative; display:inline-flex; }
+    .v2-cta-ring-wrap{ position:relative; display:inline-block; }
     .v2-cta-ring{
-        position:absolute; top:50%; left:50%; width:150px; height:150px;
+        position:absolute; top:50%; left:50%; width:190px; height:190px;
         transform: translate(-50%,-50%); pointer-events:none; z-index:0; opacity:.45;
     }
     .v2-cta-ring-text{ font-family: var(--font-ui); font-size:9px; letter-spacing:.16em; fill:var(--gold); text-transform:uppercase; }
-    html.motion-ok .v2-cta-ring{ animation: v2BadgeRotate 20s linear infinite; }
+    @keyframes v2CtaRingRotate{ from{ transform: translate(-50%,-50%) rotate(0deg); } to{ transform: translate(-50%,-50%) rotate(360deg); } }
+    html.motion-ok .v2-cta-ring{ animation: v2CtaRingRotate 20s linear infinite; }
     .v2-cta-ring-wrap .contact-cta{ position:relative; z-index:1; }
     @media (max-width:768px), (pointer:coarse){ .v2-cta-ring{ display:none; } }
     html.reduced .v2-cta-ring{ animation:none !important; }
@@ -998,9 +1060,11 @@
     html.reduced body{ cursor:auto !important; }
 
     /* --- F11 Ambience: animated grain (body::before, distinct from the existing static body::after) + hero dust --- */
+    /* V3 P0-7: inset:-50% (200% layer) + transform-only keyframes so the animation is
+       compositor-driven (no per-frame paint from background-position). */
     body::before{
-        content:''; position:fixed; inset:-100px; z-index:9998; pointer-events:none;
-        opacity:.05; mix-blend-mode:overlay; display:none;
+        content:''; position:fixed; inset:-50%; z-index:9998; pointer-events:none;
+        opacity:.05; mix-blend-mode:overlay; display:none; will-change:transform;
         background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='vg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23vg)'/%3E%3C/svg%3E");
         background-size:140px 140px;
     }
@@ -1012,10 +1076,10 @@
         html.motion-ok body::before{ opacity:.035; }
     }
     @keyframes v2Grain{
-        0%{ background-position:0 0; } 16%{ background-position:-10% 4%; }
-        32%{ background-position:6% -8%; } 48%{ background-position:-4% 10%; }
-        64%{ background-position:10% 2%; } 80%{ background-position:-8% -6%; }
-        100%{ background-position:0 0; }
+        0%{ transform:translate3d(0,0,0); } 16%{ transform:translate3d(-14px,6px,0); }
+        32%{ transform:translate3d(8px,-11px,0); } 48%{ transform:translate3d(-6px,14px,0); }
+        64%{ transform:translate3d(14px,3px,0); } 80%{ transform:translate3d(-11px,-8px,0); }
+        100%{ transform:translate3d(0,0,0); }
     }
     html.reduced body::before{ display:none !important; }
     #v2-dust{ position:absolute; inset:0; z-index:3; pointer-events:none; opacity:.8; }
@@ -1070,6 +1134,45 @@
     html.reduced .v2-ch{ opacity:1 !important; transform:none !important; filter:none !important; animation:none !important; }
     html.reduced #v2-progress{ transition:none !important; }
     html.reduced [data-magnetic]{ transform:none !important; }
+
+    /* ===== V3 ADDITIONS ===== */
+
+    /* --- S-1: WebGL hero canvas slot (engine creates/removes the <canvas id="v3-gl">
+       node itself; this just reserves its stacking position between the hero <img> (z:0)
+       and .hero-overlay (z:2), and its fade-in base state). Toggle class="is-visible"
+       (or set style.opacity directly) once the first frame has rendered. --- */
+    #v3-gl{ position:absolute; inset:0; z-index:1; width:100%; height:100%; opacity:0; transition:opacity .6s ease; pointer-events:none; }
+    #v3-gl.is-visible{ opacity:1; }
+
+    /* --- L-7: kanji chapter watermarks (first child of each named section) ---
+       [engine hand-off]: add/remove a "visible" class on .v3-kanji itself (IntersectionObserver
+       or a scrub ScrollTrigger) to trigger the gold transition below, and drive the desktop-only
+       parallax via translateY((progress-0.5)*40px) on the same element. */
+    .v3-kanji{
+        position:absolute; right:4vw; top:8%; writing-mode:vertical-rl;
+        font-family: var(--font-jp-serif); font-weight:500;
+        font-size: clamp(180px,24vw,340px); color:transparent;
+        -webkit-text-stroke: 1px rgba(246,244,239,.055);
+        z-index:0; pointer-events:none; user-select:none;
+        transition: -webkit-text-stroke-color 1.2s ease, color 1.2s ease;
+    }
+    /* left-aligned sections (L-3) flip the kanji to the left edge */
+    #works .v3-kanji, #about .v3-kanji, #pricing .v3-kanji{ right:auto; left:4vw; }
+    .v3-kanji.visible{
+        -webkit-text-stroke-color: rgba(212,168,83,.10);
+        color: rgba(212,168,83,.035);
+    }
+    @media (max-width:768px){
+        .v3-kanji{ font-size: clamp(120px,40vw,200px); opacity:.5; transform:none !important; }
+    }
+    html.reduced .v3-kanji{ transition:none !important; transform:none !important; }
+
+    /* Sections hosting a kanji watermark need position:relative; their inner container
+       needs z-index above the kanji's z-index:0 so real content always paints on top. */
+    .spotlight, .awards, .works, .more-works, .about, .services, .process, .pricing, .faq, .contact{ position:relative; }
+    .awards-container, .works-container, .more-works-container, .services-container,
+    .process-container, .pricing-container, .faq-container, .contact-container,
+    .about-container{ position:relative; z-index:1; }
     </style>
 </head>
 <body>
@@ -1180,6 +1283,7 @@
 
     <!-- Grand Prix Spotlight -->
     <section id="spotlight" class="spotlight">
+        <span class="v3-kanji" aria-hidden="true">約</span>
         <div class="spotlight-glow" aria-hidden="true"></div>
         <div class="spotlight-container reveal" data-reveal>
             <div class="laurel laurel--wreath" aria-hidden="true">
@@ -1199,6 +1303,7 @@
 
     <!-- Awards -->
     <section id="awards" class="awards">
+        <span class="v3-kanji" aria-hidden="true">賞</span>
         <div class="awards-container">
             <div class="section-head reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span>01 — RECOGNITION</p>
@@ -1207,10 +1312,7 @@
             </div>
             <div class="v2-marquee" aria-hidden="true">
                 <div class="v2-marquee-row v2-marquee-row--1">
-                    <div class="v2-marquee-track"><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span></div>
-                </div>
-                <div class="v2-marquee-row v2-marquee-row--2">
-                    <div class="v2-marquee-track"><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ミスターAIコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>ViduQreation Challenge</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>NICIドリームステージ大賞</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>泣けるAIショートアニメ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>幸手市映像コンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Anipop Award</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span></div>
+                    <div class="v2-marquee-track"><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>Vidu「Duscar」Awards</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第29回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span><span>SOZO美術館 第30回コンペ</span><span class="v2-marquee-sep" aria-hidden="true">✦</span></div>
                 </div>
             </div>
             <ul class="awards-grid">
@@ -1279,6 +1381,7 @@
 
     <!-- Works -->
     <section id="works" class="works">
+        <span class="v3-kanji" aria-hidden="true">作</span>
         <div class="works-container">
             <div class="section-head reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span>02 — SELECTED WORK</p>
@@ -1467,6 +1570,7 @@
 
     <!-- More Works (contact sheet) -->
     <section class="more-works">
+        <span class="v3-kanji" aria-hidden="true">続</span>
         <div class="more-works-container">
             <div class="section-head reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span><span data-lang-key="more-works-label">More Works</span></p>
@@ -1617,6 +1721,7 @@
 
     <!-- About -->
     <section id="about" class="about">
+        <span class="v3-kanji" aria-hidden="true">人</span>
         <div class="about-container">
             <div class="about-intro reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span>03 — ABOUT</p>
@@ -1657,6 +1762,7 @@
 
     <!-- Services -->
     <section id="services" class="services">
+        <span class="v3-kanji" aria-hidden="true">技</span>
         <div class="services-container">
             <div class="section-head reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span>04 — SERVICES</p>
@@ -1685,6 +1791,7 @@
 
     <!-- Process -->
     <section class="process">
+        <span class="v3-kanji" aria-hidden="true">程</span>
         <div class="process-container">
             <div class="section-head reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span>05 — PROCESS</p>
@@ -1728,6 +1835,7 @@
 
     <!-- Pricing -->
     <section id="pricing" class="pricing">
+        <span class="v3-kanji" aria-hidden="true">価</span>
         <div class="pricing-container">
             <div class="section-head reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span>06 — PRICING</p>
@@ -1737,7 +1845,7 @@
             <div class="pricing-grid">
                 <div class="pricing-card reveal" data-reveal data-reveal-delay="0.0">
                     <div class="pricing-plan" data-lang-key="pricing-light-plan">Light</div>
-                    <div class="pricing-price">¥50,000<span>〜</span></div>
+                    <div class="pricing-price"><span>¥</span>50,000<span>〜</span></div>
                     <div class="pricing-unit" data-lang-key="pricing-light-unit">30秒以下の短尺動画</div>
                     <ul class="pricing-features">
                         <li data-lang-key="pricing-light-f1">SNS向けショート動画</li>
@@ -1749,9 +1857,8 @@
                     <a href="#contact" class="pricing-cta" data-lang-key="pricing-cta">このプランで相談する</a>
                 </div>
                 <div class="pricing-card featured reveal" data-reveal data-reveal-delay="0.1">
-                    <div class="pricing-badge" data-lang-key="pricing-popular">POPULAR</div>
                     <div class="pricing-plan" data-lang-key="pricing-standard-plan">Standard</div>
-                    <div class="pricing-price">¥100,000<span>〜</span></div>
+                    <div class="pricing-price"><span>¥</span>100,000<span>〜</span></div>
                     <div class="pricing-unit" data-lang-key="pricing-standard-unit">1分程度のアニメ・PR動画</div>
                     <ul class="pricing-features">
                         <li data-lang-key="pricing-standard-f1">ストーリーボード付き</li>
@@ -1765,7 +1872,7 @@
                 </div>
                 <div class="pricing-card reveal" data-reveal data-reveal-delay="0.2">
                     <div class="pricing-plan" data-lang-key="pricing-premium-plan">Premium</div>
-                    <div class="pricing-price">¥200,000<span>〜</span></div>
+                    <div class="pricing-price"><span>¥</span>200,000<span>〜</span></div>
                     <div class="pricing-unit" data-lang-key="pricing-premium-unit">2分以上 / 複雑な演出</div>
                     <ul class="pricing-features">
                         <li data-lang-key="pricing-premium-f1">フルストーリーボード</li>
@@ -1779,11 +1886,13 @@
                 </div>
             </div>
             <p class="pricing-note" data-lang-key="pricing-note">※ 上記は目安です。プロジェクトの内容・規模により変動します。まずはお気軽にご相談ください。</p>
+            <p class="pricing-custom" data-lang-key="pricing-custom">上記を超える規模・継続案件 — ご予算に応じて個別設計いたします（要相談）</p>
         </div>
     </section>
 
     <!-- FAQ -->
     <section id="faq" class="faq">
+        <span class="v3-kanji" aria-hidden="true">問</span>
         <div class="faq-container">
             <div class="section-head reveal" data-reveal>
                 <p class="kicker" data-scramble><span class="kicker-dot"></span>07 — FAQ</p>
@@ -1821,6 +1930,7 @@
 
     <!-- Contact -->
     <section id="contact" class="contact">
+        <span class="v3-kanji" aria-hidden="true">結</span>
         <div class="contact-container reveal" data-reveal>
             <p class="kicker" data-scramble><span class="kicker-dot"></span>08 — CONTACT</p>
             <h2 data-reveal-mask class="contact-title" data-lang-key="contact-title">Let's Create Together</h2>
@@ -1867,7 +1977,7 @@
     <footer>
         <div class="footer-logo">
             <span class="laurel laurel--half" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
-            RYO STUDIO
+            <span class="v3-footer-word">RYO STUDIO</span>
             <span class="laurel laurel--half laurel--mirror" aria-hidden="true"><svg viewBox="0 0 60 120"><use href="#laurel-branch"></use></svg></span>
         </div>
         <p class="footer-tagline" data-lang-key="footer-tagline">AI Agent x Video Production</p>
@@ -1888,6 +1998,7 @@
             <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
         <div class="video-lightbox-content">
+            <div class="v2-screening" aria-hidden="true"><span class="v2-screening-label">NOW SCREENING</span><span class="v2-screening-title" id="lightboxTitle"></span></div>
             <iframe id="lightboxIframe" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
@@ -1903,7 +2014,11 @@
 
         // Loading - faster on mobile
         window.addEventListener('load', () => {
-            setTimeout(() => document.querySelector('.loading-screen').classList.add('hidden'), isDesktop ? 1400 : 800);
+            setTimeout(() => {
+                document.querySelector('.loading-screen').classList.add('hidden');
+                // V3 P0-4: flips hero char/fadeIn animations from paused -> running (see v2-motion CSS)
+                document.body.classList.add('is-loaded');
+            }, isDesktop ? 850 : 550);
         });
 
         // Menu Toggle
@@ -2132,6 +2247,7 @@
             'pricing-premium-f5': { jp: '修正3回まで', en: 'Up to 3 revisions' },
             'pricing-premium-f6': { jp: '納期：約3〜4週間', en: 'Delivery: ~3-4 weeks' },
             'pricing-note': { jp: '※ 上記は目安です。プロジェクトの内容・規模により変動します。まずはお気軽にご相談ください。', en: '* Prices are estimates and vary by project scope. Feel free to reach out for a custom quote.' },
+            'pricing-custom': { jp: '上記を超える規模・継続案件 — ご予算に応じて個別設計いたします（要相談）', en: 'Larger or ongoing engagements — custom proposals on request.' },
             'filter-all': { jp: 'すべて', en: 'All' },
             'filter-animation': { jp: 'アニメ', en: 'Animation' },
             'filter-shortfilm': { jp: 'ショートフィルム', en: 'Short Film' },
@@ -2203,6 +2319,343 @@
     </script>
 
     <!-- ===== V2 ENGINE ===== -->
+    <script id="v3-webgl">
+// ===== V3 WEBGL HERO 「生きた映写」 (S-1) =====
+// Raw WebGL, no libraries. Exposes window.__v3InitHeroGL(heroEl, imgSrc) which
+// returns { canvas, destroy() } on success or null on any failure/unsupported
+// environment. Caller (v2-engine) is responsible for gating on desktop /
+// motion-ok / not-reduced and for never letting a throw here break the page.
+(function () {
+    'use strict';
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+    function nowMs() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
+
+    var VERT_SRC =
+        'attribute vec2 aPos;\n' +
+        'varying vec2 vUv;\n' +
+        'void main() {\n' +
+        '  vUv = aPos * 0.5 + 0.5;\n' +
+        '  gl_Position = vec4(aPos, 0.0, 1.0);\n' +
+        '}\n';
+
+    // Effects, all subtle/additive by design:
+    //  - cover-fit texture sampling (coverUv)
+    //  - 2-3 drifting diagonal gold light shafts from top-left (shaft)
+    //  - cursor-velocity ripple: radial sine displacement + chromatic
+    //    aberration at the ripple front, fed by a 3-slot uniform array
+    //  - film weave (uv.y sine wobble) + per-frame brightness flicker
+    //  - uStartup: 0.9s projector-on ramp with two brightness dips
+    var FRAG_SRC = [
+        'precision mediump float;',
+        'varying vec2 vUv;',
+        'uniform sampler2D uTex;',
+        'uniform vec2 uResolution;',
+        'uniform vec2 uTexSize;',
+        'uniform float uTime;',
+        'uniform float uStartup;',
+        'uniform vec4 uRipple0;',
+        'uniform vec4 uRipple1;',
+        'uniform vec4 uRipple2;',
+        '',
+        'float hash(float n) { return fract(sin(n) * 43758.5453123); }',
+        '',
+        'vec2 coverUv(vec2 uv) {',
+        '  float sAR = uResolution.x / max(uResolution.y, 1.0);',
+        '  float tAR = uTexSize.x / max(uTexSize.y, 1.0);',
+        '  vec2 scale = vec2(1.0);',
+        '  if (sAR > tAR) { scale.y = tAR / sAR; } else { scale.x = sAR / tAR; }',
+        '  return (uv - 0.5) * scale + 0.5;',
+        '}',
+        '',
+        'void rippleContribution(vec2 uv, vec4 ripple, inout vec2 disp, inout float ca) {',
+        '  float strength = ripple.w * (1.0 - smoothstep(0.0, 1.0, ripple.z));',
+        '  if (strength <= 0.0001) return;',
+        '  vec2 delta = uv - ripple.xy;',
+        '  float dist = length(delta);',
+        '  float ringR = ripple.z * 0.6;',
+        '  float front = 1.0 - smoothstep(0.0, 0.12, abs(dist - ringR));',
+        '  float wave = sin((dist - ringR) * 60.0) * front;',
+        '  vec2 dir = dist > 0.0001 ? delta / dist : vec2(0.0);',
+        '  disp += dir * wave * strength * 0.004;',
+        '  ca += front * strength;',
+        '}',
+        '',
+        'float shaft(vec2 uv, float phase, float speed, vec2 dir, float t) {',
+        '  vec2 origin = vec2(-0.15, 1.15);',
+        '  float d = dot(uv - origin, dir);',
+        '  float drift = sin(t * speed + phase) * 0.12;',
+        '  float band = 1.0 - smoothstep(0.0, 0.05, abs(fract((d + drift) * 1.4) - 0.5));',
+        '  float vfall = smoothstep(0.05, 0.85, uv.y);',
+        '  return band * vfall;',
+        '}',
+        '',
+        'void main() {',
+        '  vec2 uv = coverUv(vUv);',
+        '  uv.y += sin(uTime * 1.1) * 0.0006;',
+        '',
+        '  vec2 disp = vec2(0.0);',
+        '  float ca = 0.0;',
+        '  rippleContribution(uv, uRipple0, disp, ca);',
+        '  rippleContribution(uv, uRipple1, disp, ca);',
+        '  rippleContribution(uv, uRipple2, disp, ca);',
+        '',
+        '  float caPx = min(ca, 1.0) * 1.5 / max(uResolution.x, 1.0);',
+        '  vec2 uvR = clamp(uv + disp, 0.0, 1.0);',
+        '',
+        '  vec3 col;',
+        '  col.r = texture2D(uTex, clamp(uvR + vec2(caPx, 0.0), 0.0, 1.0)).r;',
+        '  col.g = texture2D(uTex, uvR).g;',
+        '  col.b = texture2D(uTex, clamp(uvR - vec2(caPx, 0.0), 0.0, 1.0)).b;',
+        '',
+        '  vec3 gold = vec3(1.0, 0.82, 0.45);',
+        '  float shafts = 0.0;',
+        '  shafts += shaft(uv, 0.0, 0.65, normalize(vec2(1.0, -1.0)), uTime);',
+        '  shafts += shaft(uv, 2.1, 0.70, normalize(vec2(1.0, -1.2)), uTime);',
+        '  shafts += shaft(uv, 4.2, 0.75, normalize(vec2(0.9, -1.0)), uTime);',
+        '  col += gold * min(shafts, 1.0) * 0.05;',
+        '',
+        '  float flicker = 1.0 + (hash(floor(uTime * 24.0)) - 0.5) * 0.012;',
+        '  col *= uStartup * flicker;',
+        '',
+        '  gl_FragColor = vec4(col, 1.0);',
+        '}'
+    ].join('\n');
+
+    function compileShader(gl, type, src) {
+        var shader = gl.createShader(type);
+        gl.shaderSource(shader, src);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            gl.deleteShader(shader);
+            return null;
+        }
+        return shader;
+    }
+
+    function createProgram(gl, vertSrc, fragSrc) {
+        var vert = compileShader(gl, gl.VERTEX_SHADER, vertSrc);
+        var frag = compileShader(gl, gl.FRAGMENT_SHADER, fragSrc);
+        if (!vert || !frag) return null;
+        var program = gl.createProgram();
+        gl.attachShader(program, vert);
+        gl.attachShader(program, frag);
+        gl.linkProgram(program);
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            gl.deleteProgram(program);
+            return null;
+        }
+        return program;
+    }
+
+    function computeStartup(elapsedSec) {
+        var dur = 0.9;
+        if (elapsedSec >= dur) return 1;
+        var t = elapsedSec / dur;
+        var base = t;
+        var dip1 = Math.exp(-Math.pow((t - 0.35) / 0.05, 2)) * 0.5;
+        var dip2 = Math.exp(-Math.pow((t - 0.7) / 0.05, 2)) * 0.4;
+        return clamp(base - dip1 - dip2, 0, 1);
+    }
+
+    window.__v3InitHeroGL = function (heroEl, imgSrc) {
+        if (!heroEl || !imgSrc) return null;
+
+        var canvas = document.createElement('canvas');
+        canvas.id = 'v3-gl';
+        canvas.setAttribute('aria-hidden', 'true');
+        // z-index:1 — between .hero-image-bg (z0) and .hero-overlay (z2).
+        canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;' +
+            'z-index:1;pointer-events:none;opacity:0;transition:opacity .6s ease-out;';
+
+        var gl = null;
+        try {
+            gl = canvas.getContext('webgl', { premultipliedAlpha: false, alpha: false, antialias: false }) ||
+                canvas.getContext('experimental-webgl', { premultipliedAlpha: false, alpha: false, antialias: false });
+        } catch (err) { gl = null; }
+        if (!gl) return null;
+
+        var program = createProgram(gl, VERT_SRC, FRAG_SRC);
+        if (!program) return null;
+
+        var quad = new Float32Array([-1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1]);
+        var buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+
+        var aPos = gl.getAttribLocation(program, 'aPos');
+        var uTex = gl.getUniformLocation(program, 'uTex');
+        var uResolution = gl.getUniformLocation(program, 'uResolution');
+        var uTexSize = gl.getUniformLocation(program, 'uTexSize');
+        var uTime = gl.getUniformLocation(program, 'uTime');
+        var uStartup = gl.getUniformLocation(program, 'uStartup');
+        var uRipple = [
+            gl.getUniformLocation(program, 'uRipple0'),
+            gl.getUniformLocation(program, 'uRipple1'),
+            gl.getUniformLocation(program, 'uRipple2')
+        ];
+
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+        var texture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+
+        var texW = 1, texH = 1, texReady = false;
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function () {
+            texW = img.naturalWidth || 1;
+            texH = img.naturalHeight || 1;
+            gl.bindTexture(gl.TEXTURE_2D, texture);
+            try {
+                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+                texReady = true;
+            } catch (err) { texReady = false; }
+        };
+        img.onerror = function () { texReady = false; };
+        img.src = imgSrc;
+
+        var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        var cw = 0, ch = 0;
+        function resize() {
+            var rect = heroEl.getBoundingClientRect();
+            cw = Math.max(1, Math.round(rect.width * dpr));
+            ch = Math.max(1, Math.round(rect.height * dpr));
+            if (canvas.width !== cw || canvas.height !== ch) {
+                canvas.width = cw;
+                canvas.height = ch;
+                gl.viewport(0, 0, cw, ch);
+            }
+        }
+        resize();
+        window.addEventListener('resize', resize, { passive: true });
+
+        heroEl.appendChild(canvas);
+
+        // ---- cursor velocity -> ripple impulses (3-slot round robin) ----
+        var ripples = [
+            { x: 0.5, y: 0.5, start: 0, strength: 0 },
+            { x: 0.5, y: 0.5, start: 0, strength: 0 },
+            { x: 0.5, y: 0.5, start: 0, strength: 0 }
+        ];
+        var rippleSlot = 0;
+        var lastPX = null, lastPY = null, lastPT = 0;
+        function onPointerMove(e) {
+            var rect = heroEl.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+            var x = (e.clientX - rect.left) / rect.width;
+            var y = 1 - (e.clientY - rect.top) / rect.height;
+            var now = nowMs();
+            if (lastPX !== null) {
+                var dt = Math.max(now - lastPT, 1);
+                var dx = e.clientX - lastPX, dy = e.clientY - lastPY;
+                var vel = Math.sqrt(dx * dx + dy * dy) / dt;
+                if (vel > 0.35) {
+                    var slot = ripples[rippleSlot];
+                    slot.x = x; slot.y = y; slot.start = now;
+                    slot.strength = clamp(vel / 3, 0.2, 1);
+                    rippleSlot = (rippleSlot + 1) % ripples.length;
+                }
+            }
+            lastPX = e.clientX; lastPY = e.clientY; lastPT = now;
+        }
+        heroEl.addEventListener('pointermove', onPointerMove, { passive: true });
+
+        // ---- pause on hidden / offscreen ----
+        var visible = true;
+        var io = null;
+        if (window.IntersectionObserver) {
+            io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) { visible = entry.isIntersecting; });
+            }, { threshold: 0 });
+            io.observe(heroEl);
+        }
+
+        // ---- context lost -> remove canvas silently ----
+        var destroyed = false;
+        function onContextLost(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            destroy();
+        }
+        canvas.addEventListener('webglcontextlost', onContextLost, false);
+
+        var startTime = nowMs();
+        var firstFrameShown = false;
+        var rafId = null;
+
+        function render(ts) {
+            if (destroyed) return;
+            rafId = requestAnimationFrame(render);
+            if (document.hidden || !visible || !texReady || !cw || !ch) return;
+
+            var now = nowMs();
+            var elapsedSec = (now - startTime) / 1000;
+
+            gl.useProgram(program);
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.enableVertexAttribArray(aPos);
+            gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+            gl.activeTexture(gl.TEXTURE0);
+            gl.bindTexture(gl.TEXTURE_2D, texture);
+            gl.uniform1i(uTex, 0);
+            gl.uniform2f(uResolution, cw, ch);
+            gl.uniform2f(uTexSize, texW, texH);
+            gl.uniform1f(uTime, elapsedSec);
+            gl.uniform1f(uStartup, computeStartup(elapsedSec));
+
+            for (var i = 0; i < ripples.length; i++) {
+                var r = ripples[i];
+                var age = clamp((now - r.start) / 1800, 0, 1);
+                gl.uniform4f(uRipple[i], r.x, r.y, age, r.strength);
+            }
+
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+            if (!firstFrameShown) {
+                firstFrameShown = true;
+                canvas.style.opacity = '1';
+            }
+        }
+        rafId = requestAnimationFrame(render);
+
+        function destroy() {
+            if (destroyed) return;
+            destroyed = true;
+            if (rafId) cancelAnimationFrame(rafId);
+            window.removeEventListener('resize', resize);
+            heroEl.removeEventListener('pointermove', onPointerMove);
+            canvas.removeEventListener('webglcontextlost', onContextLost);
+            if (io) io.disconnect();
+            if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+        }
+
+        return { canvas: canvas, destroy: destroy };
+    };
+})();
+
+</script>
+    <script id="v3-kanji-visible">
+(function(){
+  var spans = document.querySelectorAll('.v3-kanji');
+  if (!spans.length) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    spans.forEach(function(k){ k.classList.add('visible'); });
+    return;
+  }
+  if (!('IntersectionObserver' in window)) { spans.forEach(function(k){ k.classList.add('visible'); }); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  spans.forEach(function(k){ io.observe(k); });
+})();
+</script>
     <script id="v2-engine">// ===== V2 ENGINE =====
 (function () {
     'use strict';
@@ -2448,7 +2901,6 @@
                 heroTargetY = clamp(((e.clientY - rect.top) / rect.height) * 100, 0, 100);
             }, { passive: true });
         }
-        initHeroSpotlight();
         function heroSpotlightFrame() {
             if (!heroSpotActive || !heroEl) return;
             heroSpotX += (heroTargetX - heroSpotX) * 0.1;
@@ -2458,10 +2910,19 @@
         }
 
         // ---- Hero scroll-out rack focus / parallax (F2) ----
-        function initHeroExitScrub() {
-            var bg = qs('.hero-image-bg');
-            if (!heroEl || !bg) return;
-            gsap.fromTo(bg,
+        // [S-1 wiring] heroExitTargets/buildHeroExitScrub let the WebGL canvas
+        // join this same blur/opacity/parallax scrub once it exists, without a
+        // second conflicting ScrollTrigger on the hero.
+        var heroExitTargets = [];
+        var heroExitTween = null;
+        function buildHeroExitScrub() {
+            if (heroExitTween) {
+                if (heroExitTween.scrollTrigger) heroExitTween.scrollTrigger.kill();
+                heroExitTween.kill();
+                heroExitTween = null;
+            }
+            if (!heroExitTargets.length) return;
+            heroExitTween = gsap.fromTo(heroExitTargets,
                 { filter: 'blur(0px)', opacity: 1, y: 0 },
                 {
                     filter: 'blur(6px)', opacity: 0.6, y: function () { return window.innerHeight * 0.3; },
@@ -2470,7 +2931,32 @@
                 }
             );
         }
+        function initHeroExitScrub() {
+            var bg = qs('.hero-image-bg');
+            if (!heroEl || !bg) return;
+            heroExitTargets = [bg];
+            buildHeroExitScrub();
+        }
         initHeroExitScrub();
+
+        // ---- WebGL hero 「生きた映写」 (S-1) [engine] ----
+        function initHeroGL() {
+            try {
+                if (!heroEl || !desktopFine) return;
+                if (!html.classList.contains('motion-ok') || html.classList.contains('reduced')) return;
+                if (typeof window.__v3InitHeroGL !== 'function') return;
+                var heroImg = heroEl.querySelector('img');
+                var imgSrc = heroImg ? (heroImg.currentSrc || heroImg.src) : '';
+                if (!imgSrc) return;
+                window.__v3InitHeroGL(heroEl, imgSrc);
+                var glCanvas = qs('#v3-gl', heroEl);
+                if (glCanvas && heroExitTargets.indexOf(glCanvas) === -1) {
+                    heroExitTargets.push(glCanvas);
+                    buildHeroExitScrub();
+                }
+            } catch (err) { /* silent — GL is decorative, never break the page */ }
+        }
+        window.addEventListener('load', initHeroGL);
 
         // ---- Signature spotlight scrub (F4) ----
         var signatureTween = null;
@@ -2539,7 +3025,6 @@
                 }, { passive: true });
             });
         }
-        initTilt();
         function tiltFrame() {
             for (var i = 0; i < tiltState.length; i++) {
                 var st = tiltState[i];
@@ -2550,8 +3035,70 @@
             }
         }
 
+        // ---- Work-card flipbook hover (S-2) [engine] ----
+        function initFlipbook() {
+            if (!desktopFine) return;
+            var HOLD_MS = 180, FRAME_MS = 320;
+            qsa('[data-tilt]').forEach(function (card) {
+                var videoId = card.getAttribute('data-video');
+                var img = card.querySelector('img');
+                if (!videoId || !img) return;
+                var originalSrc = img.getAttribute('src');
+                var frames = [
+                    'https://img.youtube.com/vi/' + videoId + '/hq1.jpg',
+                    'https://img.youtube.com/vi/' + videoId + '/hq2.jpg',
+                    'https://img.youtube.com/vi/' + videoId + '/hq3.jpg'
+                ];
+                var preloaded = false, framesOk = true, flipping = false;
+                var holdTimer = null, loopTimer = null, frameIdx = 0;
+
+                function preload() {
+                    if (preloaded) return;
+                    preloaded = true;
+                    frames.forEach(function (src) {
+                        var probe = new Image();
+                        probe.onerror = function () { framesOk = false; };
+                        probe.src = src;
+                    });
+                }
+                function stopFlip() {
+                    flipping = false;
+                    card.classList.remove('is-flipping');
+                    if (loopTimer) { clearTimeout(loopTimer); loopTimer = null; }
+                    if (originalSrc) img.src = originalSrc;
+                }
+                function stepFrame() {
+                    if (!framesOk) { stopFlip(); return; }
+                    frameIdx = (frameIdx + 1) % frames.length;
+                    img.src = frames[frameIdx];
+                    loopTimer = setTimeout(stepFrame, FRAME_MS);
+                }
+                function startFlip() {
+                    if (!framesOk || flipping) return;
+                    flipping = true;
+                    card.classList.add('is-flipping');
+                    frameIdx = 0;
+                    img.src = frames[0];
+                    loopTimer = setTimeout(stepFrame, FRAME_MS);
+                }
+                card.addEventListener('pointerenter', function () {
+                    preload();
+                    if (holdTimer) clearTimeout(holdTimer);
+                    holdTimer = setTimeout(startFlip, HOLD_MS);
+                }, { passive: true });
+                card.addEventListener('pointerleave', function () {
+                    if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+                    if (flipping) stopFlip();
+                }, { passive: true });
+            });
+        }
+
         // ---- Scramble (F7) ----
-        var SCRAMBLE_CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン・#%&*+=<>/';
+        // [P0-2] Only [A-Za-z0-9] chars scramble; punctuation/space/kanji stay
+        // verbatim throughout, and the terminal frame always writes back the
+        // exact original string.
+        var SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var SCRAMBLE_ALNUM_RE = /[A-Za-z0-9]/;
         var scrambleResolved = [];
         function ensureScrambleTarget(el) {
             var existing = el.querySelector(':scope > .v2-scramble-text');
@@ -2580,7 +3127,7 @@
                 target.setAttribute('data-v2-original', original);
             }
             var len = original.length;
-            var totalFrames = 30;
+            var totalFrames = isMobile ? 20 : 30;
             var frame = 0;
             if (el.__v2ScrambleTimer) clearInterval(el.__v2ScrambleTimer);
             el.__v2ScrambleTimer = setInterval(function () {
@@ -2589,7 +3136,7 @@
                 var out = '';
                 for (var i = 0; i < len; i++) {
                     var ch = original[i];
-                    if (i < resolvedCount || /\s/.test(ch)) out += ch;
+                    if (i < resolvedCount || !SCRAMBLE_ALNUM_RE.test(ch)) out += ch;
                     else out += SCRAMBLE_CHARS.charAt(Math.floor(Math.random() * SCRAMBLE_CHARS.length));
                 }
                 target.textContent = out;
@@ -2615,7 +3162,6 @@
             }, { threshold: 0.5 });
             els.forEach(function (el) { scrambleIO.observe(el); });
         }
-        initScramble();
 
         // ---- Magnetic buttons (F9) ----
         function initMagnetic() {
@@ -2632,7 +3178,35 @@
                 });
             });
         }
-        initMagnetic();
+
+        // ---- Cinema lightbox chrome (S-3) [engine] ----
+        // openLightbox() itself lives in the markup-owned inline script (not on
+        // window), so this listens for the same [data-video] clicks independently
+        // to populate .v2-screening-title and flicker the lightbox, staying inside
+        // our region without touching that function.
+        function findScreeningTitle(videoEl) {
+            var sel = '.work-card-title, .more-work-title, .spotlight-title';
+            var found = videoEl.querySelector(sel);
+            if (!found) {
+                var scope = videoEl.closest('.spotlight-container, .work-card, .more-work-card') || videoEl.parentElement;
+                if (scope) found = scope.querySelector(sel);
+            }
+            return found ? found.textContent.trim() : '';
+        }
+        function initScreeningChrome() {
+            doc.addEventListener('click', function (e) {
+                var videoEl = e.target && e.target.closest ? e.target.closest('[data-video]') : null;
+                if (!videoEl) return;
+                var titleEl = qs('.v2-screening-title');
+                if (titleEl) titleEl.textContent = findScreeningTitle(videoEl);
+                var lb = qs('#videoLightbox') || qs('.video-lightbox');
+                if (lb) {
+                    lb.classList.add('v2-flicker');
+                    setTimeout(function () { lb.classList.remove('v2-flicker'); }, 500);
+                }
+            }, { passive: true });
+        }
+        initScreeningChrome();
 
         // ---- Cursor v2 (F10) ----
         var cursorRing = null, cursorDot = null, cursorActive = false;
@@ -2716,30 +3290,32 @@
         }
 
         // ---- Dust motes canvas (F11) ----
+        // [P0-6] Own rAF loop folded into the single shared frame loop below —
+        // initDust() only sets up state; dustFrame() is driven by sharedFrame().
+        var dustCtx = null, dustCanvas = null, dustW = 0, dustH = 0, dustMotes = [], dustHeroVisible = true;
         function initDust() {
             if (!desktopFine) return;
-            var canvas = qs('#v2-dust');
-            if (!canvas || !heroEl) return;
-            var ctx = canvas.getContext && canvas.getContext('2d');
-            if (!ctx) return;
+            dustCanvas = qs('#v2-dust');
+            if (!dustCanvas || !heroEl) return;
+            dustCtx = dustCanvas.getContext && dustCanvas.getContext('2d');
+            if (!dustCtx) { dustCtx = null; return; }
 
             var dpr = Math.min(window.devicePixelRatio || 1, 2);
-            var w = 0, h = 0;
             function resize() {
-                w = heroEl.clientWidth; h = heroEl.clientHeight;
-                if (!w || !h) return;
-                canvas.width = w * dpr; canvas.height = h * dpr;
-                canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                dustW = heroEl.clientWidth; dustH = heroEl.clientHeight;
+                if (!dustW || !dustH) return;
+                dustCanvas.width = dustW * dpr; dustCanvas.height = dustH * dpr;
+                dustCanvas.style.width = dustW + 'px'; dustCanvas.style.height = dustH + 'px';
+                dustCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
             }
             resize();
             window.addEventListener('resize', resize, { passive: true });
 
-            var motes = [];
+            dustMotes = [];
             for (var i = 0; i < 28; i++) {
-                motes.push({
-                    x: Math.random() * (w || 1),
-                    y: Math.random() * (h || 1),
+                dustMotes.push({
+                    x: Math.random() * (dustW || 1),
+                    y: Math.random() * (dustH || 1),
                     r: 0.6 + Math.random() * 1.4,
                     a: 0.05 + Math.random() * 0.11,
                     vx: 0.06 + Math.random() * 0.10,
@@ -2749,32 +3325,26 @@
                 });
             }
 
-            var heroVisible = true;
             var dustIO = new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) { heroVisible = e.isIntersecting; });
+                entries.forEach(function (e) { dustHeroVisible = e.isIntersecting; });
             }, { threshold: 0 });
             dustIO.observe(heroEl);
-
-            function frame() {
-                if (!doc.hidden && heroVisible && w && h) {
-                    ctx.clearRect(0, 0, w, h);
-                    for (var j = 0; j < motes.length; j++) {
-                        var m = motes[j];
-                        m.x += m.vx; m.y += m.vy; m.tw += m.tws;
-                        if (m.x > w + 5) m.x = -5;
-                        if (m.y < -5) m.y = h + 5;
-                        var alpha = m.a * (0.6 + 0.4 * Math.sin(m.tw));
-                        ctx.beginPath();
-                        ctx.fillStyle = 'rgba(212,168,83,' + alpha.toFixed(3) + ')';
-                        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-                requestAnimationFrame(frame);
-            }
-            requestAnimationFrame(frame);
         }
-        initDust();
+        function dustFrame() {
+            if (!dustCtx || !dustHeroVisible || !dustW || !dustH) return;
+            dustCtx.clearRect(0, 0, dustW, dustH);
+            for (var j = 0; j < dustMotes.length; j++) {
+                var m = dustMotes[j];
+                m.x += m.vx; m.y += m.vy; m.tw += m.tws;
+                if (m.x > dustW + 5) m.x = -5;
+                if (m.y < -5) m.y = dustH + 5;
+                var alpha = m.a * (0.6 + 0.4 * Math.sin(m.tw));
+                dustCtx.beginPath();
+                dustCtx.fillStyle = 'rgba(212,168,83,' + alpha.toFixed(3) + ')';
+                dustCtx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+                dustCtx.fill();
+            }
+        }
 
         // ---- Velocity skew (F12) ----
         var skewEls = [];
@@ -2782,7 +3352,6 @@
             if (!lenis) return;
             skewEls = qsa('[data-skew]');
         }
-        initSkew();
         var skewCur = [];
         function skewFrame() {
             if (!lenis || !skewEls.length) return;
@@ -2796,23 +3365,8 @@
             }
         }
 
-        // ---- Awards idle glint (F6) ----
-        function initGlint() {
-            var cards = qsa('.award-card');
-            if (!cards.length) return;
-            function schedule() {
-                var delay = 7000 + Math.random() * 4000;
-                setTimeout(function () {
-                    if (doc.hidden) { schedule(); return; }
-                    var card = cards[Math.floor(Math.random() * cards.length)];
-                    card.classList.add('v2-glint');
-                    setTimeout(function () { card.classList.remove('v2-glint'); }, 1200);
-                    schedule();
-                }, delay);
-            }
-            schedule();
-        }
-        initGlint();
+        // [P0-5] Awards idle glint (F6) removed — killed the 7-11s random loop
+        // that caused unprompted card glints.
 
         // ---- Back-to-top progress ring (F13) ----
         function initBackToTopRing() {
@@ -2842,7 +3396,24 @@
                 }
             });
         }
-        initBackToTopRing();
+
+        // ---- Kanji chapter watermark parallax (L-7) [engine] ----
+        function initKanjiParallax() {
+            if (isMobile) return;
+            qsa('.v3-kanji').forEach(function (span) {
+                var section = span.closest('section') || span.parentElement;
+                if (!section) return;
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true,
+                    onUpdate: function (self) {
+                        gsap.set(span, { y: (self.progress - 0.5) * 40 });
+                    }
+                });
+            });
+        }
 
         // ---- Works filter (F14) ----
         window.__v2Filter = function (category) {
@@ -2896,17 +3467,44 @@
             ScrollTrigger.refresh();
         };
 
-        // ---- Shared rAF loop (cursor ring, tilt, hero spotlight, skew) ----
+        // ---- Shared rAF loop (cursor ring, tilt, hero spotlight, skew, dust) ----
         function sharedFrame() {
             if (!doc.hidden) {
                 heroSpotlightFrame();
                 tiltFrame();
                 cursorRingFrame();
                 skewFrame();
+                dustFrame();
             }
             requestAnimationFrame(sharedFrame);
         }
         requestAnimationFrame(sharedFrame);
+
+        // ---- P0-6: idle-time init staggering ----
+        // Frame 1 (above, synchronous) already covered reveals + splitChars +
+        // cursor. Everything else that measured as long-task work on boot is
+        // spread across requestIdleCallback chunks (setTimeout(,1) fallback),
+        // ending in a single ScrollTrigger.refresh() once layout has settled.
+        function idle(fn) {
+            if (window.requestIdleCallback) window.requestIdleCallback(fn, { timeout: 400 });
+            else setTimeout(fn, 1);
+        }
+        idle(function () {
+            initHeroSpotlight();
+            initTilt();
+            initFlipbook();
+            idle(function () {
+                initScramble();
+                initMagnetic();
+                idle(function () {
+                    initDust();
+                    initSkew();
+                    initBackToTopRing();
+                    initKanjiParallax();
+                    ScrollTrigger.refresh();
+                });
+            });
+        });
     }
 })();
 </script>

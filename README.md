@@ -7,7 +7,8 @@
 
 | 版 | 場所 | 内容 |
 |---|---|---|
-| **v2 (現行)** | `index.html` | モーション強化版 —「映写機の光」コンセプト (GSAP + ScrollTrigger + Lenis) |
+| **v3 (現行)** | `index.html` | 「試写室」— WebGLヒーロー(生きた映写)+作品フリップブック+章漢字透かし+高級化リファイン |
+| **v2 (保存)** | git tag `v2` | 「映写機の光」モーション層 (GSAP + ScrollTrigger + Lenis) |
 | **v1 (保存)** | `v1.html` / git tag `v1` | film-festival award-winner concept (モーション追加前) |
 
 v1 はそのまま閲覧可能: https://ryominami.github.io/Movie-portfolio/v1.html
@@ -15,8 +16,8 @@ v1 はそのまま閲覧可能: https://ryominami.github.io/Movie-portfolio/v1.h
 ## v1 に戻す方法 (どちらか1つ)
 
 ```bash
-# 方法A: タグから復元
-git checkout v1 -- index.html
+# 方法A: タグから復元 (v1 または v2)
+git checkout v1 -- index.html   # v2に戻すなら: git checkout v2 -- index.html
 git commit -m "revert: back to v1"
 git push
 
