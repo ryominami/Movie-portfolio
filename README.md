@@ -7,26 +7,27 @@
 
 | 版 | 場所 | 内容 |
 |---|---|---|
-| **v4 (現行)** | `index.html` | 「CARD DECK」— 黒基調3Dカードデザイン (浮遊カードデッキヒーロー+筆記体透かし+作品フリップカード+スティッキー積層FEATURED+白セクション帯)。Kanit+Zen Kaku Gothic New、GSAP+ScrollTrigger のみ (Lenis廃止) |
-| **v3 (保存)** | `v3.html` / git tag `v3` | 「試写室」— WebGLヒーロー(生きた映写)+作品フリップブック+章漢字透かし+高級化リファイン |
+| **v3 (現行)** | `index.html` (= `v3.html`) / git tag `v3` | 「試写室」— WebGLヒーロー(生きた映写)+作品フリップブック+章漢字透かし+高級化リファイン |
+| **v4 (保存)** | `v4.html` / git tag `v4` | 「CARD DECK」— 黒基調3Dカードデザイン (浮遊カードデッキヒーロー+筆記体透かし+作品フリップカード+スティッキー積層FEATURED+白セクション帯)。Kanit+Zen Kaku Gothic New、GSAP+ScrollTrigger のみ (Lenis廃止) |
 | **v2 (保存)** | git tag `v2` | 「映写機の光」モーション層 (GSAP + ScrollTrigger + Lenis) |
 | **v1 (保存)** | `v1.html` / git tag `v1` | film-festival award-winner concept (モーション追加前) |
 
 保存版はそのまま閲覧可能:
+- v4: https://ryominami.github.io/Movie-portfolio/v4.html
 - v3: https://ryominami.github.io/Movie-portfolio/v3.html
 - v1: https://ryominami.github.io/Movie-portfolio/v1.html
 
-## 前の版に戻す方法 (どちらか1つ)
+## 別の版に切り替える方法 (どちらか1つ)
 
 ```bash
-# 方法A: タグから復元 (v1 / v2 / v3)
-git checkout v3 -- index.html   # v3 に戻す例
-git commit -m "revert: back to v3"
+# 方法A: タグから復元 (v1 / v2 / v3 / v4)
+git checkout v4 -- index.html   # v4 に切り替える例
+git commit -m "switch: to v4"
 git push
 
 # 方法B: 保存ファイルから復元
-cp v3.html index.html           # v1 なら cp v1.html index.html
-git commit -am "revert: back to v3"
+cp v4.html index.html           # v3 なら cp v3.html index.html
+git commit -am "switch: to v4"
 git push
 ```
 
