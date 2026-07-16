@@ -7,7 +7,8 @@
 
 | 版 | 場所 | 内容 |
 |---|---|---|
-| **v5 (現行)** | `index.html` / git tag `v5` | 「案内猫の試写室」— v3の情緒 × v4の3Dカード × 対話ヒーローの融合。シネマゴールド配色、オリジナル3Dキャラ「案内猫フク」(GPT Image 2生成・images/usher-cat*.png) がカードデッキ上で迎え、ブラー導入+タイプライター挨拶+ピルボタン。章漢字透かし復活、Shippori Mincho追加 |
+| **v6 (現行)** | `index.html` / git tag `v6` | 「クリームの上映サロン」— v5 の生成りクリーム転調。--paper #F5F1E8 基調・墨インク・濃ゴールド、contact のみエスプレッソ暗転+lightbox はダーク維持 (上映=暗転の演出)。構造/キャラ/機能は v5 と同一 |
+| **v5 (保存)** | git tag `v5` | 「案内猫の試写室」— v3の情緒 × v4の3Dカード × 対話ヒーローの融合 (黒×ゴールドのダーク版)。オリジナル3Dキャラ「案内猫フク」(GPT Image 2生成・images/usher-cat*.png) がカードデッキ上で迎え、ブラー導入+タイプライター挨拶+ピルボタン。章漢字透かし復活、Shippori Mincho追加 |
 | **v4 (保存)** | `v4.html` / git tag `v4` | 「CARD DECK」— 黒基調3Dカードデザイン (浮遊カードデッキヒーロー+筆記体透かし+作品フリップカード+スティッキー積層FEATURED+白セクション帯)。Kanit+Zen Kaku Gothic New、GSAP+ScrollTrigger のみ (Lenis廃止) |
 | **v3 (保存)** | `v3.html` / git tag `v3` | 「試写室」— WebGLヒーロー(生きた映写)+作品フリップブック+章漢字透かし+高級化リファイン |
 | **v2 (保存)** | git tag `v2` | 「映写機の光」モーション層 (GSAP + ScrollTrigger + Lenis) |
