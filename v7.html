@@ -1,0 +1,2680 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RYO STUDIO | Visual Storyteller</title>
+    <meta name="description" content="受賞歴10以上の映像クリエイター RYO STUDIO。CM・PR映像、アニメーション(横型/縦型)、ショートフィルムを企画から納品までワンストップで制作。お見積もり無料、オンライン完結で全国対応。">
+    <meta property="og:title" content="RYO STUDIO | Visual Storyteller">
+    <meta property="og:description" content="映像で物語を紡ぐクリエイター">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://ryominami.github.io/Movie-portfolio/images/hero-anime-og.jpg">
+    <meta property="og:url" content="https://ryominami.github.io/Movie-portfolio/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RYO STUDIO | Visual Storyteller">
+    <meta name="twitter:description" content="映像で物語を紡ぐクリエイター">
+    <meta name="twitter:image" content="https://ryominami.github.io/Movie-portfolio/images/hero-anime-og.jpg">
+    <link rel="canonical" href="https://ryominami.github.io/Movie-portfolio/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23060607' width='100' height='100' rx='16'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='58' font-weight='400' fill='%23d4a853' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://img.youtube.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;800;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Shippori+Mincho:wght@500;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "RYO STUDIO",
+        "url": "https://ryominami.github.io/Movie-portfolio/",
+        "description": "映像で物語を紡ぐクリエイター。アニメーション、プロモーション映像など、心に響く映像作品を制作します。",
+        "sameAs": ["https://x.com/ryo05m"],
+        "jobTitle": "Visual Storyteller / Video Creator",
+        "knowsAbout": ["Video Production", "Animation", "AI Video", "Short Film", "Promotion Video"],
+        "award": [
+            "グランプリ — JAPAN AI VIDEO AWARDS 2026 予防医療普及部門",
+            "Best Director賞 — Vidu Duscar Awards",
+            "優秀賞 — Anipop Award",
+            "最優秀賞 — KAERUN AI「あったらいいな」CMコンテスト",
+            "グランプリ×3 — SOZO美術館 第29回コンペ",
+            "準グランプリ — SOZO美術館 第30回コンペ",
+            "優秀賞 — 幸手市映像コンテスト",
+            "優秀賞 — 泣けるAIショートアニメ",
+            "SNS特別賞 — NICIドリームステージ大賞",
+            "Silver賞 — ViduQreation Challenge",
+            "3位 — ミスターAIコンテスト"
+        ]
+    }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <style id="v4-style">
+        :root {
+            --bg: #F5F1E8;
+            --paper: #F5F1E8;
+            --paper-soft: #FBF8F1;
+            --espresso: #221A10;
+            --text: #211B10;
+            --text-dim: rgba(33,27,16,.66);
+            --text-faint: rgba(33,27,16,.42);
+            --white: #FFFFFF;
+            --ink: #211B10;
+            --ink-dim: #6E6252;
+            --line: rgba(33,27,16,.14);
+            --line-strong: rgba(33,27,16,.28);
+            --line-ink: rgba(33,27,16,.15);
+            --accent-grad: linear-gradient(123deg,#5a3f12 0%,#A87E2F 45%,#8a5a1f 75%,#C9A04E 100%);
+            --heading-grad: linear-gradient(180deg,#33291A 0%,#8A6A35 100%);
+            --gold: #A87E2F;
+            --gold-hi: #C9A04E;
+            --gold-soft: rgba(168,126,47,.45);
+            --font-en: 'Kanit', system-ui, sans-serif;
+            --font-jp: 'Zen Kaku Gothic New', 'Kanit', system-ui, sans-serif;
+            --font-jp-display: 'Shippori Mincho', 'Zen Kaku Gothic New', serif;
+            --font-script: 'Pinyon Script', cursive;
+            --ease: cubic-bezier(.25,.1,.25,1);
+            --ease-flip: cubic-bezier(.4,.2,.2,1);
+            --maxw: 1400px;
+            --gutter: clamp(20px,5vw,64px);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: clip; }
+        html, body { max-width: 100%; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-jp);
+            line-height: 1.7;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+        ul, ol { list-style: none; }
+        button { font: inherit; background: none; border: none; color: inherit; cursor: pointer; }
+        .wrapper { overflow-x: clip; position: relative; }
+        .container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+        section { scroll-margin-top: 88px; position: relative; }
+        [aria-hidden="true"] { user-select: none; }
+
+        /* ---------- V7: focus-visible (A1) ---------- */
+        :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+        .btn-pill:focus-visible, .nav-cta:focus-visible, .hero-award-chip:focus-visible,
+        .contact-cta:focus-visible, .pricing-cta.featured:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--paper), 0 0 0 6px var(--gold);
+        }
+
+        /* ---------- shared type ---------- */
+        .section-head { position: relative; z-index: 2; max-width: 900px; margin: 0 0 clamp(2.5rem,6vw,4.5rem); }
+        .section-kicker {
+            font-family: var(--font-jp); font-size: clamp(.95rem,1.6vw,1.15rem);
+            font-weight: 700; letter-spacing: .02em; opacity: .82; margin-bottom: .5rem;
+        }
+        .section-heading {
+            font-family: var(--font-en); font-weight: 900; text-transform: uppercase;
+            line-height: .9; font-size: clamp(3rem,12vw,160px); letter-spacing: -.01em;
+        }
+        .section-heading.hero-heading {
+            background: var(--heading-grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .section-white .section-heading { color: var(--ink); }
+        .section-sub {
+            margin-top: 1rem; font-size: clamp(1rem,2vw,1.25rem); color: var(--text-dim); font-weight: 500;
+        }
+        .section-white .section-sub { color: rgba(33,27,16,.6); }
+
+        /* ---------- buttons ---------- */
+        .btn-pill, .contact-cta, .pricing-cta.featured {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 15px 34px; border-radius: 9999px; background: var(--accent-grad);
+            color: #fff; text-decoration: none; font-family: var(--font-en); font-weight: 600;
+            text-transform: uppercase; letter-spacing: .04em; font-size: .85rem;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,.3), 0 16px 34px -14px rgba(168,126,47,.55);
+            outline: 2px solid #3a2c14; outline-offset: -3px; border: none; cursor: pointer;
+            transition: transform .3s var(--ease);
+            will-change: transform;
+        }
+        .btn-ghost, .pricing-cta, .yt-channel-link {
+            display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px;
+            border: 1.5px solid var(--line-strong); border-radius: 9999px; color: var(--text);
+            text-decoration: none; font-family: var(--font-en); text-transform: uppercase;
+            letter-spacing: .05em; font-size: .78rem; font-weight: 500;
+            transition: border-color .3s, background .3s;
+        }
+        .btn-ghost:hover, .pricing-cta:hover, .yt-channel-link:hover { border-color: var(--text); background: rgba(33,27,16,.08); }
+        .section-white .btn-ghost, .section-white .pricing-cta { border-color: var(--line-ink); color: var(--ink); }
+        .section-white .btn-ghost:hover, .section-white .pricing-cta:hover { border-color: var(--ink); background: rgba(33,27,16,.05); }
+        .btn-ghost svg, .btn-pill svg { width: 14px; height: 14px; }
+
+        /* ================= NAV ================= */
+        header.nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 22px var(--gutter);
+            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, rgba(245,241,232,.85), transparent);
+            transition: background .3s, border-color .3s;
+            border-bottom: 1px solid transparent;
+        }
+        /* V7 A3: scrolled state (JS toggles .nav--scrolled past scrollY>40) */
+        header.nav.nav--scrolled {
+            background: rgba(245,241,232,.92);
+            border-bottom-color: var(--line);
+        }
+        .nav-logo { font-family: var(--font-en); font-weight: 800; letter-spacing: .06em; text-transform: uppercase; font-size: 1rem; }
+        .nav-links { display: flex; align-items: center; gap: clamp(14px,2.4vw,30px); overflow-x: auto; scrollbar-width: none; }
+        .nav-links::-webkit-scrollbar { display: none; }
+        .nav-links a {
+            position: relative; font-family: var(--font-en); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em;
+            text-decoration: none; color: var(--text); opacity: .8; white-space: nowrap;
+            transition: opacity .25s, letter-spacing .25s;
+        }
+        /* V7 D6: underline sweep + tracking */
+        .nav-links a::after {
+            content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px;
+            background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);
+        }
+        .nav-links a:hover { opacity: 1; letter-spacing: .1em; }
+        .nav-links a:hover::after { transform: scaleX(1); }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        #langToggle {
+            font-family: var(--font-en); font-size: .72rem; letter-spacing: .06em;
+            border: 1px solid var(--line-strong); border-radius: 9999px; padding: 6px 12px; color: var(--text);
+        }
+        .nav-cta {
+            font-family: var(--font-en); font-size: .74rem; text-transform: uppercase; letter-spacing: .05em;
+            text-decoration: none; padding: 10px 20px; border-radius: 9999px; background: var(--accent-grad); color: #fff;
+            white-space: nowrap;
+        }
+        /* V7 E2: gold-foil sweep (.btn-pill/.nav-cta) */
+        .btn-pill, .nav-cta { position: relative; overflow: hidden; }
+        .btn-pill::before, .nav-cta::before {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.25) 50%, transparent 60%);
+            transform: translateX(-120%);
+        }
+        .btn-pill:hover::before, .nav-cta:hover::before { transition: transform .6s ease; transform: translateX(120%); }
+        @media (max-width: 860px) { .nav-cta { display: none; } }
+        @media (max-width: 700px) {
+            header.nav { flex-wrap: wrap; row-gap: 10px; padding-top: 14px; padding-bottom: 12px; }
+            .nav-links { order: 3; flex-basis: 100%; gap: 4px; justify-content: space-between; }
+            .nav-links a { font-size: .68rem; padding: 13px 6px; }
+        }
+
+        /* ================= HERO ================= */
+        #hero {
+            min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+            padding: clamp(84px,9svh,120px) var(--gutter) clamp(18px,3svh,32px); overflow: hidden;
+        }
+        .script-wm {
+            position: absolute; top: 46%; left: 50%; transform: translate(-50%,-50%);
+            font-family: var(--font-script); font-size: clamp(220px,44vw,640px); color: rgba(255,255,255,.045);
+            white-space: nowrap; z-index: 0; pointer-events: none; line-height: 1;
+        }
+        .hero-inner {
+            position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: clamp(8px,1.4svh,14px);
+            perspective: 1400px; perspective-origin: 50% 38%;
+        }
+        .hero-award-chip {
+            display: inline-flex; align-items: center; gap: 8px; padding: 9px 22px;
+            border-radius: 9999px; background: var(--accent-grad); box-shadow: inset 0 1px 2px rgba(255,255,255,.25);
+            outline: 2px solid #3a2c14; outline-offset: -3px; font-family: var(--font-en);
+            font-size: clamp(.62rem,1.1vw,.75rem); letter-spacing: .06em; text-transform: uppercase; color: #fff;
+        }
+        .hero-sub { font-family: var(--font-en); font-weight: 300; font-size: clamp(.9rem,1.7vw,1.2rem); color: var(--text-dim); line-height: 1.3; position: relative; z-index: 6; margin-bottom: .2em; text-shadow: 0 2px 18px rgba(12,12,12,.9); }
+        .hero-sub em { font-style: italic; font-weight: 500; color: var(--text); }
+        .hero-headline {
+            font-family: var(--font-en); font-weight: 900; text-transform: uppercase;
+            font-size: clamp(2.8rem,9.6vw,10rem); line-height: .88; white-space: nowrap;
+            margin: -0.14em 0 -0.15em;
+        }
+        .hero-deck { position: relative; width: 100%; max-width: 960px; height: clamp(216px,31svh,400px); margin-top: clamp(2px,.6svh,8px); }
+        .deck-card { position: absolute; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 60px -24px rgba(33,27,16,.35); border: 1px solid var(--line); }
+        .deck-card--main { border-color: rgba(138,90,31,.5); }
+        .deck-card--main {
+            left: 50%; top: 50%; margin-left: calc(clamp(210px,23vw,330px) / -2); margin-top: calc((clamp(210px,23vw,330px) / 1.586) / -2);
+            width: clamp(210px,23vw,330px); aspect-ratio: 1.586 / 1; z-index: 5;
+            background: radial-gradient(120% 140% at 15% 0%, #4a3410 0%, #17110a 42%, #0a0806 100%);
+            padding: clamp(18px,2.6vw,30px); display: flex; flex-direction: column; justify-content: space-between;
+            animation: deckFloatMain 6s ease-in-out infinite alternate;
+        }
+        .deck-card--main::before {
+            content: ""; position: absolute; inset: 0;
+            /* V7 B2: cursor-tracked light source (--lx/--ly set by heroParallax) */
+            background: radial-gradient(60% 90% at var(--lx,78%) var(--ly,10%), rgba(255,255,255,.18), transparent 60%);
+            mix-blend-mode: screen; pointer-events: none;
+        }
+        .deck-card--main::after {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background:
+                linear-gradient(115deg, transparent 32%, rgba(255,255,255,.07) 46%, transparent 58%),
+                radial-gradient(95% 70% at 62% 108%, rgba(212,168,83,.30), transparent 68%),
+                radial-gradient(70% 55% at 100% 118%, rgba(240,198,116,.20), transparent 70%),
+                repeating-radial-gradient(circle at 88% 120%, rgba(255,255,255,.045) 0 1.5px, transparent 1.5px 30px);
+        }
+        .deck-logo { font-family: var(--font-script); font-size: clamp(1.4rem,3vw,2.1rem); color: #fff; position: relative; z-index: 1; }
+        .deck-chip {
+            width: clamp(34px,4.4vw,46px); aspect-ratio: 4/3; border-radius: 6px; position: relative; z-index: 1;
+            background: linear-gradient(135deg,#f4d689,#b8862f 60%,#f4d689);
+            background-image: linear-gradient(135deg,#f4d689,#b8862f 60%,#f4d689),
+                repeating-linear-gradient(90deg, rgba(0,0,0,.25) 0 2px, transparent 2px 8px);
+            box-shadow: 0 2px 4px rgba(0,0,0,.4);
+        }
+        .deck-imprint { font-family: var(--font-en); font-size: clamp(.55rem,.9vw,.68rem); letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); position: relative; z-index: 1; }
+        .deck-card--thumb {
+            width: clamp(115px,14vw,180px); aspect-ratio: 16 / 10; z-index: 2; filter: brightness(.5) saturate(.8);
+        }
+        .deck-card--thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .deck-card--tl { top: -7%; left: 2%; animation: deckFloatTL 6s ease-in-out infinite alternate; animation-delay: .2s; }
+        .deck-card--tr { top: -9%; right: 3%; animation: deckFloatTR 6s ease-in-out infinite alternate; animation-delay: .8s; }
+        .deck-card--bl { bottom: -8%; left: 6%; animation: deckFloatBL 6s ease-in-out infinite alternate; animation-delay: .5s; }
+        .deck-card--br { bottom: -6%; right: 1%; animation: deckFloatBR 6s ease-in-out infinite alternate; animation-delay: 1.1s; }
+        @keyframes deckFloatMain { from { transform: translateY(-8px); } to { transform: translateY(8px); } }
+        @keyframes deckFloatTL { from { transform: rotate(-7deg) translateY(-8px); } to { transform: rotate(-7deg) translateY(8px); } }
+        @keyframes deckFloatTR { from { transform: rotate(6deg) translateY(-8px); } to { transform: rotate(6deg) translateY(8px); } }
+        @keyframes deckFloatBL { from { transform: rotate(5deg) translateY(-8px); } to { transform: rotate(5deg) translateY(8px); } }
+        @keyframes deckFloatBR { from { transform: rotate(-4deg) translateY(-8px); } to { transform: rotate(-4deg) translateY(8px); } }
+        @media (prefers-reduced-motion: reduce) {
+            .deck-card--main, .deck-card--tl, .deck-card--tr, .deck-card--bl, .deck-card--br { animation: none; }
+        }
+        .hero-bar {
+            position: relative; z-index: 1; width: 100%; max-width: var(--maxw); margin: clamp(28px,5vw,56px) auto 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+        }
+        .hero-tagline { max-width: 260px; font-family: var(--font-jp); font-weight: 500; text-transform: uppercase; font-size: .82rem; letter-spacing: .02em; color: var(--text-dim); }
+        .hero-bar-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .showreel-link svg { fill: currentColor; }
+        @media (max-width: 640px) {
+            .hero-bar { justify-content: center; text-align: center; }
+            .hero-tagline { max-width: 100%; }
+        }
+
+        /* ================= MARQUEE ================= */
+        #marquee { padding: clamp(70px,9vw,140px) 0 clamp(30px,4vw,60px); }
+        .mq-row { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-bottom: 12px; }
+        .mq-row::-webkit-scrollbar { display: none; }
+        /* V7 D2: film sprocket holes — turns the marquee row into a filmstrip */
+        .mq-row::before, .mq-row::after {
+            content: ""; display: block; height: 10px; margin: 6px 4px;
+            background-image: radial-gradient(circle, var(--line-strong) 42%, transparent 44%);
+            background-size: 16px 100%; background-repeat: repeat-x; background-position: 0 center;
+        }
+        .mq-track { display: flex; gap: 12px; width: max-content; will-change: transform; }
+        .mq-tile {
+            height: clamp(120px,18vw,270px); aspect-ratio: 16 / 10; object-fit: cover; border-radius: 18px;
+            filter: saturate(.9); border: 1px solid var(--line); box-shadow: 0 8px 24px -14px rgba(33,27,16,.3);
+        }
+
+        /* ================= ABOUT ================= */
+        #about { min-height: 100vh; display: flex; align-items: center; padding: clamp(80px,10vw,140px) 0; overflow: hidden; }
+        .about-inner { position: relative; z-index: 2; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: clamp(28px,4vw,44px); }
+        .char-reveal { max-width: 560px; font-size: clamp(1rem,1.8vw,1.2rem); line-height: 1.9; color: var(--text-dim); }
+        .about-stats { display: flex; gap: clamp(28px,6vw,64px); flex-wrap: wrap; justify-content: center; }
+        .about-stat { text-align: center; }
+        .about-stat-number { font-family: var(--font-en); font-weight: 800; font-size: clamp(2rem,4vw,3rem); }
+        .about-stat-label { font-family: var(--font-en); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); margin-top: 4px; }
+        .about-bio { max-width: 520px; }
+        .about-profile-role { font-family: var(--font-en); font-weight: 600; font-size: .95rem; letter-spacing: .02em; margin-bottom: 8px; }
+        .about-profile-bio { font-size: .92rem; line-height: 1.85; color: var(--text-dim); }
+        .corner-obj { position: absolute; z-index: 1; opacity: .5; width: clamp(90px,12vw,200px); aspect-ratio: 1; pointer-events: none; }
+        .corner-obj--reel {
+            top: 4%; left: 4%; border-radius: 50%;
+            background:
+                radial-gradient(circle at center, transparent 0 18%, rgba(33,27,16,.5) 18% 20%, transparent 20% 32%, rgba(33,27,16,.35) 32% 34%, transparent 34% 100%);
+            border: 2px solid var(--line-strong);
+        }
+        .corner-obj--reel::after {
+            content: ""; position: absolute; inset: 30%; border-radius: 50%; background: var(--bg); border: 2px solid var(--line-strong);
+        }
+        .corner-obj--clap { top: 6%; right: 5%; display: flex; flex-direction: column; border-radius: 6px; overflow: hidden; border: 2px solid var(--line-strong); aspect-ratio: 4/3; height: clamp(70px,9vw,150px); width: auto; }
+        .corner-obj--clap::before {
+            content: ""; display: block; height: 32%;
+            background: repeating-linear-gradient(-35deg, #0C0C0C 0 14px, var(--text-dim) 14px 28px);
+        }
+        .corner-obj--clap::after { content: ""; flex: 1; background: rgba(33,27,16,.06); }
+        .corner-obj--play {
+            bottom: 5%; left: 6%; border-radius: 50%; background: rgba(33,27,16,.08); border: 2px solid var(--line-strong);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .corner-obj--play::after {
+            content: ""; width: 0; height: 0; margin-left: 12%;
+            border-top: .55em solid transparent; border-bottom: .55em solid transparent; border-left: .9em solid var(--text-dim);
+        }
+        .corner-obj--strip {
+            bottom: 4%; right: 4%; width: clamp(50px,6vw,90px); height: clamp(110px,14vw,220px);
+            background: rgba(33,27,16,.08); border: 2px solid var(--line-strong); border-radius: 6px;
+            background-image:
+                repeating-linear-gradient(0deg, var(--bg) 0 10px, transparent 10px 22px),
+                repeating-linear-gradient(0deg, var(--bg) 0 10px, transparent 10px 22px);
+            background-position: 4px 0, right 4px top 0; background-size: 10px 22px;
+            background-repeat: repeat-y;
+        }
+        @media (max-width: 720px) { .corner-obj { opacity: .3; width: clamp(60px,16vw,110px); } }
+
+        /* ================= FEATURED ================= */
+        #featured { padding: clamp(60px,8vw,110px) 0 clamp(20px,4vw,40px); }
+        .stack-wrap { display: flex; flex-direction: column; }
+        .stack-item { min-height: 85vh; display: flex; align-items: flex-start; }
+        .stack-card {
+            position: sticky; top: calc(96px + var(--i,0) * 28px); width: 100%;
+            border: 1.5px solid rgba(168,126,47,.4); border-radius: clamp(28px,4vw,52px); background: var(--paper-soft);
+            padding: clamp(24px,4vw,56px); transform: scale(1); transform-origin: top center;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .stack-item { min-height: 0; }
+            .stack-card { position: static; top: auto; margin-bottom: 24px; }
+        }
+        .stack-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(20px,3vw,36px); }
+        .stack-num { font-family: var(--font-en); font-weight: 800; font-size: clamp(2.6rem,7vw,6rem); color: var(--gold); opacity: .38; line-height: 1; }
+        .stack-heading { flex: 1; min-width: 220px; }
+        .stack-cat { font-family: var(--font-en); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+        .stack-title { font-family: var(--font-jp); font-weight: 700; font-size: clamp(1.4rem,3vw,2.4rem); margin-bottom: 10px; }
+        .stack-desc { max-width: 60ch; color: var(--text-dim); font-size: .92rem; line-height: 1.85; margin-bottom: 14px; }
+        .stack-imgs { display: grid; grid-template-columns: 40% 1fr; gap: 12px; }
+        .stack-imgs-left { display: flex; flex-direction: column; gap: 12px; }
+        .stack-imgs-left img, .stack-imgs-right img { width: 100%; height: 100%; object-fit: cover; border-radius: clamp(16px,2.4vw,32px); }
+        .stack-imgs-left img { aspect-ratio: 16/9.5; }
+        .stack-imgs-right img { aspect-ratio: auto; min-height: 100%; }
+        .stack-card[data-orientation="portrait"] .stack-imgs { grid-template-columns: 1fr 40%; }
+        @media (max-width: 720px) { .stack-imgs { grid-template-columns: 1fr; } .stack-imgs-left { flex-direction: row; } }
+
+        /* ================= WORKS / FLIP CARDS ================= */
+        #works, .more-works { padding: clamp(60px,8vw,110px) 0; }
+        .filter-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: clamp(28px,4vw,44px); }
+        .filter-tab {
+            padding: 10px 22px; border-radius: 9999px; border: 1.5px solid var(--line-strong);
+            font-family: var(--font-jp); font-size: .82rem; font-weight: 500; color: var(--text-dim);
+            transition: border-color .25s, color .25s, background .25s;
+        }
+        .filter-tab.active, .filter-tab:hover { border-color: var(--gold); color: var(--gold); background: rgba(168,126,47,.1); }
+        .works-grid, .more-works-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,340px),1fr)); gap: 20px;
+        }
+        .more-works-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%,280px),1fr)); gap: 16px; }
+
+        .work-card, .more-work-card {
+            display: flex; flex-direction: column; text-decoration: none; color: inherit;
+            background: var(--paper-soft); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+        }
+        .work-card-thumbnail { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #050506; }
+        .work-card-thumbnail img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+        /* V7 C1: legacy .3s hover — demoted to no-motion fallback only (GSAP 2-beat takes over when .motion-ok) */
+        html:not(.motion-ok) .work-card:hover .work-card-thumbnail img, html:not(.motion-ok) .more-work-card:hover .work-card-thumbnail img { transform: scale(1.06); }
+        .work-card-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.75) 100%); }
+        /* V7 B3: cursor-tracked glare (--gx/--gy set on .work-card by tilt module) */
+        .work-card-thumbnail::after {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(160px circle at var(--gx,50%) var(--gy,50%), rgba(255,248,232,.25), transparent 70%);
+            opacity: 0; transition: opacity .3s;
+        }
+        .work-card:hover .work-card-thumbnail::after, .more-work-card:hover .work-card-thumbnail::after { opacity: 1; }
+        /* V7 C3: press feedback (thumbnail image only — avoids fighting the flip rotateY on the wrapper) */
+        .work-card:active .work-card-thumbnail img, .more-work-card:active .work-card-thumbnail img { transform: scale(.97); }
+        .work-card-play {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(.85); opacity: 0;
+            width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.16);
+            backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;
+            transition: opacity .3s, transform .3s;
+        }
+        .work-card-play svg { width: 18px; height: 18px; fill: #fff; margin-left: 2px; }
+        /* V7 C1: legacy .3s hover — demoted to no-motion fallback only */
+        html:not(.motion-ok) .work-card:hover .work-card-play, html:not(.motion-ok) .more-work-card:hover .work-card-play { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+        .work-card-badge {
+            position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 12px; border-radius: 9999px; background: rgba(20,15,8,.74); backdrop-filter: blur(4px);
+            font-size: .68rem; font-weight: 600; letter-spacing: .02em; color: #F2E7C8;
+        }
+        .work-card-badge svg { width: 12px; height: 12px; fill: #C9A04E; }
+        .work-card-badge--gold { background: linear-gradient(123deg,#5a3f12 0%,#A87E2F 55%,#C9A04E 100%); color: #FFF8E8; }
+        .work-card-badge--gold svg { fill: #FFF8E8; }
+        .more-work-index {
+            position: absolute; bottom: 10px; right: 12px; font-family: var(--font-en); font-size: .72rem;
+            letter-spacing: .06em; color: rgba(255,255,255,.8);
+        }
+        .work-card-info { padding: 18px 20px 22px; }
+        .work-card-category { font-family: var(--font-en); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+        .work-card-title { font-family: var(--font-jp); font-weight: 700; font-size: 1.08rem; margin-bottom: 8px; }
+        .work-card-desc { font-size: .82rem; line-height: 1.75; color: var(--text-dim); }
+        .more-work-card .work-card-info { padding: 14px 16px 18px; }
+        .more-work-card .work-card-title { font-size: .98rem; }
+        .more-work-card .work-card-desc { font-size: .78rem; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* --- flip gate: only active once JS confirms engine booted --- */
+        html.js-flip .work-card, html.js-flip .more-work-card {
+            position: relative; aspect-ratio: 16/9; perspective: 1200px; cursor: pointer;
+        }
+        html.js-flip .work-card-thumbnail, html.js-flip .work-card-info {
+            position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            transition: transform .7s var(--ease-flip); overflow-y: auto;
+        }
+        html.js-flip .work-card-thumbnail { transform: rotateY(0deg); }
+        html.js-flip .work-card-info { transform: rotateY(180deg); background: var(--paper-soft); color: var(--ink); border: 1.5px solid rgba(168,126,47,.45); border-radius: inherit; }
+        html.js-flip .work-card.is-flipped .work-card-thumbnail,
+        html.js-flip .more-work-card.is-flipped .work-card-thumbnail { transform: rotateY(180deg); }
+        html.js-flip .work-card.is-flipped .work-card-info,
+        html.js-flip .more-work-card.is-flipped .work-card-info { transform: rotateY(360deg); }
+        @media (prefers-reduced-motion: reduce) {
+            html.js-flip .work-card-thumbnail, html.js-flip .work-card-info { transition: none; }
+        }
+        .wc-front-label {
+            position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 16px;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,.88));
+            font-family: var(--font-jp);
+        }
+        .wc-front-label .wc-fl-cat { font-family: var(--font-en); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(242,231,200,.8); display: block; margin-bottom: 3px; }
+        .wc-front-label .wc-fl-title { font-weight: 700; font-size: .98rem; color: #FFF8E8; display: block; line-height: 1.35; }
+        .wc-watch {
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; padding: 9px 20px;
+            border: 1.5px solid var(--line-strong); border-radius: 9999px; font-family: var(--font-en);
+            font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text);
+        }
+        .work-card.is-flipped .wc-watch, .more-work-card.is-flipped .wc-watch { animation: watchPulse 1.1s ease-in-out .35s 2; }
+        @keyframes watchPulse { 50% { box-shadow: 0 0 0 7px rgba(168,126,47,.22); border-color: var(--gold); } }
+        @media (prefers-reduced-motion: reduce) { .work-card.is-flipped .wc-watch, .more-work-card.is-flipped .wc-watch { animation: none; border-color: var(--gold); } }
+        html.js-flip [data-tilt] { transition: transform .3s ease-out; will-change: transform; }
+
+        /* ================= MORE WORKS FOOTER ================= */
+        .more-works-footer { margin-top: clamp(28px,4vw,44px); text-align: center; }
+
+        /* ================= CTA BAND ================= */
+        .cta-band { padding: clamp(70px,9vw,130px) 0; text-align: center; }
+        .cta-band-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+        .cta-band-title { font-family: var(--font-jp); font-weight: 900; font-size: clamp(1.6rem,4vw,2.6rem); line-height: 1.4; }
+        .cta-band-text { color: var(--text-dim); font-size: .95rem; line-height: 1.9; }
+
+        /* ================= WHITE SECTIONS ================= */
+        .section-white { background: var(--paper-soft); color: var(--ink); }
+        #awards.section-white { border-radius: 48px 48px 0 0; margin-top: -48px; position: relative; z-index: 2; padding: 0 0 clamp(60px,8vw,110px); }
+        .awards-ticker {
+            background: var(--paper); color: var(--ink); border-radius: 48px 48px 0 0; overflow: hidden;
+            padding: 16px 0; margin-bottom: clamp(50px,7vw,90px); border-bottom: 1px solid var(--line);
+        }
+        .awards-ticker-track { display: flex; gap: 18px; width: max-content; white-space: nowrap; font-family: var(--font-en); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; animation: tickerScroll 38s linear infinite; will-change: transform; }
+        @keyframes tickerScroll { to { transform: translateX(calc(-50% - 9px)); } }
+        .awards-ticker:hover .awards-ticker-track { animation-play-state: paused; }
+        @media (prefers-reduced-motion: reduce) { .awards-ticker-track { animation: none; } }
+        .awards-ticker-sep { opacity: .5; }
+        #awards .container { padding-top: clamp(60px,8vw,100px); }
+        .awards-list { border-top: 1px solid var(--line-ink); }
+        .award-row {
+            display: flex; align-items: center; gap: clamp(16px,3vw,40px); padding: clamp(20px,3vw,40px) 0;
+            border-bottom: 1px solid var(--line-ink);
+        }
+        .award-num { font-family: var(--font-en); font-weight: 800; font-size: clamp(2.4rem,7vw,7rem); color: var(--gold); line-height: 1; flex-shrink: 0; width: clamp(70px,10vw,180px); }
+        .award-body { flex: 1; }
+        .award-prize { font-family: var(--font-en); font-weight: 600; text-transform: uppercase; letter-spacing: .03em; font-size: clamp(1rem,2vw,1.3rem); }
+        /* V7 D5: paw print beside the grand prize name */
+        .award-paw { width: 14px; height: 14px; fill: var(--gold); margin: 0 2px 0 6px; vertical-align: middle; }
+        .award-name { display: block; font-size: .88rem; font-weight: 300; opacity: .62; margin-top: 4px; }
+        .award-year { font-family: var(--font-en); font-size: .8rem; opacity: .5; flex-shrink: 0; }
+
+        #services.section-white, .process.section-white { padding: clamp(60px,8vw,110px) 0; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px,3vw,32px); }
+        .service-card { border: 1px solid var(--line-ink); border-radius: 24px; padding: clamp(24px,3vw,36px); }
+        .service-icon { width: 40px; height: 40px; margin-bottom: 20px; }
+        .service-icon svg { width: 100%; height: 100%; }
+        .service-card h3 { font-family: var(--font-en); font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; text-transform: uppercase; }
+        .service-card p { font-size: .88rem; line-height: 1.8; opacity: .68; }
+        @media (max-width: 860px) { .services-grid { grid-template-columns: 1fr; } }
+
+        .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(16px,2vw,24px); }
+        .process-step { position: relative; padding-top: clamp(20px,3vw,32px); border-top: 2px solid var(--ink); }
+        .process-step-num { font-family: var(--font-en); font-weight: 800; font-size: clamp(1.6rem,3vw,2.4rem); margin-bottom: 10px; }
+        .process-step h4 { font-family: var(--font-jp); font-weight: 700; font-size: 1.02rem; margin-bottom: 8px; }
+        .process-step p { font-size: .82rem; line-height: 1.7; opacity: .65; }
+        @media (max-width: 900px) { .process-steps { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 520px) { .process-steps { grid-template-columns: 1fr; } }
+
+        #pricing.section-white { padding: clamp(60px,8vw,110px) 0; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px,3vw,28px); align-items: stretch; }
+        .pricing-card {
+            border: 1.5px solid var(--line-ink); border-radius: 28px; padding: clamp(26px,3vw,38px);
+            display: flex; flex-direction: column; gap: 18px;
+        }
+        .pricing-card.featured { border-color: var(--gold); background: rgba(168,126,47,.08); box-shadow: 0 24px 60px -30px rgba(33,27,16,.35); position: relative; }
+        /* V7 D4: フク peeking over the featured plan (top half only) */
+        .pricing-peek {
+            position: absolute; top: -28px; right: 20px; width: 56px; height: 28px;
+            object-fit: cover; object-position: top; transform: rotate(-8deg);
+            pointer-events: auto; cursor: pointer; filter: drop-shadow(0 6px 10px rgba(33,27,16,.3));
+        }
+        @media (max-width: 720px) { .pricing-peek { width: 52px; height: 26px; top: -26px; right: 16px; } }
+        .fuku-bubble--peek {
+            position: absolute; top: -64px; right: 8px; left: auto; bottom: auto; transform: none;
+        }
+        .pricing-plan { font-family: var(--font-en); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: 1.1rem; }
+        .pricing-price { font-family: var(--font-en); font-weight: 800; font-size: clamp(1.8rem,3.4vw,2.6rem); }
+        .pricing-price span { font-size: .5em; font-weight: 500; opacity: .6; }
+        .pricing-unit { font-size: .82rem; opacity: .62; }
+        .pricing-features { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+        .pricing-features li { font-size: .86rem; padding-left: 20px; position: relative; opacity: .8; }
+        .pricing-features li::before { content: "—"; position: absolute; left: 0; opacity: .4; }
+        .pricing-cta { justify-content: center; text-align: center; }
+        .pricing-note, .pricing-custom { text-align: center; font-size: .82rem; opacity: .55; margin-top: clamp(24px,3vw,36px); max-width: 620px; margin-left: auto; margin-right: auto; }
+        .pricing-custom { margin-top: 10px; opacity: .7; }
+        @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+        #faq.section-white { padding: clamp(60px,8vw,110px) 0; }
+        .faq-list { border-top: 1px solid var(--line-ink); max-width: 820px; }
+        /* V7 F1: 2-column FAQ on desktop — reclaims the empty right half at wide viewports */
+        @media (min-width: 768px) {
+            .faq-list { max-width: 1200px; columns: 2; column-gap: 48px; }
+            .faq-item { break-inside: avoid; }
+        }
+        .faq-item { border-bottom: 1px solid var(--line-ink); padding: clamp(18px,2.4vw,26px) 0; }
+        .faq-item summary { display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-weight: 700; font-size: clamp(.95rem,1.6vw,1.1rem); list-style: none; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform .3s; }
+        .faq-item[open] summary svg { transform: rotate(180deg); }
+        .faq-answer { margin-top: 14px; font-size: .88rem; line-height: 1.85; opacity: .68; max-width: 68ch; }
+
+        /* ================= CONTACT (espresso — stays dark) ================= */
+        #contact {
+            background: var(--espresso); color: #F2EAD8; border-radius: 48px 48px 0 0; margin-top: -48px;
+            position: relative; z-index: 3; padding: clamp(90px,11vw,150px) 0 clamp(60px,8vw,100px);
+            text-align: center;
+        }
+        #contact .sec-kanji { color: rgba(255,255,255,.04); }
+        #contact .section-heading.hero-heading { background: linear-gradient(180deg,#8a6a35,#F2E7C8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        #contact .contact-cta { outline-color: #fff; }
+        .contact-inner { display: flex; flex-direction: column; align-items: center; gap: clamp(18px,2.6vw,26px); }
+        .contact-lede { font-family: var(--font-jp); font-weight: 700; font-size: clamp(1.2rem,2.6vw,1.7rem); }
+        .contact-subtitle { color: rgba(242,234,216,.75); font-size: .95rem; line-height: 1.9; max-width: 480px; }
+        .contact-availability { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-en); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; color: rgba(242,234,216,.75); }
+        .contact-availability .dot { width: 8px; height: 8px; border-radius: 50%; background: #3fd67a; box-shadow: 0 0 0 4px rgba(63,214,122,.18); }
+        .contact-trust { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .trust-chip { font-size: .76rem; padding: 7px 16px; border: 1px solid rgba(255,255,255,.25); border-radius: 9999px; color: rgba(242,234,216,.75); }
+        .v2-cta-ring-wrap { position: relative; width: clamp(150px,20vw,220px); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+        .v2-cta-ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 22s linear infinite; }
+        .v2-cta-ring-text { font-family: var(--font-en); font-size: 8.6px; letter-spacing: .08em; fill: var(--gold-hi); text-transform: uppercase; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .v2-cta-ring { animation: none; } }
+        .v2-cta-ring-wrap .contact-cta { position: relative; z-index: 1; padding: 18px 30px; }
+        .v2-cta-ring-wrap .contact-cta svg { width: 16px; height: 16px; fill: #fff; }
+        .contact-note { font-size: .8rem; color: rgba(242,234,216,.55); max-width: 440px; line-height: 1.8; }
+        .social-links { display: flex; gap: 16px; }
+        .social-link { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .social-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+        /* ================= FOOTER (espresso — stays dark) ================= */
+        footer {
+            background: var(--espresso); color: rgba(242,234,216,.75); padding: clamp(40px,6vw,70px) 0; text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 14px;
+        }
+        .footer-script { font-family: var(--font-script); font-size: 2.2rem; }
+        .footer-tagline { font-family: var(--font-en); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(242,234,216,.75); }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+        .footer-links a { font-family: var(--font-en); font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; text-decoration: none; color: rgba(242,234,216,.75); }
+        .footer-text { font-size: .74rem; color: rgba(242,234,216,.55); }
+
+        /* ================= LIGHTBOX ================= */
+        .video-lightbox {
+            position: fixed; inset: 0; z-index: 999; background: rgba(4,4,5,.94); backdrop-filter: blur(6px);
+            display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden;
+            transition: opacity .35s var(--ease); padding: 24px;
+        }
+        .video-lightbox.active { opacity: 1; visibility: visible; }
+        .video-lightbox-close {
+            position: absolute; top: 24px; right: 24px; width: 44px; height: 44px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center;
+        }
+        .video-lightbox-close svg { width: 18px; height: 18px; stroke: #fff; }
+        .video-lightbox-content { position: relative; width: min(1000px, 100%); aspect-ratio: 16/9; }
+        .video-lightbox.is-portrait .video-lightbox-content { width: auto; height: min(88vh, 900px); aspect-ratio: 9/16; }
+        .video-lightbox-content iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 12px; }
+        .v2-screening { position: absolute; top: -34px; left: 0; display: flex; gap: 10px; align-items: baseline; font-family: var(--font-en); }
+        .v2-screening-label { font-size: .68rem; letter-spacing: .12em; color: var(--gold-hi); }
+        .v2-screening-title { font-size: .8rem; color: rgba(232,226,212,.7); }
+
+        /* ================= V5: NAV MARK ================= */
+        .nav-mark { color: var(--gold); margin-left: 6px; font-weight: 400; }
+
+        /* ================= V5: PROJECTOR BEAM + KANJI WATERMARK ================= */
+        .projector-beam {
+            position: absolute; top: -10%; left: -12%; width: 72%; height: 120%;
+            background: conic-gradient(from 200deg at 0% 0%, rgba(168,126,47,.10), transparent 35%);
+            filter: blur(46px); mix-blend-mode: screen; pointer-events: none; z-index: 1;
+            animation: beamFlicker 7s ease-in-out infinite alternate;
+        }
+        @keyframes beamFlicker { from { opacity: .8; } to { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { .projector-beam { animation: none; opacity: .9; } }
+        .kanji-wm {
+            position: absolute; top: 46%; left: 50%; transform: translate(-50%,-50%);
+            font-family: var(--font-jp-display); font-weight: 700; font-size: clamp(200px,38vw,560px);
+            color: rgba(33,27,16,.045); white-space: nowrap; z-index: 0; pointer-events: none; line-height: 1;
+        }
+
+        /* ================= V5: USHER CAT (hero) ================= */
+        .usher {
+            /* V7 D1: clickable (was pointer-events:none) */
+            position: absolute; z-index: 6; pointer-events: auto; cursor: pointer; left: 56%;
+            bottom: calc(50% + (clamp(210px,23vw,330px) / 1.586 / 2) - 4px);
+            transform: translateX(-42%);
+            height: clamp(128px,19svh,230px); width: auto;
+        }
+        .usher-img {
+            display: block; height: 100%; width: auto;
+            filter: drop-shadow(0 14px 24px rgba(33,27,16,.35));
+            animation: deckFloatMain 6s ease-in-out infinite alternate;
+        }
+        @media (prefers-reduced-motion: reduce) { .usher-img { animation: none; } }
+        @media (max-width: 640px) { .usher { left: 58%; height: clamp(120px,30vw,200px); } }
+
+        /* V7 D1: speech bubble (created/toggled by engine 'delight' module on usher click/tap) */
+        .fuku-bubble {
+            position: absolute; left: 50%; bottom: 100%; transform: translate(-50%,6px);
+            margin-bottom: 8px; padding: 6px 16px; border-radius: 9999px;
+            background: #fff; color: var(--ink); font-family: var(--font-jp-display); font-weight: 700;
+            font-size: .86rem; white-space: nowrap; z-index: 7; pointer-events: none;
+            box-shadow: 0 10px 24px -10px rgba(33,27,16,.45); border: 1px solid var(--line);
+            opacity: 0; transition: opacity .25s ease, transform .25s ease;
+        }
+        .fuku-bubble::after {
+            content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border: 6px solid transparent; border-top-color: #fff;
+        }
+        .fuku-bubble.is-visible { opacity: 1; transform: translate(-50%,0); }
+        @media (prefers-reduced-motion: reduce) { .fuku-bubble { transition: none; } }
+
+        /* ================= V5: CONCIERGE BLOCK ================= */
+        .concierge-block {
+            position: relative; z-index: 6; width: 100%; max-width: 680px; margin: clamp(10px,1.8svh,20px) auto 0;
+            display: flex; flex-direction: column; align-items: center; gap: clamp(8px,1.2svh,14px); text-align: center;
+        }
+        .blur-intro {
+            filter: blur(1.8px); user-select: none; pointer-events: none;
+            font-family: var(--font-jp-display); font-size: clamp(.95rem,1.8vw,1.2rem); line-height: 1.7; color: var(--text-dim); opacity: .85;
+        }
+        .concierge-greet {
+            font-family: var(--font-jp-display); font-size: clamp(16px,2vw,21px); min-height: 1.5em; line-height: 1.4;
+            display: flex; align-items: flex-start; justify-content: center; gap: 4px; flex-wrap: wrap; color: var(--text);
+        }
+        .tw-cursor {
+            display: inline-block; width: 2px; height: 1em; background: var(--gold); margin-left: 2px;
+            animation: twBlink 1s step-start infinite; vertical-align: -0.15em;
+        }
+        .tw-cursor.is-done { animation: none; opacity: 0; }
+        @keyframes twBlink { 50% { opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) { .tw-cursor { animation: none; } }
+        .concierge-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .concierge-pills.pre-in { opacity: 0; transform: translateY(10px); }
+        .concierge-pills.is-in { opacity: 1; transform: translateY(0); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+        .pill-white {
+            display: inline-flex; align-items: center; padding: 11px 22px; border-radius: 9999px;
+            background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-family: var(--font-en);
+            font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+            transition: background .25s, color .25s, border-color .25s;
+        }
+        .pill-white:hover { background: var(--ink); color: #F5F1E8; border-color: var(--ink); }
+        /* V7 C3: press feedback */
+        .btn-pill:active, .pill-white:active { transform: scale(.97); }
+        .concierge-block .showreel-link { border-color: var(--gold-soft); }
+        .concierge-block .showreel-link:hover { border-color: var(--gold); background: rgba(168,126,47,.12); }
+
+        /* ================= V5: SECTION KANJI WATERMARK ================= */
+        .sec-kanji {
+            position: absolute; top: 6%; z-index: -1; pointer-events: none; user-select: none;
+            font-family: var(--font-jp-display); font-weight: 700; line-height: 1;
+            font-size: clamp(160px,26vw,420px); color: rgba(33,27,16,.045);
+        }
+        .section-white .sec-kanji { color: rgba(33,27,16,.045); }
+        .sec-kanji--tr { right: 2%; }
+        .sec-kanji--tl { left: 2%; }
+        @media (max-width: 720px) { .sec-kanji { font-size: clamp(110px,32vw,220px); } }
+
+        /* ================= V5: USHER CAT RE-APPEARANCES ================= */
+        .usher-bow {
+            position: absolute; z-index: 2; pointer-events: none;
+            top: clamp(70px,9vw,110px); right: clamp(10px,4vw,60px);
+            height: clamp(140px,18vw,260px); width: auto;
+        }
+        @media (max-width: 720px) { .usher-bow { position: static; margin: 0 auto; display: block; } }
+        .corner-obj--usher {
+            bottom: 4%; right: 4%; opacity: .9; aspect-ratio: auto;
+            width: auto; height: clamp(90px,10vw,150px);
+        }
+        @media (max-width: 720px) { .corner-obj--usher { opacity: .8; height: clamp(60px,16vw,90px); } }
+
+        /* ================= V7: SCROLL REEL (D3) ================= */
+        /* rotation (rotate = scroll progress * 720deg) applied via inline style by the engine's 'delight' module — no CSS transition here, must track 1:1 with scroll */
+        .scroll-reel {
+            position: fixed; left: 20px; bottom: 20px; z-index: 150;
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 1.5px solid rgba(33,27,16,.2);
+            background:
+                radial-gradient(circle at center, transparent 0 24%, rgba(33,27,16,.2) 24% 28%, transparent 28% 100%),
+                linear-gradient(rgba(33,27,16,.2), rgba(33,27,16,.2)) center / 100% 1.5px no-repeat,
+                linear-gradient(rgba(33,27,16,.2), rgba(33,27,16,.2)) center / 1.5px 100% no-repeat;
+            pointer-events: none; will-change: transform;
+        }
+        @media (max-width: 640px) { .scroll-reel { left: 14px; bottom: 14px; width: 28px; height: 28px; } }
+        @media (prefers-reduced-motion: reduce), print { .scroll-reel { display: none; } }
+
+        /* ================= V7: PAPER GRAIN (E1) ================= */
+        body::after {
+            content: "";
+            position: fixed; inset: 0; z-index: 2; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: .035; mix-blend-mode: multiply;
+        }
+        @media print { body::after { display: none; } }
+
+        /* ================= RESPONSIVE GLOBAL ================= */
+        @media (max-width: 720px) {
+            .stack-top { flex-direction: column; }
+            .services-grid, .pricing-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero-award-chip { font-size: .58rem; padding: 7px 16px; }
+            .btn-pill, .contact-cta { padding: 13px 26px; font-size: .78rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <header class="nav">
+        <div class="nav-logo">RYO STUDIO<span class="nav-mark">❋</span></div>
+        <nav class="nav-links">
+            <a href="#works">Work</a>
+            <a href="#awards">Awards</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="nav-right">
+            <button id="langToggle" aria-label="Toggle language">EN</button>
+            <a href="#contact" class="nav-cta">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section id="hero">
+        <div class="projector-beam" aria-hidden="true"></div>
+        <span class="kanji-wm" aria-hidden="true">物語</span>
+        <div class="hero-inner">
+            <p class="hero-award-chip" data-lang-key="hero-award-line">JAPAN AI VIDEO AWARDS 2026 ・ グランプリ</p>
+            <p class="hero-sub" data-lang-key="hero-h1">Where <em>Stories</em><br>Come Alive</p>
+            <h1 class="hero-headline hero-heading">RYO STUDIO</h1>
+            <div class="hero-deck">
+                <div class="deck-card deck-card--main">
+                    <div class="deck-logo">Ryo Studio</div>
+                    <div class="deck-chip" aria-hidden="true"></div>
+                    <div class="deck-imprint">VISUAL STORYTELLER · SINCE 2024</div>
+                </div>
+                <div class="deck-card deck-card--thumb deck-card--tl" data-depth="0.6">
+                    <img src="https://img.youtube.com/vi/w98sWMe82BQ/hqdefault.jpg" alt="" loading="lazy">
+                </div>
+                <div class="deck-card deck-card--thumb deck-card--tr" data-depth="0.4">
+                    <img src="https://img.youtube.com/vi/Z8TOiDzkGac/hqdefault.jpg" alt="" loading="lazy">
+                </div>
+                <div class="deck-card deck-card--thumb deck-card--bl" data-depth="0.5">
+                    <img src="https://img.youtube.com/vi/xp4sub-rhXM/hqdefault.jpg" alt="" loading="lazy">
+                </div>
+                <div class="deck-card deck-card--thumb deck-card--br" data-depth="0.3">
+                    <img src="https://img.youtube.com/vi/Uvy3QIx8odM/hqdefault.jpg" alt="" loading="lazy">
+                </div>
+                <div class="usher" data-depth="1.15" role="img" aria-label="案内猫のフク">
+                    <img class="usher-img" src="images/usher-cat.png" alt="案内猫 フク" loading="lazy">
+                </div>
+            </div>
+            <div class="concierge-block">
+                <p class="blur-intro" data-lang-key="v5-intro" aria-hidden="true">はじめまして、案内猫の フク と申します。<br>RYO STUDIO の試写室へようこそ。</p>
+                <p class="concierge-greet"><span id="typeline" data-lang-key="v5-greet">ようこそ。今夜は、どんな物語をご覧になりますか？</span><span class="tw-cursor" aria-hidden="true"></span></p>
+                <div class="concierge-pills">
+                    <a href="#works" class="pill-white" data-lang-key="v5-pill-works">作品を観る</a>
+                    <a href="#awards" class="pill-white" data-lang-key="v5-pill-awards">受賞歴</a>
+                    <a href="#pricing" class="pill-white" data-lang-key="v5-pill-pricing">料金プラン</a>
+                    <a href="#services" class="pill-white" data-lang-key="v5-pill-flow">制作の流れ</a>
+                    <a href="#" class="btn-ghost showreel-link" data-video="UO9ty4c_ntQ" data-lang-key="hero-showreel"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Showreel</a>
+                    <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="btn-pill" data-magnetic><span data-lang-key="contact-cta-dm">XのDMで相談する</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <section id="marquee" aria-hidden="true">
+        <div class="mq-row" data-dir="1">
+            <div class="mq-track">
+                <img class="mq-tile" src="https://img.youtube.com/vi/UO9ty4c_ntQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/xp4sub-rhXM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Uvy3QIx8odM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/eioMivdnM5M/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/7OEvltA8WbI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/UOXAXAf5mB4/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/sEeYbHs_qZM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/LaB5PMDItJI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/D13aAFKnYGQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/w98sWMe82BQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Z8TOiDzkGac/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/UO9ty4c_ntQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/xp4sub-rhXM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Uvy3QIx8odM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/eioMivdnM5M/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/7OEvltA8WbI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/UOXAXAf5mB4/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/sEeYbHs_qZM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/LaB5PMDItJI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/D13aAFKnYGQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/w98sWMe82BQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Z8TOiDzkGac/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/UO9ty4c_ntQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/xp4sub-rhXM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Uvy3QIx8odM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/eioMivdnM5M/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/7OEvltA8WbI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/UOXAXAf5mB4/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/sEeYbHs_qZM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/LaB5PMDItJI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/D13aAFKnYGQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/w98sWMe82BQ/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Z8TOiDzkGac/hqdefault.jpg" loading="lazy" alt="">
+            </div>
+        </div>
+        <div class="mq-row" data-dir="-1">
+            <div class="mq-track">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Jw2OGiHJNf4/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/KZkzLVDarFY/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/p1KAUBDJQhI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/nbbz7K2eIME/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/mx36xR9Q9Mo/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/seTHDd55QjY/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/qPU5APmACeo/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/mg9MIUcsnb8/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/LpsHPhURFTU/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/HpPsWhL5luM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Jw2OGiHJNf4/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/KZkzLVDarFY/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/p1KAUBDJQhI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/nbbz7K2eIME/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/mx36xR9Q9Mo/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/seTHDd55QjY/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/qPU5APmACeo/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/mg9MIUcsnb8/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/LpsHPhURFTU/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/HpPsWhL5luM/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/Jw2OGiHJNf4/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/KZkzLVDarFY/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/p1KAUBDJQhI/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/nbbz7K2eIME/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/mx36xR9Q9Mo/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/seTHDd55QjY/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/qPU5APmACeo/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/mg9MIUcsnb8/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/LpsHPhURFTU/hqdefault.jpg" loading="lazy" alt="">
+                <img class="mq-tile" src="https://img.youtube.com/vi/HpPsWhL5luM/hqdefault.jpg" loading="lazy" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about">
+        <span class="sec-kanji sec-kanji--tl" aria-hidden="true">人</span>
+        <div class="corner-obj corner-obj--reel" aria-hidden="true"></div>
+        <div class="corner-obj corner-obj--clap" aria-hidden="true"></div>
+        <div class="corner-obj corner-obj--play" aria-hidden="true"></div>
+        <img class="corner-obj corner-obj--usher" src="images/usher-cat.png" alt="案内猫 フク" loading="lazy" aria-hidden="true">
+        <div class="container about-inner">
+            <p class="section-kicker" data-lang-key="hero-tagline">映像という言葉で、あなたの物語を紡ぎます</p>
+            <h2 class="section-heading hero-heading">ABOUT ME</h2>
+            <p class="char-reveal" data-lang-key="about-text">アニメーション、プロモーション映像、ショートフィルムなど、幅広いジャンルの映像制作を手がけています。最新のAI技術と映像制作の技術を組み合わせ、視聴者の心に響く作品をお届けします。</p>
+            <div class="about-stats">
+                <div class="about-stat">
+                    <div class="about-stat-number" data-target="10+">10+</div>
+                    <div class="about-stat-label">Awards</div>
+                </div>
+                <div class="about-stat">
+                    <div class="about-stat-number" data-target="50+">50+</div>
+                    <div class="about-stat-label">Projects</div>
+                </div>
+                <div class="about-stat">
+                    <div class="about-stat-number" data-target="24h">24h</div>
+                    <div class="about-stat-label">Response</div>
+                </div>
+            </div>
+            <div class="about-bio">
+                <p class="about-profile-role" data-lang-key="about-profile-role">Visual Storyteller / RYO STUDIO 代表</p>
+                <p class="about-profile-bio" data-lang-key="about-profile-bio">国内外の映像コンテストで数多くの受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。</p>
+            </div>
+            <a href="#contact" class="btn-pill" data-magnetic>CONTACT ME</a>
+        </div>
+    </section>
+
+    <!-- ================= FEATURED ================= -->
+    <section id="featured">
+        <span class="sec-kanji sec-kanji--tr" aria-hidden="true">約</span>
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-heading hero-heading">FEATURED</h2>
+            </div>
+            <div class="stack-wrap">
+                <div class="stack-item" style="--i:0">
+                    <article class="stack-card" data-video="HpPsWhL5luM" data-index="01" style="--i:0">
+                        <div class="stack-top">
+                            <span class="stack-num">01</span>
+                            <div class="stack-heading">
+                                <p class="stack-cat">JAPAN AI VIDEO AWARDS 2026 グランプリ</p>
+                                <h3 class="stack-title">『約束』</h3>
+                                <p class="stack-desc" data-lang-key="spotlight-statement">予防医療の普及をテーマにしたショートフィルム。物語の力で、"伝わりにくい大切なこと"を心に届く映像にしました。企画・構成から演出・編集まで、一貫して手がけています。</p>
+                                <a href="#" class="btn-ghost" data-video="HpPsWhL5luM">WATCH <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+                            </div>
+                        </div>
+                        <div class="stack-imgs">
+                            <div class="stack-imgs-left">
+                                <img src="https://img.youtube.com/vi/HpPsWhL5luM/hq1.jpg" alt="『約束』" loading="lazy">
+                                <img src="https://img.youtube.com/vi/HpPsWhL5luM/hq2.jpg" alt="『約束』" loading="lazy">
+                            </div>
+                            <div class="stack-imgs-right">
+                                <img src="https://img.youtube.com/vi/HpPsWhL5luM/hqdefault.jpg" alt="『約束』" loading="lazy">
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="stack-item" style="--i:1">
+                    <article class="stack-card" data-video="w98sWMe82BQ" data-index="02" style="--i:1">
+                        <div class="stack-top">
+                            <span class="stack-num">02</span>
+                            <div class="stack-heading">
+                                <p class="stack-cat">Short Film / Family — SOZO美術館 第29回コンペ グランプリ</p>
+                                <h3 class="stack-title">これも、日常の宝物。</h3>
+                                <p class="stack-desc">SOZO美術館 第29回コンペ 縦型ショートアニメ総合賞グランプリ。慌ただしい朝のひとつひとつが、かけがえのない思い出。</p>
+                                <a href="#" class="btn-ghost" data-video="w98sWMe82BQ">WATCH <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+                            </div>
+                        </div>
+                        <div class="stack-imgs">
+                            <div class="stack-imgs-left">
+                                <img src="https://img.youtube.com/vi/w98sWMe82BQ/hq1.jpg" alt="これも、日常の宝物。" loading="lazy">
+                                <img src="https://img.youtube.com/vi/w98sWMe82BQ/hq2.jpg" alt="これも、日常の宝物。" loading="lazy">
+                            </div>
+                            <div class="stack-imgs-right">
+                                <img src="https://img.youtube.com/vi/w98sWMe82BQ/hqdefault.jpg" alt="これも、日常の宝物。" loading="lazy">
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="stack-item" style="--i:2">
+                    <article class="stack-card" data-video="Z8TOiDzkGac" data-index="03" data-orientation="portrait" style="--i:2">
+                        <div class="stack-top">
+                            <span class="stack-num">03</span>
+                            <div class="stack-heading">
+                                <p class="stack-cat">Animation / 縦型時代劇 — Best Director賞 + Anipop優秀賞</p>
+                                <h3 class="stack-title">無銘 -MUMEI-</h3>
+                                <p class="stack-desc">Vidu「Duscar」Awards Best Director賞 + Anipop Award優秀賞のW受賞。名もなき侍の生き様を描く縦型シネマティック時代劇アニメ。</p>
+                                <a href="#" class="btn-ghost" data-video="Z8TOiDzkGac">WATCH <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+                            </div>
+                        </div>
+                        <div class="stack-imgs">
+                            <div class="stack-imgs-left">
+                                <img src="https://img.youtube.com/vi/Z8TOiDzkGac/hq1.jpg" alt="無銘 -MUMEI-" loading="lazy">
+                                <img src="https://img.youtube.com/vi/Z8TOiDzkGac/hq2.jpg" alt="無銘 -MUMEI-" loading="lazy">
+                            </div>
+                            <div class="stack-imgs-right">
+                                <img src="https://img.youtube.com/vi/Z8TOiDzkGac/hqdefault.jpg" alt="無銘 -MUMEI-" loading="lazy">
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= WORKS ================= -->
+    <section id="works">
+        <span class="sec-kanji sec-kanji--tl" aria-hidden="true">作</span>
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-heading hero-heading">ALL WORKS</h2>
+                <p class="section-sub" data-lang-key="works-subtitle">受賞歴のある映像作品</p>
+            </div>
+
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-tab active" data-filter="all" data-lang-key="filter-all">すべて</button>
+                <button class="filter-tab" data-filter="animation" data-lang-key="filter-animation">アニメ</button>
+                <button class="filter-tab" data-filter="shortfilm" data-lang-key="filter-shortfilm">ショートフィルム</button>
+                <button class="filter-tab" data-filter="commercial" data-lang-key="filter-commercial">CM・PR</button>
+                <button class="filter-tab" data-filter="other" data-lang-key="filter-other">その他</button>
+            </div>
+
+            <div class="works-grid" data-skew>
+                <!-- KAERUN AI - 最優秀賞 (moved from v3 works-featured) -->
+                <a href="#" data-video="UO9ty4c_ntQ" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.16" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/UO9ty4c_ntQ/hqdefault.jpg" alt="KAERUN AI" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge work-card-badge--gold"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>最優秀賞</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Commercial / Tech</div>
+                        <h3 class="work-card-title">KAERUN AI</h3>
+                        <p class="work-card-desc">「あったらいいな」CMコンテスト最優秀賞。仕事も家族も、自分らしく。AIアシスタントが届ける新しい日常の形。</p>
+                    </div>
+                </a>
+
+                <!-- 幸手市 - 地域創生 優秀賞 -->
+                <a href="#" data-video="xp4sub-rhXM" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.0" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/xp4sub-rhXM/hqdefault.jpg" alt="幸手市PR映像" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>優秀賞</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">地域創生 / City PR</div>
+                        <h3 class="work-card-title">幸手市 - 目に見えない幸せ</h3>
+                        <p class="work-card-desc">幸手市映像コンテスト優秀賞。日本で唯一「幸」の字を持つまち。目には見えない幸せを映像で紡ぐ。</p>
+                    </div>
+                </a>
+
+                <!-- 白浜 - 地域創生 SOZO第30回 準グランプリ -->
+                <a href="#" data-video="Uvy3QIx8odM" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.05" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/Uvy3QIx8odM/hqdefault.jpg" alt="白浜PR映像" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge work-card-badge--gold"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>準グランプリ</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">地域創生 / Tourism PR</div>
+                        <h3 class="work-card-title">白浜 - あの日の空気感</h3>
+                        <p class="work-card-desc">SOZO美術館 第30回「行ってみたい白浜」準グランプリ。和歌山・白浜の絶景写真をAIでアニメーション化。最高にエモい30秒の白浜旅へ。</p>
+                    </div>
+                </a>
+
+                <!-- それぞれの午後 - SOZO第29回 グランプリ -->
+                <a href="#" data-video="eioMivdnM5M" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.1" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/eioMivdnM5M/hqdefault.jpg" alt="それぞれの午後、一つの想い" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge work-card-badge--gold"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>グランプリ</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Short Film / Family</div>
+                        <h3 class="work-card-title">それぞれの午後、一つの想い</h3>
+                        <p class="work-card-desc">SOZO美術館 第29回コンペ グランプリ受賞作。離れていても、心は繋がる。それぞれの場所で家族を想う、かけがえのない午後の物語。</p>
+                    </div>
+                </a>
+
+                <!-- 夜のゴールライン - SOZO第29回 グランプリ -->
+                <a href="#" data-video="7OEvltA8WbI" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.15" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/7OEvltA8WbI/hqdefault.jpg" alt="夜のゴールライン" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge work-card-badge--gold"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>グランプリ</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Short Film / Family</div>
+                        <h3 class="work-card-title">夜のゴールライン</h3>
+                        <p class="work-card-desc">SOZO美術館 第29回コンペ グランプリ受賞作。遅くまで働く父と待つ家族の、夜を越えて繋がる想い。</p>
+                    </div>
+                </a>
+
+                <!-- 最後の宿題 - 泣けるAIショートアニメ 優秀賞 -->
+                <a href="#" data-video="UOXAXAf5mB4" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.2" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/UOXAXAf5mB4/hqdefault.jpg" alt="最後の宿題" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>優秀賞</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Short Film / Drama</div>
+                        <h3 class="work-card-title">最後の宿題</h3>
+                        <p class="work-card-desc">泣けるAIショートアニメ優秀賞。『20年後の自分へ』先生が出した宿題と約束。時を経て教室の扉を開ける、涙と感謝の物語。</p>
+                    </div>
+                </a>
+
+                <!-- 希望への筆跡 - NICIドリームステージ大賞 SNS特別賞 -->
+                <a href="#" data-video="sEeYbHs_qZM" data-category="other" class="work-card reveal" data-reveal data-reveal-delay="0.25" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/sEeYbHs_qZM/hqdefault.jpg" alt="希望への筆跡" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>SNS特別賞</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Performance / Art</div>
+                        <h3 class="work-card-title">希望への筆跡</h3>
+                        <p class="work-card-desc">NICIドリームステージ大賞 SNS特別賞。書道パフォーマンスで綴る希望のメッセージ。</p>
+                    </div>
+                </a>
+
+                <!-- AIスタイリスト降臨 - ミスターAIコンテスト 3位 -->
+                <a href="#" data-video="LaB5PMDItJI" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.3" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/LaB5PMDItJI/hqdefault.jpg" alt="AIスタイリスト降臨" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>3位</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Commercial</div>
+                        <h3 class="work-card-title">AIスタイリスト降臨</h3>
+                        <p class="work-card-desc">ミスターAIコンテスト3位。AIがあなたの毎日をスタイリング。最新ファッションテックの世界観を描く。</p>
+                    </div>
+                </a>
+
+                <!-- Survival Instinct - ViduQreation Challenge Silver賞 -->
+                <a href="#" data-video="D13aAFKnYGQ" data-category="shortfilm" class="work-card reveal" data-reveal data-reveal-delay="0.35" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/D13aAFKnYGQ/hqdefault.jpg" alt="Survival Instinct" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>Silver賞</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Short Film</div>
+                        <h3 class="work-card-title">Survival Instinct</h3>
+                        <p class="work-card-desc">ViduQreation Challenge Silver賞。生存本能が呼び覚まされる、緊迫感あふれるサバイバルショートフィルム。</p>
+                    </div>
+                </a>
+                <!-- PORTFOLIO:WORKS:INSERT (auto-publish anchor - do not remove) -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MORE WORKS ================= -->
+    <section class="more-works">
+        <span class="sec-kanji sec-kanji--tr" aria-hidden="true">続</span>
+        <div class="container">
+            <div class="section-head">
+                <p class="section-kicker" data-lang-key="more-works-label">More Works</p>
+                <h2 class="section-heading hero-heading" data-lang-key="more-works-title">Other Projects</h2>
+            </div>
+
+            <div class="more-works-grid" data-skew>
+                <a href="#" data-video="Jw2OGiHJNf4" data-category="commercial" class="more-work-card reveal" data-reveal data-reveal-delay="0.0" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/Jw2OGiHJNf4/hqdefault.jpg" alt="BreakingDown19 PV" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 01</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Promotion / Event PV</div>
+                        <h3 class="work-card-title">BreakingDown19 PV</h3>
+                        <p class="work-card-desc">「1分で、証明しろ」— 格闘技イベントの熱量を30秒に凝縮したPV映像。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="KZkzLVDarFY" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.04" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/KZkzLVDarFY/hqdefault.jpg" alt="GAMBLE KINGDOM" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 02</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Animation / Anime OP</div>
+                        <h3 class="work-card-title">GAMBLE KINGDOM</h3>
+                        <p class="work-card-desc">眠らない摩天楼のカジノを舞台に、運命のカードが舞うアニメOP。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="p1KAUBDJQhI" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.08" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/p1KAUBDJQhI/hqdefault.jpg" alt="Chrono Heart" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 03</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Animation</div>
+                        <h3 class="work-card-title">Chrono Heart</h3>
+                        <p class="work-card-desc">時を超えて紡がれる運命の物語。心震えるファンタジーアニメーション。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="nbbz7K2eIME" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.12" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/nbbz7K2eIME/hqdefault.jpg" alt="CYBER BUSHIDO" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 04</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Animation / SF</div>
+                        <h3 class="work-card-title">CYBER BUSHIDO</h3>
+                        <p class="work-card-desc">サイバーパンクの世界で蘇る武士道。近未来と伝統が交錯するSFアクション。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="mx36xR9Q9Mo" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.16" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/mx36xR9Q9Mo/hqdefault.jpg" alt="ENSEN OP" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 05</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Animation / OP</div>
+                        <h3 class="work-card-title">ENSEN -Flame Flash-</h3>
+                        <p class="work-card-desc">炎が閃く瞬間を捉えた、躍動感あふれるアニメオープニング映像。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="seTHDd55QjY" data-category="commercial" class="more-work-card reveal" data-reveal data-reveal-delay="0.2" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/seTHDd55QjY/hqdefault.jpg" alt="BEYOND BOUNDARIES" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 06</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Promotion</div>
+                        <h3 class="work-card-title">BEYOND BOUNDARIES</h3>
+                        <p class="work-card-desc">境界を超える挑戦。限界を打ち破るプロモーション映像。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="qPU5APmACeo" data-category="other" class="more-work-card reveal" data-reveal data-reveal-delay="0.24" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/qPU5APmACeo/hqdefault.jpg" alt="Pieces of Light" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 07</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Music Video</div>
+                        <h3 class="work-card-title">Pieces of Light</h3>
+                        <p class="work-card-desc">光のかけらが紡ぐ、叙情的なミュージックビデオ。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="mg9MIUcsnb8" data-category="shortfilm" class="more-work-card reveal" data-reveal data-reveal-delay="0.28" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/mg9MIUcsnb8/hqdefault.jpg" alt="黄金の約束" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 08</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Short Film / Animation</div>
+                        <h3 class="work-card-title">黄金の約束 〜心が自由になる場所〜</h3>
+                        <p class="work-card-desc">「真面目に生きるなんて損だ」不安な夜、私を救ったのは優しさと自分との約束。確かな備えが心を自由にする物語。</p>
+                    </div>
+                </a>
+
+                <a href="#" data-video="LpsHPhURFTU" data-category="animation" class="more-work-card reveal" data-reveal data-reveal-delay="0.32" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/LpsHPhURFTU/hqdefault.jpg" alt="AIの答え、僕の答え。" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <span class="more-work-index">— 09</span>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">Animation / Drama</div>
+                        <h3 class="work-card-title">AIの答え、僕の答え。</h3>
+                        <p class="work-card-desc">「人生で最高の瞬間って何？」AIが提示した美しく孤独な世界。僕が欲しかったのは、ひとりでは生まれない幸せ。</p>
+                    </div>
+                </a>
+                <!-- PORTFOLIO:MORE:INSERT (auto-publish anchor - do not remove) -->
+            </div>
+            <div class="more-works-footer">
+                <a class="yt-channel-link" href="https://www.youtube.com/@RyoStudio05" target="_blank" rel="noopener noreferrer" data-lang-key="more-works-yt">その他の作品は YouTube チャンネルでご覧いただけます →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CTA BAND ================= -->
+    <section class="cta-band">
+        <div class="cta-band-container">
+            <h2 class="cta-band-title" data-lang-key="cta-band-title">こんな映像を、あなたのプロジェクトでも。</h2>
+            <p class="cta-band-text" data-lang-key="cta-band-text">目的や予算がまだ固まっていなくても大丈夫です。<br>作りたいイメージをお聞かせいただければ、最適な形をご提案します。</p>
+            <a href="#contact" class="contact-cta btn-pill" data-magnetic data-lang-key="cta-band-btn">無料で相談する</a>
+        </div>
+    </section>
+
+    <!-- ================= AWARDS (white) ================= -->
+    <section id="awards" class="section-white">
+        <span class="sec-kanji sec-kanji--tr" aria-hidden="true">賞</span>
+        <div class="awards-ticker" aria-hidden="true">
+            <div class="awards-ticker-track">
+                <span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="awards-ticker-sep">✦</span><span>Vidu「Duscar」Awards</span><span class="awards-ticker-sep">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="awards-ticker-sep">✦</span><span>SOZO美術館 第29回コンペ</span><span class="awards-ticker-sep">✦</span><span>SOZO美術館 第30回コンペ</span><span class="awards-ticker-sep">✦</span><span>JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span><span class="awards-ticker-sep">✦</span><span>Vidu「Duscar」Awards</span><span class="awards-ticker-sep">✦</span><span>KAERUN AI「あったらいいな」CMコンテスト</span><span class="awards-ticker-sep">✦</span><span>SOZO美術館 第29回コンペ</span><span class="awards-ticker-sep">✦</span><span>SOZO美術館 第30回コンペ</span><span class="awards-ticker-sep">✦</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-heading" data-lang-key="awards-title">AWARDS</h2>
+                <p class="section-sub" data-lang-key="awards-sub">受賞歴</p>
+            </div>
+            <div class="awards-list">
+                <div class="award-row">
+                    <span class="award-num">01</span>
+                    <div class="award-body"><span class="award-prize">グランプリ<svg class="award-paw" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><ellipse cx="12" cy="16.5" rx="6.5" ry="5.5"/><circle cx="5.5" cy="9" r="2.4"/><circle cx="9.5" cy="5" r="2.4"/><circle cx="14.5" cy="5" r="2.4"/><circle cx="18.5" cy="9" r="2.4"/></svg></span><span class="award-name">JAPAN AI VIDEO AWARDS 2026 予防医療普及部門</span></div>
+                    <span class="award-year">2026</span>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">02</span>
+                    <div class="award-body"><span class="award-prize">Best Director賞</span><span class="award-name">Vidu「Duscar」Awards</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">03</span>
+                    <div class="award-body"><span class="award-prize">優秀賞</span><span class="award-name">Anipop Award</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">04</span>
+                    <div class="award-body"><span class="award-prize">最優秀賞</span><span class="award-name">KAERUN AI「あったらいいな」CMコンテスト</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">05</span>
+                    <div class="award-body"><span class="award-prize">グランプリ ×3</span><span class="award-name">SOZO美術館 第29回コンペ</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">06</span>
+                    <div class="award-body"><span class="award-prize">準グランプリ</span><span class="award-name">SOZO美術館 第30回コンペ</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">07</span>
+                    <div class="award-body"><span class="award-prize">優秀賞</span><span class="award-name">幸手市映像コンテスト</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">08</span>
+                    <div class="award-body"><span class="award-prize">優秀賞</span><span class="award-name">泣けるAIショートアニメ</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">09</span>
+                    <div class="award-body"><span class="award-prize">SNS特別賞</span><span class="award-name">NICIドリームステージ大賞</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">10</span>
+                    <div class="award-body"><span class="award-prize">Silver賞</span><span class="award-name">ViduQreation Challenge</span></div>
+                </div>
+                <div class="award-row">
+                    <span class="award-num">11</span>
+                    <div class="award-body"><span class="award-prize">3位</span><span class="award-name">ミスターAIコンテスト</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES (white) ================= -->
+    <section id="services" class="section-white">
+        <span class="sec-kanji sec-kanji--tl" aria-hidden="true">技</span>
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-heading" data-lang-key="services-title">What I Create</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="13" height="14" rx="2"/><path d="M15 10l5-3v10l-5-3z"/></svg></div>
+                    <h3>Promotion</h3>
+                    <p data-lang-key="service-promotion-desc">企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div>
+                    <h3>Animation</h3>
+                    <p data-lang-key="service-animation-desc">物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。SNS・スマホ視聴に最適な縦型ショートアニメにも対応。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
+                    <h3>Short Film</h3>
+                    <p data-lang-key="service-shortfilm-desc">心に残るストーリーを、映像という形で紡ぎます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROCESS (white) ================= -->
+    <section class="process section-white">
+        <span class="sec-kanji sec-kanji--tr" aria-hidden="true">程</span>
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-heading">PROCESS</h2>
+                <p class="section-kicker" data-lang-key="process-title">制作の流れ</p>
+                <p class="section-sub" data-lang-key="process-subtitle">お問い合わせから納品まで、スムーズな制作体験を</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step-num">01</div>
+                    <h4 data-lang-key="process-step1-title">お問い合わせ</h4>
+                    <p data-lang-key="process-step1-desc">X(Twitter)のDMからお気軽にご連絡ください</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">02</div>
+                    <h4 data-lang-key="process-step2-title">ヒアリング</h4>
+                    <p data-lang-key="process-step2-desc">目的・ターゲット・イメージを丁寧にお伺いします</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">03</div>
+                    <h4 data-lang-key="process-step3-title">企画・構成</h4>
+                    <p data-lang-key="process-step3-desc">ストーリーボードと演出プランをご提案</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">04</div>
+                    <h4 data-lang-key="process-step4-title">制作</h4>
+                    <p data-lang-key="process-step4-desc">AI技術と映像制作スキルを融合し、映像を制作します</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">05</div>
+                    <h4 data-lang-key="process-step5-title">納品</h4>
+                    <p data-lang-key="process-step5-desc">修正対応の上、ご希望のフォーマットで納品</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PRICING (white) ================= -->
+    <section id="pricing" class="section-white">
+        <span class="sec-kanji sec-kanji--tl" aria-hidden="true">価</span>
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-heading">PRICE</h2>
+                <p class="section-kicker" data-lang-key="pricing-title">料金プラン</p>
+                <p class="section-sub" data-lang-key="pricing-subtitle">プロジェクトに合わせた最適なプランを</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-plan" data-lang-key="pricing-light-plan">Light</div>
+                    <div class="pricing-price"><span>¥</span>50,000<span>〜</span></div>
+                    <div class="pricing-unit" data-lang-key="pricing-light-unit">30秒以下の短尺動画</div>
+                    <ul class="pricing-features">
+                        <li data-lang-key="pricing-light-f1">SNS向けショート動画</li>
+                        <li data-lang-key="pricing-light-f2">シンプルな演出・構成</li>
+                        <li data-lang-key="pricing-light-f3">BGM・効果音込み</li>
+                        <li data-lang-key="pricing-light-f4">修正1回まで</li>
+                        <li data-lang-key="pricing-light-f5">納期：約1週間</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta" data-lang-key="pricing-cta">このプランで相談する</a>
+                </div>
+                <div class="pricing-card featured">
+                    <img class="pricing-peek" src="images/usher-cat.png" alt="" aria-hidden="true" loading="eager" width="379" height="720">
+                    <div class="pricing-plan" data-lang-key="pricing-standard-plan">Standard</div>
+                    <div class="pricing-price"><span>¥</span>100,000<span>〜</span></div>
+                    <div class="pricing-unit" data-lang-key="pricing-standard-unit">1分程度のアニメ・PR動画</div>
+                    <ul class="pricing-features">
+                        <li data-lang-key="pricing-standard-f1">ストーリーボード付き</li>
+                        <li data-lang-key="pricing-standard-f2">キャラクターデザイン</li>
+                        <li data-lang-key="pricing-standard-f3">演出・アニメーション</li>
+                        <li data-lang-key="pricing-standard-f4">BGM・効果音・SE込み</li>
+                        <li data-lang-key="pricing-standard-f5">修正2回まで</li>
+                        <li data-lang-key="pricing-standard-f6">納期：約2週間</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta featured" data-lang-key="pricing-cta">このプランで相談する</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-plan" data-lang-key="pricing-premium-plan">Premium</div>
+                    <div class="pricing-price"><span>¥</span>200,000<span>〜</span></div>
+                    <div class="pricing-unit" data-lang-key="pricing-premium-unit">2分以上 / 複雑な演出</div>
+                    <ul class="pricing-features">
+                        <li data-lang-key="pricing-premium-f1">フルストーリーボード</li>
+                        <li data-lang-key="pricing-premium-f2">オリジナルキャラ複数体</li>
+                        <li data-lang-key="pricing-premium-f3">高度な演出・VFX</li>
+                        <li data-lang-key="pricing-premium-f4">AI音声・ナレーション生成</li>
+                        <li data-lang-key="pricing-premium-f5">修正3回まで</li>
+                        <li data-lang-key="pricing-premium-f6">納期：約3〜4週間</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta" data-lang-key="pricing-cta">このプランで相談する</a>
+                </div>
+            </div>
+            <p class="pricing-note" data-lang-key="pricing-note">※ 上記は目安です。プロジェクトの内容・規模により変動します。まずはお気軽にご相談ください。</p>
+            <p class="pricing-custom" data-lang-key="pricing-custom">上記を超える規模・継続案件 — ご予算に応じて個別設計いたします（要相談）</p>
+        </div>
+    </section>
+
+    <!-- ================= FAQ (white) ================= -->
+    <section id="faq" class="section-white">
+        <span class="sec-kanji sec-kanji--tr" aria-hidden="true">問</span>
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-heading">FAQ</h2>
+                <p class="section-kicker" data-lang-key="faq-title">よくあるご質問</p>
+                <p class="section-sub" data-lang-key="faq-subtitle">ご依頼前の不安にお答えします</p>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q1">どんな映像を依頼できますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a1">CM・PR映像、アニメーション、ショートフィルム、ミュージックビデオなどに対応しています。横型(16:9)・縦型(9:16のショートアニメ等)どちらの形式も制作可能です。実写撮影を伴わない、AI生成と映像編集を組み合わせた制作が中心です。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q2">納品された映像は商用利用できますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a2">はい。広告・SNS・Webサイト・イベント上映など、ご契約時に取り決めた範囲で自由にご利用いただけます。権利の取り扱いはお見積もり時に明確にご説明します。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q3">AIで制作するメリットは何ですか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a3">従来の映像制作と比べて、短い納期と抑えたコストでアニメーション表現が可能になります。生成だけに頼らず、企画・構成・演出・編集は人の手で丁寧に仕上げるため、品質と再現性を両立できます。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q4">修正には対応してもらえますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a4">プランに応じて1〜3回の修正が料金に含まれています。それ以上の修正や大きな方針変更も、追加費用のご相談のうえで柔軟に対応します。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q5">納期はどのくらいかかりますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a5">内容や尺により約1〜4週間が目安です。お急ぎの場合はスケジュールをご相談ください。可能な範囲で調整します。</p>
+                </details>
+                <details class="faq-item">
+                    <summary><span data-lang-key="faq-q6">打ち合わせはどのように進めますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p class="faq-answer" data-lang-key="faq-a6">お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。X(Twitter)のDMでテキストのみのやり取りでも問題ありません。</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact">
+        <span class="sec-kanji sec-kanji--tl" aria-hidden="true">結</span>
+        <img class="usher-bow reveal" src="images/usher-cat-bow.png" alt="案内猫 フク（お辞儀）" loading="lazy" data-reveal data-reveal-delay="0.15">
+        <div class="container contact-inner">
+            <h2 class="section-heading hero-heading">LET'S TALK</h2>
+            <p class="contact-lede" data-lang-key="contact-title">Let's Create Together</p>
+            <p class="contact-subtitle" data-lang-key="contact-subtitle">プロジェクトのご相談はお気軽にどうぞ。<br>アイデア段階からでも喜んでお伺いします。</p>
+
+            <div class="contact-availability">
+                <div class="dot"></div>
+                <span data-lang-key="contact-availability">Available for new projects</span>
+            </div>
+
+            <div class="contact-trust">
+                <span class="trust-chip" data-lang-key="contact-trust-1">お見積もり無料</span>
+                <span class="trust-chip" data-lang-key="contact-trust-2">企画段階からの相談OK</span>
+                <span class="trust-chip" data-lang-key="contact-trust-3">オンライン完結・全国対応</span>
+            </div>
+
+            <div class="v2-cta-ring-wrap">
+                <svg class="v2-cta-ring" viewBox="0 0 150 150" aria-hidden="true" focusable="false">
+                    <defs><path id="v2-contact-ring-path" d="M75,10 a65,65 0 1,1 -0.1,0"/></defs>
+                    <text class="v2-cta-ring-text"><textPath href="#v2-contact-ring-path" startOffset="0">LET'S CREATE TOGETHER • RYO STUDIO • LET'S CREATE TOGETHER • RYO STUDIO • </textPath></text>
+                </svg>
+                <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta" data-magnetic>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    <span data-lang-key="contact-cta-dm">XのDMで相談する</span>
+                </a>
+            </div>
+
+            <p class="contact-note" data-lang-key="contact-note">24時間以内に返信いたします。営業や売り込みは一切いたしませんので、お気軽にどうぞ。</p>
+
+            <div class="social-links">
+                <a href="https://x.com/ryo05m" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@RyoStudio05" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-script" aria-hidden="true">Ryo.</div>
+        <p class="footer-tagline" data-lang-key="footer-tagline">AI Agent x Video Production</p>
+        <div class="footer-links" role="navigation" aria-label="Footer">
+            <a href="#works">Work</a>
+            <a href="#awards">Awards</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p class="footer-text" data-lang-key="footer-text">&copy; 2026 RYO STUDIO. All Rights Reserved.</p>
+    </footer>
+
+    <!-- ================= SCROLL REEL (D3) ================= -->
+    <div class="scroll-reel" aria-hidden="true"></div>
+
+    <!-- ================= LIGHTBOX ================= -->
+    <div class="video-lightbox" id="videoLightbox">
+        <button class="video-lightbox-close" id="lightboxClose" aria-label="Close video">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="video-lightbox-content">
+            <div class="v2-screening" aria-hidden="true"><span class="v2-screening-label">NOW SCREENING</span><span class="v2-screening-title" id="lightboxTitle"></span></div>
+            <iframe id="lightboxIframe" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+</div>
+<script id="v4-engine">
+(function () {
+    'use strict';
+
+    var translations = {
+        'hero-award-line': { jp: 'JAPAN AI VIDEO AWARDS 2026 ・ グランプリ', en: 'JAPAN AI VIDEO AWARDS 2026 · GRAND PRIX' },
+        'hero-eyebrow': { jp: 'Visual Storyteller', en: 'Visual Storyteller' },
+        'hero-h1': { jp: 'Where <em>Stories</em><br>Come Alive', en: 'Where <em>Stories</em><br>Come Alive' },
+        'hero-tagline': { jp: '映像という言葉で、あなたの物語を紡ぎます', en: 'Crafting your story through the art of visual storytelling' },
+        'hero-cta-works': { jp: '作品を観る <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>', en: 'View Works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' },
+        'hero-cta-contact': { jp: 'お問い合わせ', en: 'Contact' },
+        'hero-showreel': { jp: '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Showreel', en: '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Showreel' },
+        'spotlight-eyebrow': { jp: 'JAPAN AI VIDEO AWARDS 2026 ／ 予防医療普及部門 グランプリ', en: 'JAPAN AI VIDEO AWARDS 2026 / Preventive Healthcare Category — Grand Prix' },
+        'spotlight-statement': { jp: '予防医療の普及をテーマにしたショートフィルム。物語の力で、"伝わりにくい大切なこと"を心に届く映像にしました。企画・構成から演出・編集まで、一貫して手がけています。', en: 'A short film on preventive healthcare — turning an important, hard-to-tell message into a story that moves people. Planned, directed, and produced end to end.' },
+        'awards-title': { jp: 'Awards', en: 'Awards' },
+        'awards-sub': { jp: '受賞歴', en: 'Selected recognitions' },
+        'works-title': { jp: 'Works', en: 'Works' },
+        'works-subtitle': { jp: '受賞歴のある映像作品', en: 'Award-winning video works' },
+        'more-works-label': { jp: 'More Works', en: 'More Works' },
+        'more-works-title': { jp: 'Other Projects', en: 'Other Projects' },
+        'more-works-yt': { jp: 'その他の作品は YouTube チャンネルでご覧いただけます →', en: 'See more works on my YouTube channel →' },
+        'cta-band-title': { jp: 'こんな映像を、あなたのプロジェクトでも。', en: 'Videos like these, for your project.' },
+        'cta-band-text': { jp: '目的や予算がまだ固まっていなくても大丈夫です。<br>作りたいイメージをお聞かせいただければ、最適な形をご提案します。', en: "It's fine if your goals or budget aren't set yet.<br>Tell me the image you have in mind, and I'll propose the best approach." },
+        'cta-band-btn': { jp: '無料で相談する', en: 'Get a Free Consultation' },
+        'about-title': { jp: '映像という言葉で<br><em>物語を紡ぐ</em>', en: 'Weaving <em>Stories</em><br>Through Film' },
+        'about-text': { jp: 'アニメーション、プロモーション映像、ショートフィルムなど、<br>幅広いジャンルの映像制作を手がけています。<br>最新のAI技術と映像制作の技術を組み合わせ、<br>視聴者の心に響く作品をお届けします。', en: 'I create a wide range of video content including<br>animation, promotional videos, and short films.<br>Combining cutting-edge AI technology with filmmaking,<br>I deliver works that resonate with viewers.' },
+        'about-more-link': { jp: 'すべての受賞歴を見る →', en: 'See all recognition →' },
+        'about-profile-role': { jp: 'Visual Storyteller / RYO STUDIO 代表', en: 'Visual Storyteller / Founder, RYO STUDIO' },
+        'about-profile-bio': { jp: '国内外の映像コンテストで数多くの受賞歴。企業・自治体のPR映像から物語性のあるショートフィルムまで、企画・構成から納品まで一貫して担当します。AI動画制作スクールの講師としても活動中です。', en: 'Winner of numerous awards in video contests in Japan and abroad. I handle everything from planning and storyboarding to final delivery — from corporate and municipal PR videos to narrative short films. Also active as an instructor at an AI video production school.' },
+        'services-title': { jp: 'What I Create', en: 'What I Create' },
+        'service-promotion-desc': { jp: '企業・サービス・商品の魅力を最大限に引き出すプロモーション映像を制作します。', en: 'Creating promotional videos that maximize the appeal of your brand, service, or product.' },
+        'service-animation-desc': { jp: '物語性のあるアニメーションで、感情に訴えかける映像体験をお届けします。SNS・スマホ視聴に最適な縦型ショートアニメにも対応。', en: 'Delivering emotionally compelling visual experiences through narrative animation. Vertical short anime optimized for social media is also available.' },
+        'service-shortfilm-desc': { jp: '心に残るストーリーを、映像という形で紡ぎます。', en: 'Weaving memorable stories through the medium of film.' },
+        'contact-title': { jp: "Let's Create Together", en: "Let's Create Together" },
+        'contact-subtitle': { jp: 'プロジェクトのご相談はお気軽にどうぞ。<br>アイデア段階からでも喜んでお伺いします。', en: 'Feel free to reach out about your project.<br>I\'m happy to discuss from the idea stage.' },
+        'contact-availability': { jp: 'Available for new projects', en: 'Available for new projects' },
+        'contact-note': { jp: '24時間以内に返信いたします。営業や売り込みは一切いたしませんので、お気軽にどうぞ。', en: "I'll respond within 24 hours. No sales pitch — just an honest conversation about your project." },
+        'contact-trust-1': { jp: 'お見積もり無料', en: 'Free estimates' },
+        'contact-trust-2': { jp: '企画段階からの相談OK', en: 'Idea-stage consultations welcome' },
+        'contact-trust-3': { jp: 'オンライン完結・全国対応', en: 'Fully online — available nationwide' },
+        'contact-cta-dm': { jp: 'XのDMで相談する', en: 'DM me on X' },
+        'pricing-cta': { jp: 'このプランで相談する', en: 'Discuss this plan' },
+        'faq-title': { jp: 'よくあるご質問', en: 'Frequently Asked Questions' },
+        'faq-subtitle': { jp: 'ご依頼前の不安にお答えします', en: 'Answers to common questions before you commission' },
+        'faq-q1': { jp: 'どんな映像を依頼できますか？', en: 'What kind of videos can I commission?' },
+        'faq-a1': { jp: 'CM・PR映像、アニメーション、ショートフィルム、ミュージックビデオなどに対応しています。横型(16:9)・縦型(9:16のショートアニメ等)どちらの形式も制作可能です。実写撮影を伴わない、AI生成と映像編集を組み合わせた制作が中心です。', en: 'Commercials, PR videos, animation, short films, and music videos — in both landscape (16:9) and vertical (9:16 short anime) formats. My work centers on AI-generated visuals combined with hands-on editing — no live-action filming required.' },
+        'faq-q2': { jp: '納品された映像は商用利用できますか？', en: 'Can I use the delivered video commercially?' },
+        'faq-a2': { jp: 'はい。広告・SNS・Webサイト・イベント上映など、ご契約時に取り決めた範囲で自由にご利用いただけます。権利の取り扱いはお見積もり時に明確にご説明します。', en: 'Yes. You can freely use it for advertising, social media, websites, and event screenings within the scope agreed in the contract. Rights handling is clearly explained at the estimate stage.' },
+        'faq-q3': { jp: 'AIで制作するメリットは何ですか？', en: 'What are the benefits of AI-assisted production?' },
+        'faq-a3': { jp: '従来の映像制作と比べて、短い納期と抑えたコストでアニメーション表現が可能になります。生成だけに頼らず、企画・構成・演出・編集は人の手で丁寧に仕上げるため、品質と再現性を両立できます。', en: 'Compared to traditional production, animation becomes possible on shorter timelines and lower budgets. Planning, direction, and editing are still done carefully by hand, balancing quality with consistency.' },
+        'faq-q4': { jp: '修正には対応してもらえますか？', en: 'Are revisions included?' },
+        'faq-a4': { jp: 'プランに応じて1〜3回の修正が料金に含まれています。それ以上の修正や大きな方針変更も、追加費用のご相談のうえで柔軟に対応します。', en: '1–3 revision rounds are included depending on the plan. Additional revisions or major direction changes can be handled flexibly with a separate quote.' },
+        'faq-q5': { jp: '納期はどのくらいかかりますか？', en: 'How long does production take?' },
+        'faq-a5': { jp: '内容や尺により約1〜4週間が目安です。お急ぎの場合はスケジュールをご相談ください。可能な範囲で調整します。', en: 'Roughly 1–4 weeks depending on content and length. If you are in a hurry, let me know — I will adjust the schedule where possible.' },
+        'faq-q6': { jp: '打ち合わせはどのように進めますか？', en: 'How do meetings work?' },
+        'faq-a6': { jp: 'お打ち合わせはオンラインで完結するため、全国どこからでもご依頼いただけます。X(Twitter)のDMでテキストのみのやり取りでも問題ありません。', en: 'All meetings are held online, so you can commission from anywhere. Text-only communication via X (Twitter) DM works fine too.' },
+        'footer-tagline': { jp: 'AI Agent x Video Production', en: 'AI Agent x Video Production' },
+        'footer-text': { jp: '&copy; 2026 RYO STUDIO. All Rights Reserved.', en: '&copy; 2026 RYO STUDIO. All Rights Reserved.' },
+        'process-label': { jp: 'Process', en: 'Process' },
+        'process-title': { jp: '制作の流れ', en: 'How It Works' },
+        'process-subtitle': { jp: 'お問い合わせから納品まで、スムーズな制作体験を', en: 'A smooth creative experience from inquiry to delivery' },
+        'process-step1-title': { jp: 'お問い合わせ', en: 'Contact' },
+        'process-step1-desc': { jp: 'X(Twitter)のDMからお気軽にご連絡ください', en: 'Reach out via X (Twitter) DM' },
+        'process-step2-title': { jp: 'ヒアリング', en: 'Consultation' },
+        'process-step2-desc': { jp: '目的・ターゲット・イメージを丁寧にお伺いします', en: 'We discuss your goals, target audience, and creative vision' },
+        'process-step3-title': { jp: '企画・構成', en: 'Planning' },
+        'process-step3-desc': { jp: 'ストーリーボードと演出プランをご提案', en: 'Storyboard and creative direction proposal' },
+        'process-step4-title': { jp: '制作', en: 'Production' },
+        'process-step4-desc': { jp: 'AI技術と映像制作スキルを融合し、映像を制作します', en: 'Creating your video with AI technology and filmmaking expertise' },
+        'process-step5-title': { jp: '納品', en: 'Delivery' },
+        'process-step5-desc': { jp: '修正対応の上、ご希望のフォーマットで納品', en: 'Final revisions and delivery in your preferred format' },
+        'pricing-label': { jp: 'Pricing', en: 'Pricing' },
+        'pricing-title': { jp: '料金プラン', en: 'Pricing Plans' },
+        'pricing-subtitle': { jp: 'プロジェクトに合わせた最適なプランを', en: 'The right plan for your project' },
+        'pricing-light-plan': { jp: 'Light', en: 'Light' },
+        'pricing-light-unit': { jp: '30秒以下の短尺動画', en: 'Short videos under 30 seconds' },
+        'pricing-light-f1': { jp: 'SNS向けショート動画', en: 'Short videos for social media' },
+        'pricing-light-f2': { jp: 'シンプルな演出・構成', en: 'Simple direction & structure' },
+        'pricing-light-f3': { jp: 'BGM・効果音込み', en: 'BGM & sound effects included' },
+        'pricing-light-f4': { jp: '修正1回まで', en: 'Up to 1 revision' },
+        'pricing-light-f5': { jp: '納期：約1週間', en: 'Delivery: ~1 week' },
+        'pricing-popular': { jp: 'POPULAR', en: 'POPULAR' },
+        'pricing-standard-plan': { jp: 'Standard', en: 'Standard' },
+        'pricing-standard-unit': { jp: '1分程度のアニメ・PR動画', en: 'Anime & PR videos around 1 min' },
+        'pricing-standard-f1': { jp: 'ストーリーボード付き', en: 'Storyboard included' },
+        'pricing-standard-f2': { jp: 'キャラクターデザイン', en: 'Character design' },
+        'pricing-standard-f3': { jp: '演出・アニメーション', en: 'Direction & animation' },
+        'pricing-standard-f4': { jp: 'BGM・効果音・SE込み', en: 'BGM, SFX & sound effects' },
+        'pricing-standard-f5': { jp: '修正2回まで', en: 'Up to 2 revisions' },
+        'pricing-standard-f6': { jp: '納期：約2週間', en: 'Delivery: ~2 weeks' },
+        'pricing-premium-plan': { jp: 'Premium', en: 'Premium' },
+        'pricing-premium-unit': { jp: '2分以上 / 複雑な演出', en: '2+ minutes / complex production' },
+        'pricing-premium-f1': { jp: 'フルストーリーボード', en: 'Full storyboard' },
+        'pricing-premium-f2': { jp: 'オリジナルキャラ複数体', en: 'Multiple original characters' },
+        'pricing-premium-f3': { jp: '高度な演出・VFX', en: 'Advanced direction & VFX' },
+        'pricing-premium-f4': { jp: 'AI音声・ナレーション生成', en: 'AI voice & narration generation' },
+        'pricing-premium-f5': { jp: '修正3回まで', en: 'Up to 3 revisions' },
+        'pricing-premium-f6': { jp: '納期：約3〜4週間', en: 'Delivery: ~3-4 weeks' },
+        'pricing-note': { jp: '※ 上記は目安です。プロジェクトの内容・規模により変動します。まずはお気軽にご相談ください。', en: '* Prices are estimates and vary by project scope. Feel free to reach out for a custom quote.' },
+        'pricing-custom': { jp: '上記を超える規模・継続案件 — ご予算に応じて個別設計いたします（要相談）', en: 'Larger or ongoing engagements — custom proposals on request.' },
+        'filter-all': { jp: 'すべて', en: 'All' },
+        'filter-animation': { jp: 'アニメ', en: 'Animation' },
+        'filter-shortfilm': { jp: 'ショートフィルム', en: 'Short Film' },
+        'filter-commercial': { jp: 'CM・PR', en: 'Commercial' },
+        'filter-other': { jp: 'その他', en: 'Other' },
+        'v5-intro': { jp: 'はじめまして、案内猫の フク と申します。<br>RYO STUDIO の試写室へようこそ。', en: 'Meet Fuku, the usher cat of RYO STUDIO.<br>Welcome to our private screening room.' },
+        'v5-greet': { jp: 'ようこそ。今夜は、どんな物語をご覧になりますか？', en: 'Welcome in. What kind of story shall we screen for you tonight?' },
+        'v5-pill-works': { jp: '作品を観る', en: 'See the works' },
+        'v5-pill-awards': { jp: '受賞歴', en: 'Awards' },
+        'v5-pill-pricing': { jp: '料金プラン', en: 'Pricing' },
+        'v5-pill-flow': { jp: '制作の流れ', en: 'How we work' }
+    };
+
+    var IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+    var V4 = window.V4 = window.V4 || {};
+    V4.modules = {};
+    V4.state = { lang: 'jp' };
+    V4._hasMotion = false;
+    V4._motionActive = false;
+
+    function safe(fn) {
+        try { fn(); } catch (e) { /* one module's failure must not take down the rest */ }
+    }
+
+    function qsa(sel, ctx) {
+        return (ctx || document).querySelectorAll(sel);
+    }
+
+    /* ---------------------------------------------------------------- */
+    /* lang                                                              */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function applyLang(lang) {
+            document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'ja');
+            qsa('[data-lang-key]').forEach(function (el) {
+                var key = el.getAttribute('data-lang-key');
+                var entry = translations[key];
+                if (!entry) return;
+                var val = (lang === 'en' ? entry.en : entry.jp);
+                if (val === undefined) val = entry.jp;
+                if (val !== undefined) el.innerHTML = val;
+            });
+            var toggle = document.getElementById('langToggle');
+            if (toggle) toggle.textContent = (lang === 'en') ? 'JP' : 'EN';
+            V4.state.lang = lang;
+            try { localStorage.setItem('lang', lang); } catch (e) { /* storage unavailable */ }
+            if (V4.modules.charReveal && V4.modules.charReveal.rebuild) {
+                V4.modules.charReveal.rebuild();
+            }
+            if (V4.modules.concierge && V4.modules.concierge.onLangChange) {
+                V4.modules.concierge.onLangChange();
+            }
+        }
+
+        function init() {
+            var stored = 'jp';
+            try { stored = localStorage.getItem('lang') || 'jp'; } catch (e) { /* storage unavailable */ }
+            if (stored !== 'en') stored = 'jp';
+            applyLang(stored);
+            var toggle = document.getElementById('langToggle');
+            if (toggle) {
+                toggle.addEventListener('click', function () {
+                    applyLang(V4.state.lang === 'en' ? 'jp' : 'en');
+                });
+            }
+        }
+
+        V4.modules.lang = { init: init, apply: applyLang };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* reveal (motion-ok only)                                           */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            var els = qsa('.reveal[data-reveal]');
+            if (!els.length) return;
+            els.forEach(function (el) { gsap.set(el, { y: 28, opacity: 0 }); });
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    var el = entry.target;
+                    observer.unobserve(el);
+                    var delay = parseFloat(el.getAttribute('data-reveal-delay')) || 0;
+                    gsap.to(el, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', delay: delay });
+                });
+            }, { threshold: 0.15 });
+            els.forEach(function (el) { observer.observe(el); });
+        }
+        V4.modules.reveal = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* flipCards                                                         */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function unflipAll() {
+            qsa('.work-card.is-flipped, .more-work-card.is-flipped').forEach(function (c) {
+                c.classList.remove('is-flipped');
+                c.setAttribute('aria-pressed', 'false');
+            });
+        }
+
+        function init() {
+            var cards = qsa('.work-card, .more-work-card');
+            if (!cards.length) return;
+
+            cards.forEach(function (card) {
+                var thumb = card.querySelector('.work-card-thumbnail');
+                var titleEl = card.querySelector('.work-card-title');
+                var catEl = card.querySelector('.work-card-category');
+                var infoEl = card.querySelector('.work-card-info');
+
+                if (thumb) {
+                    var frontLabel = document.createElement('span');
+                    frontLabel.className = 'wc-front-label';
+                    var flCat = document.createElement('span');
+                    flCat.className = 'wc-fl-cat';
+                    flCat.textContent = catEl ? catEl.textContent : '';
+                    var flTitle = document.createElement('span');
+                    flTitle.className = 'wc-fl-title';
+                    flTitle.textContent = titleEl ? titleEl.textContent : '';
+                    frontLabel.appendChild(flCat);
+                    frontLabel.appendChild(flTitle);
+                    thumb.appendChild(frontLabel);
+                }
+
+                if (infoEl) {
+                    var watch = document.createElement('span');
+                    watch.className = 'wc-watch';
+                    watch.setAttribute('aria-hidden', 'true');
+                    watch.textContent = '▶ WATCH';
+                    infoEl.appendChild(watch);
+                }
+
+                card.setAttribute('aria-pressed', 'false');
+
+                // C1: two-beat hover (thumb settles, play button pops in 80ms later).
+                // GSAP-only; the plain CSS .3s hover is the html:not(.motion-ok) fallback.
+                if (V4._hasMotion && thumb) {
+                    var thumbImg = thumb.querySelector('img');
+                    var playBtn = thumb.querySelector('.work-card-play');
+                    card.addEventListener('mouseenter', function () {
+                        if (card.classList.contains('is-flipped')) return;
+                        if (thumbImg) {
+                            gsap.killTweensOf(thumbImg);
+                            gsap.to(thumbImg, { scale: 1.03, duration: 0.4, ease: 'power2.out' });
+                        }
+                        if (playBtn) {
+                            gsap.killTweensOf(playBtn);
+                            gsap.fromTo(playBtn, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)', delay: 0.08 });
+                        }
+                    });
+                    card.addEventListener('mouseleave', function () {
+                        if (thumbImg) {
+                            gsap.killTweensOf(thumbImg);
+                            gsap.to(thumbImg, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                        }
+                        if (playBtn) {
+                            gsap.killTweensOf(playBtn);
+                            gsap.to(playBtn, { scale: 0.85, opacity: 0, duration: 0.25, ease: 'power2.out' });
+                        }
+                    });
+                }
+
+                var activate = function (e) {
+                    e.preventDefault();
+                    if (card.classList.contains('is-flipped')) {
+                        var vid = card.getAttribute('data-video');
+                        var isPortrait = card.getAttribute('data-orientation') === 'portrait';
+                        var titleText = titleEl ? titleEl.textContent : '';
+                        if (V4.modules.lightbox) V4.modules.lightbox.open(vid, isPortrait, titleText);
+                    } else {
+                        card.classList.add('is-flipped');
+                        card.setAttribute('aria-pressed', 'true');
+                    }
+                };
+
+                card.addEventListener('click', activate);
+                card.addEventListener('keydown', function (e) {
+                    // A4: Space mirrors Enter's already-established flip/open contract.
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') activate(e);
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!e.target || typeof e.target.closest !== 'function') return;
+                if (!e.target.closest('.work-card, .more-work-card')) unflipAll();
+            }, { passive: true });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') unflipAll();
+            });
+        }
+
+        V4.modules.flipCards = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* tilt (no touch; must work with or without GSAP)                   */
+    /* also drives the work-card-thumbnail glare (--gx/--gy, B3)         */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            if (IS_TOUCH) return;
+            var els = qsa('[data-tilt]');
+            if (!els.length) return;
+
+            els.forEach(function (el) {
+                var ticking = false;
+                var pending = null;
+
+                function apply() {
+                    ticking = false;
+                    if (!pending || el.classList.contains('is-flipped')) return;
+                    var rect = el.getBoundingClientRect();
+                    var x = (pending.clientX - rect.left) / rect.width;
+                    var y = (pending.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * 2 * 7;
+                    var rotateX = -(y - 0.5) * 2 * 7;
+                    el.style.transition = 'none';
+                    el.style.transform = 'perspective(900px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+                    el.style.setProperty('--gx', (Math.max(0, Math.min(1, x)) * 100).toFixed(1) + '%');
+                    el.style.setProperty('--gy', (Math.max(0, Math.min(1, y)) * 100).toFixed(1) + '%');
+                }
+
+                el.addEventListener('mousemove', function (e) {
+                    if (el.classList.contains('is-flipped')) return;
+                    pending = e;
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(apply);
+                    }
+                }, { passive: true });
+
+                el.addEventListener('mouseleave', function () {
+                    el.style.transition = 'transform .18s ease-out';
+                    el.style.transform = '';
+                    el.style.removeProperty('--gx');
+                    el.style.removeProperty('--gy');
+                }, { passive: true });
+            });
+        }
+        V4.modules.tilt = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* filters                                                            */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            var tabs = qsa('.filter-tab');
+            if (!tabs.length) return;
+
+            tabs.forEach(function (tab) {
+                tab.setAttribute('aria-selected', tab.classList.contains('active') ? 'true' : 'false');
+                tab.addEventListener('click', function () {
+                    tabs.forEach(function (t) {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+
+                    var filter = tab.getAttribute('data-filter') || 'all';
+                    qsa('.work-card[data-category], .more-work-card[data-category]').forEach(function (card) {
+                        var cat = card.getAttribute('data-category');
+                        var show = (filter === 'all' || cat === filter);
+                        card.hidden = !show;
+                        if (card.classList.contains('is-flipped')) {
+                            card.classList.remove('is-flipped');
+                            card.setAttribute('aria-pressed', 'false');
+                        }
+                    });
+                });
+            });
+        }
+        V4.modules.filters = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* lightbox                                                           */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        var lightboxEl, closeBtn, titleEl, iframeEl;
+
+        function open(vid, isPortrait, titleText) {
+            if (!lightboxEl || !iframeEl || !vid) return;
+            iframeEl.src = 'https://www.youtube-nocookie.com/embed/' + vid + '?autoplay=1&rel=0';
+            if (titleEl) titleEl.textContent = titleText || '';
+            lightboxEl.classList.toggle('is-portrait', !!isPortrait);
+            lightboxEl.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function close() {
+            if (!lightboxEl) return;
+            lightboxEl.classList.remove('active');
+            lightboxEl.classList.remove('is-portrait');
+            if (iframeEl) iframeEl.src = 'about:blank';
+            document.body.style.overflow = '';
+        }
+
+        function wireVideoTriggers() {
+            qsa('[data-video]').forEach(function (el) {
+                if (el.classList.contains('work-card') || el.classList.contains('more-work-card')) return;
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var vid = el.getAttribute('data-video');
+                    var portraitAncestor = el.closest('[data-orientation="portrait"]');
+                    var isPortrait = el.getAttribute('data-orientation') === 'portrait' || !!portraitAncestor;
+                    var titleText = '';
+                    var stackCard = el.closest('.stack-card');
+                    if (stackCard) {
+                        var t = stackCard.querySelector('.stack-title');
+                        if (t) titleText = t.textContent;
+                    }
+                    if (!titleText) titleText = el.getAttribute('aria-label') || '';
+                    open(vid, isPortrait, titleText);
+                });
+            });
+        }
+
+        function init() {
+            lightboxEl = document.getElementById('videoLightbox');
+            closeBtn = document.getElementById('lightboxClose');
+            titleEl = document.getElementById('lightboxTitle');
+            iframeEl = document.getElementById('lightboxIframe');
+            if (!lightboxEl) return;
+
+            if (closeBtn) closeBtn.addEventListener('click', close);
+            lightboxEl.addEventListener('click', function (e) {
+                if (e.target === lightboxEl) close();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && lightboxEl.classList.contains('active')) close();
+            });
+
+            wireVideoTriggers();
+        }
+
+        V4.modules.lightbox = { init: init, open: open, close: close };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* depth (B1 hero perspective camera / B2 cursor light / B4 heading  */
+    /* depth entrance). Supersedes the old heroParallax: same mousemove  */
+    /* logic plus a translateZ per data-depth and a --lx/--ly light      */
+    /* source on the main deck card. Gated at the boot() call site the   */
+    /* same way heroParallax was (motion-ok, no touch).                  */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            if (IS_TOUCH) return;
+            var hero = document.getElementById('hero');
+            var deckCards = qsa('.deck-card[data-depth], .usher[data-depth]');
+            var mainCard = document.querySelector('.deck-card--main');
+            if (!hero || !deckCards.length) return;
+
+            var ticking = false;
+            var pending = null;
+
+            function apply() {
+                ticking = false;
+                if (!pending) return;
+                var rect = hero.getBoundingClientRect();
+                var fx = (pending.clientX - rect.left) / rect.width;
+                var fy = (pending.clientY - rect.top) / rect.height;
+                var cx = fx - 0.5;
+                var cy = fy - 0.5;
+                deckCards.forEach(function (c) {
+                    var depth = parseFloat(c.getAttribute('data-depth')) || 0;
+                    var tx = cx * 26 * depth;
+                    var ty = cy * 26 * depth;
+                    var tz = (depth - 1) * 80;
+                    c.style.transform = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,' + tz.toFixed(2) + 'px)';
+                });
+                if (mainCard) {
+                    mainCard.style.setProperty('--lx', Math.max(0, Math.min(100, fx * 100)).toFixed(1) + '%');
+                    mainCard.style.setProperty('--ly', Math.max(0, Math.min(100, fy * 100)).toFixed(1) + '%');
+                }
+            }
+
+            hero.addEventListener('mousemove', function (e) {
+                pending = e;
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(apply);
+                }
+            }, { passive: true });
+
+            hero.addEventListener('mouseleave', function () {
+                deckCards.forEach(function (c) { c.style.transform = 'translate3d(0,0,0)'; });
+                if (mainCard) {
+                    mainCard.style.removeProperty('--lx');
+                    mainCard.style.removeProperty('--ly');
+                }
+            }, { passive: true });
+        }
+
+        function initScroll() {
+            var els = qsa('.section-heading');
+            if (!els.length) return;
+            els.forEach(function (el) {
+                gsap.set(el, { transformPerspective: 700, z: -140, y: 30, opacity: 0.2 });
+                gsap.to(el, {
+                    z: 0, y: 0, opacity: 1,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 92%',
+                        end: 'top 55%',
+                        scrub: 0.4
+                    }
+                });
+            });
+        }
+
+        V4.modules.depth = { init: init, initScroll: initScroll };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* concierge (typewriter greet + pills reveal)                       */
+    /* must work with or without GSAP; internally gated on _motionActive */
+    /* for the animated variants, so CDN-down / reduced-motion always    */
+    /* fall back to the full static text the lang module already wrote. */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        var typeEl, cursorEl, pillsEl, timer, charIndex;
+
+        function greetText() {
+            var entry = translations['v5-greet'];
+            if (!entry) return '';
+            var val = (V4.state.lang === 'en' ? entry.en : entry.jp);
+            return val === undefined ? entry.jp : val;
+        }
+
+        function stopTyping() {
+            if (timer) { clearTimeout(timer); timer = null; }
+        }
+
+        function finishInstant() {
+            stopTyping();
+            if (typeEl) typeEl.textContent = greetText();
+            if (cursorEl) cursorEl.classList.add('is-done');
+        }
+
+        function typeNext() {
+            if (!typeEl) return;
+            var text = greetText();
+            if (charIndex >= text.length) {
+                if (cursorEl) cursorEl.classList.add('is-done');
+                return;
+            }
+            typeEl.textContent = text.slice(0, charIndex + 1);
+            charIndex++;
+            timer = setTimeout(typeNext, 38);
+        }
+
+        function startTyping() {
+            stopTyping();
+            if (!typeEl) return;
+            typeEl.textContent = '';
+            charIndex = 0;
+            if (cursorEl) cursorEl.classList.remove('is-done');
+            timer = setTimeout(typeNext, 600);
+        }
+
+        function revealPills() {
+            if (!pillsEl) return;
+            pillsEl.classList.add('pre-in');
+            setTimeout(function () {
+                pillsEl.classList.remove('pre-in');
+                pillsEl.classList.add('is-in');
+            }, 400);
+        }
+
+        function init() {
+            typeEl = document.getElementById('typeline');
+            cursorEl = document.querySelector('.tw-cursor');
+            pillsEl = document.querySelector('.concierge-pills');
+            if (!V4._motionActive) {
+                // lang module already wrote the full sentence into #typeline;
+                // pills use their default visible CSS state. Just park the cursor.
+                if (cursorEl) cursorEl.classList.add('is-done');
+                return;
+            }
+            if (pillsEl) revealPills();
+            if (typeEl) startTyping();
+        }
+
+        function onLangChange() {
+            // applyLang() has already rewritten #typeline's full text in the
+            // new language; stop any in-flight typing and show it immediately.
+            finishInstant();
+        }
+
+        V4.modules.concierge = { init: init, onLangChange: onLangChange };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* marquee (motion-ok only)                                          */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            var rows = qsa('.mq-row[data-dir]');
+            if (!rows.length) return;
+
+            var ticking = false;
+
+            function update() {
+                ticking = false;
+                rows.forEach(function (row) {
+                    var track = row.querySelector('.mq-track');
+                    if (!track) return;
+                    var dir = parseFloat(row.getAttribute('data-dir')) || 1;
+                    var rect = row.getBoundingClientRect();
+                    var rowTop = rect.top + window.scrollY;
+                    var offset = (window.scrollY - rowTop + window.innerHeight) * 0.25;
+                    track.style.transform = 'translateX(' + (dir * offset).toFixed(2) + 'px)';
+                });
+            }
+
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            }, { passive: true });
+
+            update();
+        }
+        V4.modules.marquee = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* stack (motion-ok only)                                            */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            var items = qsa('.stack-item');
+            if (!items.length) return;
+            items.forEach(function (item, i) {
+                var card = item.querySelector('.stack-card') || item.firstElementChild;
+                if (!card) return;
+                var targetScale = 1 - (2 - i) * 0.03;
+                gsap.to(card, {
+                    scale: targetScale,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top top+=120',
+                        end: '+=60%',
+                        scrub: 0.4
+                    }
+                });
+            });
+        }
+        V4.modules.stack = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* charReveal (motion-ok only, rebuildable on lang switch)           */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function wrapTextInto(node, container) {
+            var text = node.textContent;
+            for (var i = 0; i < text.length; i++) {
+                var ch = text[i];
+                var span = document.createElement('span');
+                span.className = 'ch';
+                if (ch === ' ') {
+                    span.innerHTML = '&nbsp;';
+                } else {
+                    span.textContent = ch;
+                }
+                container.appendChild(span);
+            }
+        }
+
+        function splitChars(el) {
+            var nodes = Array.prototype.slice.call(el.childNodes);
+            el.innerHTML = '';
+            nodes.forEach(function (node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    wrapTextInto(node, el);
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    var clone = node.cloneNode(false);
+                    var innerNodes = Array.prototype.slice.call(node.childNodes);
+                    if (innerNodes.length) {
+                        innerNodes.forEach(function (inner) {
+                            if (inner.nodeType === Node.TEXT_NODE) {
+                                wrapTextInto(inner, clone);
+                            } else {
+                                clone.appendChild(inner.cloneNode(true));
+                            }
+                        });
+                    }
+                    el.appendChild(clone);
+                }
+            });
+            return el.querySelectorAll('.ch');
+        }
+
+        function build() {
+            var els = qsa('.char-reveal');
+            if (!els.length) return;
+            els.forEach(function (el) {
+                if (window.ScrollTrigger) {
+                    ScrollTrigger.getAll().forEach(function (st) {
+                        if (st.trigger === el) st.kill();
+                    });
+                }
+                var chars = splitChars(el);
+                if (!chars.length) return;
+                gsap.set(chars, { opacity: 0.2 });
+                gsap.to(chars, {
+                    opacity: 1,
+                    stagger: 0.02,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 80%',
+                        end: 'bottom 35%',
+                        scrub: 0.4
+                    }
+                });
+            });
+            if (window.ScrollTrigger) ScrollTrigger.refresh();
+        }
+
+        function init() {
+            if (!V4._motionActive) return;
+            build();
+        }
+
+        function rebuild() {
+            if (!V4._motionActive) return;
+            build();
+        }
+
+        V4.modules.charReveal = { init: init, rebuild: rebuild };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* countUp                                                            */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function parseTarget(str) {
+            var m = /^(\d+)(.*)$/.exec(str || '');
+            if (!m) return { num: 0, suffix: str || '' };
+            return { num: parseInt(m[1], 10), suffix: m[2] };
+        }
+
+        function init(motionActive) {
+            var els = qsa('.about-stat-number[data-target]');
+            if (!els.length) return;
+            if (!motionActive) return; // markup already shows the target text verbatim
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    var el = entry.target;
+                    if (el.dataset.counted === '1') return;
+                    el.dataset.counted = '1';
+                    observer.unobserve(el);
+
+                    var parsed = parseTarget(el.getAttribute('data-target'));
+                    var obj = { val: 0 };
+                    gsap.to(obj, {
+                        val: parsed.num,
+                        duration: 1.2,
+                        ease: 'power1.out',
+                        onUpdate: function () {
+                            el.textContent = Math.round(obj.val) + parsed.suffix;
+                        },
+                        onComplete: function () {
+                            el.textContent = parsed.num + parsed.suffix;
+                        }
+                    });
+                });
+            }, { threshold: 0.4 });
+
+            els.forEach(function (el) { observer.observe(el); });
+        }
+        V4.modules.countUp = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* magnet (motion-ok only, no touch)                                  */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            if (IS_TOUCH) return;
+            var els = qsa('[data-magnetic]');
+            if (!els.length) return;
+
+            els.forEach(function (el) {
+                var ticking = false;
+                var pending = null;
+
+                function apply() {
+                    ticking = false;
+                    if (!pending) return;
+                    var rect = el.getBoundingClientRect();
+                    var cx = pending.clientX - (rect.left + rect.width / 2);
+                    var cy = pending.clientY - (rect.top + rect.height / 2);
+                    el.style.transition = 'none';
+                    el.style.transform = 'translate3d(' + (cx / 8).toFixed(2) + 'px,' + (cy / 8).toFixed(2) + 'px,0)';
+                }
+
+                el.addEventListener('mousemove', function (e) {
+                    pending = e;
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(apply);
+                    }
+                }, { passive: true });
+
+                el.addEventListener('mouseleave', function () {
+                    el.style.transition = 'transform .18s ease-out';
+                    el.style.transform = 'translate3d(0,0,0)';
+                }, { passive: true });
+            });
+        }
+        V4.modules.magnet = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* nav (A3 — scrolled state; must work with or without GSAP)         */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            var header = document.querySelector('header.nav');
+            if (!header) return;
+            var ticking = false;
+
+            function update() {
+                ticking = false;
+                header.classList.toggle('nav--scrolled', window.scrollY > 40);
+            }
+
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            }, { passive: true });
+
+            update();
+        }
+        V4.modules.nav = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* delight (C2 usher entrance / D1 poke-the-cat / D3 scroll reel).   */
+    /* D1 must work with or without GSAP (boot() calls initPoke          */
+    /* unconditionally); C2/D3 are motion-ok flourishes gated at the     */
+    /* boot() call site like reveal/marquee/stack.                       */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        var FUKU_MESSAGES = ['にゃ', 'にゃ?', '♪'];
+        var fukuIndex = 0;
+        var bubbleTimer = null;
+
+        function initEntrance() {
+            var usher = document.querySelector('.usher');
+            if (!usher) return;
+            gsap.set(usher, { scale: 0.85, transformOrigin: '50% 100%' });
+            gsap.to(usher, { scale: 1, duration: 0.6, ease: 'back.out(1.4)' });
+        }
+
+        function ensureBubble(usher) {
+            var bubble = usher.querySelector('.fuku-bubble');
+            if (!bubble) {
+                bubble = document.createElement('span');
+                bubble.className = 'fuku-bubble';
+                bubble.setAttribute('aria-hidden', 'true');
+                usher.appendChild(bubble);
+            }
+            return bubble;
+        }
+
+        function jump(img) {
+            if (!img) return;
+            var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+            if (reduceMotion) return;
+            img.style.animationPlayState = 'paused';
+            img.style.transition = 'transform .18s ease-out';
+            img.style.transform = 'translateY(-10px)';
+            setTimeout(function () {
+                img.style.transform = 'translateY(0px)';
+                setTimeout(function () {
+                    img.style.transition = '';
+                    img.style.transform = '';
+                    img.style.animationPlayState = '';
+                }, 180);
+            }, 180);
+        }
+
+        function showBubble(usher) {
+            var bubble = ensureBubble(usher);
+            bubble.textContent = FUKU_MESSAGES[fukuIndex % FUKU_MESSAGES.length];
+            fukuIndex++;
+            bubble.classList.remove('is-visible');
+            void bubble.offsetWidth; // restart the CSS transition/animation on repeated pokes
+            bubble.classList.add('is-visible');
+            if (bubbleTimer) clearTimeout(bubbleTimer);
+            bubbleTimer = setTimeout(function () {
+                bubble.classList.remove('is-visible');
+            }, 1200);
+        }
+
+        function initPoke() {
+            var usher = document.querySelector('.usher');
+            var img = usher ? usher.querySelector('.usher-img') : null;
+            if (usher && img) {
+                usher.addEventListener('click', function () {
+                    jump(img);
+                    showBubble(usher);
+                });
+            }
+            var peek = document.querySelector('.pricing-peek');
+            if (peek && peek.parentElement) {
+                var host = peek.parentElement;
+                peek.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    jump(peek);
+                    var bubble = host.querySelector('.fuku-bubble');
+                    if (!bubble) {
+                        bubble = document.createElement('span');
+                        bubble.className = 'fuku-bubble fuku-bubble--peek';
+                        bubble.setAttribute('aria-hidden', 'true');
+                        host.appendChild(bubble);
+                    }
+                    bubble.textContent = FUKU_MESSAGES[fukuIndex % FUKU_MESSAGES.length];
+                    fukuIndex++;
+                    bubble.classList.remove('is-visible');
+                    void bubble.offsetWidth;
+                    bubble.classList.add('is-visible');
+                    setTimeout(function () { bubble.classList.remove('is-visible'); }, 1200);
+                });
+            }
+        }
+
+        function initReel() {
+            var reel = document.querySelector('.scroll-reel');
+            if (!reel) return;
+            var ticking = false;
+
+            function update() {
+                ticking = false;
+                var max = document.documentElement.scrollHeight - window.innerHeight;
+                var progress = max > 0 ? Math.max(0, Math.min(1, window.scrollY / max)) : 0;
+                reel.style.transform = 'rotate(' + (progress * 720).toFixed(1) + 'deg)';
+            }
+
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            }, { passive: true });
+
+            update();
+        }
+
+        V4.modules.delight = { initEntrance: initEntrance, initPoke: initPoke, initReel: initReel };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* maxresUpgrade                                                      */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            var imgs = qsa('.work-card-thumbnail img, .mq-tile, .stack-imgs img, .deck-card--thumb img');
+            imgs.forEach(function (img) {
+                var src = img.getAttribute('src') || '';
+                if (src.indexOf('hqdefault') === -1) return;
+                var maxSrc = src.replace('hqdefault', 'maxresdefault');
+                var test = new Image();
+                test.onload = function () {
+                    if (test.naturalWidth > 120) img.src = maxSrc;
+                };
+                test.src = maxSrc;
+            });
+        }
+        V4.modules.maxresUpgrade = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
+    /* boot                                                               */
+    /* ---------------------------------------------------------------- */
+    function boot() {
+        document.documentElement.classList.add('js-flip');
+
+        var hasMotion = !!(window.gsap && window.ScrollTrigger);
+        var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        var motionActive = hasMotion && !reduceMotion;
+
+        V4._hasMotion = hasMotion;
+        V4._motionActive = motionActive;
+
+        if (hasMotion) {
+            document.documentElement.classList.add('motion-ok');
+            safe(function () { gsap.registerPlugin(ScrollTrigger); });
+        }
+
+        // Functional modules: must work with or without GSAP.
+        safe(function () { V4.modules.lang.init(); });
+        safe(function () { V4.modules.nav.init(); });
+        safe(function () { V4.modules.flipCards.init(); });
+        safe(function () { V4.modules.filters.init(); });
+        safe(function () { V4.modules.lightbox.init(); });
+        safe(function () { V4.modules.concierge.init(); });
+        safe(function () { V4.modules.countUp.init(motionActive); });
+        safe(function () { V4.modules.maxresUpgrade.init(); });
+        safe(function () { V4.modules.delight.initPoke(); });
+
+        if (hasMotion) {
+            // Interaction-only motion module: not part of the reduced-motion animation list.
+            safe(function () { V4.modules.magnet.init(); });
+
+            if (!reduceMotion) {
+                safe(function () { V4.modules.reveal.init(); });
+                safe(function () { V4.modules.depth.init(); });
+                safe(function () { V4.modules.depth.initScroll(); });
+                safe(function () { V4.modules.marquee.init(); });
+                safe(function () { V4.modules.stack.init(); });
+                safe(function () { V4.modules.charReveal.init(); });
+                safe(function () { V4.modules.tilt.init(); });
+                safe(function () { V4.modules.delight.initEntrance(); });
+                safe(function () { V4.modules.delight.initReel(); });
+            }
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+    } else {
+        boot();
+    }
+})();
+
+</script>
+</body>
+</html>

@@ -770,6 +770,129 @@
             .hero-award-chip { font-size: .58rem; padding: 7px 16px; }
             .btn-pill, .contact-cta { padding: 13px 26px; font-size: .78rem; }
         }
+    /* ================= V8: FILM JOURNEY ================= */
+    .jny { position: relative; background: #0a0806; color: #F5F1E8; }
+    .jny-track { position: relative; height: 600vh; }
+    .jny-shell {
+        position: sticky; top: 0; height: 100vh; height: 100svh;
+        overflow: clip; display: flex; flex-direction: column; justify-content: flex-end;
+        background: radial-gradient(120% 90% at 82% 8%, #241a0c 0%, #0a0806 55%, #050403 100%);
+    }
+    .jny-film {
+        position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+        opacity: 0; transition: opacity 1s var(--ease);
+    }
+    .jny.is-film-ready .jny-film { opacity: 1; }
+    .jny-veil {
+        position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background:
+            linear-gradient(0deg, rgba(5,4,3,.92) 0%, rgba(5,4,3,.55) 32%, rgba(5,4,3,.15) 58%, rgba(5,4,3,.55) 100%),
+            radial-gradient(120% 80% at 50% 100%, rgba(5,4,3,.6), transparent 60%);
+    }
+    .jny-kanji {
+        position: absolute; top: 50%; right: -2%; transform: translateY(-50%);
+        font-family: var(--font-jp-display); font-weight: 700;
+        font-size: clamp(200px,32vw,420px); line-height: 1; opacity: 1;
+        color: rgba(201,160,78,.10); pointer-events: none; z-index: 1;
+        white-space: nowrap; transition: opacity .5s var(--ease);
+    }
+    .jny-head {
+        position: absolute; top: clamp(96px,12vh,140px); left: var(--gutter); z-index: 3;
+        display: flex; flex-direction: column; gap: 6px; max-width: 640px;
+    }
+    .jny-head-en {
+        font-family: var(--font-en); font-weight: 700; letter-spacing: .28em;
+        text-transform: uppercase; font-size: clamp(.72rem,1.2vw,.85rem); color: #C9A04E;
+    }
+    .jny-head-jp {
+        font-family: var(--font-jp); font-size: clamp(.78rem,1.3vw,.92rem);
+        color: rgba(245,241,232,.6);
+    }
+    .jny-chapters { position: relative; z-index: 2; }
+    .jny-copy {
+        position: absolute; left: var(--gutter); right: var(--gutter); bottom: clamp(60px,10vh,110px);
+        max-width: 620px; opacity: 0; transform: translateY(26px); pointer-events: none;
+        transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+    .jny-copy.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .jny-copy-meta {
+        display: inline-flex; align-items: center; padding: 6px 16px; margin-bottom: 14px;
+        border: 1px solid rgba(201,160,78,.5); border-radius: 9999px;
+        backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+        font-family: var(--font-en); font-size: .68rem; letter-spacing: .08em;
+        text-transform: uppercase; color: #C9A04E;
+    }
+    .jny-copy-title { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+    .jny-copy-en { font-family: var(--font-en); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: clamp(.85rem,1.6vw,1.05rem); color: #C9A04E; }
+    .jny-copy-jp { font-family: var(--font-jp-display); font-weight: 700; font-size: clamp(1.6rem,3.6vw,2.6rem); color: #F5F1E8; }
+    .jny-copy-body { font-family: var(--font-jp); font-size: clamp(.9rem,1.5vw,1.05rem); line-height: 1.9; color: rgba(245,241,232,.78); max-width: 34em; }
+    .jny-cta {
+        display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 14px 30px;
+        border-radius: 9999px; background: var(--accent-grad); color: #fff; text-decoration: none;
+        font-family: var(--font-en); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; font-size: .82rem;
+        outline: 2px solid #3a2c14; outline-offset: -3px; transition: transform .3s var(--ease);
+    }
+    .jny-poster-static { display: none; }
+    .jny-dots {
+        position: absolute; right: clamp(18px,3vw,40px); top: 50%; transform: translateY(-50%); z-index: 3;
+        display: flex; flex-direction: column; gap: 12px;
+    }
+    .jny-dots button {
+        width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(245,241,232,.4);
+        background: transparent; padding: 0; cursor: pointer; transition: background .3s, border-color .3s, transform .3s;
+    }
+    .jny-dots button[aria-current="true"] { background: #C9A04E; border-color: #C9A04E; transform: scale(1.3); }
+    .jny-counter {
+        position: absolute; left: var(--gutter); bottom: clamp(18px,3vh,28px); z-index: 3;
+        font-family: var(--font-en); font-size: .75rem; letter-spacing: .1em; color: rgba(245,241,232,.55);
+    }
+    .jny-counter-now { color: #F5F1E8; font-weight: 700; }
+    .jny-progress {
+        position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 4;
+        background: rgba(245,241,232,.12);
+    }
+    .jny-progress i {
+        display: block; width: 100%; height: 100%; transform-origin: left center; transform: scaleX(0);
+        background: linear-gradient(90deg,#8a5a1f,#C9A04E);
+    }
+    .jny-hint {
+        position: absolute; right: var(--gutter); bottom: clamp(18px,3vh,28px); z-index: 3;
+        font-family: var(--font-en); font-size: .68rem; letter-spacing: .3em; color: rgba(245,241,232,.5);
+        writing-mode: vertical-rl; opacity: 1; transition: opacity .5s var(--ease);
+    }
+    .jny-hint::after { content: ""; display: block; width: 1px; height: 26px; margin: 8px auto 0; background: rgba(245,241,232,.4); animation: jnyHintDrop 1.6s ease-in-out infinite; }
+    @keyframes jnyHintDrop { 0%,100% { transform: scaleY(.4); opacity: .4; } 50% { transform: scaleY(1); opacity: 1; } }
+    .jny-hint.is-hidden { opacity: 0; pointer-events: none; }
+
+    @media (max-width: 768px) {
+        .jny-track { height: 430vh; }
+        .jny-kanji { font-size: 46vw; opacity: .5; right: -4%; }
+        .jny-head { left: var(--gutter); right: var(--gutter); top: clamp(84px,10vh,110px); }
+        .jny-copy { left: var(--gutter); right: var(--gutter); bottom: clamp(44px,8vh,80px); max-width: none; }
+        .jny-dots { right: 10px; gap: 8px; }
+        .jny-dots button { width: 8px; height: 8px; }
+        .jny-hint { right: 12px; }
+    }
+
+    /* static fallback: no-JS(noscript above) / reduced-motion / JS-detected saveData (.is-static) */
+    .jny.is-static .jny-track { height: auto; }
+    .jny.is-static .jny-shell { position: static; height: auto; overflow: visible; padding: clamp(70px,9vw,120px) 0 clamp(40px,6vw,70px); }
+    .jny.is-static .jny-film, .jny.is-static .jny-veil, .jny.is-static .jny-kanji,
+    .jny.is-static .jny-hint, .jny.is-static .jny-progress, .jny.is-static .jny-dots, .jny.is-static .jny-counter { display: none; }
+    .jny.is-static .jny-head { position: static; margin: 0 var(--gutter) clamp(32px,5vw,56px); max-width: none; }
+    .jny.is-static .jny-chapters { display: flex; flex-direction: column; gap: clamp(40px,6vw,64px); padding: 0 var(--gutter); }
+    .jny.is-static .jny-copy { position: static; opacity: 1; transform: none; pointer-events: auto; max-width: 640px; bottom: auto; left: auto; right: auto; }
+    .jny.is-static .jny-poster-static { display: block; width: 100%; max-width: 640px; border-radius: 14px; margin-bottom: 18px; aspect-ratio: 16/9; object-fit: cover; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .jny-track { height: auto; }
+        .jny-shell { position: static; height: auto; overflow: visible; padding: clamp(70px,9vw,120px) 0 clamp(40px,6vw,70px); }
+        .jny-film, .jny-veil, .jny-kanji, .jny-hint, .jny-progress, .jny-dots, .jny-counter { display: none; }
+        .jny-head { position: static; margin: 0 var(--gutter) clamp(32px,5vw,56px); max-width: none; }
+        .jny-chapters { display: flex; flex-direction: column; gap: clamp(40px,6vw,64px); padding: 0 var(--gutter); }
+        .jny-copy { position: static; opacity: 1; transform: none; pointer-events: auto; max-width: 640px; bottom: auto; left: auto; right: auto; }
+        .jny-poster-static { display: block; width: 100%; max-width: 640px; border-radius: 14px; margin-bottom: 18px; aspect-ratio: 16/9; object-fit: cover; }
+    }
     </style>
 </head>
 <body>
@@ -778,6 +901,7 @@
     <header class="nav">
         <div class="nav-logo">RYO STUDIO<span class="nav-mark">❋</span></div>
         <nav class="nav-links">
+            <a href="#journey">Journey</a>
             <a href="#works">Work</a>
             <a href="#awards">Awards</a>
             <a href="#about">About</a>
@@ -834,6 +958,82 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- ================= V8: FILM JOURNEY ================= -->
+    <section id="journey" class="jny" aria-label="FILM JOURNEY — 六つの物語を歩く">
+        <div class="jny-track">
+            <div class="jny-shell">
+                <video class="jny-film" muted playsinline preload="none" aria-hidden="true" poster="images/journey-poster-1.webp"></video>
+                <div class="jny-veil" aria-hidden="true"></div>
+                <div class="jny-kanji" aria-hidden="true">歌</div>
+                <header class="jny-head">
+                    <span class="jny-head-en">FILM JOURNEY</span>
+                    <span class="jny-head-jp" data-lang-key="jny-subtitle">六つの物語を歩く — スクロールでフィルムが進み、戻れば時間も巻き戻る</span>
+                </header>
+                <div class="jny-chapters">
+                    <article class="jny-copy is-active" data-ch="1" data-kanji="歌" data-time-start="0">
+                        <img class="jny-poster-static" src="images/journey-poster-1.webp" alt="カギウタ" loading="lazy">
+                        <p class="jny-copy-meta" data-lang-key="jny-ch1-meta">FLAGSHIP — 長編パイロット</p>
+                        <h3 class="jny-copy-title"><span class="jny-copy-en">KAGIUTA</span><span class="jny-copy-jp">カギウタ</span></h3>
+                        <p class="jny-copy-body" data-lang-key="jny-ch1-body">井戸の底に築かれた、歌の都。屋根の海の向こうへ夕陽が沈み、少女はまだ知らない歌を探している。</p>
+                    </article>
+                    <article class="jny-copy" data-ch="2" data-kanji="約" data-time-start="4.75">
+                        <img class="jny-poster-static" src="images/journey-poster-2.webp" alt="約束" loading="lazy">
+                        <p class="jny-copy-meta" data-lang-key="jny-ch2-meta">グランプリ — JAPAN AI VIDEO AWARDS 2026</p>
+                        <h3 class="jny-copy-title"><span class="jny-copy-en">YAKUSOKU</span><span class="jny-copy-jp">約束</span></h3>
+                        <p class="jny-copy-body" data-lang-key="jny-ch2-body">何気ない夜の指切りが、いちばん遠くまで届く約束になる。</p>
+                    </article>
+                    <article class="jny-copy" data-ch="3" data-kanji="糸" data-time-start="8.75">
+                        <img class="jny-poster-static" src="images/journey-poster-3.webp" alt="母の縫い目" loading="lazy">
+                        <p class="jny-copy-meta" data-lang-key="jny-ch3-meta">短編アニメーション 60秒</p>
+                        <h3 class="jny-copy-title"><span class="jny-copy-en">HAHA NO NUIME</span><span class="jny-copy-jp">母の縫い目</span></h3>
+                        <p class="jny-copy-body" data-lang-key="jny-ch3-body">夜更けのミシンが刻む音は、言葉にならない手紙のようなもの。</p>
+                    </article>
+                    <article class="jny-copy" data-ch="4" data-kanji="夏" data-time-start="12.25">
+                        <img class="jny-poster-static" src="images/journey-poster-4.webp" alt="風鈴" loading="lazy">
+                        <p class="jny-copy-meta" data-lang-key="jny-anim60-meta">アニメーション 60秒</p>
+                        <h3 class="jny-copy-title"><span class="jny-copy-en">FUURIN</span><span class="jny-copy-jp">風鈴</span></h3>
+                        <p class="jny-copy-body" data-lang-key="jny-ch4-body">縁側の金色の光の中で、祖母から孫へ。ガラスの中で夏が鳴る。</p>
+                    </article>
+                    <article class="jny-copy" data-ch="5" data-kanji="雪" data-time-start="16.25">
+                        <img class="jny-poster-static" src="images/journey-poster-5.webp" alt="雪灯篭" loading="lazy">
+                        <p class="jny-copy-meta" data-lang-key="jny-anim60-meta">アニメーション 60秒</p>
+                        <h3 class="jny-copy-title"><span class="jny-copy-en">YUKI-DORO</span><span class="jny-copy-jp">雪灯篭</span></h3>
+                        <p class="jny-copy-body" data-lang-key="jny-ch5-body">雪の参道にひとつずつ火が灯る。会いに行くという、祈りのかたち。</p>
+                    </article>
+                    <article class="jny-copy" data-ch="6" data-kanji="幕" data-time-start="20.25">
+                        <img class="jny-poster-static" src="images/journey-poster-6.webp" alt="開幕" loading="lazy">
+                        <p class="jny-copy-meta" data-lang-key="jny-ch6-meta">受賞歴 10+</p>
+                        <h3 class="jny-copy-title"><span class="jny-copy-en">THE PREMIERE</span><span class="jny-copy-jp">開幕</span></h3>
+                        <p class="jny-copy-body" data-lang-key="jny-ch6-body">宝箱の中で歯車が回りはじめる。物語はここから、あなたの前で上映される。</p>
+                        <a href="#works" class="jny-cta" data-lang-key="jny-cta">作品を観る</a>
+                    </article>
+                </div>
+                <nav class="jny-dots" aria-label="章ナビゲーション">
+                    <button type="button" data-ch="1" aria-label="第1章 カギウタ" aria-current="true"></button>
+                    <button type="button" data-ch="2" aria-label="第2章 約束"></button>
+                    <button type="button" data-ch="3" aria-label="第3章 母の縫い目"></button>
+                    <button type="button" data-ch="4" aria-label="第4章 風鈴"></button>
+                    <button type="button" data-ch="5" aria-label="第5章 雪灯篭"></button>
+                    <button type="button" data-ch="6" aria-label="第6章 開幕"></button>
+                </nav>
+                <div class="jny-counter"><span class="jny-counter-now">01</span> / 06</div>
+                <div class="jny-progress"><i></i></div>
+                <div class="jny-hint" aria-hidden="true">SCROLL</div>
+            </div>
+        </div>
+        <noscript>
+        <style>
+            .jny-track { height: auto; }
+            .jny-shell { position: static; height: auto; overflow: visible; padding: clamp(70px,9vw,120px) 0 clamp(40px,6vw,70px); }
+            .jny-film, .jny-veil, .jny-kanji, .jny-hint, .jny-progress, .jny-dots, .jny-counter { display: none; }
+            .jny-head { position: static; margin: 0 var(--gutter) clamp(32px,5vw,56px); max-width: none; }
+            .jny-chapters { display: flex; flex-direction: column; gap: clamp(40px,6vw,64px); padding: 0 var(--gutter); }
+            .jny-copy { position: static; opacity: 1; transform: none; pointer-events: auto; max-width: 640px; bottom: auto; left: auto; right: auto; }
+            .jny-poster-static { display: block; width: 100%; max-width: 640px; border-radius: 14px; margin-bottom: 18px; aspect-ratio: 16/9; object-fit: cover; }
+        </style>
+        </noscript>
     </section>
 
     <!-- ================= MARQUEE ================= -->
@@ -1605,6 +1805,7 @@
         <div class="footer-script" aria-hidden="true">Ryo.</div>
         <p class="footer-tagline" data-lang-key="footer-tagline">AI Agent x Video Production</p>
         <div class="footer-links" role="navigation" aria-label="Footer">
+            <a href="#journey">Journey</a>
             <a href="#works">Work</a>
             <a href="#awards">Awards</a>
             <a href="#about">About</a>
@@ -1740,7 +1941,20 @@
         'v5-pill-works': { jp: '作品を観る', en: 'See the works' },
         'v5-pill-awards': { jp: '受賞歴', en: 'Awards' },
         'v5-pill-pricing': { jp: '料金プラン', en: 'Pricing' },
-        'v5-pill-flow': { jp: '制作の流れ', en: 'How we work' }
+        'v5-pill-flow': { jp: '制作の流れ', en: 'How we work' },
+        'jny-subtitle': { jp: '六つの物語を歩く — スクロールでフィルムが進み、戻れば時間も巻き戻る', en: 'Walk through six stories — scroll to move the film forward, scroll back to rewind.' },
+        'jny-ch1-meta': { jp: 'FLAGSHIP — 長編パイロット', en: 'FLAGSHIP — Feature Pilot' },
+        'jny-ch1-body': { jp: '井戸の底に築かれた、歌の都。屋根の海の向こうへ夕陽が沈み、少女はまだ知らない歌を探している。', en: 'A city of song built at the bottom of a well. The sun sets beyond a sea of rooftops, and a girl searches for a song she has yet to know.' },
+        'jny-ch2-meta': { jp: 'グランプリ — JAPAN AI VIDEO AWARDS 2026', en: 'GRAND PRIX — JAPAN AI VIDEO AWARDS 2026' },
+        'jny-ch2-body': { jp: '何気ない夜の指切りが、いちばん遠くまで届く約束になる。', en: 'A casual pinky promise at night becomes the promise that reaches furthest.' },
+        'jny-ch3-meta': { jp: '短編アニメーション 60秒', en: 'Short Animation, 60s' },
+        'jny-ch3-body': { jp: '夜更けのミシンが刻む音は、言葉にならない手紙のようなもの。', en: 'The rhythm of a sewing machine late at night — a letter written without words.' },
+        'jny-anim60-meta': { jp: 'アニメーション 60秒', en: 'Animation, 60s' },
+        'jny-ch4-body': { jp: '縁側の金色の光の中で、祖母から孫へ。ガラスの中で夏が鳴る。', en: 'In the golden light of the veranda, from grandmother to granddaughter. Summer rings inside the glass.' },
+        'jny-ch5-body': { jp: '雪の参道にひとつずつ火が灯る。会いに行くという、祈りのかたち。', en: 'Along the snowy approach, lanterns light one by one. Going to meet someone — a form of prayer.' },
+        'jny-ch6-meta': { jp: '受賞歴 10+', en: '10+ Awards' },
+        'jny-ch6-body': { jp: '宝箱の中で歯車が回りはじめる。物語はここから、あなたの前で上映される。', en: 'Inside the treasure box, gears begin to turn. From here, the story premieres before you.' },
+        'jny-cta': { jp: '作品を観る', en: 'View Works' }
     };
 
     var IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -2675,6 +2889,179 @@
     }
 })();
 
+</script>
+<script id="jny-engine">
+(function () {
+    'use strict';
+
+    var FALLBACK_DURATION = 25.084;
+    var VIDEO_SRC = 'videos/journey.mp4';
+
+    var section = document.getElementById('journey');
+    if (!section) return;
+
+    var track = section.querySelector('.jny-track');
+    var video = section.querySelector('.jny-film');
+    var kanjiEl = section.querySelector('.jny-kanji');
+    var hintEl = section.querySelector('.jny-hint');
+    var progressBar = section.querySelector('.jny-progress i');
+    var counterNow = section.querySelector('.jny-counter-now');
+    var chaptersEls = Array.prototype.slice.call(section.querySelectorAll('.jny-copy'));
+    var dotsEls = Array.prototype.slice.call(section.querySelectorAll('.jny-dots button'));
+    var startTimes = chaptersEls.map(function (el) {
+        return parseFloat(el.getAttribute('data-time-start')) || 0;
+    });
+
+    function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function getDuration() {
+        return (video.duration && isFinite(video.duration)) ? video.duration : FALLBACK_DURATION;
+    }
+
+    var lastIndex = -1;
+    function updateChapter(t) {
+        var idx = 0;
+        for (var i = 0; i < startTimes.length; i++) {
+            if (t >= startTimes[i]) idx = i;
+        }
+        if (idx === lastIndex) return;
+        lastIndex = idx;
+
+        chaptersEls.forEach(function (el, i) {
+            el.classList.toggle('is-active', i === idx);
+        });
+        dotsEls.forEach(function (btn, i) {
+            if (i === idx) btn.setAttribute('aria-current', 'true');
+            else btn.removeAttribute('aria-current');
+        });
+        if (counterNow) counterNow.textContent = pad2(idx + 1);
+
+        if (kanjiEl) {
+            var nextKanji = chaptersEls[idx].getAttribute('data-kanji') || '';
+            kanjiEl.style.opacity = '0';
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    kanjiEl.textContent = nextKanji;
+                    kanjiEl.style.opacity = '';
+                });
+            });
+        }
+    }
+
+    /* ---------- static / reduced-motion / save-data guard ---------- */
+    var prefersReduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var saveData = !!(navigator.connection && navigator.connection.saveData);
+    var supportsIO = 'IntersectionObserver' in window;
+
+    if (prefersReduced || saveData || !supportsIO) {
+        section.classList.add('is-static');
+        return;
+    }
+
+    /* ---------- scrub engine (tea-repo style: rAF + lerp, no GSAP) ---------- */
+    var trackTop = 0, trackHeight = 0, innerH = window.innerHeight;
+    function measure() {
+        var rect = track.getBoundingClientRect();
+        trackTop = rect.top + (window.scrollY || window.pageYOffset);
+        trackHeight = track.offsetHeight;
+        innerH = window.innerHeight;
+    }
+    measure();
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(measure, 150);
+    });
+
+    var current = 0;
+    var rafId = null;
+    var hintHidden = false;
+
+    function loop() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        var span = trackHeight - innerH;
+        var raw = span > 0 ? (scrollY - trackTop) / span : 0;
+        var progress = raw < 0 ? 0 : (raw > 1 ? 1 : raw);
+        var duration = getDuration();
+        var target = progress * duration;
+
+        current += (target - current) * 0.16;
+        if (Math.abs(current - video.currentTime) > 0.033 && video.readyState >= 1) {
+            try { video.currentTime = current; } catch (e) {}
+        }
+
+        if (progressBar) progressBar.style.transform = 'scaleX(' + progress + ')';
+
+        if (hintEl) {
+            if (progress > 0.02 && !hintHidden) {
+                hintEl.classList.add('is-hidden');
+                hintHidden = true;
+            } else if (progress <= 0.02 && hintHidden) {
+                hintEl.classList.remove('is-hidden');
+                hintHidden = false;
+            }
+        }
+
+        updateChapter(current);
+        rafId = requestAnimationFrame(loop);
+    }
+
+    var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                measure();
+                if (!rafId) rafId = requestAnimationFrame(loop);
+            } else if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+        });
+    }, { threshold: 0 });
+    sectionObserver.observe(track);
+
+    /* ---------- lazy film load: fetch -> blob URL, fallback to direct src ---------- */
+    function markReady() {
+        section.classList.add('is-film-ready');
+    }
+    video.addEventListener('canplay', markReady, { once: true });
+
+    function loadFilm() {
+        if (window.fetch) {
+            fetch(VIDEO_SRC).then(function (res) {
+                if (!res.ok) throw new Error('journey film fetch failed');
+                return res.blob();
+            }).then(function (blob) {
+                video.src = URL.createObjectURL(blob);
+            }).catch(function () {
+                video.src = VIDEO_SRC;
+            });
+        } else {
+            video.src = VIDEO_SRC;
+        }
+    }
+
+    var mediaObserver = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                loadFilm();
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '150% 0px', threshold: 0 });
+    mediaObserver.observe(track);
+
+    /* ---------- chapter dot navigation ---------- */
+    dotsEls.forEach(function (btn, i) {
+        btn.addEventListener('click', function () {
+            var duration = getDuration();
+            var startTime = startTimes[i] || 0;
+            var span = trackHeight - innerH;
+            var top = trackTop + (startTime / duration) * span;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        });
+    });
+})();
 </script>
 </body>
 </html>
