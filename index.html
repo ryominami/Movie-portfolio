@@ -46,6 +46,18 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "カギウタ / KAGIUTA — 長編パイロット版",
+        "description": "井戸の底に築かれた歌の都。声を失った少女と鍵の歌をめぐる長編パイロット (13分)。FILM JOURNEY 第1章・終章の舞台。",
+        "thumbnailUrl": "https://img.youtube.com/vi/kX9HlfK1VU8/hqdefault.jpg",
+        "uploadDate": "2026-07-30",
+        "duration": "PT13M",
+        "embedUrl": "https://www.youtube.com/embed/kX9HlfK1VU8"
+    }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <style id="v4-style">
@@ -835,6 +847,15 @@
         font-family: var(--font-en); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; font-size: .82rem;
         outline: 2px solid #3a2c14; outline-offset: -3px; transition: transform .3s var(--ease);
     }
+    .jny-watch {
+        display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; padding: 12px 22px;
+        border-radius: 9999px; border: 1px solid rgba(201,160,78,.55); background: transparent;
+        color: #C9A04E; text-decoration: none; font-family: var(--font-en); font-weight: 600;
+        text-transform: uppercase; letter-spacing: .04em; font-size: .76rem;
+        transition: color .3s, border-color .3s, background .3s;
+    }
+    .jny-watch:hover { color: #F5F1E8; border-color: #F5F1E8; background: rgba(245,241,232,.08); }
+    .jny-cta + .jny-watch { margin-top: 0; margin-left: 14px; }
     .jny-poster-static { display: none; }
     .jny-dots {
         position: absolute; right: clamp(18px,3vw,40px); top: 50%; transform: translateY(-50%); z-index: 3;
@@ -981,6 +1002,7 @@
                         <p class="jny-copy-meta" data-lang-key="jny-ch1-meta">FLAGSHIP — 長編パイロット</p>
                         <h3 class="jny-copy-title"><span class="jny-copy-en">KAGIUTA</span><span class="jny-copy-jp">カギウタ</span></h3>
                         <p class="jny-copy-body" data-lang-key="jny-ch1-body">井戸の底に築かれた、歌の都。屋根の海の向こうへ夕陽が沈み、少女はまだ知らない歌を探している。</p>
+                        <a href="#" class="jny-watch" data-video="kX9HlfK1VU8" data-lang-key="jny-watch-full">本編を観る (13分)</a>
                     </article>
                     <article class="jny-copy" data-ch="2" data-kanji="約" data-time-start="4.75">
                         <img class="jny-poster-static" src="images/journey-poster-2.webp" alt="約束" loading="lazy">
@@ -1012,6 +1034,7 @@
                         <h3 class="jny-copy-title"><span class="jny-copy-en">THE PREMIERE</span><span class="jny-copy-jp">開幕</span></h3>
                         <p class="jny-copy-body" data-lang-key="jny-ch6-body">宝箱の中で歯車が回りはじめる。物語はここから、あなたの前で上映される。</p>
                         <a href="#works" class="jny-cta" data-lang-key="jny-cta">作品を観る</a>
+                        <a href="#" class="jny-watch" data-video="kX9HlfK1VU8" data-lang-key="jny-watch-full">本編を観る (13分)</a>
                     </article>
                 </div>
                 <nav class="jny-dots" aria-label="章ナビゲーション">
@@ -1244,6 +1267,21 @@
             </div>
 
             <div class="works-grid" data-skew>
+                <!-- カギウタ - FILM JOURNEY FLAGSHIP -->
+                <a href="#" data-video="kX9HlfK1VU8" data-category="animation" class="work-card reveal" data-reveal data-reveal-delay="0.0" data-tilt data-cursor="play">
+                    <div class="work-card-thumbnail">
+                        <img src="https://img.youtube.com/vi/kX9HlfK1VU8/hqdefault.jpg" alt="カギウタ / KAGIUTA" loading="lazy">
+                        <div class="work-card-overlay"></div>
+                        <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                        <div class="work-card-badge work-card-badge--gold"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>FLAGSHIP</span></div>
+                    </div>
+                    <div class="work-card-info">
+                        <div class="work-card-category">アニメーション / Animation</div>
+                        <h3 class="work-card-title">カギウタ / KAGIUTA</h3>
+                        <p class="work-card-desc">井戸の底に築かれた歌の都。声を失った少女と鍵の歌をめぐる長編パイロット (13分)。FILM JOURNEY 第1章・終章の舞台。</p>
+                    </div>
+                </a>
+
                 <!-- KAERUN AI - 最優秀賞 (moved from v3 works-featured) -->
                 <a href="#" data-video="UO9ty4c_ntQ" data-category="commercial" class="work-card reveal" data-reveal data-reveal-delay="0.16" data-tilt data-cursor="play">
                     <div class="work-card-thumbnail">
@@ -1959,7 +1997,8 @@
         'jny-ch6-meta': { jp: '受賞歴 10+', en: '10+ Awards' },
         'jny-ch6-body': { jp: '宝箱の中で歯車が回りはじめる。物語はここから、あなたの前で上映される。', en: 'Inside the treasure box, gears begin to turn. From here, the story premieres before you.' },
         'jny-cta': { jp: '作品を観る', en: 'View Works' },
-        'v8-pill-journey': { jp: 'FILM JOURNEY ▾', en: 'FILM JOURNEY ▾' }
+        'v8-pill-journey': { jp: 'FILM JOURNEY ▾', en: 'FILM JOURNEY ▾' },
+        'jny-watch-full': { jp: '本編を観る (13分)', en: 'Watch the Full Pilot (13 min)' }
     };
 
     var IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
