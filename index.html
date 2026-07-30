@@ -857,6 +857,14 @@
     }
     .jny-watch:hover { color: #F5F1E8; border-color: #F5F1E8; background: rgba(245,241,232,.08); }
     .jny-cta + .jny-watch { margin-top: 0; margin-left: 14px; }
+    .jny-play-override {
+        display: none; align-items: center; gap: 8px; margin-top: 16px; padding: 12px 22px;
+        border-radius: 9999px; border: 1px solid rgba(201,160,78,.55); background: transparent;
+        color: #C9A04E; font-family: var(--font-en); font-weight: 600;
+        text-transform: uppercase; letter-spacing: .04em; font-size: .76rem;
+        cursor: pointer; transition: color .3s, border-color .3s, background .3s;
+    }
+    .jny-play-override:hover { color: #F5F1E8; border-color: #F5F1E8; background: rgba(245,241,232,.08); }
     .jny-poster-static { display: none; }
     .jny-dots {
         position: absolute; right: clamp(18px,3vw,40px); top: 50%; transform: translateY(-50%); z-index: 3;
@@ -905,6 +913,7 @@
     .jny.is-static .jny-film, .jny.is-static .jny-veil, .jny.is-static .jny-kanji,
     .jny.is-static .jny-hint, .jny.is-static .jny-progress, .jny.is-static .jny-dots, .jny.is-static .jny-counter { display: none; }
     .jny.is-static .jny-head { position: static; margin: 0 var(--gutter) clamp(32px,5vw,56px); max-width: none; }
+    .jny.is-static .jny-play-override { display: inline-flex; }
     .jny.is-static .jny-chapters { display: flex; flex-direction: column; gap: clamp(40px,6vw,64px); padding: 0 var(--gutter); }
     .jny.is-static .jny-copy { position: static; opacity: 1; transform: none; pointer-events: auto; max-width: 640px; bottom: auto; left: auto; right: auto; }
     .jny.is-static .jny-poster-static { display: block; width: 100%; max-width: 640px; border-radius: 14px; margin-bottom: 18px; aspect-ratio: 16/9; object-fit: cover; }
@@ -996,6 +1005,7 @@
                 <header class="jny-head">
                     <span class="jny-head-en">FILM JOURNEY</span>
                     <span class="jny-head-jp" data-lang-key="jny-subtitle">六つの物語を歩く — スクロールでフィルムが進み、戻れば時間も巻き戻る</span>
+                    <button type="button" class="jny-play-override" data-lang-key="jny-play-override">▶ フィルムを再生モードで観る</button>
                 </header>
                 <div class="jny-chapters">
                     <article class="jny-copy is-active" data-ch="1" data-kanji="歌" data-time-start="0">
@@ -1271,7 +1281,7 @@
                 <!-- カギウタ - FILM JOURNEY FLAGSHIP -->
                 <a href="#" data-video="kX9HlfK1VU8" data-category="animation" class="work-card reveal" data-reveal data-reveal-delay="0.0" data-tilt data-cursor="play">
                     <div class="work-card-thumbnail">
-                        <img src="https://img.youtube.com/vi/kX9HlfK1VU8/hqdefault.jpg" alt="カギウタ / KAGIUTA" loading="lazy">
+                        <img src="images/journey-poster-1.webp" alt="カギウタ / KAGIUTA" loading="lazy">
                         <div class="work-card-overlay"></div>
                         <div class="work-card-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
                         <div class="work-card-badge work-card-badge--gold"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><span>FLAGSHIP</span></div>
@@ -1999,7 +2009,8 @@
         'jny-ch6-body': { jp: '宝箱の中で歯車が回りはじめる。物語はここから、あなたの前で上映される。', en: 'Inside the treasure box, gears begin to turn. From here, the story premieres before you.' },
         'jny-cta': { jp: '作品を観る', en: 'View Works' },
         'v8-pill-journey': { jp: 'FILM JOURNEY ▾', en: 'FILM JOURNEY ▾' },
-        'jny-watch-full': { jp: '本編を観る (13分)', en: 'Watch the Full Pilot (13 min)' }
+        'jny-watch-full': { jp: '本編を観る (13分)', en: 'Watch the Full Pilot (13 min)' },
+        'jny-play-override': { jp: '▶ フィルムを再生モードで観る', en: '▶ Play the film journey' }
     };
 
     var IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -2998,149 +3009,166 @@
     var saveData = !!(navigator.connection && navigator.connection.saveData);
     var supportsIO = 'IntersectionObserver' in window;
 
+    /* ---------- scrub engine (tea-repo style: rAF + lerp, no GSAP) ---------- */
+    /* wrapped in a function so the static fallback's play-override button can start it on demand */
+    var scrubStarted = false;
+    function initScrubEngine() {
+        if (scrubStarted) return;
+        scrubStarted = true;
+
+        var trackTop = 0, trackHeight = 0, innerH = window.innerHeight;
+        function measure() {
+            var rect = track.getBoundingClientRect();
+            trackTop = rect.top + (window.scrollY || window.pageYOffset);
+            trackHeight = track.offsetHeight;
+            innerH = window.innerHeight;
+        }
+        measure();
+
+        var resizeTimer = null;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(measure, 150);
+        });
+
+        var current = 0;
+        var rafId = null;
+        var hintHidden = false;
+
+        function loop() {
+            var scrollY = window.scrollY || window.pageYOffset;
+            var span = trackHeight - innerH;
+            var raw = span > 0 ? (scrollY - trackTop) / span : 0;
+            var progress = raw < 0 ? 0 : (raw > 1 ? 1 : raw);
+            var duration = getDuration();
+            var target = progress * duration;
+
+            current += (target - current) * 0.16;
+            if (Math.abs(current - video.currentTime) > 0.033 && video.readyState >= 1) {
+                try { video.currentTime = current; } catch (e) {}
+            }
+
+            if (progressBar) progressBar.style.transform = 'scaleX(' + progress + ')';
+
+            if (hintEl) {
+                if (progress > 0.02 && !hintHidden) {
+                    hintEl.classList.add('is-hidden');
+                    hintHidden = true;
+                } else if (progress <= 0.02 && hintHidden) {
+                    hintEl.classList.remove('is-hidden');
+                    hintHidden = false;
+                }
+            }
+
+            updateChapter(current);
+            rafId = requestAnimationFrame(loop);
+        }
+
+        var isInView = false;
+        var sectionObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                isInView = entry.isIntersecting;
+                if (entry.isIntersecting) {
+                    measure();
+                    if (!rafId) rafId = requestAnimationFrame(loop);
+                } else if (rafId) {
+                    cancelAnimationFrame(rafId);
+                    rafId = null;
+                }
+            });
+        }, { threshold: 0 });
+        sectionObserver.observe(track);
+
+        /* ---------- lazy film load: fetch -> blob URL, fallback to direct src ---------- */
+        function markReady() {
+            section.classList.add('is-film-ready');
+        }
+        video.addEventListener('canplay', markReady, { once: true });
+
+        function loadFilm() {
+            if (window.fetch) {
+                fetch(VIDEO_SRC).then(function (res) {
+                    if (!res.ok) throw new Error('journey film fetch failed');
+                    return res.blob();
+                }).then(function (blob) {
+                    video.src = URL.createObjectURL(blob);
+                }).catch(function () {
+                    video.src = VIDEO_SRC;
+                });
+            } else {
+                video.src = VIDEO_SRC;
+            }
+        }
+
+        var mediaObserver = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    loadFilm();
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '150% 0px', threshold: 0 });
+        mediaObserver.observe(track);
+
+        /* ---------- chapter dot navigation ---------- */
+        function chapterSpan(i) {
+            var next = (i + 1 < startTimes.length) ? startTimes[i + 1] : getDuration();
+            return next - startTimes[i];
+        }
+
+        function scrollToChapter(i) {
+            var duration = getDuration();
+            var startTime = startTimes[i] || 0;
+            var targetTime = (i === 0) ? 0 : startTime + chapterSpan(i) * 0.04;
+            var span = trackHeight - innerH;
+            var top = trackTop + (targetTime / duration) * span;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+
+        dotsEls.forEach(function (btn, i) {
+            btn.addEventListener('click', function () {
+                scrollToChapter(i);
+            });
+        });
+
+        /* ---------- keyboard navigation (active only while journey is in view) ---------- */
+        function isTypingTarget(el) {
+            if (!el) return false;
+            var tag = el.tagName;
+            return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || !!el.isContentEditable;
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (!isInView) return;
+            if (isTypingTarget(document.activeElement)) return;
+
+            var delta = 0;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') delta = 1;
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') delta = -1;
+            else return;
+
+            e.preventDefault();
+            var next = lastIndex + delta;
+            if (next < 0) next = 0;
+            if (next > startTimes.length - 1) next = startTimes.length - 1;
+            scrollToChapter(next);
+        });
+    }
+
     if (prefersReduced || saveData || !supportsIO) {
         section.classList.add('is-static');
-        return;
+    } else {
+        initScrubEngine();
     }
 
-    /* ---------- scrub engine (tea-repo style: rAF + lerp, no GSAP) ---------- */
-    var trackTop = 0, trackHeight = 0, innerH = window.innerHeight;
-    function measure() {
-        var rect = track.getBoundingClientRect();
-        trackTop = rect.top + (window.scrollY || window.pageYOffset);
-        trackHeight = track.offsetHeight;
-        innerH = window.innerHeight;
-    }
-    measure();
-
-    var resizeTimer = null;
-    window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(measure, 150);
-    });
-
-    var current = 0;
-    var rafId = null;
-    var hintHidden = false;
-
-    function loop() {
-        var scrollY = window.scrollY || window.pageYOffset;
-        var span = trackHeight - innerH;
-        var raw = span > 0 ? (scrollY - trackTop) / span : 0;
-        var progress = raw < 0 ? 0 : (raw > 1 ? 1 : raw);
-        var duration = getDuration();
-        var target = progress * duration;
-
-        current += (target - current) * 0.16;
-        if (Math.abs(current - video.currentTime) > 0.033 && video.readyState >= 1) {
-            try { video.currentTime = current; } catch (e) {}
-        }
-
-        if (progressBar) progressBar.style.transform = 'scaleX(' + progress + ')';
-
-        if (hintEl) {
-            if (progress > 0.02 && !hintHidden) {
-                hintEl.classList.add('is-hidden');
-                hintHidden = true;
-            } else if (progress <= 0.02 && hintHidden) {
-                hintEl.classList.remove('is-hidden');
-                hintHidden = false;
-            }
-        }
-
-        updateChapter(current);
-        rafId = requestAnimationFrame(loop);
-    }
-
-    var isInView = false;
-    var sectionObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            isInView = entry.isIntersecting;
-            if (entry.isIntersecting) {
-                measure();
-                if (!rafId) rafId = requestAnimationFrame(loop);
-            } else if (rafId) {
-                cancelAnimationFrame(rafId);
-                rafId = null;
-            }
+    /* ---------- static fallback opt-in: re-enable the scrubbing journey on demand ---------- */
+    var playOverrideBtn = section.querySelector('.jny-play-override');
+    if (playOverrideBtn) {
+        playOverrideBtn.addEventListener('click', function () {
+            section.classList.remove('is-static');
+            initScrubEngine();
         });
-    }, { threshold: 0 });
-    sectionObserver.observe(track);
-
-    /* ---------- lazy film load: fetch -> blob URL, fallback to direct src ---------- */
-    function markReady() {
-        section.classList.add('is-film-ready');
     }
-    video.addEventListener('canplay', markReady, { once: true });
-
-    function loadFilm() {
-        if (window.fetch) {
-            fetch(VIDEO_SRC).then(function (res) {
-                if (!res.ok) throw new Error('journey film fetch failed');
-                return res.blob();
-            }).then(function (blob) {
-                video.src = URL.createObjectURL(blob);
-            }).catch(function () {
-                video.src = VIDEO_SRC;
-            });
-        } else {
-            video.src = VIDEO_SRC;
-        }
-    }
-
-    var mediaObserver = new IntersectionObserver(function (entries, obs) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                loadFilm();
-                obs.unobserve(entry.target);
-            }
-        });
-    }, { rootMargin: '150% 0px', threshold: 0 });
-    mediaObserver.observe(track);
-
-    /* ---------- chapter dot navigation ---------- */
-    function chapterSpan(i) {
-        var next = (i + 1 < startTimes.length) ? startTimes[i + 1] : getDuration();
-        return next - startTimes[i];
-    }
-
-    function scrollToChapter(i) {
-        var duration = getDuration();
-        var startTime = startTimes[i] || 0;
-        var targetTime = (i === 0) ? 0 : startTime + chapterSpan(i) * 0.04;
-        var span = trackHeight - innerH;
-        var top = trackTop + (targetTime / duration) * span;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-    }
-
-    dotsEls.forEach(function (btn, i) {
-        btn.addEventListener('click', function () {
-            scrollToChapter(i);
-        });
-    });
-
-    /* ---------- keyboard navigation (active only while journey is in view) ---------- */
-    function isTypingTarget(el) {
-        if (!el) return false;
-        var tag = el.tagName;
-        return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || !!el.isContentEditable;
-    }
-
-    document.addEventListener('keydown', function (e) {
-        if (!isInView) return;
-        if (isTypingTarget(document.activeElement)) return;
-
-        var delta = 0;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') delta = 1;
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') delta = -1;
-        else return;
-
-        e.preventDefault();
-        var next = lastIndex + delta;
-        if (next < 0) next = 0;
-        if (next > startTimes.length - 1) next = startTimes.length - 1;
-        scrollToChapter(next);
-    });
 })();
 </script>
 </body>
