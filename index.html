@@ -3084,20 +3084,37 @@
             section.classList.add('is-film-ready');
         }
         video.addEventListener('canplay', markReady, { once: true });
+        video.addEventListener('loadeddata', markReady, { once: true });
 
+        /* preload="none" のままだと Safari 系は src 差し替えだけでは読み込みを
+           開始しない (canplay が来ない) ため、preload 昇格 + 明示 load() が必須 */
+        function applySrc(src) {
+            video.preload = 'auto';
+            video.src = src;
+            video.load();
+        }
+
+        var filmRequested = false;
         function loadFilm() {
+            if (filmRequested) return;
+            filmRequested = true;
             if (window.fetch) {
                 fetch(VIDEO_SRC).then(function (res) {
                     if (!res.ok) throw new Error('journey film fetch failed');
                     return res.blob();
                 }).then(function (blob) {
-                    video.src = URL.createObjectURL(blob);
+                    applySrc(URL.createObjectURL(blob));
                 }).catch(function () {
-                    video.src = VIDEO_SRC;
+                    applySrc(VIDEO_SRC);
                 });
             } else {
-                video.src = VIDEO_SRC;
+                applySrc(VIDEO_SRC);
             }
+            /* blob 再生に癖のある環境 (iOS Safari 等) 向け: 8秒待って
+               ready にならなければ直URLへ切り替え (Pages は Range 対応) */
+            setTimeout(function () {
+                if (!section.classList.contains('is-film-ready')) applySrc(VIDEO_SRC);
+            }, 8000);
         }
 
         var mediaObserver = new IntersectionObserver(function (entries, obs) {
