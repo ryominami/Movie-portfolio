@@ -776,7 +776,10 @@
     .jny-shell {
         position: sticky; top: 0; height: 100vh; height: 100svh;
         overflow: clip; display: flex; flex-direction: column; justify-content: flex-end;
-        background: radial-gradient(120% 90% at 82% 8%, #241a0c 0%, #0a0806 55%, #050403 100%);
+        background:
+            radial-gradient(120% 90% at 82% 8%, rgba(36,26,12,.55) 0%, rgba(10,8,6,.72) 55%, rgba(5,4,3,.88) 100%),
+            url('images/journey-poster-blur.webp') center/cover no-repeat,
+            #0d0a06;
     }
     .jny-film {
         position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -867,7 +870,7 @@
     @media (max-width: 768px) {
         .jny-track { height: 430vh; }
         .jny-kanji { font-size: 46vw; opacity: .5; right: -4%; }
-        .jny-head { left: var(--gutter); right: var(--gutter); top: clamp(84px,10vh,110px); }
+        .jny-head { left: var(--gutter); right: var(--gutter); top: calc(clamp(84px,10vh,110px) + 44px); }
         .jny-copy { left: var(--gutter); right: var(--gutter); bottom: clamp(44px,8vh,80px); max-width: none; }
         .jny-dots { right: 10px; gap: 8px; }
         .jny-dots button { width: 8px; height: 8px; }
@@ -949,6 +952,7 @@
                 <p class="blur-intro" data-lang-key="v5-intro" aria-hidden="true">はじめまして、案内猫の フク と申します。<br>RYO STUDIO の試写室へようこそ。</p>
                 <p class="concierge-greet"><span id="typeline" data-lang-key="v5-greet">ようこそ。今夜は、どんな物語をご覧になりますか？</span><span class="tw-cursor" aria-hidden="true"></span></p>
                 <div class="concierge-pills">
+                    <a href="#journey" class="pill-white" data-lang-key="v8-pill-journey">FILM JOURNEY ▾</a>
                     <a href="#works" class="pill-white" data-lang-key="v5-pill-works">作品を観る</a>
                     <a href="#awards" class="pill-white" data-lang-key="v5-pill-awards">受賞歴</a>
                     <a href="#pricing" class="pill-white" data-lang-key="v5-pill-pricing">料金プラン</a>
@@ -1954,7 +1958,8 @@
         'jny-ch5-body': { jp: '雪の参道にひとつずつ火が灯る。会いに行くという、祈りのかたち。', en: 'Along the snowy approach, lanterns light one by one. Going to meet someone — a form of prayer.' },
         'jny-ch6-meta': { jp: '受賞歴 10+', en: '10+ Awards' },
         'jny-ch6-body': { jp: '宝箱の中で歯車が回りはじめる。物語はここから、あなたの前で上映される。', en: 'Inside the treasure box, gears begin to turn. From here, the story premieres before you.' },
-        'jny-cta': { jp: '作品を観る', en: 'View Works' }
+        'jny-cta': { jp: '作品を観る', en: 'View Works' },
+        'v8-pill-journey': { jp: 'FILM JOURNEY ▾', en: 'FILM JOURNEY ▾' }
     };
 
     var IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -3007,8 +3012,10 @@
         rafId = requestAnimationFrame(loop);
     }
 
+    var isInView = false;
     var sectionObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
+            isInView = entry.isIntersecting;
             if (entry.isIntersecting) {
                 measure();
                 if (!rafId) rafId = requestAnimationFrame(loop);
@@ -3052,14 +3059,47 @@
     mediaObserver.observe(track);
 
     /* ---------- chapter dot navigation ---------- */
+    function chapterSpan(i) {
+        var next = (i + 1 < startTimes.length) ? startTimes[i + 1] : getDuration();
+        return next - startTimes[i];
+    }
+
+    function scrollToChapter(i) {
+        var duration = getDuration();
+        var startTime = startTimes[i] || 0;
+        var targetTime = (i === 0) ? 0 : startTime + chapterSpan(i) * 0.04;
+        var span = trackHeight - innerH;
+        var top = trackTop + (targetTime / duration) * span;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+
     dotsEls.forEach(function (btn, i) {
         btn.addEventListener('click', function () {
-            var duration = getDuration();
-            var startTime = startTimes[i] || 0;
-            var span = trackHeight - innerH;
-            var top = trackTop + (startTime / duration) * span;
-            window.scrollTo({ top: top, behavior: 'smooth' });
+            scrollToChapter(i);
         });
+    });
+
+    /* ---------- keyboard navigation (active only while journey is in view) ---------- */
+    function isTypingTarget(el) {
+        if (!el) return false;
+        var tag = el.tagName;
+        return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || !!el.isContentEditable;
+    }
+
+    document.addEventListener('keydown', function (e) {
+        if (!isInView) return;
+        if (isTypingTarget(document.activeElement)) return;
+
+        var delta = 0;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') delta = 1;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') delta = -1;
+        else return;
+
+        e.preventDefault();
+        var next = lastIndex + delta;
+        if (next < 0) next = 0;
+        if (next > startTimes.length - 1) next = startTimes.length - 1;
+        scrollToChapter(next);
     });
 })();
 </script>
