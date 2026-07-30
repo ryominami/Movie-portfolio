@@ -697,8 +697,7 @@
             display: flex; flex-direction: column; align-items: center; gap: clamp(8px,1.2svh,14px); text-align: center;
         }
         .blur-intro {
-            filter: blur(1.8px); user-select: none; pointer-events: none;
-            font-family: var(--font-jp-display); font-size: clamp(.95rem,1.8vw,1.2rem); line-height: 1.7; color: var(--text-dim); opacity: .85;
+            font-family: var(--font-jp-display); font-size: clamp(.72rem,1.3vw,.85rem); line-height: 1.6; color: var(--text-dim); opacity: .85;
         }
         .concierge-greet {
             font-family: var(--font-jp-display); font-size: clamp(16px,2vw,21px); min-height: 1.5em; line-height: 1.4;
@@ -725,6 +724,68 @@
         .btn-pill:active, .pill-white:active { transform: scale(.97); }
         .concierge-block .showreel-link { border-color: var(--gold-soft); }
         .concierge-block .showreel-link:hover { border-color: var(--gold); background: rgba(168,126,47,.12); }
+
+        /* ================= V8.2: FUKU-SAY (permanent speech bubble, deck-anchored) ================= */
+        .fuku-say {
+            position: absolute; z-index: 7; left: 58.5%; top: 34%;
+            display: flex; flex-direction: column; gap: 8px;
+            max-width: 340px; text-align: left;
+            background: #FBF8F1; color: var(--ink);
+            border: 1px solid var(--line-strong); border-radius: 18px;
+            padding: 14px 20px;
+            box-shadow: 0 16px 30px -14px rgba(33,27,16,.35);
+            opacity: 0; animation: fukuSayIn .5s var(--ease) .4s both;
+        }
+        .fuku-say::after {
+            content: ""; position: absolute; left: -8px; top: 20px;
+            width: 14px; height: 14px; background: inherit;
+            border-left: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+            transform: rotate(45deg);
+        }
+        @keyframes fukuSayIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
+        @media (prefers-reduced-motion: reduce) { .fuku-say { animation: none; opacity: 1; } }
+        @media (max-width: 640px) {
+            .fuku-say {
+                left: 50%; margin-left: -44%; right: auto; top: auto;
+                bottom: clamp(-70px,-15vw,-42px); width: 88%; max-width: none;
+            }
+            .fuku-say::after {
+                left: 50%; margin-left: -7px; bottom: auto; top: -7px;
+                border-left: none; border-bottom: none;
+                border-top: 1px solid var(--line-strong); border-right: 1px solid var(--line-strong);
+            }
+        }
+
+        /* ================= V8.2: X-CAT (hero, peeking from the edge) ================= */
+        .x-cat {
+            position: absolute; z-index: 6; right: calc(-1 * var(--gutter)); top: 52%;
+            display: block; height: clamp(120px,14vw,190px); width: auto;
+            cursor: pointer; transform: translateX(40%);
+            transition: transform .35s var(--ease);
+            animation: xCatBob 6s ease-in-out infinite;
+        }
+        .x-cat img { display: block; height: 100%; width: auto; pointer-events: none; }
+        .x-cat:hover, .x-cat:focus-visible { transform: translateX(10%); }
+        @keyframes xCatBob { from { margin-top: -3px; } to { margin-top: 3px; } }
+        @media (prefers-reduced-motion: reduce) { .x-cat { animation: none; } }
+        .x-cat-say {
+            position: absolute; right: calc(100% + 8px); left: auto; top: 10px;
+            display: inline-flex; white-space: nowrap; padding: 6px 14px;
+            border-radius: 9999px; background: #FBF8F1; color: var(--ink);
+            border: 1px solid var(--gold); font-family: var(--font-jp-display); font-weight: 700;
+            font-size: .78rem; opacity: 0; transform: translateY(6px); pointer-events: none;
+            transition: opacity .3s var(--ease), transform .3s var(--ease);
+        }
+        .x-cat:hover .x-cat-say, .x-cat:focus-visible .x-cat-say, .x-cat-say.is-visible {
+            opacity: 1; transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) { .x-cat-say { transition: none; } }
+        @media (max-width: 640px) {
+            .x-cat { height: 88px; top: 30%; bottom: auto; }
+            .x-cat-say { opacity: 1; transform: translateY(0); font-size: .6rem; padding: 5px 10px; }
+            /* fuku-say がデッキ下に約150pxはみ出すため、ピル列をその分下げて重なりを根絶 */
+            .concierge-block { margin-top: clamp(140px, 40vw, 175px); }
+        }
 
         /* ================= V5: SECTION KANJI WATERMARK ================= */
         .sec-kanji {
@@ -782,6 +843,11 @@
         @media (max-width: 480px) {
             .hero-award-chip { font-size: .58rem; padding: 7px 16px; }
             .btn-pill, .contact-cta { padding: 13px 26px; font-size: .78rem; }
+        }
+        /* v8.2: モバイルはヘッダーが2段化するため、ヒーロー上余白を追加
+           (受賞チップが磨りガラスのヘッダー裏に潜る v7 からの持病を根治) */
+        @media (max-width: 640px) {
+            #hero { padding-top: calc(clamp(84px,9svh,120px) + 48px); }
         }
     /* ================= V8: FILM JOURNEY ================= */
     .jny { position: relative; background: #0a0806; color: #F5F1E8; }
@@ -978,10 +1044,12 @@
                 <div class="usher" data-depth="1.15" role="img" aria-label="案内猫のフク">
                     <img class="usher-img" src="images/usher-cat.png" alt="案内猫 フク" loading="lazy">
                 </div>
+                <div class="fuku-say">
+                    <p class="blur-intro" data-lang-key="v5-intro">はじめまして、案内猫の フク と申します。<br>RYO STUDIO の試写室へようこそ。</p>
+                    <p class="concierge-greet"><span id="typeline" data-lang-key="v5-greet">ようこそ。今夜は、どんな物語をご覧になりますか？</span><span class="tw-cursor" aria-hidden="true"></span></p>
+                </div>
             </div>
             <div class="concierge-block">
-                <p class="blur-intro" data-lang-key="v5-intro" aria-hidden="true">はじめまして、案内猫の フク と申します。<br>RYO STUDIO の試写室へようこそ。</p>
-                <p class="concierge-greet"><span id="typeline" data-lang-key="v5-greet">ようこそ。今夜は、どんな物語をご覧になりますか？</span><span class="tw-cursor" aria-hidden="true"></span></p>
                 <div class="concierge-pills">
                     <a href="#journey" class="pill-white" data-lang-key="v8-pill-journey">FILM JOURNEY ▾</a>
                     <a href="#works" class="pill-white" data-lang-key="v5-pill-works">作品を観る</a>
@@ -992,6 +1060,10 @@
                     <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="btn-pill" data-magnetic><span data-lang-key="contact-cta-dm">XのDMで相談する</span></a>
                 </div>
             </div>
+            <a class="x-cat" href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" aria-label="X (旧Twitter) で RYO STUDIO をフォロー">
+                <img src="images/x-cat.webp" alt="" width="458" height="560">
+                <span class="x-cat-say" data-lang-key="v8-xcat-say">𝕏 で発信中！</span>
+            </a>
         </div>
     </section>
 
@@ -2010,7 +2082,8 @@
         'jny-cta': { jp: '作品を観る', en: 'View Works' },
         'v8-pill-journey': { jp: 'FILM JOURNEY ▾', en: 'FILM JOURNEY ▾' },
         'jny-watch-full': { jp: '本編を観る (13分)', en: 'Watch the Full Pilot (13 min)' },
-        'jny-play-override': { jp: '▶ フィルムを再生モードで観る', en: '▶ Play the film journey' }
+        'jny-play-override': { jp: '▶ フィルムを再生モードで観る', en: '▶ Play the film journey' },
+        'v8-xcat-say': { jp: '𝕏 で発信中！', en: 'Find me on 𝕏!' }
     };
 
     var IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -2892,6 +2965,29 @@
     })();
 
     /* ---------------------------------------------------------------- */
+    /* xcat (V8.2: one-shot auto-peek of the X follow pill on first load) */
+    /* must work with or without GSAP; mobile always shows .x-cat-say    */
+    /* via CSS alone, so this is skipped there (touch) and on            */
+    /* reduced-motion (no auto-reveal, per spec).                        */
+    /* ---------------------------------------------------------------- */
+    (function () {
+        function init() {
+            var link = document.querySelector('.x-cat');
+            var say = link ? link.querySelector('.x-cat-say') : null;
+            if (!link || !say) return;
+            var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+            if (reduceMotion || IS_TOUCH) return;
+            setTimeout(function () {
+                say.classList.add('is-visible');
+                setTimeout(function () {
+                    say.classList.remove('is-visible');
+                }, 3000);
+            }, 2500);
+        }
+        V4.modules.xcat = { init: init };
+    })();
+
+    /* ---------------------------------------------------------------- */
     /* boot                                                               */
     /* ---------------------------------------------------------------- */
     function boot() {
@@ -2919,6 +3015,7 @@
         safe(function () { V4.modules.countUp.init(motionActive); });
         safe(function () { V4.modules.maxresUpgrade.init(); });
         safe(function () { V4.modules.delight.initPoke(); });
+        safe(function () { V4.modules.xcat.init(); });
 
         if (hasMotion) {
             // Interaction-only motion module: not part of the reduced-motion animation list.
