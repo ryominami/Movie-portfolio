@@ -946,14 +946,100 @@
         font-family: var(--font-en); font-size: .75rem; letter-spacing: .1em; color: rgba(245,241,232,.55);
     }
     .jny-counter-now { color: #F5F1E8; font-weight: 700; }
+    .jny-tc { margin-left: 12px; font-size: .68rem; letter-spacing: .12em; color: rgba(245,241,232,.4); font-variant-numeric: tabular-nums; }
+    /* v9: 進捗バーは top:0 だと固定ヘッダーの裏に埋まる (v8 まで不可視だった) — 下端へ */
     .jny-progress {
-        position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 4;
+        position: absolute; bottom: 0; left: 0; right: 0; height: 3px; z-index: 4;
         background: rgba(245,241,232,.12);
     }
     .jny-progress i {
         display: block; width: 100%; height: 100%; transform-origin: left center; transform: scaleX(0);
         background: linear-gradient(90deg,#8a5a1f,#C9A04E);
     }
+    /* v9: フィルムリーダー (3-2-1 カウントダウン) — スクロールでスクラブされる導入 */
+    .jny-leader {
+        position: absolute; inset: 0; z-index: 5; pointer-events: none;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px;
+        background: rgba(5,4,3,.62);
+        opacity: 0; transition: opacity .45s var(--ease);
+    }
+    .jny.is-intro .jny-leader { opacity: 1; }
+    .jny-leader-circle {
+        position: relative; width: clamp(180px,30vh,280px); height: clamp(180px,30vh,280px);
+        border-radius: 50%; border: 1px solid rgba(245,241,232,.28);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .jny-leader-circle::before {
+        content: ""; position: absolute; inset: -14px; border-radius: 50%;
+        border: 1px solid rgba(245,241,232,.14);
+    }
+    /* アカデミーリーダーの十字線 */
+    .jny-leader-circle::after {
+        content: ""; position: absolute; inset: 0; pointer-events: none;
+        background:
+            linear-gradient(rgba(245,241,232,.22), rgba(245,241,232,.22)) center/1px 200% no-repeat,
+            linear-gradient(rgba(245,241,232,.22), rgba(245,241,232,.22)) center/200% 1px no-repeat;
+    }
+    .jny-leader-sweep {
+        position: absolute; inset: 8px; border-radius: 50%;
+        background: conic-gradient(rgba(201,160,78,.32) var(--jny-sweep,0deg), transparent 0deg);
+        -webkit-mask: radial-gradient(circle, transparent 56%, #000 57%);
+        mask: radial-gradient(circle, transparent 56%, #000 57%);
+    }
+    .jny-leader-num {
+        font-family: var(--font-en); font-weight: 700; font-size: clamp(72px,12vh,120px);
+        color: #F5F1E8; line-height: 1; transform: translateY(2px);
+    }
+    .jny-leader-cap {
+        font-family: var(--font-en); font-weight: 600; font-size: clamp(.62rem,1vw,.74rem);
+        letter-spacing: .34em; text-transform: uppercase; color: rgba(201,160,78,.85); text-align: center;
+    }
+    /* カウントダウン中は章コピー・漢字を伏せる */
+    .jny.is-intro .jny-copy.is-active { opacity: 0; transform: translateY(26px); pointer-events: none; }
+    .jny.is-intro .jny-kanji { opacity: 0; }
+    /* v9: フク・ウォーカー — 進捗バーの上を歩く案内猫 */
+    .jny-walker {
+        position: absolute; bottom: 3px; left: 0; z-index: 5; pointer-events: none;
+        opacity: 1; transition: opacity .5s var(--ease);
+        will-change: transform;
+    }
+    .jny.is-intro .jny-walker { opacity: 0; }
+    .jny-walker-img {
+        display: block; height: 38px; width: auto;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,.5));
+        transform-origin: 50% 100%;
+    }
+    .jny-walker.is-walking .jny-walker-img { animation: jnyWalkBob .38s ease-in-out infinite; }
+    .jny-walker.is-back .jny-walker-img { transform: scaleX(-1); }
+    .jny-walker.is-back.is-walking .jny-walker-img { animation: jnyWalkBobBack .38s ease-in-out infinite; }
+    @keyframes jnyWalkBob {
+        0%, 100% { transform: translateY(0) rotate(-2deg); }
+        50% { transform: translateY(-3px) rotate(2deg); }
+    }
+    @keyframes jnyWalkBobBack {
+        0%, 100% { transform: scaleX(-1) translateY(0) rotate(2deg); }
+        50% { transform: scaleX(-1) translateY(-3px) rotate(-2deg); }
+    }
+    .jny-whisper {
+        position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%) translateY(6px);
+        white-space: nowrap; padding: 8px 14px; border-radius: 12px;
+        background: rgba(13,10,6,.78); border: 1px solid rgba(201,160,78,.5);
+        backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+        font-family: var(--font-jp); font-size: .78rem; color: rgba(245,241,232,.92);
+        opacity: 0; transition: opacity .4s var(--ease), transform .4s var(--ease);
+    }
+    .jny-whisper::after {
+        content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+        border: 5px solid transparent; border-top-color: rgba(201,160,78,.5);
+    }
+    .jny-whisper.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+    /* 吹き出しがバー端で画面外に出ないよう内側に倒す */
+    .jny-walker.is-edge-l .jny-whisper { left: 0; transform: translateX(0) translateY(6px); }
+    .jny-walker.is-edge-l .jny-whisper.is-visible { transform: translateX(0) translateY(0); }
+    .jny-walker.is-edge-l .jny-whisper::after { left: 18px; }
+    .jny-walker.is-edge-r .jny-whisper { left: auto; right: 0; transform: translateX(0) translateY(6px); }
+    .jny-walker.is-edge-r .jny-whisper.is-visible { transform: translateX(0) translateY(0); }
+    .jny-walker.is-edge-r .jny-whisper::after { left: auto; right: 18px; }
     .jny-hint {
         position: absolute; right: var(--gutter); bottom: clamp(18px,3vh,28px); z-index: 3;
         font-family: var(--font-en); font-size: .68rem; letter-spacing: .3em; color: rgba(245,241,232,.5);
@@ -963,6 +1049,10 @@
     @keyframes jnyHintDrop { 0%,100% { transform: scaleY(.4); opacity: .4; } 50% { transform: scaleY(1); opacity: 1; } }
     .jny-hint.is-hidden { opacity: 0; pointer-events: none; }
 
+    @media (max-width: 900px) {
+        /* 小画面では吹き出しはノイズ — ウォーカーだけ残す */
+        .jny-whisper { display: none; }
+    }
     @media (max-width: 768px) {
         .jny-track { height: 430vh; }
         .jny-kanji { font-size: 46vw; opacity: .5; right: -4%; }
@@ -971,13 +1061,22 @@
         .jny-dots { right: 10px; gap: 8px; }
         .jny-dots button { width: 8px; height: 8px; }
         .jny-hint { right: 12px; }
+        .jny-walker-img { height: 28px; }
+        .jny-leader-cap { padding: 0 24px; }
+    }
+    /* 横持ちスマホ等の低背ビューポートではリーダー円を詰める */
+    @media (max-height: 520px) {
+        .jny-leader { gap: 14px; }
+        .jny-leader-circle { width: 132px; height: 132px; }
+        .jny-leader-num { font-size: 56px; }
     }
 
     /* static fallback: no-JS(noscript above) / reduced-motion / JS-detected saveData (.is-static) */
     .jny.is-static .jny-track { height: auto; }
     .jny.is-static .jny-shell { position: static; height: auto; overflow: visible; padding: clamp(70px,9vw,120px) 0 clamp(40px,6vw,70px); }
     .jny.is-static .jny-film, .jny.is-static .jny-veil, .jny.is-static .jny-kanji,
-    .jny.is-static .jny-hint, .jny.is-static .jny-progress, .jny.is-static .jny-dots, .jny.is-static .jny-counter { display: none; }
+    .jny.is-static .jny-hint, .jny.is-static .jny-progress, .jny.is-static .jny-dots, .jny.is-static .jny-counter,
+    .jny.is-static .jny-leader, .jny.is-static .jny-walker { display: none; }
     .jny.is-static .jny-head { position: static; margin: 0 var(--gutter) clamp(32px,5vw,56px); max-width: none; }
     .jny.is-static .jny-play-override { display: inline-flex; }
     .jny.is-static .jny-chapters { display: flex; flex-direction: column; gap: clamp(40px,6vw,64px); padding: 0 var(--gutter); }
@@ -987,7 +1086,8 @@
     @media (prefers-reduced-motion: reduce) {
         .jny-track { height: auto; }
         .jny-shell { position: static; height: auto; overflow: visible; padding: clamp(70px,9vw,120px) 0 clamp(40px,6vw,70px); }
-        .jny-film, .jny-veil, .jny-kanji, .jny-hint, .jny-progress, .jny-dots, .jny-counter { display: none; }
+        .jny-film, .jny-veil, .jny-kanji, .jny-hint, .jny-progress, .jny-dots, .jny-counter,
+        .jny-leader, .jny-walker { display: none; }
         .jny-head { position: static; margin: 0 var(--gutter) clamp(32px,5vw,56px); max-width: none; }
         .jny-chapters { display: flex; flex-direction: column; gap: clamp(40px,6vw,64px); padding: 0 var(--gutter); }
         .jny-copy { position: static; opacity: 1; transform: none; pointer-events: auto; max-width: 640px; bottom: auto; left: auto; right: auto; }
@@ -1128,8 +1228,19 @@
                     <button type="button" data-ch="5" aria-label="第5章 雪灯篭"></button>
                     <button type="button" data-ch="6" aria-label="第6章 開幕"></button>
                 </nav>
-                <div class="jny-counter"><span class="jny-counter-now">01</span> / 06</div>
+                <div class="jny-counter"><span class="jny-counter-now">01</span> / 06<span class="jny-tc" aria-hidden="true"></span></div>
                 <div class="jny-progress"><i></i></div>
+                <div class="jny-leader" aria-hidden="true">
+                    <div class="jny-leader-circle">
+                        <div class="jny-leader-sweep"></div>
+                        <span class="jny-leader-num">3</span>
+                    </div>
+                    <span class="jny-leader-cap">RYO STUDIO PRESENTS<br>A FILM JOURNEY</span>
+                </div>
+                <div class="jny-walker" aria-hidden="true">
+                    <span class="jny-whisper"></span>
+                    <img class="jny-walker-img" src="images/usher-cat.png" alt="" loading="lazy">
+                </div>
                 <div class="jny-hint" aria-hidden="true">SCROLL</div>
             </div>
         </div>
@@ -1137,7 +1248,7 @@
         <style>
             .jny-track { height: auto; }
             .jny-shell { position: static; height: auto; overflow: visible; padding: clamp(70px,9vw,120px) 0 clamp(40px,6vw,70px); }
-            .jny-film, .jny-veil, .jny-kanji, .jny-hint, .jny-progress, .jny-dots, .jny-counter { display: none; }
+            .jny-film, .jny-veil, .jny-kanji, .jny-hint, .jny-progress, .jny-dots, .jny-counter, .jny-leader, .jny-walker { display: none; }
             .jny-head { position: static; margin: 0 var(--gutter) clamp(32px,5vw,56px); max-width: none; }
             .jny-chapters { display: flex; flex-direction: column; gap: clamp(40px,6vw,64px); padding: 0 var(--gutter); }
             .jny-copy { position: static; opacity: 1; transform: none; pointer-events: auto; max-width: 640px; bottom: auto; left: auto; right: auto; }
@@ -3059,16 +3170,62 @@
     var hintEl = section.querySelector('.jny-hint');
     var progressBar = section.querySelector('.jny-progress i');
     var counterNow = section.querySelector('.jny-counter-now');
+    var tcEl = section.querySelector('.jny-tc');
+    var leaderEl = section.querySelector('.jny-leader');
+    var leaderNum = section.querySelector('.jny-leader-num');
+    var leaderSweep = section.querySelector('.jny-leader-sweep');
+    var walkerEl = section.querySelector('.jny-walker');
+    var whisperEl = section.querySelector('.jny-whisper');
     var chaptersEls = Array.prototype.slice.call(section.querySelectorAll('.jny-copy'));
     var dotsEls = Array.prototype.slice.call(section.querySelectorAll('.jny-dots button'));
     var startTimes = chaptersEls.map(function (el) {
         return parseFloat(el.getAttribute('data-time-start')) || 0;
     });
 
+    /* v9: トラック先頭のこの割合はフィルムリーダー (3-2-1)。以降を 0..duration に再写像 */
+    var INTRO = 0.075;
+
+    /* v9: フクの章ごとの一言 (JP/EN は documentElement.lang で判定 — v4-engine が applyLang で設定) */
+    var WHISPERS = [
+        { jp: '当館の看板作品でございます', en: 'Our flagship picture.' },
+        { jp: 'グランプリの夜の物語です', en: 'This one took the Grand Prix.' },
+        { jp: '言葉のいらない60秒です', en: 'Sixty seconds, no words needed.' },
+        { jp: 'ガラスの中に夏がおります', en: 'Summer lives inside the glass.' },
+        { jp: '灯りが道をご案内します', en: 'The lanterns will show you the way.' },
+        { jp: '次は、あなたの物語の番です', en: 'Next, the screen is yours.' }
+    ];
+
     function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function fmtTC(sec) {
+        var s = Math.max(0, Math.floor(sec));
+        return pad2(Math.floor(s / 60)) + ':' + pad2(s % 60);
+    }
 
     function getDuration() {
         return (video.duration && isFinite(video.duration)) ? video.duration : FALLBACK_DURATION;
+    }
+
+    /* v9: リーダー通過前は true。ウォーカーの吹き出しはフィルム開始後のみ */
+    var introActive = false;
+    var whisperTimer = null;
+    var whisperPending = null;
+    function showWhisper(idx) {
+        if (!whisperEl || !WHISPERS[idx]) return;
+        var en = (document.documentElement.getAttribute('lang') || '').indexOf('en') === 0;
+        whisperEl.textContent = WHISPERS[idx][en ? 'en' : 'jp'];
+        whisperEl.classList.remove('is-visible');
+        void whisperEl.offsetWidth;
+        whisperEl.classList.add('is-visible');
+        if (whisperTimer) clearTimeout(whisperTimer);
+        whisperTimer = setTimeout(function () {
+            whisperEl.classList.remove('is-visible');
+        }, 3200);
+    }
+    /* 高速スクラブ中の吹き出し連打を抑止 — 章に 600ms 留まった時だけ喋る */
+    function scheduleWhisper(idx) {
+        if (whisperPending) clearTimeout(whisperPending);
+        whisperPending = setTimeout(function () { showWhisper(idx); }, 600);
     }
 
     var lastIndex = -1;
@@ -3078,7 +3235,9 @@
             if (t >= startTimes[i]) idx = i;
         }
         if (idx === lastIndex) return;
+        var isFirstSync = lastIndex === -1;
         lastIndex = idx;
+        if (!introActive && !isFirstSync) scheduleWhisper(idx);
 
         chaptersEls.forEach(function (el, i) {
             el.classList.toggle('is-active', i === idx);
@@ -3114,11 +3273,18 @@
         scrubStarted = true;
 
         var trackTop = 0, trackHeight = 0, innerH = window.innerHeight;
+        var walkerPadL = 0, walkerRange = 0;
         function measure() {
             var rect = track.getBoundingClientRect();
             trackTop = rect.top + (window.scrollY || window.pageYOffset);
             trackHeight = track.offsetHeight;
             innerH = window.innerHeight;
+            /* ウォーカーの可動域: 左は counter、右は SCROLL ヒントを避ける */
+            var w = track.offsetWidth || window.innerWidth;
+            var walkerW = walkerEl ? (walkerEl.offsetWidth || 30) : 30;
+            walkerPadL = w < 768 ? 96 : 160;
+            var padR = w < 768 ? 56 : 96;
+            walkerRange = Math.max(0, w - walkerPadL - padR - walkerW);
         }
         measure();
 
@@ -3131,6 +3297,10 @@
         var current = 0;
         var rafId = null;
         var hintHidden = false;
+        var lastLeaderN = -1;
+        var lastTC = '';
+        var walkerDir = 1;
+        var entranceGreeted = false;
 
         function loop() {
             var scrollY = window.scrollY || window.pageYOffset;
@@ -3138,20 +3308,65 @@
             var raw = span > 0 ? (scrollY - trackTop) / span : 0;
             var progress = raw < 0 ? 0 : (raw > 1 ? 1 : raw);
             var duration = getDuration();
-            var target = progress * duration;
+
+            /* v9: 先頭 INTRO 割合はフィルムリーダー、残りをフィルム時間に再写像 */
+            var filmP = progress <= INTRO ? 0 : (progress - INTRO) / (1 - INTRO);
+            var target = filmP * duration;
+
+            var inIntro = progress < INTRO;
+            if (inIntro !== introActive) {
+                introActive = inIntro;
+                section.classList.toggle('is-intro', inIntro);
+                /* フィルム開始の瞬間: フクが最初のひとことで迎える */
+                if (!inIntro && !entranceGreeted) {
+                    entranceGreeted = true;
+                    showWhisper(lastIndex < 0 ? 0 : lastIndex);
+                }
+            }
+            if (inIntro && leaderNum && leaderSweep) {
+                var ip = INTRO > 0 ? progress / INTRO : 1;
+                var n = ip < 1 / 3 ? 3 : (ip < 2 / 3 ? 2 : 1);
+                if (n !== lastLeaderN) {
+                    lastLeaderN = n;
+                    leaderNum.textContent = n;
+                }
+                leaderSweep.style.setProperty('--jny-sweep', (((ip * 3) % 1) * 360).toFixed(1) + 'deg');
+            }
 
             current += (target - current) * 0.16;
             if (Math.abs(current - video.currentTime) > 0.033 && video.readyState >= 1) {
                 try { video.currentTime = current; } catch (e) {}
             }
 
-            if (progressBar) progressBar.style.transform = 'scaleX(' + progress + ')';
+            if (progressBar) progressBar.style.transform = 'scaleX(' + filmP + ')';
+
+            /* v9: フク・ウォーカー — バー上を歩き、逆走で振り向く */
+            if (walkerEl) {
+                var wx = walkerPadL + filmP * walkerRange;
+                var delta = target - current;
+                if (delta > 0.05) walkerDir = 1;
+                else if (delta < -0.05) walkerDir = -1;
+                walkerEl.style.transform = 'translateX(' + wx.toFixed(1) + 'px)';
+                walkerEl.classList.toggle('is-walking', Math.abs(delta) > 0.05);
+                walkerEl.classList.toggle('is-back', walkerDir === -1);
+                walkerEl.classList.toggle('is-edge-l', wx < 140);
+                walkerEl.classList.toggle('is-edge-r', walkerRange - (wx - walkerPadL) < 140);
+            }
+
+            if (tcEl) {
+                var tc = fmtTC(current) + ' / ' + fmtTC(duration);
+                if (tc !== lastTC) {
+                    lastTC = tc;
+                    tcEl.textContent = tc;
+                }
+            }
 
             if (hintEl) {
-                if (progress > 0.02 && !hintHidden) {
+                var hideHint = progress > INTRO + 0.02;
+                if (hideHint && !hintHidden) {
                     hintEl.classList.add('is-hidden');
                     hintHidden = true;
-                } else if (progress <= 0.02 && hintHidden) {
+                } else if (!hideHint && hintHidden) {
                     hintEl.classList.remove('is-hidden');
                     hintHidden = false;
                 }
@@ -3235,7 +3450,8 @@
             var startTime = startTimes[i] || 0;
             var targetTime = (i === 0) ? 0 : startTime + chapterSpan(i) * 0.04;
             var span = trackHeight - innerH;
-            var top = trackTop + (targetTime / duration) * span;
+            /* v9: INTRO 再写像に合わせる — フィルム時間→トラック位置はリーダー分を下駄上げ */
+            var top = trackTop + (INTRO + (targetTime / duration) * (1 - INTRO)) * span;
             window.scrollTo({ top: top, behavior: 'smooth' });
         }
 
