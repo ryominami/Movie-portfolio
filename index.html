@@ -534,23 +534,28 @@
         .follow-band.is-inview .follow-band-bubble { opacity: 1; }
         @media (prefers-reduced-motion: reduce) { .follow-band-bubble { transition: none; opacity: 1; } }
 
-        .follow-band-btnwrap { position: relative; display: inline-block; }
+        .follow-band-btnwrap { position: relative; display: inline-block; margin-top: 34px; }
+        .follow-band-btnwrap .contact-cta { position: relative; z-index: 1; }
         .follow-band-xcat {
-            position: absolute; z-index: 0; bottom: 45%; left: 58%;
-            width: clamp(56px,8vw,80px); height: auto; pointer-events: none;
-            transform: translateX(-30%);
+            position: absolute; bottom: 100%; margin-bottom: -4px;
+            left: 58%; transform: translateX(-30%);
+            width: 72px; height: 38px; overflow: hidden; pointer-events: none;
+        }
+        .follow-band-xcat img {
+            display: block; width: 100%; height: auto;
+            transform: translateY(12px);
             transition: transform .35s var(--ease);
         }
-        .follow-band-xcat img { display: block; width: 100%; height: auto; }
-        .follow-band-btnwrap .contact-cta { position: relative; z-index: 1; }
-        .follow-band-btnwrap:hover .follow-band-xcat { transform: translateX(-30%) translateY(-8px); }
-        @media (prefers-reduced-motion: reduce) { .follow-band-xcat { transition: none; } }
+        .follow-band.is-inview .follow-band-xcat img { transform: translateY(4px); }
+        .follow-band-btnwrap:hover .follow-band-xcat img { transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .follow-band-xcat img { transition: none; transform: translateY(4px); } }
 
         @media (max-width: 640px) {
             .follow-band-inner { flex-direction: column; gap: 20px; }
             .follow-band-fuku img { height: 96px; }
             .follow-band-bubble { width: 88%; max-width: none; margin: 0 auto; }
-            .follow-band-xcat { width: 60px; }
+            .follow-band-btnwrap { margin-top: 28px; }
+            .follow-band-xcat { width: 58px; height: 30px; }
         }
 
         /* ================= WHITE SECTIONS ================= */
