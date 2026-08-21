@@ -502,6 +502,57 @@
         .follow-band-handle { font-family: var(--font-en); font-size: .78rem; letter-spacing: .03em; color: var(--text-faint); text-decoration: none; }
         .follow-band-handle:hover { color: var(--text-dim); }
 
+        .follow-band-inner {
+            max-width: 760px; margin: 0 auto; padding: 0 var(--gutter);
+            display: flex; align-items: center; justify-content: center;
+            gap: clamp(20px,4vw,48px);
+        }
+        .follow-band-main { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+
+        .follow-band-fuku { flex-shrink: 0; }
+        .follow-band-fuku img {
+            display: block; height: clamp(120px,15vw,180px); width: auto;
+            opacity: 0; transform: translateY(14px);
+            transition: opacity .6s var(--ease), transform .6s var(--ease);
+        }
+        .follow-band.is-inview .follow-band-fuku img { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .follow-band-fuku img { transition: none; opacity: 1; transform: none; } }
+
+        .follow-band-bubble {
+            position: relative; max-width: 320px; text-align: left;
+            background: #FBF8F1; color: var(--ink);
+            border: 1px solid var(--line-strong); border-radius: 18px;
+            padding: 12px 18px; font-family: var(--font-jp-display); font-size: .82rem; line-height: 1.6;
+            opacity: 0; transition: opacity .5s var(--ease) .3s;
+        }
+        .follow-band-bubble::after {
+            content: ""; position: absolute; left: -8px; top: 50%; margin-top: -7px;
+            width: 14px; height: 14px; background: inherit;
+            border-left: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+            transform: rotate(45deg);
+        }
+        .follow-band.is-inview .follow-band-bubble { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) { .follow-band-bubble { transition: none; opacity: 1; } }
+
+        .follow-band-btnwrap { position: relative; display: inline-block; }
+        .follow-band-xcat {
+            position: absolute; z-index: 0; bottom: 45%; left: 58%;
+            width: clamp(56px,8vw,80px); height: auto; pointer-events: none;
+            transform: translateX(-30%);
+            transition: transform .35s var(--ease);
+        }
+        .follow-band-xcat img { display: block; width: 100%; height: auto; }
+        .follow-band-btnwrap .contact-cta { position: relative; z-index: 1; }
+        .follow-band-btnwrap:hover .follow-band-xcat { transform: translateX(-30%) translateY(-8px); }
+        @media (prefers-reduced-motion: reduce) { .follow-band-xcat { transition: none; } }
+
+        @media (max-width: 640px) {
+            .follow-band-inner { flex-direction: column; gap: 20px; }
+            .follow-band-fuku img { height: 96px; }
+            .follow-band-bubble { width: 88%; max-width: none; margin: 0 auto; }
+            .follow-band-xcat { width: 60px; }
+        }
+
         /* ================= WHITE SECTIONS ================= */
         .section-white { background: var(--paper-soft); color: var(--ink); }
         #awards.section-white { border-radius: 48px 48px 0 0; margin-top: -48px; position: relative; z-index: 2; padding: 0 0 clamp(60px,8vw,110px); }
@@ -1455,10 +1506,19 @@
 
     <!-- ================= FOLLOW BAND ================= -->
     <section class="cta-band follow-band">
-        <div class="cta-band-container">
-            <p class="cta-band-text" data-lang-key="follow-band-title">最新AI映像ツールの検証と制作ノウハウをXで毎日発信中</p>
-            <a href="https://x.com/intent/follow?screen_name=ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta btn-pill" data-magnetic data-lang-key="follow-band-btn">Xでフォローする</a>
-            <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="follow-band-handle" data-lang-key="follow-band-handle">@ryo05m</a>
+        <div class="follow-band-inner">
+            <div class="follow-band-fuku" aria-hidden="true">
+                <img src="images/usher-cat.png" alt="" loading="lazy">
+            </div>
+            <div class="follow-band-main">
+                <div class="follow-band-bubble"><span data-lang-key="follow-band-bubble">この先の最新作は、𝕏 の劇場でご案内します</span></div>
+                <p class="cta-band-text" data-lang-key="follow-band-title">最新AI映像ツールの検証と制作ノウハウをXで毎日発信中</p>
+                <div class="follow-band-btnwrap">
+                    <span class="follow-band-xcat" aria-hidden="true"><img src="images/x-cat.webp" alt="" loading="lazy" width="458" height="560"></span>
+                    <a href="https://x.com/intent/follow?screen_name=ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta btn-pill" data-magnetic data-lang-key="follow-band-btn">Xでフォローする</a>
+                </div>
+                <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="follow-band-handle" data-lang-key="follow-band-handle">@ryo05m</a>
+            </div>
         </div>
     </section>
 
@@ -2117,6 +2177,7 @@
         'cta-band-title': { jp: 'こんな映像を、あなたのプロジェクトでも。', en: 'Videos like these, for your project.' },
         'cta-band-text': { jp: '目的や予算がまだ固まっていなくても大丈夫です。<br>作りたいイメージをお聞かせいただければ、最適な形をご提案します。', en: "It's fine if your goals or budget aren't set yet.<br>Tell me the image you have in mind, and I'll propose the best approach." },
         'cta-band-btn': { jp: '無料で相談する', en: 'Get a Free Consultation' },
+        'follow-band-bubble': { jp: 'この先の最新作は、𝕏 の劇場でご案内します', en: 'The story continues on X — right this way.' },
         'follow-band-title': { jp: '最新AI映像ツールの検証と制作ノウハウをXで毎日発信中', en: 'Daily posts on the latest AI video tools and production know-how — on X' },
         'follow-band-btn': { jp: 'Xでフォローする', en: 'Follow on X' },
         'follow-band-handle': { jp: '@ryo05m', en: '@ryo05m' },
@@ -3529,6 +3590,26 @@
         });
     }
 })();
+</script>
+<script>
+    /* ---------- follow-band: reveal fuku + bubble once in view ---------- */
+    (function () {
+        var band = document.querySelector('.follow-band');
+        if (!band) return;
+        if (!('IntersectionObserver' in window)) {
+            band.classList.add('is-inview');
+            return;
+        }
+        var observer = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    band.classList.add('is-inview');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        observer.observe(band);
+    })();
 </script>
 </body>
 </html>
