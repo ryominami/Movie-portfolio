@@ -497,6 +497,11 @@
         .cta-band-title { font-family: var(--font-jp); font-weight: 900; font-size: clamp(1.6rem,4vw,2.6rem); line-height: 1.4; }
         .cta-band-text { color: var(--text-dim); font-size: .95rem; line-height: 1.9; }
 
+        /* ================= FOLLOW BAND (X follow CTA, after FEATURED) ================= */
+        .follow-band { padding: clamp(40px,5vw,64px) 0; }
+        .follow-band-handle { font-family: var(--font-en); font-size: .78rem; letter-spacing: .03em; color: var(--text-faint); text-decoration: none; }
+        .follow-band-handle:hover { color: var(--text-dim); }
+
         /* ================= WHITE SECTIONS ================= */
         .section-white { background: var(--paper-soft); color: var(--ink); }
         #awards.section-white { border-radius: 48px 48px 0 0; margin-top: -48px; position: relative; z-index: 2; padding: 0 0 clamp(60px,8vw,110px); }
@@ -621,6 +626,11 @@
         .footer-links { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
         .footer-links a { font-family: var(--font-en); font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; text-decoration: none; color: rgba(242,234,216,.75); }
         .footer-text { font-size: .74rem; color: rgba(242,234,216,.55); }
+        .footer-follow { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .footer-follow-text { font-size: .74rem; color: rgba(242,234,216,.6); max-width: 360px; line-height: 1.6; }
+        .footer-follow-handle { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-en); font-size: .74rem; letter-spacing: .04em; color: rgba(242,234,216,.75); text-decoration: none; }
+        .footer-follow-handle svg { width: 12px; height: 12px; fill: currentColor; }
+        .footer-follow-handle:hover { color: #fff; }
 
         /* ================= LIGHTBOX ================= */
         .video-lightbox {
@@ -1160,7 +1170,7 @@
                     <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="btn-pill" data-magnetic><span data-lang-key="contact-cta-dm">XのDMで相談する</span></a>
                 </div>
             </div>
-            <a class="x-cat" href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" aria-label="X (旧Twitter) で RYO STUDIO をフォロー">
+            <a class="x-cat" href="https://x.com/intent/follow?screen_name=ryo05m" target="_blank" rel="noopener noreferrer" aria-label="X (旧Twitter) で RYO STUDIO をフォロー">
                 <img src="images/x-cat.webp" alt="" width="458" height="560">
                 <span class="x-cat-say" data-lang-key="v8-xcat-say">𝕏 で発信中！</span>
             </a>
@@ -1440,6 +1450,15 @@
                     </article>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ================= FOLLOW BAND ================= -->
+    <section class="cta-band follow-band">
+        <div class="cta-band-container">
+            <p class="cta-band-text" data-lang-key="follow-band-title">最新AI映像ツールの検証と制作ノウハウをXで毎日発信中</p>
+            <a href="https://x.com/intent/follow?screen_name=ryo05m" target="_blank" rel="noopener noreferrer" class="contact-cta btn-pill" data-magnetic data-lang-key="follow-band-btn">Xでフォローする</a>
+            <a href="https://x.com/ryo05m" target="_blank" rel="noopener noreferrer" class="follow-band-handle" data-lang-key="follow-band-handle">@ryo05m</a>
         </div>
     </section>
 
@@ -2026,7 +2045,7 @@
             <p class="contact-note" data-lang-key="contact-note">24時間以内に返信いたします。営業や売り込みは一切いたしませんので、お気軽にどうぞ。</p>
 
             <div class="social-links">
-                <a href="https://x.com/ryo05m" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <a href="https://x.com/intent/follow?screen_name=ryo05m" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X">
                     <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
                 <a href="https://www.youtube.com/@RyoStudio05" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
@@ -2040,6 +2059,13 @@
     <footer>
         <div class="footer-script" aria-hidden="true">Ryo.</div>
         <p class="footer-tagline" data-lang-key="footer-tagline">AI Agent x Video Production</p>
+        <div class="footer-follow">
+            <p class="footer-follow-text" data-lang-key="follow-band-title">最新AI映像ツールの検証と制作ノウハウをXで毎日発信中</p>
+            <a href="https://x.com/ryo05m" class="footer-follow-handle" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span data-lang-key="follow-band-handle">@ryo05m</span>
+            </a>
+        </div>
         <div class="footer-links" role="navigation" aria-label="Footer">
             <a href="#journey">Journey</a>
             <a href="#works">Work</a>
@@ -2091,6 +2117,9 @@
         'cta-band-title': { jp: 'こんな映像を、あなたのプロジェクトでも。', en: 'Videos like these, for your project.' },
         'cta-band-text': { jp: '目的や予算がまだ固まっていなくても大丈夫です。<br>作りたいイメージをお聞かせいただければ、最適な形をご提案します。', en: "It's fine if your goals or budget aren't set yet.<br>Tell me the image you have in mind, and I'll propose the best approach." },
         'cta-band-btn': { jp: '無料で相談する', en: 'Get a Free Consultation' },
+        'follow-band-title': { jp: '最新AI映像ツールの検証と制作ノウハウをXで毎日発信中', en: 'Daily posts on the latest AI video tools and production know-how — on X' },
+        'follow-band-btn': { jp: 'Xでフォローする', en: 'Follow on X' },
+        'follow-band-handle': { jp: '@ryo05m', en: '@ryo05m' },
         'about-title': { jp: '映像という言葉で<br><em>物語を紡ぐ</em>', en: 'Weaving <em>Stories</em><br>Through Film' },
         'about-text': { jp: 'アニメーション、プロモーション映像、ショートフィルムなど、<br>幅広いジャンルの映像制作を手がけています。<br>最新のAI技術と映像制作の技術を組み合わせ、<br>視聴者の心に響く作品をお届けします。', en: 'I create a wide range of video content including<br>animation, promotional videos, and short films.<br>Combining cutting-edge AI technology with filmmaking,<br>I deliver works that resonate with viewers.' },
         'about-more-link': { jp: 'すべての受賞歴を見る →', en: 'See all recognition →' },
